@@ -27,7 +27,8 @@ namespace LiveIT2._1
             _selectedBoxes = new List<Box>();
             _screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             _viewPort = new Rectangle(_screen.Width/2, _screen.Height/2, 800, 800);
-            _miniMap = new Rectangle( 5,530, 200, 200 );
+            _miniMap = new Rectangle( 0,0, 250, 250 );
+            _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
         }
 
@@ -44,6 +45,7 @@ namespace LiveIT2._1
             {
                 boxs.DrawMiniMap( g, _miniMap, _texture, _miniMapViewPort );
             }
+            g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
             if (_changeTexture) DrawMouseSelector(g, new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(100,100)));
             if (_fillTexture) FillMouseSelector(g, new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(100, 100)));
