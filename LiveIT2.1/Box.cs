@@ -8,9 +8,10 @@ using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Box
     {
-        readonly Map _map;
+         Map _map;
         int _line;
         int _column;
         BoxGround _ground;
@@ -79,6 +80,11 @@ namespace LiveIT2._1
         {
             get { return _source; }
             set { _source = value; }
+        }
+
+        public void LoadMap(Map map)
+        {
+            _map = map;
         }
 
         /// <summary>

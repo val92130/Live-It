@@ -4,9 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Map
     {
         readonly Box[] _boxes;
@@ -90,6 +94,24 @@ namespace LiveIT2._1
                 }
             }
             return boxList;
+        }
+
+        public void Save(string filename)
+        {
+            Stream stream = File.Open(filename, FileMode.Create);
+            BinaryFormatter bFormatter = new BinaryFormatter();
+            bFormatter.Serialize(stream, this);
+            stream.Close();
+        }
+
+        public Map Load(string filename)
+        {
+            Map map;
+            Stream stream = File.Open(filename, FileMode.Open);
+            BinaryFormatter bFormatter = new BinaryFormatter();
+            map = (Map)bFormatter.Deserialize(stream);
+            stream.Close();
+            return map;
         }
     }
 }

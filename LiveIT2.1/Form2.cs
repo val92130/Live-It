@@ -250,5 +250,38 @@ namespace LiveIT2._1
                 ShowDebugInfo = true;
             }
         }
+
+        private void _buttonSaveMap_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveBox = new SaveFileDialog();
+            saveBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
+            if (saveBox.ShowDialog() == DialogResult.OK)
+            {
+                _map.Save(saveBox.FileName);
+            }
+        }
+
+        private void _buttonLoadMap_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog loadBox = new OpenFileDialog();
+            loadBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
+            if (loadBox.ShowDialog() == DialogResult.OK)
+            {
+                _map = _map.Load(loadBox.FileName);
+                _viewPort.LoadMap(_map);
+            }
+        }
+
+        private void _buttonExit_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure to exit ? All unsaved work will be deleted",
+                        "Confirm",
+                        MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            
+        }
     }
 }

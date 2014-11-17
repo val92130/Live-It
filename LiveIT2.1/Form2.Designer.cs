@@ -37,6 +37,9 @@
             this._fillTextureButton = new System.Windows.Forms.Button();
             this._fpsTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this._buttonSaveMap = new System.Windows.Forms.Button();
+            this._buttonLoadMap = new System.Windows.Forms.Button();
+            this._buttonExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // _waterButton
@@ -157,7 +160,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(20, 496);
+            this.button1.Location = new System.Drawing.Point(255, 18);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 29);
             this.button1.TabIndex = 10;
@@ -165,12 +168,55 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // _buttonSaveMap
+            // 
+            this._buttonSaveMap.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this._buttonSaveMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonSaveMap.ForeColor = System.Drawing.Color.Transparent;
+            this._buttonSaveMap.Location = new System.Drawing.Point(20, 432);
+            this._buttonSaveMap.Name = "_buttonSaveMap";
+            this._buttonSaveMap.Size = new System.Drawing.Size(111, 29);
+            this._buttonSaveMap.TabIndex = 11;
+            this._buttonSaveMap.Text = "Save Map";
+            this._buttonSaveMap.UseVisualStyleBackColor = false;
+            this._buttonSaveMap.Click += new System.EventHandler(this._buttonSaveMap_Click);
+            // 
+            // _buttonLoadMap
+            // 
+            this._buttonLoadMap.BackColor = System.Drawing.Color.Salmon;
+            this._buttonLoadMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonLoadMap.ForeColor = System.Drawing.Color.Transparent;
+            this._buttonLoadMap.Location = new System.Drawing.Point(20, 487);
+            this._buttonLoadMap.Name = "_buttonLoadMap";
+            this._buttonLoadMap.Size = new System.Drawing.Size(111, 31);
+            this._buttonLoadMap.TabIndex = 12;
+            this._buttonLoadMap.Text = "Load Map";
+            this._buttonLoadMap.UseVisualStyleBackColor = false;
+            this._buttonLoadMap.Click += new System.EventHandler(this._buttonLoadMap_Click);
+            // 
+            // _buttonExit
+            // 
+            this._buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._buttonExit.BackColor = System.Drawing.Color.Red;
+            this._buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonExit.ForeColor = System.Drawing.Color.Transparent;
+            this._buttonExit.Location = new System.Drawing.Point(1100, 2);
+            this._buttonExit.Name = "_buttonExit";
+            this._buttonExit.Size = new System.Drawing.Size(50, 29);
+            this._buttonExit.TabIndex = 13;
+            this._buttonExit.Text = "Exit";
+            this._buttonExit.UseVisualStyleBackColor = false;
+            this._buttonExit.Click += new System.EventHandler(this._buttonExit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1343, 719);
+            this.Controls.Add(this._buttonExit);
+            this.Controls.Add(this._buttonLoadMap);
+            this.Controls.Add(this._buttonSaveMap);
             this.Controls.Add(this.button1);
             this.Controls.Add(this._fpsTextBox);
             this.Controls.Add(this._fillTextureButton);
@@ -209,6 +255,9 @@
         private System.Windows.Forms.Button _fillTextureButton;
         private System.Windows.Forms.TextBox _fpsTextBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button _buttonSaveMap;
+        private System.Windows.Forms.Button _buttonLoadMap;
+        private System.Windows.Forms.Button _buttonExit;
 
     }
 }

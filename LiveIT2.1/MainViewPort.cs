@@ -12,7 +12,7 @@ namespace LiveIT2._1
 {
     public class MainViewPort
     {
-        const int _minimalWidthInCentimeter = 200;
+        const int _minimalWidthInCentimeter = 600;
         List<Box> _boxList, _boxListMini;
 
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
@@ -26,7 +26,7 @@ namespace LiveIT2._1
             _texture = new Texture();
             _selectedBoxes = new List<Box>();
             _screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            _viewPort = new Rectangle(_screen.Width/2, _screen.Height/2, 800, 800);
+            _viewPort = new Rectangle(_map.MapSize / 2, _map.MapSize / 2, 800, 800);
             _miniMap = new Rectangle( 0,0, 250, 250 );
             _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
@@ -57,8 +57,7 @@ namespace LiveIT2._1
             get { return 1.0 - ((double)_viewPort.Width / (double)_map.MapSize); }
             set
             {
-                if( value < 0.0 || value > 1.0 ) throw new ArgumentException();
-                int newWidth = (int)Math.Round( _map.MapSize * (value - 1) );
+                int newWidth = (int)Math.Round( _map.MapSize * value );
                 Debug.Assert( newWidth <= _map.MapSize );
                 if( newWidth < _minimalWidthInCentimeter ) newWidth = _minimalWidthInCentimeter;
                 int deltaW = newWidth - _viewPort.Width;
@@ -99,6 +98,11 @@ namespace LiveIT2._1
             if( _viewPort.Y < 0 ) _viewPort.Y = 0;
             if( _viewPort.Right > _map.MapSize ) _viewPort.X = _map.MapSize - _viewPort.Width;
             if( _viewPort.Bottom > _map.MapSize ) _viewPort.Y = _map.MapSize - _viewPort.Height;
+        }
+
+        public void LoadMap(Map map)
+        {
+            _map = map;
         }
 
         /// <summary>
