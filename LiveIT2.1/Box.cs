@@ -123,6 +123,14 @@ namespace LiveIT2._1
                 g.FillRectangle(textures.LoadColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
         }
+        internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
+        {
+            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width);
+            int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
+            int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
+
+            g.FillRectangle( textures.LoadColor( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newSize ) );
+        }
         
     }
 }

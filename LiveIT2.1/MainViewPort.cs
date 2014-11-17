@@ -13,32 +13,38 @@ namespace LiveIT2._1
     public class MainViewPort
     {
         const int _minimalWidthInCentimeter = 200;
-        List<Box> _boxList;
-        Rectangle _viewPort, _screen;
+        List<Box> _boxList, _boxListMini;
+
+        private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
         Map _map;
         List<Box> _selectedBoxes;
         Texture _texture;
         bool _changeTexture, _fillTexture;
         public MainViewPort( Map map)
         {
-            _map = map;
-                    
+            _map = map;                   
             _texture = new Texture();
             _selectedBoxes = new List<Box>();
             _screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            _viewPort = new Rectangle(_screen.Width/2, _screen.Height/2, 800, 800);   
+            _viewPort = new Rectangle(_screen.Width/2, _screen.Height/2, 800, 800);
+            _miniMap = new Rectangle( 5,530, 200, 200 );
+            _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
         }
 
         public void Draw( Graphics g )
         {
        
             _boxList = _map.GetOverlappedBoxes(_viewPort);
+            _boxListMini = _map.GetOverlappedBoxes( _miniMapViewPort );
             foreach( Box boxs in _boxList )
             {
-                boxs.Draw(g, _screen, _texture, _viewPort);
-                //g.DrawRectangle(Pens.Red, new Rectangle(boxs.Area.X, boxs.Area.Y, boxs.Area.Width, boxs.Area.Height));
-                //g.DrawRectangle( Pens.White, _viewPort );
+                boxs.Draw(g, _screen, _texture, _viewPort);               
             }
+            foreach( Box boxs in _boxListMini )
+            {
+                boxs.DrawMiniMap( g, _miniMap, _texture, _miniMapViewPort );
+            }
+
             if (_changeTexture) DrawMouseSelector(g, new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(100,100)));
             if (_fillTexture) FillMouseSelector(g, new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(100, 100)));
         }
