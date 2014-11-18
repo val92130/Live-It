@@ -87,30 +87,38 @@ namespace LiveIT2._1
 
         private void T_mouseWheel(object sender, MouseEventArgs e)
         {
+            int increment = 0;
             if (e.Delta >= 1)
             {
-                if( ctrl )
+                if (ctrl)
                 {
-                    _mouseRect.Width += 200;
-                    _mouseRect.Height += 200;
+                    if (_viewPort.MouseSelector.Width >= _map.BoxSize)
+                    {
+                        increment += _map.BoxSize;
+                    }
+                    _viewPort.MouseSelector = new Rectangle(_viewPort.MouseSelector.X, _viewPort.MouseSelector.Y, _viewPort.MouseSelector.Width - increment, _viewPort.MouseSelector.Height - increment);
                 }
                 else
                 {
-                    _viewPort.Zoom( -400 );
+                    _viewPort.Zoom(-400);
                 }
-                
+
 
             }
             else
             {
-                if( ctrl )
+
+                if (ctrl)
                 {
-                    _mouseRect.Width -= 200;
-                    _mouseRect.Height -= 200;
+                    if (_viewPort.MouseSelector.Width <= 600)
+                    {
+                        increment += _map.BoxSize;
+                    }
+                    _viewPort.MouseSelector = new Rectangle(_viewPort.MouseSelector.X, _viewPort.MouseSelector.Y, _viewPort.MouseSelector.Width + increment, _viewPort.MouseSelector.Height + increment);
                 }
                 else
                 {
-                    _viewPort.Zoom( 400 );
+                    _viewPort.Zoom(400);
                 }
             }
         }

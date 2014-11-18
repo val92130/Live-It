@@ -16,6 +16,7 @@ namespace LiveIT2._1
         List<Box> _boxList, _boxListMini;
 
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
+        Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
         Map _map;
         List<Box> _selectedBoxes;
         Texture _texture;
@@ -30,6 +31,8 @@ namespace LiveIT2._1
             _miniMap = new Rectangle( 0,0, 250, 250 );
             _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
+
+
         }
 
         public void Draw( Graphics g )
@@ -37,6 +40,8 @@ namespace LiveIT2._1
        
             _boxList = _map.GetOverlappedBoxes(_viewPort);
             _boxListMini = _map.GetOverlappedBoxes( _miniMapViewPort );
+            _mouseRect.X = Cursor.Position.X - (_mouseRect.Width / 2);
+            _mouseRect.Y = Cursor.Position.Y - (_mouseRect.Height / 2);
             foreach( Box boxs in _boxList )
             {
                 boxs.Draw(g, _screen, _texture, _viewPort);               
@@ -47,8 +52,8 @@ namespace LiveIT2._1
             }
             g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
-            if (_changeTexture) DrawMouseSelector(g, new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(100,100)));
-            if (_fillTexture) FillMouseSelector(g, new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(100, 100)));
+            if (_changeTexture) DrawMouseSelector(g);
+            if (_fillTexture) FillMouseSelector(g);
         }
 
 
@@ -110,21 +115,28 @@ namespace LiveIT2._1
         /// </summary>
         /// <param name="g"></param>
         /// <param name="mouseRect"></param>
-        public void DrawMouseSelector(Graphics g, Rectangle mouseRect)
+        public void DrawMouseSelector(Graphics g)
         {
             _selectedBoxes.Clear();
-            for (int i = 0; i < _boxList.Count; i++ )
+            for (int i = 0; i < _boxList.Count; i++)
             {
-                
-                mouseRect.Width = _boxList[i].RelativeSize.Width;
-                mouseRect.Height = _boxList[i].RelativeSize.Height ;
-                if (mouseRect.IntersectsWith(new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize)))
+                if (!_mouseRect.IntersectsWith(_miniMap))
                 {
-                    _selectedBoxes.Add( _map[_boxList[i].Line, _boxList[i].Column] );
-                    g.DrawRectangle(Pens.White, new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize));
-                    g.DrawString("Box X :"+(_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString() , new Font("Arial", 10f), Brushes.Aqua, _boxList[i].RelativePosition);
+                    if (_mouseRect.IntersectsWith(new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize)))
+                    {
+                        _selectedBoxes.Add(_map[_boxList[i].Line, _boxList[i].Column]);
+                        g.DrawRectangle(Pens.White, new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize));
+                        g.DrawString("Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font("Arial", 10f), Brushes.Aqua, _boxList[i].RelativePosition);
+                    }
                 }
             }
+
+        }
+
+        public Rectangle MouseSelector
+        {
+            get { return _mouseRect; }
+            set { _mouseRect = value; }
         }
 
         /// <summary>
@@ -132,19 +144,19 @@ namespace LiveIT2._1
         /// </summary>
         /// <param name="g"></param>
         /// <param name="mouseRect"></param>
-        public void FillMouseSelector(Graphics g, Rectangle mouseRect)
+        public void FillMouseSelector(Graphics g)
         {
             int count = 0;
             _selectedBoxes.Clear();
             for (int i = 0; i < _boxList.Count; i++)
             {
-                mouseRect.Width = _boxList[i].RelativeSize.Width / 4;
-                mouseRect.Height = _boxList[i].RelativeSize.Height / 4;
-                if (mouseRect.IntersectsWith(new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize)) && count != 1)
+                _mouseRect.Width = _boxList[i].RelativeSize.Width / 4;
+                _mouseRect.Height = _boxList[i].RelativeSize.Height / 4;
+                if (_mouseRect.IntersectsWith(new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize)) && count != 1)
                 {
                     count++;
                     _selectedBoxes.Add(_map[_boxList[i].Line, _boxList[i].Column]);
-                    g.FillEllipse( new SolidBrush( Color.FromArgb( 52, 152, 219 ) ), new Rectangle( mouseRect.X - (mouseRect.Width / 2), mouseRect.Y - (mouseRect.Height / 2), mouseRect.Width, mouseRect.Height ) );
+                    g.FillEllipse( new SolidBrush( Color.FromArgb( 52, 152, 219 ) ), new Rectangle( _mouseRect.X - (_mouseRect.Width / 2), _mouseRect.Y - (_mouseRect.Height / 2), _mouseRect.Width, _mouseRect.Height ) );
                     g.DrawString("Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font("Arial", 10f), Brushes.Aqua, _boxList[i].RelativePosition);
                 }
             }

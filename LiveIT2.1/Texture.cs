@@ -11,9 +11,8 @@ namespace LiveIT2._1
 {
     public class Texture
     {
-        Bitmap _textureGrass, _textureWater, _textureDesert, _textureForest, _textureSnow, _textureWater2,_textureWater3,_textureWater4,_textureWater5, _textureWaterAnimated;
-        Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow;
-        Bitmap _textureWater6, _textureWater7, _textureWater8, _textureWater9, _textureWater10, _textureWater11, _textureWater12;
+        Bitmap _textureGrass, _textureWater, _textureDesert, _textureForest, _textureSnow, _textureDirt, _textureWaterAnimated;
+        Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
        Timer _animate;
         List <Bitmap> _waterList = new List<Bitmap>();
         int count = 0;
@@ -29,8 +28,10 @@ namespace LiveIT2._1
             _textureForest = new Bitmap(@"..\..\..\assets\Forest.jpg");
             _textureSnow = new Bitmap(@"..\..\..\assets\Snow.jpg");
             _textureDesert = new Bitmap(@"..\..\..\assets\Desert.jpg");
+            _textureDirt = new Bitmap(@"..\..\..\assets\Dirt.jpg");
 
             _brushGrass = new SolidBrush(Color.FromArgb(59, 138, 33));
+            _brushDirt = new SolidBrush(Color.FromArgb(169, 144, 104));
             _brushWater = new SolidBrush(Color.FromArgb(64, 85, 213));
             _brushDesert = new SolidBrush(Color.FromArgb(173, 128, 109));
             _brushForest = new SolidBrush(Color.FromArgb(110, 121, 53));
@@ -43,11 +44,6 @@ namespace LiveIT2._1
 
         private void T_animateTick(object sender, EventArgs e)
         {
-            //Random rnd = new Random();
-            //int r = rnd.Next(_waterList.Count);
-            //_textureWaterAnimated = _waterList[r];
-
-            
             if (count + 1  <= _waterList.Count)
             {
                 _textureWaterAnimated = _waterList[count];
@@ -81,6 +77,8 @@ namespace LiveIT2._1
                     return _textureForest;
                 case "Snow" :
                     return _textureSnow;
+                case "Dirt" :
+                    return _textureDirt;
                 case "Desert" :
                     return _textureDesert;
                 default :
@@ -100,6 +98,8 @@ namespace LiveIT2._1
                     return _brushForest;
                 case "Snow":
                     return _brushSnow;
+                case "Dirt":
+                    return _brushDirt;
                 case "Desert":
                     return _brushDesert;
                 default:

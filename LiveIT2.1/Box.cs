@@ -87,6 +87,31 @@ namespace LiveIT2._1
             _map = map;
         }
 
+        public void DrawTransitionTextures()
+        {
+            if (this.Ground == BoxGround.Water)
+            {
+
+                if (this.Top != null && this.Top.Ground != BoxGround.Water)
+                {
+                    this.Top.Ground = BoxGround.Dirt;
+                }
+
+                if (this.Left != null && this.Left.Ground != BoxGround.Water)
+                {
+                    this.Left.Ground = BoxGround.Dirt;
+                }
+                if (this.Right != null && this.Right.Ground != BoxGround.Water)
+                {
+                    this.Right.Ground = BoxGround.Dirt;
+                }
+                if (this.Bottom != null && this.Bottom.Ground != BoxGround.Water)
+                {
+                    this.Bottom.Ground = BoxGround.Dirt;
+                }                
+            }
+        }
+
         /// <summary>
         /// Gets the position of the box in the viewport
         /// </summary>
@@ -112,7 +137,7 @@ namespace LiveIT2._1
         /// <param name="textures">Texture object to apply the texture on the box </param>
         internal void Draw( Graphics g, Rectangle target, Texture textures, Rectangle viewPort)
         {        
-            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width);
+            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width + 1);
             int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
             int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
             _relativePosition.X = newXpos;
@@ -128,6 +153,7 @@ namespace LiveIT2._1
             {
                 g.FillRectangle(textures.LoadColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
+            DrawTransitionTextures();
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
         {
