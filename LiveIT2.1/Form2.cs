@@ -27,6 +27,8 @@ namespace LiveIT2._1
         bool down;
         bool ctrl;
 
+        AnimalTexture _selectedAnimal;
+
         bool ShowDebugInfo = false;
 
         BoxGround _selectedTexture;
@@ -51,6 +53,7 @@ namespace LiveIT2._1
 
         private void Form1_Load( object sender, EventArgs e )
         {
+            _selectedAnimal = AnimalTexture.Rabbit;
             _fpsCount = 0;
             this.DoubleBuffered = true;
             button1.Text = "Hide Debug";
@@ -177,7 +180,7 @@ namespace LiveIT2._1
             if (_viewPort.IsAnimalSelected)
 
             {
-                _viewPort.CreateAnimal();
+                _viewPort.CreateAnimal(_selectedAnimal);
             }
         }
 
@@ -204,16 +207,6 @@ namespace LiveIT2._1
         private void _grassButton_Click( object sender, EventArgs e )
         {
             _selectedTexture = BoxGround.Grass;
-        }
-
-        private void _buttonZoomPlus_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void _buttonZoomMinus_Click( object sender, EventArgs e )
-        {
-
         }
 
         private void _changeTextureButton_Click(object sender, EventArgs e)
@@ -301,6 +294,36 @@ namespace LiveIT2._1
         {
             _viewPort.IsAnimalSelected = true;
 
+        }
+
+        private void catToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Cat;
+        }
+
+        private void dogToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Dog;
+        }
+
+        private void rabbitToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Rabbit;
+        }
+
+        private void lionToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Lion;
+        }
+
+        private void elephantToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Elephant;
+        }
+
+        private void cowToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Cow;
         }
     }
 }

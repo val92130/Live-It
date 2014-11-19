@@ -20,8 +20,16 @@ namespace LiveIT2._1
             _size = size;
             _texture = texture;
         }
-         
+        public Animal( Map map, Point position )
+        {
+            _map = map;
+            _position = position;
+        }
+        public Animal()
+        {
 
+        }
+         
         public Point Position
         {
             get { return _position; }
@@ -29,7 +37,7 @@ namespace LiveIT2._1
         }
          
 
-        public Size Size
+        public virtual Size Size
         {
             get { return _size; }
             set { _size = value; }
@@ -44,6 +52,12 @@ namespace LiveIT2._1
         {
             get { return _texture; }
             set { _texture = value; }
+        }
+
+        internal Map Park
+        {
+            get { return _map; }
+            set { _map = value; }
         }
 
     }

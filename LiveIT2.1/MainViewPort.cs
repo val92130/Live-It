@@ -18,8 +18,6 @@ namespace LiveIT2._1
         Point _animalSelectorCursor;
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
         Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
-        Rectangle t = new Rectangle( 0, 0, 100, 20 );
-        
         Map _map;
         List<Box> _selectedBoxes;
         List<Animal> _animalList;
@@ -28,9 +26,6 @@ namespace LiveIT2._1
         public MainViewPort( Map map)
         {
             _map = map;
-
-           
-
             _texture = new Texture();
             _selectedBoxes = new List<Box>();
             _animalList = new List<Animal>();
@@ -45,9 +40,6 @@ namespace LiveIT2._1
 
         public void Draw( Graphics g )
         {
-
-            t.X += 10;
-            t.Y += 5;
             _boxList = _map.GetOverlappedBoxes(_viewPort);
             _boxListMini = _map.GetOverlappedBoxes( _miniMapViewPort );
             _mouseRect.X = Cursor.Position.X - (_mouseRect.Width / 2);
@@ -72,11 +64,28 @@ namespace LiveIT2._1
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
         }
 
-        public void CreateAnimal()
+        public void CreateAnimal(AnimalTexture animalType)
         {
-            Animal temp = new Animal(_map, _animalSelectorCursor ,new Size(100,100) ,AnimalTexture.Rabbit);
-            _animalList.Add(temp);
+            Animal a;
+            switch( animalType.ToString() )
+            {
+                
+                case "Dog" :
+                    a = new Dog( _map, _animalSelectorCursor );
+                case "Cat":
+                    a = new Cat( _map, _animalSelectorCursor );
+                case "Lion":
+                    a = new Lion( _map, _animalSelectorCursor );
+                case "Rabbit":
+                    a = new Rabbit( _map, _animalSelectorCursor );
+                case "Elephant":
+                    a = new Elephant( _map, _animalSelectorCursor );
+                case "Cow":
+                    a = new Cow( _map, _animalSelectorCursor );
 
+            }
+            Rabbit rabbit = new Rabbit( _map, _animalSelectorCursor );
+            _animalList.Add(a);
         }
 
 
