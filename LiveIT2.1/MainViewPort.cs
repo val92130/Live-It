@@ -54,13 +54,15 @@ namespace LiveIT2._1
             }
             g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
+            foreach (Animal animals in _animalList)
+            {
+                DrawRectangleInViewPort(g, animals.Area, _screen, _viewPort, _miniMap, _miniMapViewPort, animals, _texture);
+            }
+
             if (_changeTexture) DrawMouseSelector(g);
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
-            foreach (Animal animals in _animalList)
-            {
-                DrawRectangleInViewPort( g, animals.Area, _screen, _viewPort, _miniMap, _miniMapViewPort, animals, _texture );
-            }
+            
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
         }
 
@@ -290,15 +292,17 @@ namespace LiveIT2._1
         public bool IsChangeTextureSelected
         {
             get { return _changeTexture; }
-            set { _changeTexture = value; _fillTexture = false;
-                _putAnimal = false;
+            set
+            {
+                _changeTexture = value; _fillTexture = false; _putAnimal = false;
+                
             }
         }
 
         public bool IsFillTextureSelected
         {
             get { return _fillTexture; }
-            set { _fillTexture = value; _changeTexture = false; }
+            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; }
         }
 
         public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )

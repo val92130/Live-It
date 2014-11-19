@@ -13,7 +13,7 @@ namespace LiveIT2._1
         public Cat( Map map, Point starPosition )
         {
             Position = starPosition;
-            Texture = AnimalTexture.Elephant;
+            Texture = AnimalTexture.Cat;
             Size = new Size( 120, 120 );
             Park = map;
         }

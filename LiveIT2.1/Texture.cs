@@ -37,9 +37,14 @@ namespace LiveIT2._1
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
 
-            _textureCow = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureCat = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureDog = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+            _textureCow = new Bitmap( @"..\..\..\assets\Animal\Cow.png" );
+
+            _textureCat = new Bitmap( @"..\..\..\assets\Animal\Cat.png" );
+            _textureCat.MakeTransparent(Color.White);
+
+            _textureDog = new Bitmap( @"..\..\..\assets\Animal\Dog.png" );
+            _textureDog.MakeTransparent(Color.White);
+
             _textureEagle = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
             _textureFinch = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
             _textureFlamingo = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
@@ -135,15 +140,15 @@ namespace LiveIT2._1
                 case "Rabbit":
                     return _textureRabbit;
                 case "Cat":
-                    return _textureWaterAnimated;
+                    return _textureCat;
                 case "Elephant":
                     return _textureElephant;
                 case "Lion":
-                    return _textureSnow;
+                    return _textureLion;
                 case "Cow":
-                    return _textureDirt;
+                    return _textureCow;
                 case "Dog":
-                    return _textureDesert;
+                    return _textureDog;
                 default:
                     return _textureGrass;
             }
