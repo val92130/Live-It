@@ -66,22 +66,28 @@ namespace LiveIT2._1
 
         public void CreateAnimal(AnimalTexture animalType)
         {
-            Animal a;
+            Animal a = new Animal();
             switch( animalType.ToString() )
             {
                 
                 case "Dog" :
                     a = new Dog( _map, _animalSelectorCursor );
+                    break;
                 case "Cat":
                     a = new Cat( _map, _animalSelectorCursor );
+                    break;
                 case "Lion":
                     a = new Lion( _map, _animalSelectorCursor );
+                    break;
                 case "Rabbit":
                     a = new Rabbit( _map, _animalSelectorCursor );
+                    break;
                 case "Elephant":
                     a = new Elephant( _map, _animalSelectorCursor );
+                    break;
                 case "Cow":
                     a = new Cow( _map, _animalSelectorCursor );
+                    break;
 
             }
             Rabbit rabbit = new Rabbit( _map, _animalSelectorCursor );
