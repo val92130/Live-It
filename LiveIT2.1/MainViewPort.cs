@@ -15,6 +15,7 @@ namespace LiveIT2._1
         const int _minimalWidthInCentimeter = 600;
         List<Box> _boxList, _boxListMini;
         Animal _cow;
+        Point _animalSelectorCursor;
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
         Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
         Rectangle t = new Rectangle( 0, 0, 100, 20 );
@@ -38,6 +39,7 @@ namespace LiveIT2._1
             _miniMap = new Rectangle( 0,0, 250, 250 );
             _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
+            _animalSelectorCursor = new Point( 0, 0 );
 
         }
 
@@ -63,7 +65,6 @@ namespace LiveIT2._1
             if (_changeTexture) DrawMouseSelector(g);
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
-           // DrawRectangleInViewPort( g, _cow.Area, _screen, _viewPort, _miniMap, _miniMapViewPort );
             foreach (Animal animals in _animalList)
             {
                 DrawRectangleInViewPort( g, animals.Area, _screen, _viewPort, _miniMap, _miniMapViewPort, animals, _texture );
@@ -73,7 +74,7 @@ namespace LiveIT2._1
 
         public void CreateAnimal()
         {
-            Animal temp = new Animal(_map, new Point(Cursor.Position.X, Cursor.Position.Y),new Size(500,500) ,AnimalTexture.Rabbit);
+            Animal temp = new Animal(_map, _animalSelectorCursor ,new Size(100,100) ,AnimalTexture.Rabbit);
             _animalList.Add(temp);
 
         }
@@ -177,7 +178,7 @@ namespace LiveIT2._1
                 {
                     count++;
                     _selectedBoxes.Add(_map[_boxList[i].Line, _boxList[i].Column]);
-                    g.FillEllipse( new SolidBrush( Color.FromArgb( 52, 152, 219 ) ), new Rectangle( _mouseRect.X - (_mouseRect.Width / 2), _mouseRect.Y - (_mouseRect.Height / 2), _mouseRect.Width, _mouseRect.Height ) );
+                    g.FillEllipse( new SolidBrush( Color.FromArgb( 52, 152, 219 ) ), new Rectangle( _mouseRect.X, _mouseRect.Y, _mouseRect.Width, _mouseRect.Height ) );
                     g.DrawString("Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font("Arial", 10f), Brushes.Aqua, _boxList[i].RelativePosition);
                 }
             }
@@ -194,7 +195,9 @@ namespace LiveIT2._1
                 {
                     count++;
                     _selectedBoxes.Add( _map[_boxList[i].Line, _boxList[i].Column] );
-                    g.FillEllipse( new SolidBrush( Color.Red ), new Rectangle( _mouseRect.X - (_mouseRect.Width / 2), _mouseRect.Y - (_mouseRect.Height / 2), _mouseRect.Width, _mouseRect.Height ) );
+                    _animalSelectorCursor.X =  _map[_boxList[i].Line, _boxList[i].Column].Area.X;
+                    _animalSelectorCursor.Y = _map[_boxList[i].Line, _boxList[i].Column].Area.Y;
+                    g.FillEllipse( new SolidBrush( Color.Red ), new Rectangle( _mouseRect.X, _mouseRect.Y , _mouseRect.Width, _mouseRect.Height ) );
                     g.DrawString( "Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font( "Arial", 10f ), Brushes.Aqua, _boxList[i].RelativePosition );
                 }
             }
