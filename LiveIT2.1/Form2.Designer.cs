@@ -40,6 +40,7 @@
             this._buttonSaveMap = new System.Windows.Forms.Button();
             this._buttonLoadMap = new System.Windows.Forms.Button();
             this._buttonExit = new System.Windows.Forms.Button();
+            this.AnimalButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // _waterButton
@@ -208,12 +209,23 @@
             this._buttonExit.UseVisualStyleBackColor = false;
             this._buttonExit.Click += new System.EventHandler(this._buttonExit_Click);
             // 
+            // AnimalButton
+            // 
+            this.AnimalButton.Location = new System.Drawing.Point(397, 24);
+            this.AnimalButton.Name = "AnimalButton";
+            this.AnimalButton.Size = new System.Drawing.Size(75, 23);
+            this.AnimalButton.TabIndex = 14;
+            this.AnimalButton.Text = "Animal";
+            this.AnimalButton.UseVisualStyleBackColor = true;
+            this.AnimalButton.Click += new System.EventHandler(this.AnimalButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1343, 719);
+            this.Controls.Add(this.AnimalButton);
             this.Controls.Add(this._buttonExit);
             this.Controls.Add(this._buttonLoadMap);
             this.Controls.Add(this._buttonSaveMap);
@@ -258,6 +270,7 @@
         private System.Windows.Forms.Button _buttonSaveMap;
         private System.Windows.Forms.Button _buttonLoadMap;
         private System.Windows.Forms.Button _buttonExit;
+        private System.Windows.Forms.Button AnimalButton;
 
     }
 }

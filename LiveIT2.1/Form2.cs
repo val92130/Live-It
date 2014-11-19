@@ -174,6 +174,11 @@ namespace LiveIT2._1
         private void Form1_MouseClick( object sender, MouseEventArgs e )
         {
             _viewPort.ChangeTexture(_selectedTexture);
+            if (_viewPort.IsAnimalSelected)
+
+            {
+                _viewPort.CreateAnimal();
+            }
         }
 
         private void _waterButton_Click( object sender, EventArgs e )
@@ -290,6 +295,12 @@ namespace LiveIT2._1
                 this.Close();
             }
             
+        }
+
+        private void AnimalButton_Click( object sender, EventArgs e )
+        {
+            _viewPort.IsAnimalSelected = true;
+
         }
     }
 }

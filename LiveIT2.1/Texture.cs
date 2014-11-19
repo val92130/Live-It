@@ -11,7 +11,7 @@ namespace LiveIT2._1
 {
     public class Texture
     {
-        Bitmap _textureGrass, _textureWater, _textureDesert, _textureForest, _textureSnow, _textureDirt, _textureWaterAnimated;
+        Bitmap _textureGrass, _textureWater, _textureDesert, _textureForest, _textureSnow, _textureDirt, _textureWaterAnimated,_textureRabbit;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
        Timer _animate;
         List <Bitmap> _waterList = new List<Bitmap>();
@@ -29,6 +29,7 @@ namespace LiveIT2._1
             _textureSnow = new Bitmap(@"..\..\..\assets\Snow.jpg");
             _textureDesert = new Bitmap(@"..\..\..\assets\Desert.jpg");
             _textureDirt = new Bitmap(@"..\..\..\assets\Dirt.jpg");
+            _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
 
             _brushGrass = new SolidBrush(Color.FromArgb(59, 138, 33));
             _brushDirt = new SolidBrush(Color.FromArgb(169, 144, 104));
@@ -106,7 +107,26 @@ namespace LiveIT2._1
                     return _brushGrass;
             }
         }
-
+        public Bitmap LoadTexture( Animal animal )
+        {
+            switch( animal.Texture.ToString() )
+            {
+                case "Rabbit":
+                    return _textureRabbit;
+                case "Cat":
+                    return _textureWaterAnimated;
+                case "Elephant":
+                    return _textureForest;
+                case "Lion":
+                    return _textureSnow;
+                case "Cow":
+                    return _textureDirt;
+                case "Dog":
+                    return _textureDesert;
+                default:
+                    return _textureGrass;
+            }
+        }
 
 
     }

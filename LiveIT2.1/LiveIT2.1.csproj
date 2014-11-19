@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animal.cs" />
+    <Compile Include="AnimalTexture.cs" />
     <Compile Include="Box.cs" />
     <Compile Include="BoxGround.cs" />
     <Compile Include="Form2.cs">
