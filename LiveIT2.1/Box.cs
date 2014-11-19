@@ -92,7 +92,7 @@ namespace LiveIT2._1
             if (this.Ground == BoxGround.Water)
             {
 
-                if (this.Top != null && this.Top.Ground != BoxGround.Water)
+                if (this.Top != null && this.Top.Ground != BoxGround.Water )
                 {
                     this.Top.Ground = BoxGround.Dirt;
                 }
