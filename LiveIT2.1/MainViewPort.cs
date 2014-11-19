@@ -56,6 +56,7 @@ namespace LiveIT2._1
             if (_changeTexture) DrawMouseSelector(g);
             if (_fillTexture) FillMouseSelector(g);
 
+
             DrawRectangleInViewPort( g, t, _screen, _viewPort, _miniMap, _miniMapViewPort );
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
         }
@@ -202,6 +203,7 @@ namespace LiveIT2._1
                 if (target.Right != null)
                 {
                     FillBox(target.Right, targetColor, Color);
+
                 }
             }
         }
@@ -242,7 +244,7 @@ namespace LiveIT2._1
             set { _fillTexture = value; _changeTexture = false; }
         }
 
-        public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )
+        public void DrawRectangleInViewPort( Graphics g ,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )
         {
             int newSize = (int)(((double)source.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)source.Height / (double)viewPort.Width) * target.Width + 1);
