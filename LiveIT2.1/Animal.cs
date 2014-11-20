@@ -188,7 +188,7 @@ namespace LiveIT2._1
             });
             //CheckIntersect.Start();
 
-            this.Direction = new Point(0, this.Speed);
+            this.Direction = new Point(this.Speed, 0);
             _position.X += this.Direction.X;
             _position.Y += this.Direction.Y;
 
@@ -208,6 +208,14 @@ namespace LiveIT2._1
                 {
                     g.DrawLine(new Pen(Brushes.Red,4), this.RelativePosition, a.RelativePosition);
                     g.DrawString("Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font("Arial", 15f), Brushes.White, this.RelativePosition);
+                }
+            }
+
+            for (int i = 0; i < _map.Boxes.Length; i++)
+            {
+                if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && this.FavoriteEnvironnment == _map.Boxes[i].Ground)
+                {
+                    g.DrawLine(new Pen(Brushes.Blue, 5), this.RelativePosition, _map.Boxes[i].RelativePosition);
                 }
             }
 

@@ -15,6 +15,8 @@ namespace LiveIT2._1
             Position = StartPosition;
             Size = new Size( 100, 100 );
             Park = map;
+            Speed = 10;
+            ViewDistance = 200;
         }
     }
 }

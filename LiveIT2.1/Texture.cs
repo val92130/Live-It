@@ -36,6 +36,7 @@ namespace LiveIT2._1
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+            _textureElephant.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureCow = new Bitmap( @"..\..\..\assets\Animal\Cow.png" );
 
