@@ -21,6 +21,7 @@ namespace LiveIT2._1
         int _speed;
         int _defaultSpeed;
         Point _relativePosition;
+        Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
         {
@@ -128,6 +129,12 @@ namespace LiveIT2._1
             set { _relativePosition = value; }
         }
 
+        public Size RelativeSize
+        {
+            get { return _relativeSize; }
+            set { _relativeSize = value; }
+        }
+
         public AnimalTexture Texture
         {
             get { return _texture; }
@@ -149,7 +156,14 @@ namespace LiveIT2._1
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
         {
             Random r = new Random();
-
+            if (this.Position.X + this.Area.Width >= _map.MapSize)
+            {
+                this.Position = new Point(0, this.Position.Y);
+            }
+            if (this.Position.Y + this.Area.Height >= _map.MapSize)
+            {
+                this.Position = new Point(this.Position.X, 0);
+            }
             Task CheckIntersect = new Task(() =>
             {
                 for (int i = 0; i < _map.Boxes.Length; i++)
@@ -174,27 +188,27 @@ namespace LiveIT2._1
             });
             //CheckIntersect.Start();
 
-            this.Direction = new Point(this.Speed, 0);
+            this.Direction = new Point(0, this.Speed);
             _position.X += this.Direction.X;
             _position.Y += this.Direction.Y;
 
 
-            int newSize = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
+            int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
             int newXpos = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width)));
             int newYpos = (int)(this.Area.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width)));
 
             this.RelativePosition = new Point(newXpos, newYpos);
+            this.RelativeSize = new Size(newWidth, newHeight);
 
 
             if (this.AnimalsAround.Count != 0)
             {
                 foreach (Animal a in AnimalsAround)
                 {
-                    g.DrawLine(Pens.Red, this.RelativePosition, a.RelativePosition);
+                    g.DrawLine(new Pen(Brushes.Red,4), this.RelativePosition, a.RelativePosition);
                     g.DrawString("Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font("Arial", 15f), Brushes.White, this.RelativePosition);
                 }
-
             }
 
             Task ThreadGetAnimalsAround = new Task(() =>
@@ -209,7 +223,7 @@ namespace LiveIT2._1
             int newXposMini = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
             int newYposMini = (int)(this.Area.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
 
-            g.DrawImage( texture.LoadTexture(this), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
+            g.DrawImage( texture.LoadTexture(this), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
             g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
         }
     }

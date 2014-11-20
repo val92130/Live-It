@@ -178,7 +178,7 @@ namespace LiveIT2._1
             {
                 for (int i = 0; i < _animalList.Count; i++)
                 {
-                    if (_animalList[i].Area.IntersectsWith(this.Area))
+                    if (!_animalList[i].Area.IntersectsWith(this.Area))
                     {
                         RemoveFromList(_animalList[i]);
                     }
@@ -186,6 +186,10 @@ namespace LiveIT2._1
             });
             CheckAnimalList.Start();
             DrawTransitionTextures();
+            if (this._animalList.Count != 0)
+            {
+                g.FillRectangle(new SolidBrush(Color.FromArgb(128, 0, 0, 255)), new Rectangle(this.RelativePosition, this.RelativeSize));
+            }
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
         {

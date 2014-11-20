@@ -11,7 +11,7 @@ namespace LiveIT2._1
 {
     public class Texture
     {
-        Bitmap _textureGrass, _textureWater, _textureDesert, _textureForest, _textureSnow,
+        Bitmap _textureGrass, _textureDesert, _textureForest, _textureSnow,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureFinch,_textureFlamingo,
             _textureGiraffe, _textureLeopard,_textureLion,_textureLizards, _textureMonkey,

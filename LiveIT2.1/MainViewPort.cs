@@ -46,6 +46,17 @@ namespace LiveIT2._1
             _mouseRect.Y = Cursor.Position.Y - (_mouseRect.Height / 2);
             foreach( Box boxs in _boxList )
             {
+                Task CheckAnimalInBoxes = new Task(() =>
+                {
+                    foreach (Animal a in _animalList)
+                    {
+                        if (a.Area.IntersectsWith(boxs.Area))
+                        {
+                            boxs.AddAnimal(a);
+                        }
+                    }
+                });
+                CheckAnimalInBoxes.Start();
                 boxs.Draw(g, _screen, _texture, _viewPort);               
             }
             foreach( Box boxs in _boxListMini )
@@ -93,7 +104,6 @@ namespace LiveIT2._1
                     break;
 
             }
-            Rabbit rabbit = new Rabbit( _map, _animalSelectorCursor );
             _animalList.Add(a);
         }
 
