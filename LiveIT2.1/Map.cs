@@ -17,6 +17,8 @@ namespace LiveIT2._1
         readonly int _boxCountPerLine;
         // Box size in centimeter.
         readonly int _boxSize;
+        List<Animal> _animals = new List<Animal>();
+        MainViewPort _viewPort;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -42,6 +44,12 @@ namespace LiveIT2._1
             get { return _boxSize; }
         }
 
+        public List<Animal> Animals
+        {
+            get { return _animals; }
+            set { _animals = value; }
+        }
+
         /// <summary>
         /// Gets the number of lines and number of columns.
         /// </summary>
@@ -63,6 +71,11 @@ namespace LiveIT2._1
             get { return _boxes; }
         }
 
+        public MainViewPort ViewPort
+        {
+            get { return _viewPort; }
+            set { _viewPort = value; }
+        }
         /// <summary>
         /// Gets the box at (line,column). line and column must be in [0,<see cref="MapSize"/>[
         /// otherwise null is returned.

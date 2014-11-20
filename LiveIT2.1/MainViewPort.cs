@@ -14,7 +14,6 @@ namespace LiveIT2._1
     {
         const int _minimalWidthInCentimeter = 600;
         List<Box> _boxList, _boxListMini;
-        Animal _cow;
         Point _animalSelectorCursor;
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
         Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
@@ -35,6 +34,7 @@ namespace LiveIT2._1
             _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
             _animalSelectorCursor = new Point( 0, 0 );
+            _map.ViewPort = this;
 
         }
 
@@ -62,7 +62,8 @@ namespace LiveIT2._1
             if (_changeTexture) DrawMouseSelector(g);
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
-            
+
+            _map.Animals = _animalList;
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
         }
 
@@ -143,6 +144,26 @@ namespace LiveIT2._1
             if( _viewPort.Y < 0 ) _viewPort.Y = 0;
             if( _viewPort.Right > _map.MapSize ) _viewPort.X = _map.MapSize - _viewPort.Width;
             if( _viewPort.Bottom > _map.MapSize ) _viewPort.Y = _map.MapSize - _viewPort.Height;
+        }
+
+        public Rectangle ScreenSize
+        {
+            get { return _screen; }
+        }
+
+        public Rectangle ViewPort
+        {
+            get { return _viewPort; }
+        }
+
+        public Rectangle MiniMap
+        {
+            get { return _miniMap; }
+        }
+
+        public Rectangle MiniMapViewPort
+        {
+            get { return _miniMapViewPort; }
         }
 
         public void LoadMap(Map map)
@@ -317,8 +338,8 @@ namespace LiveIT2._1
             int newXposMini = (int)(source.X / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
             int newYposMini = (int)(source.Y / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
 
-            g.FillRectangle( Brushes.Black, new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
-            g.FillRectangle( Brushes.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+            g.DrawRectangle( Pens.Blue, new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
+            g.DrawRectangle(Pens.Blue, new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
         }
         public void DrawRectangleInViewPort( Graphics g, Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Animal animal, Texture t )
         {

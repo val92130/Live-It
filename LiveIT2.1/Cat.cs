@@ -17,7 +17,8 @@ namespace LiveIT2._1
             Size = new Size( 120, 120 );
             Park = map;
             FavoriteEnvironnment = BoxGround.Grass;
-            Speed = 11;
+            Speed = 15;
+            ViewDistance = 300;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace LiveIT2._1
             Park = map;
             FavoriteEnvironnment = BoxGround.Forest;
             Speed = 7;
+            ViewDistance = 600;
         }
         
     }

@@ -45,6 +45,7 @@ namespace LiveIT2._1
 
             _textureDog = new Bitmap( @"..\..\..\assets\Animal\Dog.png" );
             _textureDog.MakeTransparent(Color.White);
+            _textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureEagle = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
             _textureFinch = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );

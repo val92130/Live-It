@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -172,13 +173,18 @@ namespace LiveIT2._1
                 g.FillRectangle(textures.LoadColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
 
-            for (int i = 0; i < _animalList.Count; i++)
+
+            Task CheckAnimalList = new Task(() =>
             {
-                if (_animalList[i].Area.IntersectsWith(this.Area))
+                for (int i = 0; i < _animalList.Count; i++)
                 {
-                    RemoveFromList(_animalList[i]);
+                    if (_animalList[i].Area.IntersectsWith(this.Area))
+                    {
+                        RemoveFromList(_animalList[i]);
+                    }
                 }
-            }
+            });
+            CheckAnimalList.Start();
             DrawTransitionTextures();
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
