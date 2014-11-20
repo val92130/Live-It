@@ -153,7 +153,5 @@ namespace LiveIT2._1
                     return _textureGrass;
             }
         }
-
-
     }
 }

@@ -27,7 +27,7 @@ namespace LiveIT2._1
             for( int i = 0; i < _boxCountPerLine; i++ )
             {
                 for( int j = 0; j < _boxCountPerLine; j++ )
-                {
+                {                  
                     _boxes[count++] = new Box( i, j, this );
                 }
             }
@@ -56,6 +56,11 @@ namespace LiveIT2._1
         public int MapSize
         {
             get { return _boxCountPerLine * _boxSize; }
+        }
+
+        public Box[] Boxes
+        {
+            get { return _boxes; }
         }
 
         /// <summary>
