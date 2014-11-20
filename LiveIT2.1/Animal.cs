@@ -13,7 +13,12 @@ namespace LiveIT2._1
          Size _size;
          Map _map;
          Point _direction;
+         BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
+        Rectangle _fieldOfViewRect;
+        int _viewDistance;
+        int _speed;
+        int _defaultSpeed;
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
         {
             _map = map;
@@ -21,6 +26,10 @@ namespace LiveIT2._1
             _size = size;
             _texture = texture;
             _direction = new Point( 0, 0 );
+            _favoriteEnvironnment = BoxGround.Grass;
+            _viewDistance = 1000;
+            _speed = 4;
+            
         }
         public Animal( Map map, Point position )
         {
@@ -30,6 +39,18 @@ namespace LiveIT2._1
         public Animal()
         {
 
+        }
+
+        public Rectangle FieldOfView
+        {
+            get { return new Rectangle(this.Position.X + (this.Area.Width / 2), this.Position.Y + (this.Area.Height / 2), _viewDistance, _viewDistance); }
+            set { _fieldOfViewRect = value; }
+        }
+
+        public int ViewDistance
+        {
+            get { return _viewDistance; }
+            set { _viewDistance = value; }
         }
          
         public Point Position
@@ -42,6 +63,18 @@ namespace LiveIT2._1
         {
             get { return _size; }
             set { _size = value; }
+        }
+
+        public int Speed
+        {
+            get { return _speed; }
+            set { _speed = value; }
+        }
+
+        public int DefaultSpeed
+        {
+            get { return _defaultSpeed; }
+            set { _defaultSpeed = value; }
         }
 
         public Rectangle Area
@@ -67,9 +100,37 @@ namespace LiveIT2._1
             set { _map = value; }
         }
 
-        public void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
+        public BoxGround FavoriteEnvironnment
+        {
+            get { return _favoriteEnvironnment; }
+            set { _favoriteEnvironnment = value; }
+        }
+
+        public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
         {
             Random r = new Random();
+            
+            for (int i = 0; i < _map.Boxes.Length; i++)
+            {
+                if (this.Area.IntersectsWith(_map.Boxes[i].Area))
+                {
+                    _map.Boxes[i].AddAnimal(this);
+                    if (_map.Boxes[i].Ground == this.FavoriteEnvironnment)
+                    {
+                        this.Speed = r.Next(1, 3);
+                    }
+                    else
+                    {
+                        this.Speed = this.DefaultSpeed;
+                    }
+                }
+            }
+            if (this.FieldOfView.X >= _map.MapSize)
+            {
+                this.Speed = -Speed;
+            }
+
+            this.Direction = new Point(this.Speed, 0);
             _position.X += this.Direction.X;
             _position.Y += this.Direction.Y;
 
@@ -83,7 +144,7 @@ namespace LiveIT2._1
             int newXposMini = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
             int newYposMini = (int)(this.Area.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
 
-
+            g.DrawRectangle(Pens.Red, this.FieldOfView);
             g.DrawImage( texture.LoadTexture(this), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
             g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
         }

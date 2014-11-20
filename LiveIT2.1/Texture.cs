@@ -41,6 +41,7 @@ namespace LiveIT2._1
 
             _textureCat = new Bitmap( @"..\..\..\assets\Animal\Cat.png" );
             _textureCat.MakeTransparent(Color.White);
+            _textureCat.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureDog = new Bitmap( @"..\..\..\assets\Animal\Dog.png" );
             _textureDog.MakeTransparent(Color.White);

@@ -56,7 +56,6 @@ namespace LiveIT2._1
 
             foreach (Animal animals in _animalList)
             {
-                //DrawRectangleInViewPort(g, animals.Area, _screen, _viewPort, _miniMap, _miniMapViewPort, animals, _texture);
                 animals.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
 

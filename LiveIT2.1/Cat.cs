@@ -16,6 +16,8 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Cat;
             Size = new Size( 120, 120 );
             Park = map;
+            FavoriteEnvironnment = BoxGround.Grass;
+            Speed = 11;
         }
     }
 }

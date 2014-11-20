@@ -16,6 +16,7 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Cow;
             Size = new Size( 300, 300 );
             Park = map;
+            FavoriteEnvironnment = BoxGround.Grass;
         }
     }
 }

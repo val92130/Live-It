@@ -16,6 +16,9 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Dog;
             Size = new Size( 150, 150 );
             Park = map;
+            FavoriteEnvironnment = BoxGround.Forest;
+            Speed = 7;
         }
+        
     }
 }

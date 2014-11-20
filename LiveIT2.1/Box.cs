@@ -18,6 +18,7 @@ namespace LiveIT2._1
         Rectangle _source;
         Point _relativePosition;
         Size _relativeSize;
+        List<Animal> _animalList;
 
         public Box( int line, int column, Map map )
         {
@@ -27,6 +28,7 @@ namespace LiveIT2._1
             _ground = BoxGround.Grass;
             _relativePosition = new Point(line, column);
             _relativeSize = new Size(_map.BoxSize, _map.BoxSize);
+            _animalList = new List<Animal>();
         }
 
         public Point Location
@@ -85,6 +87,22 @@ namespace LiveIT2._1
         public void LoadMap(Map map)
         {
             _map = map;
+        }
+
+        public void AddAnimal(Animal a)
+        {
+            if (!_animalList.Contains(a))
+            {
+                _animalList.Add(a);
+            }
+        }
+
+        public void RemoveFromList(Animal a)
+        {
+            if (_animalList.Contains(a))
+            {
+                _animalList.Remove(a);
+            }
         }
 
         public void DrawTransitionTextures()
@@ -152,6 +170,14 @@ namespace LiveIT2._1
             else
             {
                 g.FillRectangle(textures.LoadColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
+            }
+
+            for (int i = 0; i < _animalList.Count; i++)
+            {
+                if (_animalList[i].Area.IntersectsWith(this.Area))
+                {
+                    RemoveFromList(_animalList[i]);
+                }
             }
             DrawTransitionTextures();
         }
