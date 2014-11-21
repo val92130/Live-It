@@ -64,6 +64,7 @@ namespace LiveIT2._1
             _boxWidth = _map.BoxSize;
 
              _viewPort = new MainViewPort( _map);
+             _map.ShowDebug = true;
             _mouseRect = new Rectangle( 0, 0, 100, 100 );
 
             g = this.CreateGraphics();
@@ -251,12 +252,14 @@ namespace LiveIT2._1
                 _fpsTextBox.Show();
                 button1.Text = "Hide Debug";
                 ShowDebugInfo = false;
+                _map.ShowDebug = true;
             }
             else
             {
                 _fpsTextBox.Hide();
                 button1.Text = "Show Debug";
                 ShowDebugInfo = true;
+                _map.ShowDebug = false;
             }
         }
 
@@ -307,6 +310,10 @@ namespace LiveIT2._1
         {
             _selectedAnimal = AnimalTexture.Cow;
         }
+        private void _buttonFollowAnimal_Click( object sender, EventArgs e )
+        {
+            _viewPort.IsFollowAnimalSelected = true;
+        }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -324,7 +331,7 @@ namespace LiveIT2._1
             loadBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
             if (loadBox.ShowDialog() == DialogResult.OK)
             {
-                _map = _map.Load(loadBox.FileName);
+                _map.Boxes = _map.Load(loadBox.FileName);
                 _viewPort.LoadMap(_map);
             }
         }

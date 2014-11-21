@@ -49,6 +49,7 @@
             this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@
             this._dirtButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
             this._dirtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._dirtButton.ForeColor = System.Drawing.Color.Transparent;
-            this._dirtButton.Location = new System.Drawing.Point(10, 353);
+            this._dirtButton.Location = new System.Drawing.Point(10, 327);
             this._dirtButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._dirtButton.Name = "_dirtButton";
             this._dirtButton.Size = new System.Drawing.Size(111, 30);
@@ -85,7 +86,7 @@
             this._snowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this._snowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._snowButton.ForeColor = System.Drawing.Color.Transparent;
-            this._snowButton.Location = new System.Drawing.Point(10, 419);
+            this._snowButton.Location = new System.Drawing.Point(10, 365);
             this._snowButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._snowButton.Name = "_snowButton";
             this._snowButton.Size = new System.Drawing.Size(111, 30);
@@ -99,7 +100,7 @@
             this._desertButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
             this._desertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._desertButton.ForeColor = System.Drawing.Color.Transparent;
-            this._desertButton.Location = new System.Drawing.Point(10, 482);
+            this._desertButton.Location = new System.Drawing.Point(12, 403);
             this._desertButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._desertButton.Name = "_desertButton";
             this._desertButton.Size = new System.Drawing.Size(111, 30);
@@ -113,7 +114,7 @@
             this._grassButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
             this._grassButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._grassButton.ForeColor = System.Drawing.Color.Transparent;
-            this._grassButton.Location = new System.Drawing.Point(10, 547);
+            this._grassButton.Location = new System.Drawing.Point(12, 441);
             this._grassButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._grassButton.Name = "_grassButton";
             this._grassButton.Size = new System.Drawing.Size(111, 30);
@@ -158,7 +159,7 @@
             this._fpsTextBox.Enabled = false;
             this._fpsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this._fpsTextBox.ForeColor = System.Drawing.Color.Black;
-            this._fpsTextBox.Location = new System.Drawing.Point(1156, 34);
+            this._fpsTextBox.Location = new System.Drawing.Point(833, 34);
             this._fpsTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._fpsTextBox.Multiline = true;
             this._fpsTextBox.Name = "_fpsTextBox";
@@ -170,7 +171,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(12, 97);
+            this.button1.Location = new System.Drawing.Point(252, 94);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 29);
             this.button1.TabIndex = 10;
@@ -215,7 +216,7 @@
             this.loadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1343, 34);
+            this.menuStrip1.Size = new System.Drawing.Size(1020, 34);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -237,42 +238,42 @@
             // catToolStripMenuItem
             // 
             this.catToolStripMenuItem.Name = "catToolStripMenuItem";
-            this.catToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.catToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
             this.catToolStripMenuItem.Text = "Cat";
             this.catToolStripMenuItem.Click += new System.EventHandler(this.catToolStripMenuItem_Click);
             // 
             // dogToolStripMenuItem
             // 
             this.dogToolStripMenuItem.Name = "dogToolStripMenuItem";
-            this.dogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dogToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
             this.dogToolStripMenuItem.Text = "Dog";
             this.dogToolStripMenuItem.Click += new System.EventHandler(this.dogToolStripMenuItem_Click);
             // 
             // rabbitToolStripMenuItem
             // 
             this.rabbitToolStripMenuItem.Name = "rabbitToolStripMenuItem";
-            this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
             this.rabbitToolStripMenuItem.Text = "Rabbit";
             this.rabbitToolStripMenuItem.Click += new System.EventHandler(this.rabbitToolStripMenuItem_Click);
             // 
             // lionToolStripMenuItem
             // 
             this.lionToolStripMenuItem.Name = "lionToolStripMenuItem";
-            this.lionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lionToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
             this.lionToolStripMenuItem.Text = "Lion";
             this.lionToolStripMenuItem.Click += new System.EventHandler(this.lionToolStripMenuItem_Click);
             // 
             // elephantToolStripMenuItem
             // 
             this.elephantToolStripMenuItem.Name = "elephantToolStripMenuItem";
-            this.elephantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.elephantToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
             this.elephantToolStripMenuItem.Text = "Elephant";
             this.elephantToolStripMenuItem.Click += new System.EventHandler(this.elephantToolStripMenuItem_Click);
             // 
             // cowToolStripMenuItem
             // 
             this.cowToolStripMenuItem.Name = "cowToolStripMenuItem";
-            this.cowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cowToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
             this.cowToolStripMenuItem.Text = "Cow";
             this.cowToolStripMenuItem.Click += new System.EventHandler(this.cowToolStripMenuItem_Click);
             // 
@@ -292,12 +293,26 @@
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
+            // _buttonFollowAnimal
+            // 
+            this._buttonFollowAnimal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(108)))), ((int)(((byte)(179)))));
+            this._buttonFollowAnimal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonFollowAnimal.ForeColor = System.Drawing.Color.Transparent;
+            this._buttonFollowAnimal.Location = new System.Drawing.Point(12, 94);
+            this._buttonFollowAnimal.Name = "_buttonFollowAnimal";
+            this._buttonFollowAnimal.Size = new System.Drawing.Size(203, 32);
+            this._buttonFollowAnimal.TabIndex = 17;
+            this._buttonFollowAnimal.Text = "Follow Animal";
+            this._buttonFollowAnimal.UseVisualStyleBackColor = false;
+            this._buttonFollowAnimal.Click += new System.EventHandler(this._buttonFollowAnimal_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1343, 719);
+            this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this._buttonFollowAnimal);
             this.Controls.Add(this.AnimalButton);
             this.Controls.Add(this._buttonExit);
             this.Controls.Add(this.button1);
@@ -354,6 +369,7 @@
         private System.Windows.Forms.ToolStripMenuItem cowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.Button _buttonFollowAnimal;
 
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class MainViewPort
     {
         const int _minimalWidthInCentimeter = 600;
@@ -21,7 +22,7 @@ namespace LiveIT2._1
         List<Box> _selectedBoxes;
         List<Animal> _animalList;
         Texture _texture;
-        bool _changeTexture, _fillTexture,_putAnimal;
+        bool _changeTexture, _fillTexture,_putAnimal, _followAnimal;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -30,7 +31,7 @@ namespace LiveIT2._1
             _animalList = new List<Animal>();
             _screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             _viewPort = new Rectangle(0, 0, 800, 800);
-            _miniMap = new Rectangle( 0,0, 250, 250 );
+            _miniMap = new Rectangle( 0, 0,250, 250  );
             _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
             _animalSelectorCursor = new Point( 0, 0 );
@@ -73,6 +74,17 @@ namespace LiveIT2._1
             if (_changeTexture) DrawMouseSelector(g);
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
+            if( _followAnimal )
+            {
+                foreach( Animal a in _animalList )
+                {
+                    if( _mouseRect.IntersectsWith( new Rectangle( a.RelativePosition, a.RelativeSize ) ) )
+                    {
+                        _viewPort.X = a.Position.X - (_viewPort.Width /2);
+                        _viewPort.Y = a.Position.Y - (_viewPort.Height /2);
+                    }
+                }
+            }
 
             _map.Animals = _animalList;
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
@@ -318,14 +330,14 @@ namespace LiveIT2._1
         public bool IsAnimalSelected
         {
             get { return _putAnimal; }
-            set { _putAnimal = value; _fillTexture = false; _changeTexture = false; }
+            set { _putAnimal = value; _fillTexture = false; _changeTexture = false; _followAnimal = false; }
         }
         public bool IsChangeTextureSelected
         {
             get { return _changeTexture; }
             set
             {
-                _changeTexture = value; _fillTexture = false; _putAnimal = false;
+                _changeTexture = value; _fillTexture = false; _putAnimal = false; _followAnimal = false;
                 
             }
         }
@@ -333,7 +345,13 @@ namespace LiveIT2._1
         public bool IsFillTextureSelected
         {
             get { return _fillTexture; }
-            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; }
+            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; _followAnimal = false; }
+        }
+
+        public bool IsFollowAnimalSelected
+        {
+            get { return _followAnimal; }
+            set { _followAnimal = value; _changeTexture = false; _putAnimal = false; _fillTexture = false; }
         }
 
         public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )

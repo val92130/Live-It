@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Animal
     {
          Point _position;
@@ -23,6 +24,7 @@ namespace LiveIT2._1
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
+        
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
         {
             _map = map;
@@ -105,8 +107,7 @@ namespace LiveIT2._1
                     if (!_animalsAround.Contains(_map.Animals[i]))
                     {
                         _animalsAround.Add(_map.Animals[i]);
-                    }
-                    
+                    }                    
                 }
                 else
                 {
@@ -188,11 +189,10 @@ namespace LiveIT2._1
             });
             //CheckIntersect.Start();
 
-            this.Direction = new Point(this.Speed, 0);
+            this.Direction = new Point(r.Next(-3,_speed), r.Next(-3,_speed));
             _position.X += this.Direction.X;
             _position.Y += this.Direction.Y;
-
-
+          
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
             int newXpos = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width)));
@@ -204,20 +204,30 @@ namespace LiveIT2._1
 
             if (this.AnimalsAround.Count != 0)
             {
-                foreach (Animal a in AnimalsAround)
+                if( this._map.ShowDebug == true )
                 {
-                    g.DrawLine(new Pen(Brushes.Red,4), this.RelativePosition, a.RelativePosition);
-                    g.DrawString("Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font("Arial", 15f), Brushes.White, this.RelativePosition);
-                }
-            }
+                    foreach( Animal a in AnimalsAround )
+                    {
+                        if( this.Texture != a.Texture )
+                        {
+                            g.DrawLine( new Pen( Brushes.Red, 4 ), this.RelativePosition, a.RelativePosition );
+                            g.DrawString( "Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font( "Arial", 15f ), Brushes.White, this.RelativePosition );
+                        }
 
-            for (int i = 0; i < _map.Boxes.Length; i++)
-            {
-                if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && this.FavoriteEnvironnment == _map.Boxes[i].Ground)
-                {
-                    g.DrawLine(new Pen(Brushes.Blue, 5), this.RelativePosition, _map.Boxes[i].RelativePosition);
+                    }
+                    for( int i = 0; i < _map.Boxes.Length; i++ )
+                    {
+                        if( _map.Boxes[i].Area.IntersectsWith( this.FieldOfView ) && this.FavoriteEnvironnment == _map.Boxes[i].Ground )
+                        {
+                            g.DrawLine( new Pen( Brushes.Blue, 5 ), this.RelativePosition, _map.Boxes[i].RelativePosition );
+                        }
+                    }
+                    _map.ViewPort.DrawRectangleInViewPort( g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort );
+
                 }
             }
+            
+
 
             Task ThreadGetAnimalsAround = new Task(() =>
             {
@@ -225,7 +235,6 @@ namespace LiveIT2._1
             });
             ThreadGetAnimalsAround.Start();
 
-            _map.ViewPort.DrawRectangleInViewPort(g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
             int newSizeMini = (int)(((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             int newHeightMini = (int)(((double)this.Area.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             int newXposMini = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));

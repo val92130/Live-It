@@ -147,7 +147,6 @@ namespace LiveIT2._1
             get { return _relativeSize; }
         }
 
-
         /// <summary>
         /// Draw the box in the targeted Rectangle
         /// </summary>

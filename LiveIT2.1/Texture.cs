@@ -9,6 +9,7 @@ using System.IO;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Texture
     {
         Bitmap _textureGrass, _textureDesert, _textureForest, _textureSnow,

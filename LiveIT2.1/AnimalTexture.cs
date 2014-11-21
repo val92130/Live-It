@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
    public enum AnimalTexture
    {
         None = 0,
