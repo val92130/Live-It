@@ -12,6 +12,7 @@ namespace LiveIT2._1
 {
     public partial class Form3 : Form
     {
+        int i =0;
         public Form3()
         {
             InitializeComponent();
@@ -19,8 +20,9 @@ namespace LiveIT2._1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            progressBar1.Increment(1);
-            if (progressBar1.Value == 100 )
+            i++;
+
+            if (i == 100 )
             {
                 timer1.Stop();
             }
