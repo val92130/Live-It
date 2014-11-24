@@ -12,20 +12,21 @@ namespace LiveIT2._1
 {
     public partial class SplashScreen : Form
     {
-        int i = 0;
+        Timer t;
         public SplashScreen()
         {
+            t = new Timer();
+            t.Interval = 3000;
+            t.Start();
+            t.Tick += new EventHandler(T_tick);
             InitializeComponent();
+            
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void T_tick(object sender, EventArgs e)
         {
-            i++;
-
-            if (i == 100 )
-            {
-                timer1.Stop();
-            }
+            this.Close();
         }
+
     }
 }

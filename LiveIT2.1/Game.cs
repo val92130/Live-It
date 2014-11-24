@@ -18,11 +18,7 @@ namespace LiveIT2._1
         {
             InitializeComponent();
         }
-       
-        public void MenuGame()
-        {
-            Application.Run(new Menu());
-        }
+      
         Graphics g;
         Graphics _screenGraphic;
 
@@ -98,7 +94,10 @@ namespace LiveIT2._1
             t2.Start();
         }
 
-
+        public void LoadMap(Map map)
+        {
+            this._map = map;
+        }
 
         private void T_mouseWheel(object sender, MouseEventArgs e)
         {
@@ -354,7 +353,15 @@ namespace LiveIT2._1
                 this.Close();                
             }
         }
+        public MainViewPort ViewPort
+        {
+            get { return _viewPort; }
+        }
 
+        public Map Map
+        {
+            get { return _map; }
+        }
         private void muteToolStripMenuItem_Click( object sender, EventArgs e )
         {
             _soundEnvironment.ToggleMute();

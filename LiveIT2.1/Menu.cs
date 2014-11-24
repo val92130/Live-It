@@ -18,23 +18,32 @@ namespace LiveIT2._1
             InitializeComponent();
         }
 
-        private void pbTransport_Click(object sender, EventArgs e)
+        private void newGame_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form1 form = new Form1();
             form.Show(this);
         }
 
-        private void pbRestore_Click(object sender, EventArgs e)
+        private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         private void loadGameText_Click( object sender, EventArgs e )
         {
-            this.Hide();
+            
             Form1 game = new Form1();
-            game.Show();
+            OpenFileDialog loadBox = new OpenFileDialog();
+            loadBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
+            if (loadBox.ShowDialog() == DialogResult.OK)
+            {
+                this.Hide();
+                game.Show(this);
+                game.Map.Boxes = game.Map.Load(loadBox.FileName);
+                game.ViewPort.LoadMap(game.Map);
+            }
+
         }
     }
 }

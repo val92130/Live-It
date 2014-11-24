@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Rabbit : Animal
     {
         public Rabbit( Map map, Point startPosition )

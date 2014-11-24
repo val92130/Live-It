@@ -71,7 +71,7 @@
             this.exitLabel.Size = new System.Drawing.Size(76, 76);
             this.exitLabel.TabIndex = 2;
             this.exitLabel.TabStop = false;
-            this.exitLabel.Click += new System.EventHandler(this.pbRestore_Click);
+            this.exitLabel.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // btnExit
             // 
@@ -173,7 +173,7 @@
             this.newGameText.Size = new System.Drawing.Size(76, 76);
             this.newGameText.TabIndex = 2;
             this.newGameText.TabStop = false;
-            this.newGameText.Click += new System.EventHandler(this.pbTransport_Click);
+            this.newGameText.Click += new System.EventHandler(this.newGame_Click);
             // 
             // btnNewGame
             // 
