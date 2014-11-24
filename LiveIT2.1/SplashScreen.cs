@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
-    public partial class Form3 : Form
+    public partial class SplashScreen : Form
     {
         int i = 0;
-        public Form3()
+        public SplashScreen()
         {
             InitializeComponent();
         }

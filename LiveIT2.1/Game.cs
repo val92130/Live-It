@@ -21,7 +21,7 @@ namespace LiveIT2._1
        
         public void MenuGame()
         {
-            Application.Run(new Form4());
+            Application.Run(new Menu());
         }
         Graphics g;
         Graphics _screenGraphic;

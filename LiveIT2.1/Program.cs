@@ -19,14 +19,14 @@ namespace LiveIT2._1
             Application.SetCompatibleTextRenderingDefault( false );
             Thread t = new Thread(() =>
             {
-                Application.Run(new Form3());
+                Application.Run(new SplashScreen());
             });
 
             t.Start();
             Thread.Sleep(3000);
             t.Abort();
 
-            Application.Run( new Form4() );
+            Application.Run( new Menu() );
 
         }
         

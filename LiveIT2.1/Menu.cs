@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
-    public partial class Form4 : Form
+    public partial class Menu : Form
     {
-        public Form4()
+        public Menu()
         {
             InitializeComponent();
         }
