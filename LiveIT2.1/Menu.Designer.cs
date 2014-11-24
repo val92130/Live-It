@@ -197,6 +197,7 @@
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.loadGameButton);
             this.Controls.Add(this.newGameButton);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Menu";
             this.Text = "Form4";
