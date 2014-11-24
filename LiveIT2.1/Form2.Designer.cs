@@ -50,6 +50,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
+            this._exitButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -306,12 +307,27 @@
             this._buttonFollowAnimal.UseVisualStyleBackColor = false;
             this._buttonFollowAnimal.Click += new System.EventHandler(this._buttonFollowAnimal_Click);
             // 
+            // _exitButton
+            // 
+            this._exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this._exitButton.BackColor = System.Drawing.Color.Red;
+            this._exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._exitButton.ForeColor = System.Drawing.Color.Transparent;
+            this._exitButton.Location = new System.Drawing.Point(945, 0);
+            this._exitButton.Name = "_exitButton";
+            this._exitButton.Size = new System.Drawing.Size(75, 34);
+            this._exitButton.TabIndex = 18;
+            this._exitButton.Text = "Exit";
+            this._exitButton.UseVisualStyleBackColor = false;
+            this._exitButton.Click += new System.EventHandler(this._exitButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this._exitButton);
             this.Controls.Add(this._buttonFollowAnimal);
             this.Controls.Add(this.AnimalButton);
             this.Controls.Add(this._buttonExit);
@@ -370,6 +386,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.Button _buttonFollowAnimal;
+        private System.Windows.Forms.Button _exitButton;
 
     }
 }

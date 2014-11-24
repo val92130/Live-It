@@ -265,13 +265,7 @@ namespace LiveIT2._1
 
         private void _buttonExit_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure to exit ? All unsaved work will be deleted",
-                        "Confirm",
-                        MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
-            {
-                this.Close();
-            }
+
             
         }
 
@@ -333,6 +327,17 @@ namespace LiveIT2._1
             {
                 _map.Boxes = _map.Load(loadBox.FileName);
                 _viewPort.LoadMap(_map);
+            }
+        }
+
+        private void _exitButton_Click( object sender, EventArgs e )
+        {
+            var confirmResult = MessageBox.Show( "Are you sure to exit ? All unsaved work will be deleted",
+            "Confirm",
+            MessageBoxButtons.YesNo );
+            if( confirmResult == DialogResult.Yes )
+            {
+                this.Close();
             }
         }
     }
