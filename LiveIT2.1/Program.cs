@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +17,18 @@ namespace LiveIT2._1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
-            Application.Run( new Form1() );
+            Thread t = new Thread(() =>
+            {
+                Application.Run(new Form3());
+            });
+
+            t.Start();
+            Thread.Sleep(3000);
+            t.Abort();
+
+            Application.Run( new Form4() );
+
         }
+        
     }
 }

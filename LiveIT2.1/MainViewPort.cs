@@ -39,6 +39,7 @@ namespace LiveIT2._1
 
         }
 
+
         public void Draw( Graphics g )
         {
             _boxList = _map.GetOverlappedBoxes(_viewPort);
@@ -120,26 +121,26 @@ namespace LiveIT2._1
         }
 
 
-        public double ZoomFactor
-        {
-            get { return 1.0 - ((double)_viewPort.Width / (double)_map.MapSize); }
-            set
-            {
-                int newWidth = (int)Math.Round( _map.MapSize * value );
-                Debug.Assert( newWidth <= _map.MapSize );
-                if( newWidth < _minimalWidthInCentimeter ) newWidth = _minimalWidthInCentimeter;
-                int deltaW = newWidth - _viewPort.Width;
-                if( deltaW != 0 )
-                {
-                    int newHeight = (int)Math.Round( (double)_viewPort.Height * (double)newWidth / (double)_viewPort.Width );
-                    int deltaH = newHeight - _viewPort.Height;
-                    _viewPort.X -= deltaW / 2;
-                    _viewPort.Y -= deltaH / 2;
-                    _viewPort.Height = newHeight;
-                    _viewPort.Width = newWidth;
-                }
-            }
-        }
+        //public double ZoomFactor
+        //{
+        //    get { return 1.0 - ((double)_viewPort.Width / (double)_map.MapSize); }
+        //    set
+        //    {
+        //        int newWidth = (int)Math.Round( _map.MapSize * value );
+        //        Debug.Assert( newWidth <= _map.MapSize );
+        //        if( newWidth < _minimalWidthInCentimeter ) newWidth = _minimalWidthInCentimeter;
+        //        int deltaW = newWidth - _viewPort.Width;
+        //        if( deltaW != 0 )
+        //        {
+        //            int newHeight = (int)Math.Round( (double)_viewPort.Height * (double)newWidth / (double)_viewPort.Width );
+        //            int deltaH = newHeight - _viewPort.Height;
+        //            _viewPort.X -= deltaW / 2;
+        //            _viewPort.Y -= deltaH / 2;
+        //            _viewPort.Height = newHeight;
+        //            _viewPort.Width = newWidth;
+        //        }
+        //    }
+        //}
 
         public void Zoom( int meters )
         {

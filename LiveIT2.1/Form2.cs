@@ -16,15 +16,12 @@ namespace LiveIT2._1
     {
         public Form1()
         {
-            Thread t = new Thread(new ThreadStart(SplashStart));
-            t.Start();
-            Thread.Sleep(3000);
             InitializeComponent();
-            t.Abort();
         }
-        public void SplashStart()
+       
+        public void MenuGame()
         {
-            Application.Run(new Form3());
+            Application.Run(new Form4());
         }
         Graphics g;
         Graphics _screenGraphic;
