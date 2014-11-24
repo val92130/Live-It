@@ -12,7 +12,7 @@ namespace LiveIT2._1
 {
     public partial class Form3 : Form
     {
-        int i =0;
+        int i = 0;
         public Form3()
         {
             InitializeComponent();

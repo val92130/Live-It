@@ -50,6 +50,7 @@ namespace LiveIT2._1
   
         Size _selectionCursorWidth;
         Rectangle _mouseRect;
+        SoundEnvironment _soundEnvironment;
 
         MainViewPort _viewPort;
 
@@ -90,6 +91,11 @@ namespace LiveIT2._1
 
             fpst.Start();
             t.Start();
+            Thread t2 = new Thread( () =>
+            {
+                 _soundEnvironment = new SoundEnvironment();
+            } );
+            t2.Start();
         }
 
 
@@ -344,6 +350,20 @@ namespace LiveIT2._1
             {
                 this.Close();
             }
+        }
+
+        private void muteToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _soundEnvironment.ToggleMute();
+            if( _soundEnvironment.IsStopped )
+            {
+                muteToolStripMenuItem.Text = "Play";
+            }
+            else
+            {
+                muteToolStripMenuItem.Text = "Mute";
+            }
+            
         }
     }
 }
