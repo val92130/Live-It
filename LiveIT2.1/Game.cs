@@ -87,11 +87,8 @@ namespace LiveIT2._1
 
             fpst.Start();
             t.Start();
-            Thread t2 = new Thread( () =>
-            {
-                 _soundEnvironment = new SoundEnvironment();
-            } );
-            t2.Start();
+            _soundEnvironment = new SoundEnvironment();
+
         }
 
         public void LoadMap(Map map)
@@ -146,6 +143,8 @@ namespace LiveIT2._1
             if( right ) { MoveRectangle( Direction.Right ); }
             
             g.DrawImage( Draw(), new Point( 0, 0 ) );
+            _soundEnvironment.LoadBoxes(_viewPort.BoxList);
+            _soundEnvironment.PlayAllSounds();
             Interlocked.Increment(ref _fpsCount);
                       
         }

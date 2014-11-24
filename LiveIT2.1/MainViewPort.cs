@@ -266,6 +266,10 @@ namespace LiveIT2._1
             }
         }
 
+        public List<Box> BoxList
+        {
+            get { return _boxList; }
+        }
 
         public void MoveX(int centimeters) 
         {
