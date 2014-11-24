@@ -11,11 +11,10 @@ namespace LiveIT2._1
     {
 
         public Dog( Map map, Point starPosition )
+            : base( map, starPosition )
         {
-            Position = starPosition;
             Texture = AnimalTexture.Dog;
             Size = new Size( 150, 150 );
-            Park = map;
             FavoriteEnvironnment = BoxGround.Forest;
             Speed = 7;
             ViewDistance = 600;

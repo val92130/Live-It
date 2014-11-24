@@ -11,11 +11,11 @@ namespace LiveIT2._1
     {
 
         public Giraffe( Map map, Point starPosition )
+            : base( map, starPosition )
         {
             Position = starPosition;
             Texture = AnimalTexture.Elephant;
             Size = new Size( 500, 500 );
-            Park = map;
         }
     }
 }

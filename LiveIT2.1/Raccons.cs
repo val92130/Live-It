@@ -11,11 +11,11 @@ namespace LiveIT2._1
     {
 
         public Raccons( Map map, Point starPosition )
+            : base( map, starPosition )
         {
             Position = starPosition;
             Texture = AnimalTexture.Elephant;
             Size = new Size( 100, 100 );
-            Park = map;
         }
     }
 }

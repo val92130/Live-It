@@ -348,7 +348,10 @@ namespace LiveIT2._1
             MessageBoxButtons.YesNo );
             if( confirmResult == DialogResult.Yes )
             {
-                this.Close();
+                t.Stop();
+                fpst.Stop();
+                Owner.Close();
+                this.Close();                
             }
         }
 

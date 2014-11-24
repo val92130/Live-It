@@ -11,11 +11,11 @@ namespace LiveIT2._1
     {
 
         public Cow ( Map map, Point starPosition )
+            : base( map, starPosition )
         {
             Position = starPosition;
             Texture = AnimalTexture.Cow;
             Size = new Size( 300, 300 );
-            Park = map;
             FavoriteEnvironnment = BoxGround.Grass;
         }
     }

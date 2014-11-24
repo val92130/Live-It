@@ -13,7 +13,7 @@ namespace LiveIT2._1
     {
          Point _position;
          Size _size;
-         Map _map;
+         readonly Map _map;
          Point _direction;
          BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
@@ -41,15 +41,10 @@ namespace LiveIT2._1
             _map = map;
             _position = position;
         }
-        public Animal()
-        {
-
-        }
 
         public Rectangle FieldOfView
         {
             get { return new Rectangle(this.Position.X - (_viewDistance / 2), this.Position.Y - (_viewDistance / 2), _viewDistance * 2, _viewDistance * 2); }
-            set { _fieldOfViewRect = value; }
         }
 
         public int ViewDistance
@@ -139,13 +134,12 @@ namespace LiveIT2._1
         public AnimalTexture Texture
         {
             get { return _texture; }
-            set { _texture = value; }
+            protected set { _texture = value; }
         }
 
         internal Map Park
         {
             get { return _map; }
-            set { _map = value; }
         }
 
         public BoxGround FavoriteEnvironnment

@@ -17,14 +17,8 @@ namespace LiveIT2._1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
-            Thread t = new Thread(() =>
-            {
-                Application.Run(new SplashScreen());
-            });
-
-            t.Start();
+            SplashScreen splashScreen = new SplashScreen();
             Thread.Sleep(3000);
-            t.Abort();
 
             Application.Run( new Menu() );
 

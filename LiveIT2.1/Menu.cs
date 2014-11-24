@@ -20,18 +20,21 @@ namespace LiveIT2._1
 
         private void pbTransport_Click(object sender, EventArgs e)
         {
-            
-            Thread t = new Thread(() =>
-            {
-                Application.Run(new Form1());
-            });
-            t.Start();
-            this.Close();
+            this.Hide();
+            Form1 form = new Form1();
+            form.Show(this);
         }
 
         private void pbRestore_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void loadGameText_Click( object sender, EventArgs e )
+        {
+            this.Hide();
+            Form1 game = new Form1();
+            game.Show();
         }
     }
 }

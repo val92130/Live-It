@@ -93,7 +93,7 @@ namespace LiveIT2._1
 
         public void CreateAnimal(AnimalTexture animalType)
         {
-            Animal a = new Animal();
+            Animal a;
             switch( animalType.ToString() )
             {
                 
@@ -115,6 +115,8 @@ namespace LiveIT2._1
                 case "Cow":
                     a = new Cow( _map, _animalSelectorCursor );
                     break;
+                default :
+                    throw new NotSupportedException( "Unknown animal type" );
 
             }
             _animalList.Add(a);

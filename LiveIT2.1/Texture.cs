@@ -96,42 +96,42 @@ namespace LiveIT2._1
                 list.Add( _tempBmp );
             }
         }
-        public Bitmap LoadTexture( Box box )
+        public Bitmap GetTexture( Box box )
         {
-            switch( box.Ground.ToString() )
+            switch( box.Ground )
             {
-                case "Grass":
+                case BoxGround.Grass:
                     return _textureGrass;
-                case "Water":
+                case BoxGround.Water:
                     return _textureWaterAnimated;
-                case "Forest":
+                case BoxGround.Forest:
                     return _textureForest;
-                case "Snow":
+                case BoxGround.Snow:
                     return _textureSnow;
-                case "Dirt":
+                case BoxGround.Dirt:
                     return _textureDirt;
-                case "Desert":
+                case BoxGround.Desert:
                     return _textureDesert;
                 default:
                     return _textureGrass;
             }
         }
 
-        public Brush LoadColor( Box box )
+        public Brush GetColor( Box box )
         {
-            switch( box.Ground.ToString() )
+            switch( box.Ground )
             {
-                case "Grass":
+                case BoxGround.Grass:
                     return _brushGrass;
-                case "Water":
+                case BoxGround.Water:
                     return _brushWater;
-                case "Forest":
+                case BoxGround.Forest:
                     return _brushForest;
-                case "Snow":
+                case BoxGround.Snow:
                     return _brushSnow;
-                case "Dirt":
+                case BoxGround.Dirt:
                     return _brushDirt;
-                case "Desert":
+                case BoxGround.Desert:
                     return _brushDesert;
                 default:
                     return _brushGrass;

@@ -138,6 +138,7 @@
             this.loadGameText.Size = new System.Drawing.Size(76, 76);
             this.loadGameText.TabIndex = 2;
             this.loadGameText.TabStop = false;
+            this.loadGameText.Click += new System.EventHandler(this.loadGameText_Click);
             // 
             // btnLoadGame
             // 

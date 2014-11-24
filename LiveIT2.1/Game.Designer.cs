@@ -49,9 +49,9 @@
             this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
-            this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -296,6 +296,14 @@
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
+            // muteToolStripMenuItem
+            // 
+            this.muteToolStripMenuItem.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(81, 30);
+            this.muteToolStripMenuItem.Text = "Mute";
+            this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
+            // 
             // _buttonFollowAnimal
             // 
             this._buttonFollowAnimal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(108)))), ((int)(((byte)(179)))));
@@ -322,14 +330,6 @@
             this._exitButton.Text = "Exit";
             this._exitButton.UseVisualStyleBackColor = false;
             this._exitButton.Click += new System.EventHandler(this._exitButton_Click);
-            // 
-            // muteToolStripMenuItem
-            // 
-            this.muteToolStripMenuItem.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
-            this.muteToolStripMenuItem.Size = new System.Drawing.Size(81, 30);
-            this.muteToolStripMenuItem.Text = "Mute";
-            this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
             // 
             // Form1
             // 

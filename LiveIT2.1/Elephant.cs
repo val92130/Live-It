@@ -11,11 +11,10 @@ namespace LiveIT2._1
     {
          
         public Elephant(Map map, Point starPosition)
+            :base(map, starPosition)
         {
-            Position = starPosition;
             Texture = AnimalTexture.Elephant;
             Size = new Size(500,500);
-            Park = map;
             Speed = 5;
             ViewDistance = 800;
         }

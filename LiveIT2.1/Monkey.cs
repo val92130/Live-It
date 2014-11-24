@@ -11,11 +11,11 @@ namespace LiveIT2._1
     {
 
         public Monkey( Map map, Point starPosition )
+            : base( map, starPosition )
         {
             Position = starPosition;
             Texture = AnimalTexture.Elephant;
             Size = new Size( 250, 250 );
-            Park = map;
         }
     }
 }

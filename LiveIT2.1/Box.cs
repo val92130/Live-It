@@ -165,11 +165,11 @@ namespace LiveIT2._1
 
             if (viewPort.Width < 5000)
             {
-                g.DrawImage(textures.LoadTexture(this), new Rectangle(newXpos, newYpos, newSize, newSize));
+                g.DrawImage(textures.GetTexture(this), new Rectangle(newXpos, newYpos, newSize, newSize));
             }
             else
             {
-                g.FillRectangle(textures.LoadColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
+                g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
 
 
@@ -196,7 +196,7 @@ namespace LiveIT2._1
             int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
             int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
 
-            g.FillRectangle( textures.LoadColor( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newSize ) );
+            g.FillRectangle( textures.GetColor( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newSize ) );
         }
         
     }
