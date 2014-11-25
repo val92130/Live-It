@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Cat : Animal
     {
 
         public Cat( Map map, Point starPosition )
+            :base(map, starPosition)
         {
-            Position = starPosition;
             Texture = AnimalTexture.Cat;
             Size = new Size( 120, 120 );
-            Park = map;
+            FavoriteEnvironnment = BoxGround.Grass;
+            Speed = 15;
+            ViewDistance = 300;
         }
     }
 }

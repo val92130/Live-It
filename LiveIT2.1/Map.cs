@@ -13,10 +13,15 @@ namespace LiveIT2._1
     [Serializable]
     public class Map
     {
-        readonly Box[] _boxes;
+        Box[] _boxes;
         readonly int _boxCountPerLine;
         // Box size in centimeter.
         readonly int _boxSize;
+        [NonSerializedAttribute]
+        List<Animal> _animals = new List<Animal>();
+        [NonSerializedAttribute]
+        MainViewPort _viewPort;
+  bool _showDebug;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -42,6 +47,12 @@ namespace LiveIT2._1
             get { return _boxSize; }
         }
 
+        public List<Animal> Animals
+        {
+            get { return _animals; }
+            set { _animals = value; }
+        }
+
         /// <summary>
         /// Gets the number of lines and number of columns.
         /// </summary>
@@ -61,8 +72,15 @@ namespace LiveIT2._1
         public Box[] Boxes
         {
             get { return _boxes; }
+            set { _boxes = value; }
         }
 
+        
+        public MainViewPort ViewPort
+        {
+            get { return _viewPort; }
+            set { _viewPort = value; }
+        }
         /// <summary>
         /// Gets the box at (line,column). line and column must be in [0,<see cref="MapSize"/>[
         /// otherwise null is returned.
@@ -105,18 +123,22 @@ namespace LiveIT2._1
         {
             Stream stream = File.Open(filename, FileMode.Create);
             BinaryFormatter bFormatter = new BinaryFormatter();
-            bFormatter.Serialize(stream, this);
+            bFormatter.Serialize(stream, this.Boxes);
             stream.Close();
         }
 
-        public Map Load(string filename)
+        public Box[] Load(string filename)
         {
-            Map map;
             Stream stream = File.Open(filename, FileMode.Open);
             BinaryFormatter bFormatter = new BinaryFormatter();
-            map = (Map)bFormatter.Deserialize(stream);
+            _boxes = (Box[])bFormatter.Deserialize(stream);
             stream.Close();
-            return map;
+            return _boxes;
+        }
+        public bool ShowDebug
+        {
+            get { return _showDebug; }
+            set { _showDebug = value; }
         }
     }
 }

@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Finch : Animal
     {
 
         public Finch( Map map, Point starPosition )
+            : base( map, starPosition )
         {
             Position = starPosition;
             Texture = AnimalTexture.Elephant;
             Size = new Size( 50, 50 );
-            Park = map;
         }
     }
 }

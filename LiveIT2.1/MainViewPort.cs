@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class MainViewPort
     {
         const int _minimalWidthInCentimeter = 600;
         List<Box> _boxList, _boxListMini;
-        Animal _cow;
         Point _animalSelectorCursor;
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
         Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
@@ -22,7 +22,7 @@ namespace LiveIT2._1
         List<Box> _selectedBoxes;
         List<Animal> _animalList;
         Texture _texture;
-        bool _changeTexture, _fillTexture,_putAnimal;
+        bool _changeTexture, _fillTexture,_putAnimal, _followAnimal;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -31,12 +31,14 @@ namespace LiveIT2._1
             _animalList = new List<Animal>();
             _screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             _viewPort = new Rectangle(0, 0, 800, 800);
-            _miniMap = new Rectangle( 0,0, 250, 250 );
+            _miniMap = new Rectangle( 0, 0,250, 250  );
             _miniMap.Y = _screen.Bottom - _miniMap.Height;
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
             _animalSelectorCursor = new Point( 0, 0 );
+            _map.ViewPort = this;
 
         }
+
 
         public void Draw( Graphics g )
         {
@@ -46,6 +48,17 @@ namespace LiveIT2._1
             _mouseRect.Y = Cursor.Position.Y - (_mouseRect.Height / 2);
             foreach( Box boxs in _boxList )
             {
+                Task CheckAnimalInBoxes = new Task(() =>
+                {
+                    foreach (Animal a in _animalList)
+                    {
+                        if (a.Area.IntersectsWith(boxs.Area))
+                        {
+                            boxs.AddAnimal(a);
+                        }
+                    }
+                });
+                CheckAnimalInBoxes.Start();
                 boxs.Draw(g, _screen, _texture, _viewPort);               
             }
             foreach( Box boxs in _boxListMini )
@@ -56,20 +69,31 @@ namespace LiveIT2._1
 
             foreach (Animal animals in _animalList)
             {
-                //DrawRectangleInViewPort(g, animals.Area, _screen, _viewPort, _miniMap, _miniMapViewPort, animals, _texture);
                 animals.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
 
             if (_changeTexture) DrawMouseSelector(g);
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
-            
+            if( _followAnimal )
+            {
+                foreach( Animal a in _animalList )
+                {
+                    if( _mouseRect.IntersectsWith( new Rectangle( a.RelativePosition, a.RelativeSize ) ) )
+                    {
+                        _viewPort.X = a.Position.X - (_viewPort.Width /2);
+                        _viewPort.Y = a.Position.Y - (_viewPort.Height /2);
+                    }
+                }
+            }
+
+            _map.Animals = _animalList;
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
         }
 
         public void CreateAnimal(AnimalTexture animalType)
         {
-            Animal a = new Animal();
+            Animal a;
             switch( animalType.ToString() )
             {
                 
@@ -91,33 +115,34 @@ namespace LiveIT2._1
                 case "Cow":
                     a = new Cow( _map, _animalSelectorCursor );
                     break;
+                default :
+                    throw new NotSupportedException( "Unknown animal type" );
 
             }
-            Rabbit rabbit = new Rabbit( _map, _animalSelectorCursor );
             _animalList.Add(a);
         }
 
 
-        public double ZoomFactor
-        {
-            get { return 1.0 - ((double)_viewPort.Width / (double)_map.MapSize); }
-            set
-            {
-                int newWidth = (int)Math.Round( _map.MapSize * value );
-                Debug.Assert( newWidth <= _map.MapSize );
-                if( newWidth < _minimalWidthInCentimeter ) newWidth = _minimalWidthInCentimeter;
-                int deltaW = newWidth - _viewPort.Width;
-                if( deltaW != 0 )
-                {
-                    int newHeight = (int)Math.Round( (double)_viewPort.Height * (double)newWidth / (double)_viewPort.Width );
-                    int deltaH = newHeight - _viewPort.Height;
-                    _viewPort.X -= deltaW / 2;
-                    _viewPort.Y -= deltaH / 2;
-                    _viewPort.Height = newHeight;
-                    _viewPort.Width = newWidth;
-                }
-            }
-        }
+        //public double ZoomFactor
+        //{
+        //    get { return 1.0 - ((double)_viewPort.Width / (double)_map.MapSize); }
+        //    set
+        //    {
+        //        int newWidth = (int)Math.Round( _map.MapSize * value );
+        //        Debug.Assert( newWidth <= _map.MapSize );
+        //        if( newWidth < _minimalWidthInCentimeter ) newWidth = _minimalWidthInCentimeter;
+        //        int deltaW = newWidth - _viewPort.Width;
+        //        if( deltaW != 0 )
+        //        {
+        //            int newHeight = (int)Math.Round( (double)_viewPort.Height * (double)newWidth / (double)_viewPort.Width );
+        //            int deltaH = newHeight - _viewPort.Height;
+        //            _viewPort.X -= deltaW / 2;
+        //            _viewPort.Y -= deltaH / 2;
+        //            _viewPort.Height = newHeight;
+        //            _viewPort.Width = newWidth;
+        //        }
+        //    }
+        //}
 
         public void Zoom( int meters )
         {
@@ -144,6 +169,26 @@ namespace LiveIT2._1
             if( _viewPort.Y < 0 ) _viewPort.Y = 0;
             if( _viewPort.Right > _map.MapSize ) _viewPort.X = _map.MapSize - _viewPort.Width;
             if( _viewPort.Bottom > _map.MapSize ) _viewPort.Y = _map.MapSize - _viewPort.Height;
+        }
+
+        public Rectangle ScreenSize
+        {
+            get { return _screen; }
+        }
+
+        public Rectangle ViewPort
+        {
+            get { return _viewPort; }
+        }
+
+        public Rectangle MiniMap
+        {
+            get { return _miniMap; }
+        }
+
+        public Rectangle MiniMapViewPort
+        {
+            get { return _miniMapViewPort; }
         }
 
         public void LoadMap(Map map)
@@ -221,6 +266,10 @@ namespace LiveIT2._1
             }
         }
 
+        public List<Box> BoxList
+        {
+            get { return _boxList; }
+        }
 
         public void MoveX(int centimeters) 
         {
@@ -288,14 +337,14 @@ namespace LiveIT2._1
         public bool IsAnimalSelected
         {
             get { return _putAnimal; }
-            set { _putAnimal = value; _fillTexture = false; _changeTexture = false; }
+            set { _putAnimal = value; _fillTexture = false; _changeTexture = false; _followAnimal = false; }
         }
         public bool IsChangeTextureSelected
         {
             get { return _changeTexture; }
             set
             {
-                _changeTexture = value; _fillTexture = false; _putAnimal = false;
+                _changeTexture = value; _fillTexture = false; _putAnimal = false; _followAnimal = false;
                 
             }
         }
@@ -303,7 +352,13 @@ namespace LiveIT2._1
         public bool IsFillTextureSelected
         {
             get { return _fillTexture; }
-            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; }
+            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; _followAnimal = false; }
+        }
+
+        public bool IsFollowAnimalSelected
+        {
+            get { return _followAnimal; }
+            set { _followAnimal = value; _changeTexture = false; _putAnimal = false; _fillTexture = false; }
         }
 
         public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )
@@ -318,8 +373,8 @@ namespace LiveIT2._1
             int newXposMini = (int)(source.X / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
             int newYposMini = (int)(source.Y / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
 
-            g.FillRectangle( Brushes.Black, new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
-            g.FillRectangle( Brushes.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+            g.DrawRectangle( Pens.Blue, new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
+            g.DrawRectangle(Pens.Blue, new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
         }
         public void DrawRectangleInViewPort( Graphics g, Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Animal animal, Texture t )
         {

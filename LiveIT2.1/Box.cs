@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +19,7 @@ namespace LiveIT2._1
         Rectangle _source;
         Point _relativePosition;
         Size _relativeSize;
+        List<Animal> _animalList;
 
         public Box( int line, int column, Map map )
         {
@@ -27,6 +29,7 @@ namespace LiveIT2._1
             _ground = BoxGround.Grass;
             _relativePosition = new Point(line, column);
             _relativeSize = new Size(_map.BoxSize, _map.BoxSize);
+            _animalList = new List<Animal>();
         }
 
         public Point Location
@@ -87,6 +90,22 @@ namespace LiveIT2._1
             _map = map;
         }
 
+        public void AddAnimal(Animal a)
+        {
+            if (!_animalList.Contains(a))
+            {
+                _animalList.Add(a);
+            }
+        }
+
+        public void RemoveFromList(Animal a)
+        {
+            if (_animalList.Contains(a))
+            {
+                _animalList.Remove(a);
+            }
+        }
+
         public void DrawTransitionTextures()
         {
             if (this.Ground == BoxGround.Water)
@@ -128,7 +147,6 @@ namespace LiveIT2._1
             get { return _relativeSize; }
         }
 
-
         /// <summary>
         /// Draw the box in the targeted Rectangle
         /// </summary>
@@ -147,13 +165,30 @@ namespace LiveIT2._1
 
             if (viewPort.Width < 5000)
             {
-                g.DrawImage(textures.LoadTexture(this), new Rectangle(newXpos, newYpos, newSize, newSize));
+                g.DrawImage(textures.GetTexture(this), new Rectangle(newXpos, newYpos, newSize, newSize));
             }
             else
             {
-                g.FillRectangle(textures.LoadColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
+                g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
+
+
+            Task CheckAnimalList = new Task(() =>
+            {
+                for (int i = 0; i < _animalList.Count; i++)
+                {
+                    if (!_animalList[i].Area.IntersectsWith(this.Area))
+                    {
+                        RemoveFromList(_animalList[i]);
+                    }
+                }
+            });
+            CheckAnimalList.Start();
             DrawTransitionTextures();
+            if (this._animalList.Count != 0)
+            {
+                g.FillRectangle(new SolidBrush(Color.FromArgb(128, 0, 0, 255)), new Rectangle(this.RelativePosition, this.RelativeSize));
+            }
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
         {
@@ -161,7 +196,7 @@ namespace LiveIT2._1
             int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
             int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
 
-            g.FillRectangle( textures.LoadColor( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newSize ) );
+            g.FillRectangle( textures.GetColor( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newSize ) );
         }
         
     }

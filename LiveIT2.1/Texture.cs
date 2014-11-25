@@ -9,9 +9,10 @@ using System.IO;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Texture
     {
-        Bitmap _textureGrass, _textureWater, _textureDesert, _textureForest, _textureSnow,
+        Bitmap _textureGrass, _textureDesert, _textureForest, _textureSnow,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureFinch,_textureFlamingo,
             _textureGiraffe, _textureLeopard,_textureLion,_textureLizards, _textureMonkey,
@@ -36,14 +37,17 @@ namespace LiveIT2._1
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+            _textureElephant.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureCow = new Bitmap( @"..\..\..\assets\Animal\Cow.png" );
 
             _textureCat = new Bitmap( @"..\..\..\assets\Animal\Cat.png" );
             _textureCat.MakeTransparent(Color.White);
+            _textureCat.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureDog = new Bitmap( @"..\..\..\assets\Animal\Dog.png" );
             _textureDog.MakeTransparent(Color.White);
+            _textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureEagle = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
             _textureFinch = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
@@ -92,42 +96,42 @@ namespace LiveIT2._1
                 list.Add( _tempBmp );
             }
         }
-        public Bitmap LoadTexture( Box box )
+        public Bitmap GetTexture( Box box )
         {
-            switch( box.Ground.ToString() )
+            switch( box.Ground )
             {
-                case "Grass":
+                case BoxGround.Grass:
                     return _textureGrass;
-                case "Water":
+                case BoxGround.Water:
                     return _textureWaterAnimated;
-                case "Forest":
+                case BoxGround.Forest:
                     return _textureForest;
-                case "Snow":
+                case BoxGround.Snow:
                     return _textureSnow;
-                case "Dirt":
+                case BoxGround.Dirt:
                     return _textureDirt;
-                case "Desert":
+                case BoxGround.Desert:
                     return _textureDesert;
                 default:
                     return _textureGrass;
             }
         }
 
-        public Brush LoadColor( Box box )
+        public Brush GetColor( Box box )
         {
-            switch( box.Ground.ToString() )
+            switch( box.Ground )
             {
-                case "Grass":
+                case BoxGround.Grass:
                     return _brushGrass;
-                case "Water":
+                case BoxGround.Water:
                     return _brushWater;
-                case "Forest":
+                case BoxGround.Forest:
                     return _brushForest;
-                case "Snow":
+                case BoxGround.Snow:
                     return _brushSnow;
-                case "Dirt":
+                case BoxGround.Dirt:
                     return _brushDirt;
-                case "Desert":
+                case BoxGround.Desert:
                     return _brushDesert;
                 default:
                     return _brushGrass;

@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Cow : Animal
     {
 
         public Cow ( Map map, Point starPosition )
+            : base( map, starPosition )
         {
             Position = starPosition;
             Texture = AnimalTexture.Cow;
             Size = new Size( 300, 300 );
-            Park = map;
+            FavoriteEnvironnment = BoxGround.Grass;
         }
     }
 }

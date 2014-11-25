@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    [Serializable]
     public class Rabbit : Animal
     {
-        public Rabbit( Map map, Point StartPosition )
+        public Rabbit( Map map, Point startPosition )
+            : base( map, startPosition )
         {
             Texture = AnimalTexture.Rabbit;
-            Position = StartPosition;
+            Position = startPosition;
             Size = new Size( 100, 100 );
-            Park = map;
+            Speed = 10;
+            ViewDistance = 200;
         }
     }
 }
