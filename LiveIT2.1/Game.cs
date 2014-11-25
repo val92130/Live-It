@@ -69,7 +69,7 @@ namespace LiveIT2._1
              _map.ShowDebug = true;
             _mouseRect = new Rectangle( 0, 0, 100, 100 );
 
-            g = this.CreateGraphics();
+            g = this.CreateGraphics();  
             _screenGraphic = Graphics.FromImage( _background );
 
             _selectionCursorWidth = new Size(_boxWidth, _boxWidth);
@@ -144,6 +144,7 @@ namespace LiveIT2._1
             
             g.DrawImage( Draw(), new Point( 0, 0 ) );
             _soundEnvironment.LoadBoxes(_viewPort.BoxList);
+
             _soundEnvironment.PlayAllSounds();
             Interlocked.Increment(ref _fpsCount);
                       

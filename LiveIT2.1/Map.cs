@@ -21,7 +21,7 @@ namespace LiveIT2._1
         List<Animal> _animals = new List<Animal>();
         [NonSerializedAttribute]
         MainViewPort _viewPort;
-  bool _showDebug;
+        bool _showDebug;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -98,21 +98,41 @@ namespace LiveIT2._1
             }
         }
 
-        public List<Box> GetOverlappedBoxes(Rectangle viewPort)
+        //public List<Box> GetOverlappedBoxes(Rectangle viewPort)
+        //{
+        //    List<Box> boxList = new List<Box>();
+        //    for( int i = 0; i < _boxes.Length; i++ )
+        //    {
+        //        Box b = _boxes[i];
+
+        //        Rectangle rIntersect =  b.Area;
+        //        rIntersect.Intersect( viewPort );
+        //        if( rIntersect.IsEmpty ) continue;
+        //        rIntersect.Offset( -b.Area.Left, -b.Area.Top );
+        //        b.Source = b.Area;
+
+        //        if( _boxes[i].Area.IntersectsWith( viewPort ) )
+        //        {
+        //            boxList.Add( b );
+        //        }
+        //    }
+        //    return boxList;
+        //}
+
+        public List<Box> GetOverlappedBoxes( Rectangle r )
         {
             List<Box> boxList = new List<Box>();
-            for( int i = 0; i < _boxes.Length; i++ )
+            int top = r.Top / this.BoxSize;
+            int left = r.Left / this.BoxSize;
+            int bottom = (r.Bottom - 1) / this.BoxSize;
+            int right = (r.Right - 1) / this.BoxSize;
+            for( int i = top; i <= bottom; ++i )
             {
-                Box b = _boxes[i];
-
-                Rectangle rIntersect =  b.Area;
-                rIntersect.Intersect( viewPort );
-                if( rIntersect.IsEmpty ) continue;
-                rIntersect.Offset( -b.Area.Left, -b.Area.Top );
-                b.Source = b.Area;
-
-                if( _boxes[i].Area.IntersectsWith( viewPort ) )
+                for( int j = left; j <= right; ++j )
                 {
+                    Box b = this[j, i];
+                    Rectangle rIntersect =  b.Area;
+                    b.Source = b.Area;
                     boxList.Add( b );
                 }
             }

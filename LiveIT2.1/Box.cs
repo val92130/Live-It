@@ -155,7 +155,7 @@ namespace LiveIT2._1
         /// <param name="textures">Texture object to apply the texture on the box </param>
         internal void Draw( Graphics g, Rectangle target, Texture textures, Rectangle viewPort)
         {        
-            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width + 1);
+            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width + 2);
             int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
             int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
             _relativePosition.X = newXpos;
@@ -171,7 +171,6 @@ namespace LiveIT2._1
             {
                 g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
-
 
             Task CheckAnimalList = new Task(() =>
             {

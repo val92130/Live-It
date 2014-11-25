@@ -46,33 +46,37 @@ namespace LiveIT2._1
             _boxListMini = _map.GetOverlappedBoxes( _miniMapViewPort );
             _mouseRect.X = Cursor.Position.X - (_mouseRect.Width / 2);
             _mouseRect.Y = Cursor.Position.Y - (_mouseRect.Height / 2);
-            foreach( Box boxs in _boxList )
+
+            for( int i = 0; i < _boxList.Count; i++ )
             {
-                Task CheckAnimalInBoxes = new Task(() =>
+                Task CheckAnimalInBoxes = new Task( () =>
                 {
-                    foreach (Animal a in _animalList)
+                    foreach( Animal a in _animalList )
                     {
-                        if (a.Area.IntersectsWith(boxs.Area))
+                        if( a.Area.IntersectsWith( _boxList[i].Area ) )
                         {
-                            boxs.AddAnimal(a);
+                            _boxList[i].AddAnimal( a );
                         }
                     }
-                });
+                } );
                 CheckAnimalInBoxes.Start();
-                boxs.Draw(g, _screen, _texture, _viewPort);               
+                _boxList[i].Draw( g, _screen, _texture, _viewPort );
+
             }
-            foreach( Box boxs in _boxListMini )
+
+            for( int i = 0; i < _boxListMini.Count; i++ )
             {
-                boxs.DrawMiniMap( g, _miniMap, _texture, _miniMapViewPort );
+                _boxListMini[i].DrawMiniMap( g, _miniMap, _texture, _miniMapViewPort );
             }
+
             g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
-            foreach (Animal animals in _animalList)
+            for( int i = 0; i < _animalList.Count; i++ )
             {
-                animals.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                _animalList[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
 
-            if (_changeTexture) DrawMouseSelector(g);
+            if( _changeTexture ) DrawMouseSelector( g );
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
             if( _followAnimal )
@@ -121,28 +125,6 @@ namespace LiveIT2._1
             }
             _animalList.Add(a);
         }
-
-
-        //public double ZoomFactor
-        //{
-        //    get { return 1.0 - ((double)_viewPort.Width / (double)_map.MapSize); }
-        //    set
-        //    {
-        //        int newWidth = (int)Math.Round( _map.MapSize * value );
-        //        Debug.Assert( newWidth <= _map.MapSize );
-        //        if( newWidth < _minimalWidthInCentimeter ) newWidth = _minimalWidthInCentimeter;
-        //        int deltaW = newWidth - _viewPort.Width;
-        //        if( deltaW != 0 )
-        //        {
-        //            int newHeight = (int)Math.Round( (double)_viewPort.Height * (double)newWidth / (double)_viewPort.Width );
-        //            int deltaH = newHeight - _viewPort.Height;
-        //            _viewPort.X -= deltaW / 2;
-        //            _viewPort.Y -= deltaH / 2;
-        //            _viewPort.Height = newHeight;
-        //            _viewPort.Width = newWidth;
-        //        }
-        //    }
-        //}
 
         public void Zoom( int meters )
         {

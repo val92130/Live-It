@@ -28,7 +28,7 @@ namespace LiveIT2._1
             _animate.Start();
             _animate.Interval = 10;
             _animate.Tick += new EventHandler( T_animateTick );
-            _textureGrass = new Bitmap( @"..\..\..\assets\Grass.jpg" );
+            _textureGrass = new Bitmap( @"..\..\..\assets\Grass.jpg");
 
             _textureForest = new Bitmap( @"..\..\..\assets\Forest.jpg" );
             _textureSnow = new Bitmap( @"..\..\..\assets\Snow.jpg" );
