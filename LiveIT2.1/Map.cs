@@ -130,10 +130,13 @@ namespace LiveIT2._1
             {
                 for( int j = left; j <= right; ++j )
                 {
-                    Box b = this[j, i];
-                    Rectangle rIntersect =  b.Area;
-                    b.Source = b.Area;
-                    boxList.Add( b );
+                    if (this[i, j] != null)
+                    {
+                        Box b = this[j, i];
+                        b.Source = b.Area;
+                        boxList.Add(b);
+                    }
+
                 }
             }
             return boxList;

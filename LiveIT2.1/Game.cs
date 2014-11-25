@@ -61,6 +61,7 @@ namespace LiveIT2._1
             button1.Text = "Hide Debug";
             _selectedTexture = BoxGround.Grass;
             _background = new Bitmap( this.Width, this.Height );
+            
             _map = new Map( 50, 2 );
             
             _boxWidth = _map.BoxSize;
@@ -71,6 +72,9 @@ namespace LiveIT2._1
 
             g = this.CreateGraphics();  
             _screenGraphic = Graphics.FromImage( _background );
+            _screenGraphic.CompositingQuality = CompositingQuality.HighSpeed;
+            _screenGraphic.InterpolationMode = InterpolationMode.Low;
+            
 
             _selectionCursorWidth = new Size(_boxWidth, _boxWidth);
             this.MouseWheel += new MouseEventHandler(T_mouseWheel);
@@ -141,10 +145,10 @@ namespace LiveIT2._1
             if( left ) { MoveRectangle( Direction.Left ); }
             if( down ) { MoveRectangle( Direction.Down ); }
             if( right ) { MoveRectangle( Direction.Right ); }
-            
-            g.DrawImage( Draw(), new Point( 0, 0 ) );
-            _soundEnvironment.LoadBoxes(_viewPort.BoxList);
 
+            Draw();
+            g.DrawImage(_background, new Point(0,0));
+            _soundEnvironment.LoadBoxes(_viewPort.BoxList);
             _soundEnvironment.PlayAllSounds();
             Interlocked.Increment(ref _fpsCount);
                       
@@ -159,12 +163,11 @@ namespace LiveIT2._1
             if (d == Direction.Right) { _viewPort.MoveX(speed); }
             if (d == Direction.Left) { _viewPort.MoveX(-speed); }
         }
-        public Bitmap Draw()
+        public void Draw()
         {
             Rectangle _rMouse = new Rectangle( new Point( Cursor.Position.X, Cursor.Position.Y ), _selectionCursorWidth );
-            _screenGraphic.Clear( Color.FromArgb( 255, Color.Black ) );
-            _viewPort.Draw( _screenGraphic );    
-            return _background;           
+            //_screenGraphic.Clear( Color.FromArgb( 255, Color.Black ) );
+            _viewPort.Draw( _screenGraphic );            
         }
 
         private void Form1_KeyDown( object sender, KeyEventArgs e )
