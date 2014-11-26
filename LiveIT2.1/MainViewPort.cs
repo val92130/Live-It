@@ -47,11 +47,11 @@ namespace LiveIT2._1
 
             for( int i = 0; i < _boxList.Count; i++ )
             {
-                    foreach( Animal a in _map.Animals )
+                    for( int j = 0; j < _map.Animals.Count(); j++ )
                     {
-                        if( a.Area.IntersectsWith( _boxList[i].Area ) )
+                        if (_map.Animals[j].Area.IntersectsWith(_boxList[i].Area))
                         {
-                            _boxList[i].AddAnimal( a );
+                            _boxList[i].AddAnimal(_map.Animals[j]);
                         }
                     }
                 _boxList[i].Draw( g, _screen, _texture, _viewPort );

@@ -16,7 +16,7 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Rabbit;
             Position = startPosition;
             Size = new Size( 100, 100 );
-            Speed = 200000;
+            Speed = 20000;
             ViewDistance = 200;
         }
     }

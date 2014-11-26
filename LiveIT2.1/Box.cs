@@ -174,17 +174,14 @@ namespace LiveIT2._1
                 g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
             }
 
-            Task CheckAnimalList = new Task(() =>
+            for (int i = 0; i < _animalList.Count; i++)
             {
-                for (int i = 0; i < _animalList.Count; i++)
+                if (!_animalList[i].Area.IntersectsWith(this.Area))
                 {
-                    if (!_animalList[i].Area.IntersectsWith(this.Area))
-                    {
-                        RemoveFromList(_animalList[i]);
-                    }
+                    RemoveFromList(_animalList[i]);
                 }
-            });
-            CheckAnimalList.Start();
+            }
+
             DrawTransitionTextures();
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )

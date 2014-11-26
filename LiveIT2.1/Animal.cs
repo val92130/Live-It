@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ namespace LiveIT2._1
             
         }
 
-        public bool IsWalking
+        public bool IsInMovement
         {
             get { return _walking; }
             set { _walking = value; }
@@ -181,40 +182,62 @@ namespace LiveIT2._1
             set { _favoriteEnvironnment = value; }
         }
 
-        public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
+        public virtual void Behavior()
         {
-            if (this.Position.X + this.Area.Width >= _map.MapSize)
+            if (this.FieldOfView.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
             {
-                this.Position = new Point(0, this.Position.Y);
-            }
-            if (this.Position.Y + this.Area.Height >= _map.MapSize)
-            {
-                this.Position = new Point(this.Position.X, 0);
+                this.IsInMovement = false;
             }
 
-            if( !this.IsWalking )
+            if (!this.IsInMovement)
             {
                 ChangePosition();
             }
-            foreach( Box b in BoxList )
+            if (BoxList.Count() != 0)
             {
-                if( b.Ground == BoxGround.Water && b != null )
+                foreach (Box b in BoxList)
                 {
-                    ChangePosition();
+                    if (b != null)
+                    {
+                        if (b.Ground == BoxGround.Water)
+                        {
+                            ChangePosition();
+                        }
+                    }
+                    
                 }
             }
 
-            if( this.Area.IntersectsWith( new Rectangle(this.TargetLocation, this.Area.Size) ))
+            if (this.AnimalsAround.Count != 0)
             {
+                for (int i = 0; i < AnimalsAround.Count(); i++)
+                {
+                    if (this.Texture == AnimalTexture.Elephant)
+                    {
+                        if (AnimalsAround[i].Texture == AnimalTexture.Rabbit)
+                        {
+                            ChangePosition(AnimalsAround[i].Position);
+                            if (this.Area.IntersectsWith(AnimalsAround[i].Area))
+                            {
+                                foreach (Box b in _map.Boxes)
+                                {
+                                    b.RemoveFromList(AnimalsAround[i]);
+                                }
+                                _map.Animals.Remove(AnimalsAround[i]);
+                                AnimalsAround.Remove(AnimalsAround[i]);
 
-                this.IsWalking = false;
-                
+                            }
+                        }
+
+                    }
+
+                }
             }
+        }
 
+        public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
+        {
 
-            Position = new Point( _position.X + (int) (this.Direction.Width*this.Speed),
-                                  _position.Y + (int)(this.Direction.Height * this.Speed) );
-          
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
             int newXpos = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width)));
@@ -223,54 +246,35 @@ namespace LiveIT2._1
             this.RelativePosition = new Point(newXpos, newYpos);
             this.RelativeSize = new Size(newWidth, newHeight);
 
+            
 
-            if (this.AnimalsAround.Count != 0)
+            Position = new Point(_position.X + (int)(this.Direction.Width * this.Speed),
+                                  _position.Y + (int)(this.Direction.Height * this.Speed));
+            Behavior();
+
+
+            if (this._map.ShowDebug == true)
             {
-                for( int i = 0; i < AnimalsAround.Count();i++ )
+
+                foreach (Animal a in AnimalsAround)
                 {
-                    if( this.Texture == AnimalTexture.Elephant )
+                    if (this.Texture != a.Texture)
                     {
-                        if( AnimalsAround[i].Texture == AnimalTexture.Rabbit )
-                        {
-                            ChangePosition( AnimalsAround[i].Position );
-                            if( this.Area.IntersectsWith( AnimalsAround[i].Area ) )
-                            {
-                                foreach( Box b in _map.Boxes )
-                                {
-                                    b.RemoveFromList( AnimalsAround[i] );
-                                }
-                                _map.Animals.Remove( AnimalsAround[i] );
-                                AnimalsAround.Remove( AnimalsAround[i] );
-
-                            }
-                        }
-
+                        g.DrawLine(new Pen(Brushes.Red, 4), this.RelativePosition, a.RelativePosition);
+                        g.DrawString("Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font("Arial", 15f), Brushes.White, this.RelativePosition);
                     }
 
                 }
-
-                if( this._map.ShowDebug == true )
+                for (int i = 0; i < _map.Boxes.Length; i++)
                 {
-
-                    foreach( Animal a in AnimalsAround )
+                    if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && this.FavoriteEnvironnment == _map.Boxes[i].Ground)
                     {
-                        if( this.Texture != a.Texture )
-                        {
-                            g.DrawLine( new Pen( Brushes.Red, 4 ), this.RelativePosition, a.RelativePosition );
-                            g.DrawString( "Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font( "Arial", 15f ), Brushes.White, this.RelativePosition );
-                        }
-
+                        g.DrawLine(new Pen(Brushes.Blue, 5), this.RelativePosition, _map.Boxes[i].RelativePosition);
                     }
-                    for( int i = 0; i < _map.Boxes.Length; i++ )
-                    {
-                        if( _map.Boxes[i].Area.IntersectsWith( this.FieldOfView ) && this.FavoriteEnvironnment == _map.Boxes[i].Ground )
-                        {
-                            g.DrawLine( new Pen( Brushes.Blue, 5 ), this.RelativePosition, _map.Boxes[i].RelativePosition );
-                        }
-                    }
-                    _map.ViewPort.DrawRectangleInViewPort( g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort );
-                    
                 }
+                _map.ViewPort.DrawRectangleInViewPort(g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
+
+                g.DrawString("Target pos : " + this.TargetLocation.X.ToString() + "\n" + this.TargetLocation.Y.ToString(), new Font("Arial", 20f), Brushes.Black, this.RelativePosition);
             }
             
 
@@ -287,18 +291,20 @@ namespace LiveIT2._1
             int newYposMini = (int)(this.Area.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
 
             g.DrawImage( texture.LoadTexture(this), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
-            g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+            g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+            _map.ViewPort.DrawRectangleInViewPort(g, new Rectangle(this.TargetLocation, this.Area.Size), _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
         }
 
         public void ChangePosition()
         {
             Random r = new Random();
             Point newTarget = new Point( r.Next( 0, _map.MapSize ), r.Next( 0, _map.MapSize ) );
+            Debug.Assert(newTarget.X <= _map.MapSize && newTarget.Y <= _map.MapSize);
             this.TargetLocation = newTarget;
             float distance = (float)(Math.Pow( newTarget.X - this.Position.X, 2 ) + Math.Pow( newTarget.Y - this.Position.Y, 2 ));
             SizeF _dir = new SizeF( (newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance );
             this.Direction = _dir;
-            this.IsWalking = true;
+            this.IsInMovement = true;
         }
         public void ChangePosition(Point target)
         {
@@ -308,7 +314,7 @@ namespace LiveIT2._1
             float distance = (float)(Math.Pow(newTarget.X - this.Position.X, 2) + Math.Pow(newTarget.Y - this.Position.Y, 2));
             SizeF _dir = new SizeF((newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance);
             this.Direction = _dir;
-            this.IsWalking = true;
+            this.IsInMovement = true;
         }
     }
 }

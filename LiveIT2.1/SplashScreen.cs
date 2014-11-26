@@ -16,7 +16,7 @@ namespace LiveIT2._1
         public SplashScreen()
         {
             t = new Timer();
-            t.Interval = 3000;
+            t.Interval = 1000;
             t.Start();
             t.Tick += new EventHandler(T_tick);
             InitializeComponent();
