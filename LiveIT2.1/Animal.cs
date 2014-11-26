@@ -64,7 +64,10 @@ namespace LiveIT2._1
         public Point Position
         {
             get { return _position; }
-            set { _position = value; }
+            set
+            {
+                _position = value;
+            }
         }
          
         public virtual Size Size
@@ -184,10 +187,10 @@ namespace LiveIT2._1
                 this.IsWalking = false;
                 
             }
-            
 
-            _position.X += (int)(this.Direction.Width * this.Speed) ;
-            _position.Y += (int)(this.Direction.Height * this.Speed);
+
+            Position = new Point( _position.X + (int) (this.Direction.Width*this.Speed),
+                                  _position.Y + (int)(this.Direction.Height * this.Speed) );
           
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
@@ -200,6 +203,24 @@ namespace LiveIT2._1
 
             if (this.AnimalsAround.Count != 0)
             {
+                foreach (Animal a in AnimalsAround)
+                {
+                    if (this.Texture == AnimalTexture.Elephant)
+                    {
+                        if (a.Texture == AnimalTexture.Rabbit)
+                        {
+                            if (this.Area.IntersectsWith(a.Area))
+                            {
+
+                                _map.Animals.Remove(a);
+                            }
+                       
+                            ChangePosition(a.Position);
+                        }
+                        
+                    }
+
+                }
                 if( this._map.ShowDebug == true )
                 {
                     foreach( Animal a in AnimalsAround )
@@ -219,7 +240,7 @@ namespace LiveIT2._1
                         }
                     }
                     _map.ViewPort.DrawRectangleInViewPort( g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort );
-
+                    
                 }
             }
             
@@ -247,6 +268,16 @@ namespace LiveIT2._1
             this.TargetLocation = newTarget;
             float distance = (float)(Math.Pow( newTarget.X - this.Position.X, 2 ) + Math.Pow( newTarget.Y - this.Position.Y, 2 ));
             SizeF _dir = new SizeF( (newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance );
+            this.Direction = _dir;
+            this.IsWalking = true;
+        }
+        public void ChangePosition(Point target)
+        {
+            Random r = new Random();
+            Point newTarget = target;
+            this.TargetLocation = newTarget;
+            float distance = (float)(Math.Pow(newTarget.X - this.Position.X, 2) + Math.Pow(newTarget.Y - this.Position.Y, 2));
+            SizeF _dir = new SizeF((newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance);
             this.Direction = _dir;
             this.IsWalking = true;
         }
