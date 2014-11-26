@@ -159,29 +159,6 @@ namespace LiveIT2._1
             {
                 this.Position = new Point(this.Position.X, 0);
             }
-            Task CheckIntersect = new Task(() =>
-            {
-                for (int i = 0; i < _map.Boxes.Length; i++)
-                {
-                    if (this.Area.IntersectsWith(_map.Boxes[i].Area))
-                    {
-                        _map.Boxes[i].AddAnimal(this);
-                        if (_map.Boxes[i].Ground == this.FavoriteEnvironnment)
-                        {
-                            this.Speed = r.Next(1, 3);
-                        }
-                        else
-                        {
-                            this.Speed = this.DefaultSpeed;
-                        }
-                    }
-                }
-                if (this.FieldOfView.X >= _map.MapSize)
-                {
-                    this.Speed = -Speed;
-                }
-            });
-            //CheckIntersect.Start();
 
             this.Direction = new Point(r.Next(-3,_speed), r.Next(-3,_speed));
             _position.X += this.Direction.X;
@@ -204,6 +181,7 @@ namespace LiveIT2._1
                     {
                         if( this.Texture != a.Texture )
                         {
+                            ChangePosition( a.Position );
                             g.DrawLine( new Pen( Brushes.Red, 4 ), this.RelativePosition, a.RelativePosition );
                             g.DrawString( "Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font( "Arial", 15f ), Brushes.White, this.RelativePosition );
                         }
@@ -236,6 +214,11 @@ namespace LiveIT2._1
 
             g.DrawImage( texture.LoadTexture(this), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
             g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+        }
+
+        public void ChangePosition( Point point )
+        {
+            this.Position = point;
         }
     }
 }
