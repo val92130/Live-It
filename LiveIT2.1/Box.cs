@@ -94,6 +94,7 @@ namespace LiveIT2._1
         {
             if (!_animalList.Contains(a))
             {
+                a.AddToList( this );
                 _animalList.Add(a);
             }
         }
@@ -102,6 +103,7 @@ namespace LiveIT2._1
         {
             if (_animalList.Contains(a))
             {
+                a.RemoveFromList( this );
                 _animalList.Remove(a);
             }
         }
@@ -184,10 +186,6 @@ namespace LiveIT2._1
             });
             CheckAnimalList.Start();
             DrawTransitionTextures();
-            //if (this._animalList.Count != 0)
-            //{
-            //    g.FillRectangle(new SolidBrush(Color.FromArgb(128, 0, 0, 255)), new Rectangle(this.RelativePosition, this.RelativeSize));
-            //}
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
         {

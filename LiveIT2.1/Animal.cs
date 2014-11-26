@@ -18,6 +18,7 @@ namespace LiveIT2._1
          BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
         Rectangle _fieldOfViewRect;
+        List<Box> BoxList = new List<Box>();
         int _viewDistance;
         int _speed;
         int _defaultSpeed;
@@ -59,6 +60,21 @@ namespace LiveIT2._1
         {
             get { return _viewDistance; }
             set { _viewDistance = value; }
+        }
+
+        public void AddToList( Box b )
+        {
+            if( !BoxList.Contains( b ) )
+            {
+                BoxList.Add( b );
+            }          
+        }
+        public void RemoveFromList( Box b )
+        {
+            if( BoxList.Contains( b ) )
+            {
+                BoxList.Remove( b );
+            }
         }
          
         public Point Position
@@ -180,6 +196,13 @@ namespace LiveIT2._1
             {
                 ChangePosition();
             }
+            foreach( Box b in BoxList )
+            {
+                if( b.Ground == BoxGround.Water && b != null )
+                {
+                    ChangePosition();
+                }
+            }
 
             if( this.Area.IntersectsWith( new Rectangle(this.TargetLocation, this.Area.Size) ))
             {
@@ -225,8 +248,10 @@ namespace LiveIT2._1
                     }
 
                 }
+
                 if( this._map.ShowDebug == true )
                 {
+
                     foreach( Animal a in AnimalsAround )
                     {
                         if( this.Texture != a.Texture )
