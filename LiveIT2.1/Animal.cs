@@ -160,6 +160,10 @@ namespace LiveIT2._1
                 this.Position = new Point(this.Position.X, 0);
             }
 
+            Random r2 = new Random();
+
+            ChangePosition( new Point( r2.Next( 0, _map.MapSize ), r2.Next( 0, _map.MapSize ) ) );
+
             this.Direction = new Point(r.Next(-3,_speed), r.Next(-3,_speed));
             _position.X += this.Direction.X;
             _position.Y += this.Direction.Y;
@@ -181,7 +185,6 @@ namespace LiveIT2._1
                     {
                         if( this.Texture != a.Texture )
                         {
-                            ChangePosition( a.Position );
                             g.DrawLine( new Pen( Brushes.Red, 4 ), this.RelativePosition, a.RelativePosition );
                             g.DrawString( "Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font( "Arial", 15f ), Brushes.White, this.RelativePosition );
                         }
