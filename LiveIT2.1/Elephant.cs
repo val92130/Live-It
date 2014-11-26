@@ -16,7 +16,7 @@ namespace LiveIT2._1
         {
             Texture = AnimalTexture.Elephant;
             Size = new Size(500,500);
-            Speed = 5;
+            Speed = 15000;
             ViewDistance = 800;
         }
     }

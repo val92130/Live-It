@@ -14,7 +14,7 @@ namespace LiveIT2._1
          Point _position;
          Size _size;
          readonly Map _map;
-         Point _direction;
+         SizeF _direction;
          BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
         Rectangle _fieldOfViewRect;
@@ -24,6 +24,8 @@ namespace LiveIT2._1
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
+        bool _walking;
+        private  Point _targetLocation;
         
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
         {
@@ -31,10 +33,16 @@ namespace LiveIT2._1
             _position = position;
             _size = size;
             _texture = texture;
-            _direction = new Point( 0, 0 );
+            _direction = new SizeF( 0, 0 );
             _favoriteEnvironnment = BoxGround.Grass;
             _viewDistance = 1000;
             
+        }
+
+        public bool IsWalking
+        {
+            get { return _walking; }
+            set { _walking = value; }
         }
         public Animal( Map map, Point position )
         {
@@ -82,7 +90,7 @@ namespace LiveIT2._1
             get { return  new Rectangle(_position, _size); }
         }
 
-        public Point Direction
+        public SizeF Direction
         {
             get { return _direction; }
             set { _direction = value; }
@@ -142,6 +150,12 @@ namespace LiveIT2._1
             get { return _map; }
         }
 
+        public Point TargetLocation
+        {
+            get { return _targetLocation; }
+            set { _targetLocation = value; }
+        }
+
         public BoxGround FavoriteEnvironnment
         {
             get { return _favoriteEnvironnment; }
@@ -150,7 +164,6 @@ namespace LiveIT2._1
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
         {
-            Random r = new Random();
             if (this.Position.X + this.Area.Width >= _map.MapSize)
             {
                 this.Position = new Point(0, this.Position.Y);
@@ -160,13 +173,21 @@ namespace LiveIT2._1
                 this.Position = new Point(this.Position.X, 0);
             }
 
-            Random r2 = new Random();
+            if( !this.IsWalking )
+            {
+                ChangePosition();
+            }
 
-            ChangePosition( new Point( r2.Next( 0, _map.MapSize ), r2.Next( 0, _map.MapSize ) ) );
+            if( this.Area.IntersectsWith( new Rectangle(this.TargetLocation, this.Area.Size) ))
+            {
 
-            this.Direction = new Point(r.Next(-3,_speed), r.Next(-3,_speed));
-            _position.X += this.Direction.X;
-            _position.Y += this.Direction.Y;
+                this.IsWalking = false;
+                
+            }
+            
+
+            _position.X += (int)(this.Direction.Width * this.Speed) ;
+            _position.Y += (int)(this.Direction.Height * this.Speed);
           
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
@@ -219,9 +240,15 @@ namespace LiveIT2._1
             g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
         }
 
-        public void ChangePosition( Point point )
+        public void ChangePosition()
         {
-            this.Position = point;
+            Random r = new Random();
+            Point newTarget = new Point( r.Next( 0, _map.MapSize ), r.Next( 0, _map.MapSize ) );
+            this.TargetLocation = newTarget;
+            float distance = (float)(Math.Pow( newTarget.X - this.Position.X, 2 ) + Math.Pow( newTarget.Y - this.Position.Y, 2 ));
+            SizeF _dir = new SizeF( (newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance );
+            this.Direction = _dir;
+            this.IsWalking = true;
         }
     }
 }

@@ -49,8 +49,6 @@ namespace LiveIT2._1
 
             for( int i = 0; i < _boxList.Count; i++ )
             {
-                Task CheckAnimalInBoxes = new Task( () =>
-                {
                     foreach( Animal a in _animalList )
                     {
                         if( a.Area.IntersectsWith( _boxList[i].Area ) )
@@ -58,8 +56,6 @@ namespace LiveIT2._1
                             _boxList[i].AddAnimal( a );
                         }
                     }
-                } );
-                CheckAnimalInBoxes.Start();
                 _boxList[i].Draw( g, _screen, _texture, _viewPort );
 
             }
@@ -93,6 +89,7 @@ namespace LiveIT2._1
 
             _map.Animals = _animalList;
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
+
         }
 
         public void CreateAnimal(AnimalTexture animalType)
