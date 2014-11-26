@@ -203,21 +203,25 @@ namespace LiveIT2._1
 
             if (this.AnimalsAround.Count != 0)
             {
-                foreach (Animal a in AnimalsAround)
+                for( int i = 0; i < AnimalsAround.Count();i++ )
                 {
-                    if (this.Texture == AnimalTexture.Elephant)
+                    if( this.Texture == AnimalTexture.Elephant )
                     {
-                        if (a.Texture == AnimalTexture.Rabbit)
+                        if( AnimalsAround[i].Texture == AnimalTexture.Rabbit )
                         {
-                            if (this.Area.IntersectsWith(a.Area))
+                            ChangePosition( AnimalsAround[i].Position );
+                            if( this.Area.IntersectsWith( AnimalsAround[i].Area ) )
                             {
+                                foreach( Box b in _map.Boxes )
+                                {
+                                    b.RemoveFromList( AnimalsAround[i] );
+                                }
+                                _map.Animals.Remove( AnimalsAround[i] );
+                                AnimalsAround.Remove( AnimalsAround[i] );
 
-                                _map.Animals.Remove(a);
                             }
-                       
-                            ChangePosition(a.Position);
                         }
-                        
+
                     }
 
                 }

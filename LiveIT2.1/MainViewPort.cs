@@ -20,7 +20,6 @@ namespace LiveIT2._1
         Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
         Map _map;
         List<Box> _selectedBoxes;
-        List<Animal> _animalList;
         Texture _texture;
         bool _changeTexture, _fillTexture,_putAnimal, _followAnimal;
         public MainViewPort( Map map)
@@ -28,7 +27,6 @@ namespace LiveIT2._1
             _map = map;
             _texture = new Texture();
             _selectedBoxes = new List<Box>();
-            _animalList = new List<Animal>();
             _screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             _viewPort = new Rectangle(0, 0, 800, 800);
             _miniMap = new Rectangle( 0, 0,250, 250  );
@@ -49,7 +47,7 @@ namespace LiveIT2._1
 
             for( int i = 0; i < _boxList.Count; i++ )
             {
-                    foreach( Animal a in _animalList )
+                    foreach( Animal a in _map.Animals )
                     {
                         if( a.Area.IntersectsWith( _boxList[i].Area ) )
                         {
@@ -67,9 +65,9 @@ namespace LiveIT2._1
 
             g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
-            for( int i = 0; i < _animalList.Count; i++ )
+            for( int i = 0; i < _map.Animals.Count; i++ )
             {
-                _animalList[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
 
             if( _changeTexture ) DrawMouseSelector( g );
@@ -77,7 +75,7 @@ namespace LiveIT2._1
             if(_putAnimal)PutAnimalSelector(g);
             if( _followAnimal )
             {
-                foreach( Animal a in _animalList )
+                foreach( Animal a in _map.Animals )
                 {
                     if( _mouseRect.IntersectsWith( new Rectangle( a.RelativePosition, a.RelativeSize ) ) )
                     {
@@ -87,7 +85,6 @@ namespace LiveIT2._1
                 }
             }
 
-            _map.Animals = _animalList;
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
         }
@@ -120,7 +117,7 @@ namespace LiveIT2._1
                     throw new NotSupportedException( "Unknown animal type" );
 
             }
-            _animalList.Add(a);
+            _map.Animals.Add( a );
         }
 
         public void Zoom( int meters )

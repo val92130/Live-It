@@ -184,10 +184,10 @@ namespace LiveIT2._1
             });
             CheckAnimalList.Start();
             DrawTransitionTextures();
-            if (this._animalList.Count != 0)
-            {
-                g.FillRectangle(new SolidBrush(Color.FromArgb(128, 0, 0, 255)), new Rectangle(this.RelativePosition, this.RelativeSize));
-            }
+            //if (this._animalList.Count != 0)
+            //{
+            //    g.FillRectangle(new SolidBrush(Color.FromArgb(128, 0, 0, 255)), new Rectangle(this.RelativePosition, this.RelativeSize));
+            //}
         }
         internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
         {
