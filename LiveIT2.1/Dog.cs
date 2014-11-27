@@ -18,7 +18,7 @@ namespace LiveIT2._1
             Size = new Size( 150, 150 );
             FavoriteEnvironnment = BoxGround.Forest;
             Speed = 25000;
-            ViewDistance = 600;
+            ViewDistance = 400;
         }
 
         public override void Behavior()
