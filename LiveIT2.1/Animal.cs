@@ -14,12 +14,13 @@ namespace LiveIT2._1
     {
          Point _position;
          Size _size;
-         readonly Map _map;
+         protected readonly Map _map;
          SizeF _direction;
          BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
         Rectangle _fieldOfViewRect;
         List<Box> BoxList = new List<Box>();
+        List<Box> WalkableBoxes = new List<Box>();
         int _viewDistance;
         int _speed;
         int _defaultSpeed;
@@ -187,7 +188,7 @@ namespace LiveIT2._1
             if (this.FieldOfView.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
             {
                 this.IsInMovement = false;
-            }
+            }            
 
             if (!this.IsInMovement)
             {
@@ -201,38 +202,39 @@ namespace LiveIT2._1
                     {
                         if (b.Ground == BoxGround.Water)
                         {
-                            ChangePosition();
+                            for (int i = 0; i < _map.Boxes.Length; i++)
+                            {
+                                if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && _map.Boxes[i].Ground != BoxGround.Water)
+                                {
+                                    //g.DrawLine(new Pen(Brushes.Blue, 5), this.RelativePosition, _map.Boxes[i].RelativePosition);
+                                    if (!WalkableBoxes.Contains(_map.Boxes[i])) WalkableBoxes.Add(_map.Boxes[i]);
+                                }
+                                if (WalkableBoxes.Count != 0)
+                                {
+                                    for (int j = 0; j < WalkableBoxes.Count; j++)
+                                    {
+                                        if (!WalkableBoxes[j].Area.IntersectsWith(this.FieldOfView))
+                                        {
+                                            WalkableBoxes.Remove(WalkableBoxes[j]);
+                                        }
+                                    }
+                                }
+                            }
+                            if (WalkableBoxes.Count != 0)
+                            {
+                                Random r = new Random();
+                                ChangePosition(WalkableBoxes[r.Next(0,WalkableBoxes.Count)].Location);
+                            }
+                            else
+                            {
+                                ChangePosition();
+                            }
+                            
                         }
                     }
                     
                 }
-            }
-
-            if (this.AnimalsAround.Count != 0)
-            {
-                for (int i = 0; i < AnimalsAround.Count(); i++)
-                {
-                    if (this.Texture == AnimalTexture.Elephant)
-                    {
-                        if (AnimalsAround[i].Texture == AnimalTexture.Rabbit)
-                        {
-                            ChangePosition(AnimalsAround[i].Position);
-                            if (this.Area.IntersectsWith(AnimalsAround[i].Area))
-                            {
-                                foreach (Box b in _map.Boxes)
-                                {
-                                    b.RemoveFromList(AnimalsAround[i]);
-                                }
-                                _map.Animals.Remove(AnimalsAround[i]);
-                                AnimalsAround.Remove(AnimalsAround[i]);
-
-                            }
-                        }
-
-                    }
-
-                }
-            }
+            }           
         }
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
@@ -264,35 +266,21 @@ namespace LiveIT2._1
                         g.DrawString("Animals in field of view : " + this.AnimalsAround.Count.ToString(), new Font("Arial", 15f), Brushes.White, this.RelativePosition);
                     }
 
-                }
-                for (int i = 0; i < _map.Boxes.Length; i++)
-                {
-                    if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && this.FavoriteEnvironnment == _map.Boxes[i].Ground)
-                    {
-                        g.DrawLine(new Pen(Brushes.Blue, 5), this.RelativePosition, _map.Boxes[i].RelativePosition);
-                    }
-                }
+                }               
                 _map.ViewPort.DrawRectangleInViewPort(g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
 
                 g.DrawString("Target pos : " + this.TargetLocation.X.ToString() + "\n" + this.TargetLocation.Y.ToString(), new Font("Arial", 20f), Brushes.Black, this.RelativePosition);
-            }
-            
+                _map.ViewPort.DrawRectangleInViewPort(g, new Rectangle(this.TargetLocation, this.Area.Size), _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
+            }           
 
-
-            Task ThreadGetAnimalsAround = new Task(() =>
-            {
-                GetAnimalsAround();
-            });
-            ThreadGetAnimalsAround.Start();
-
+            GetAnimalsAround();
             int newSizeMini = (int)(((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             int newHeightMini = (int)(((double)this.Area.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             int newXposMini = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
             int newYposMini = (int)(this.Area.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (this.Area.Width / (((double)this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
 
             g.DrawImage( texture.LoadTexture(this), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
-            g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
-            _map.ViewPort.DrawRectangleInViewPort(g, new Rectangle(this.TargetLocation, this.Area.Size), _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
+            g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );          
         }
 
         public void ChangePosition()
