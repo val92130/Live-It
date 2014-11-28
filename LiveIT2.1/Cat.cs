@@ -17,7 +17,7 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Cat;
             Size = new Size( 120, 120 );
             FavoriteEnvironnment = BoxGround.Grass;
-            Speed = 30000;
+            Speed = 15000;
             ViewDistance = 300;
         }
 
@@ -31,6 +31,7 @@ namespace LiveIT2._1
                     if (AnimalsAround[i].Texture == AnimalTexture.Rabbit)
                     {
                         ChangePosition(AnimalsAround[i].Position);
+                        this.AnimalsAround[i].Speed = (int)(this.Speed * 2.5); 
                         if (this.Area.IntersectsWith(AnimalsAround[i].Area))
                         {
                             foreach (Box b in _map.Boxes)
