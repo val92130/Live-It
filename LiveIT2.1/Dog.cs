@@ -17,7 +17,7 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Dog;
             Size = new Size( 150, 150 );
             FavoriteEnvironnment = BoxGround.Forest;
-            Speed = 25000;
+            Speed = 15000;
             ViewDistance = 400;
         }
 
@@ -33,12 +33,7 @@ namespace LiveIT2._1
                         ChangePosition(AnimalsAround[i].Position);
                         if (this.Area.IntersectsWith(AnimalsAround[i].Area))
                         {
-                            foreach (Box b in _map.Boxes)
-                            {
-                                b.RemoveFromList(AnimalsAround[i]);
-                            }
-                            _map.Animals.Remove(AnimalsAround[i]);
-                            AnimalsAround.Remove(AnimalsAround[i]);
+                            AnimalsAround[i].Die();
                         }
                     }
                 }

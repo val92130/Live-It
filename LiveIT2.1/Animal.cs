@@ -24,10 +24,11 @@ namespace LiveIT2._1
         int _viewDistance;
         int _speed;
         int _defaultSpeed;
+        int _health;
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
-        bool _walking;
+        bool _walking, _isInWater;
         private  Point _targetLocation;
         
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
@@ -39,6 +40,7 @@ namespace LiveIT2._1
             _direction = new SizeF( 0, 0 );
             _favoriteEnvironnment = BoxGround.Grass;
             _viewDistance = 1000;
+            _health = 100;
             
         }
 
@@ -62,6 +64,47 @@ namespace LiveIT2._1
         {
             get { return _viewDistance; }
             set { _viewDistance = value; }
+        }
+
+        public int Health
+        {
+            get { return _health; }
+            private set
+            {
+                _health += value;
+                if( _health - value <= 0 )
+                {
+                    _health = 0;
+                    this.Die();
+                }
+                if( _health + value >= 100 )
+                {
+                    _health = 100;
+                }
+            }
+        }
+
+        public void Hurt( int HealthPoint )
+        {
+            if( HealthPoint < 0 ) throw new ArgumentException( "HealthPoints must be negative" );
+            this.Health -= HealthPoint;
+        }
+
+        public void Drown()
+        {
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Start();
+            t.Interval = 2000;
+            t.Tick += new EventHandler( T_drown_tick );
+            if( !_isInWater )
+            {
+                t.Stop();               
+            }
+        }
+
+        private void T_drown_tick( object sender, EventArgs e )
+        {
+            this.Hurt( 10 );
         }
 
         public void AddToList( Box b )
@@ -133,14 +176,24 @@ namespace LiveIT2._1
                         _animalsAround.Add(_map.Animals[i]);
                     }                    
                 }
-                else
+                if( _animalsAround.Contains( _map.Animals[i] ) && !_map.Animals[i].FieldOfView.IntersectsWith( this.FieldOfView ) )
                 {
-                    if (_animalsAround.Contains(_map.Animals[i]) && !_map.Animals[i].FieldOfView.IntersectsWith(this.FieldOfView))
-                    {
-                        _animalsAround.Remove(_map.Animals[i]);
-                    }
+                    _animalsAround.Remove( _map.Animals[i] );
                 }
+                for( int j = 0; j < _animalsAround.Count(); j++ )
+                {
+                    if( !_map.Animals.Contains( _animalsAround[j] ) ) _animalsAround.Remove( _animalsAround[j] );
+                }                   
             }
+        }
+
+        public void Die()
+        {
+            foreach( Box b in _map.Boxes )
+            {
+                b.RemoveFromList( this );
+            }
+            _map.Animals.Remove( this );
         }
 
         public List<Animal> AnimalsAround
@@ -182,13 +235,17 @@ namespace LiveIT2._1
             get { return _favoriteEnvironnment; }
             set { _favoriteEnvironnment = value; }
         }
-
         public virtual void Behavior()
         {
             if (this.FieldOfView.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
             {
                 this.IsInMovement = false;
-            }            
+            }
+
+            if( _isInWater )
+            {
+                this.Hurt( 1 );
+            }
 
             if (!this.IsInMovement)
             {
@@ -202,11 +259,11 @@ namespace LiveIT2._1
                     {
                         if (b.Ground == BoxGround.Water)
                         {
+                            _isInWater = true;                          
                             for (int i = 0; i < _map.Boxes.Length; i++)
                             {
                                 if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && _map.Boxes[i].Ground != BoxGround.Water)
                                 {
-                                    //g.DrawLine(new Pen(Brushes.Blue, 5), this.RelativePosition, _map.Boxes[i].RelativePosition);
                                     if (!WalkableBoxes.Contains(_map.Boxes[i])) WalkableBoxes.Add(_map.Boxes[i]);
                                 }
                                 if (WalkableBoxes.Count != 0)
@@ -229,7 +286,11 @@ namespace LiveIT2._1
                             {
                                 ChangePosition();
                             }
-                            
+
+                        }
+                        else
+                        {
+                            _isInWater = false;
                         }
                     }
                     
@@ -289,7 +350,7 @@ namespace LiveIT2._1
             Point newTarget = new Point( r.Next( 0, _map.MapSize ), r.Next( 0, _map.MapSize ) );
             Debug.Assert(newTarget.X <= _map.MapSize && newTarget.Y <= _map.MapSize);
             this.TargetLocation = newTarget;
-            float distance = (float)(Math.Pow( newTarget.X - this.Position.X, 2 ) + Math.Pow( newTarget.Y - this.Position.Y, 2 ));
+            float distance = (float)(Math.Pow( this.Position.X -newTarget.X , 2 ) + Math.Pow(  this.Position.Y - newTarget.Y, 2 ));
             SizeF _dir = new SizeF( (newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance );
             this.Direction = _dir;
             this.IsInMovement = true;
@@ -299,7 +360,7 @@ namespace LiveIT2._1
             Random r = new Random();
             Point newTarget = target;
             this.TargetLocation = newTarget;
-            float distance = (float)(Math.Pow(newTarget.X - this.Position.X, 2) + Math.Pow(newTarget.Y - this.Position.Y, 2));
+            float distance = (float)(Math.Pow( this.Position.X - newTarget.X, 2 ) + Math.Pow( this.Position.Y - newTarget.Y, 2 ));
             SizeF _dir = new SizeF((newTarget.X - this.Position.X) / distance, (newTarget.Y - this.Position.Y) / distance);
             this.Direction = _dir;
             this.IsInMovement = true;

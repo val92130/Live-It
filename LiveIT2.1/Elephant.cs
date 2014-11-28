@@ -32,12 +32,7 @@ namespace LiveIT2._1
                         ChangePosition(AnimalsAround[i].Position);
                         if (this.Area.IntersectsWith(AnimalsAround[i].Area))
                         {
-                            foreach (Box b in _map.Boxes)
-                            {
-                                b.RemoveFromList(AnimalsAround[i]);
-                            }
-                            _map.Animals.Remove(AnimalsAround[i]);
-                            AnimalsAround.Remove(AnimalsAround[i]);
+                            AnimalsAround[i].Die();
                         }
                     }
                 }

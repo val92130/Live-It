@@ -10,7 +10,6 @@ namespace LiveIT2._1
     [Serializable]
     public class Cat : Animal
     {
-
         public Cat( Map map, Point starPosition )
             :base(map, starPosition)
         {
@@ -34,12 +33,7 @@ namespace LiveIT2._1
                         this.AnimalsAround[i].Speed = (int)(this.Speed * 2.5); 
                         if (this.Area.IntersectsWith(AnimalsAround[i].Area))
                         {
-                            foreach (Box b in _map.Boxes)
-                            {
-                                b.RemoveFromList(AnimalsAround[i]);
-                            }
-                            _map.Animals.Remove(AnimalsAround[i]);
-                            AnimalsAround.Remove(AnimalsAround[i]);
+                            AnimalsAround[i].Die();
                         }
                     }
                 }
