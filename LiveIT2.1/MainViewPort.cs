@@ -186,8 +186,15 @@ namespace LiveIT2._1
                 {
                     if (_mouseRect.IntersectsWith(new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize)))
                     {
-                        _selectedBoxes.Add(_map[_boxList[i].Line, _boxList[i].Column]);
-                        g.DrawRectangle(Pens.White, new Rectangle(_boxList[i].RelativePosition, _boxList[i].RelativeSize));
+                        if( _boxList[i].AnimalList.Count != 0 )
+                        {
+                            g.DrawRectangle( Pens.Red, new Rectangle( _boxList[i].RelativePosition, _boxList[i].RelativeSize ) );
+                        }
+                        else
+                        {
+                            g.DrawRectangle( Pens.White, new Rectangle( _boxList[i].RelativePosition, _boxList[i].RelativeSize ) );
+                            _selectedBoxes.Add( _map[_boxList[i].Line, _boxList[i].Column] );  
+                        }                                            
                         g.DrawString("Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font("Arial", 10f), Brushes.Aqua, _boxList[i].RelativePosition);
                     }
                 }

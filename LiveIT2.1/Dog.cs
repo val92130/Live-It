@@ -18,26 +18,32 @@ namespace LiveIT2._1
             Size = new Size( 150, 150 );
             FavoriteEnvironnment = BoxGround.Forest;
             Speed = 15000;
+            DefaultSpeed = Speed;
             ViewDistance = 400;
         }
 
         public override void Behavior()
         {
             base.Behavior();
-            if (this.AnimalsAround.Count != 0)
+            if( this.Hunger > 50 )
             {
-                for (int i = 0; i < AnimalsAround.Count(); i++)
+                if( this.AnimalsAround.Count != 0 )
                 {
-                    if (AnimalsAround[i].Texture == AnimalTexture.Rabbit || AnimalsAround[i].Texture == AnimalTexture.Cat)
+                    for( int i = 0; i < AnimalsAround.Count(); i++ )
                     {
-                        ChangePosition(AnimalsAround[i].Position);
-                        if (this.Area.IntersectsWith(AnimalsAround[i].Area))
+                        if( AnimalsAround[i].Texture == AnimalTexture.Rabbit || AnimalsAround[i].Texture == AnimalTexture.Cat )
                         {
-                            AnimalsAround[i].Die();
+                            ChangePosition( AnimalsAround[i].Position );
+                            if( this.Area.IntersectsWith( AnimalsAround[i].Area ) )
+                            {
+                                AnimalsAround[i].Die();
+                                this.Hunger -= 50;
+                            }
                         }
                     }
                 }
             }
+            
         }
         
     }

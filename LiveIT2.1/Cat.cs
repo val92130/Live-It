@@ -17,6 +17,7 @@ namespace LiveIT2._1
             Size = new Size( 120, 120 );
             FavoriteEnvironnment = BoxGround.Grass;
             Speed = 15000;
+            DefaultSpeed = Speed;
             ViewDistance = 300;
         }
 

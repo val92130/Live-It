@@ -18,13 +18,12 @@ namespace LiveIT2._1
          SizeF _direction;
          BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
-        Rectangle _fieldOfViewRect;
         List<Box> BoxList = new List<Box>();
         List<Box> WalkableBoxes = new List<Box>();
         int _viewDistance;
         int _speed;
         int _defaultSpeed;
-        int _health;
+        int _health, _hunger, _thirst;
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
@@ -39,9 +38,7 @@ namespace LiveIT2._1
             _texture = texture;
             _direction = new SizeF( 0, 0 );
             _favoriteEnvironnment = BoxGround.Grass;
-            _viewDistance = 1000;
-            _health = 100;
-            
+            _viewDistance = 1000;          
         }
 
         public bool IsInMovement
@@ -53,6 +50,12 @@ namespace LiveIT2._1
         {
             _map = map;
             _position = position;
+            _health = 100;
+            _hunger = 0;
+            _thirst = 0;
+            CheckDrowning();
+            HungerTimer();
+            ThirstTimer();
         }
 
         public Rectangle FieldOfView
@@ -69,7 +72,7 @@ namespace LiveIT2._1
         public int Health
         {
             get { return _health; }
-            private set
+            internal set
             {
                 _health += value;
                 if( _health - value <= 0 )
@@ -81,30 +84,88 @@ namespace LiveIT2._1
                 {
                     _health = 100;
                 }
+                if( _health <= 0 ) this.Die();
+            }
+        }
+        public int Hunger
+        {
+            get { return _hunger; }
+            internal set
+            {
+                _hunger += value;
+                if( _hunger <= 0 )
+                {
+                    _hunger = 0;
+                }
+                if( _hunger >= 100 )
+                {
+                    _hunger = 100;
+                }
+            }
+        }
+        public int Thirst
+        {
+            get { return _thirst; }
+            internal set
+            {
+                _thirst = value;
+                if( _thirst <= 0 )
+                {
+                    _thirst = 0;
+                }
+                if( _thirst >= 100 )
+                {
+                    _thirst = 100;
+                }
             }
         }
 
         public void Hurt( int HealthPoint )
         {
             if( HealthPoint < 0 ) throw new ArgumentException( "HealthPoints must be negative" );
-            this.Health -= HealthPoint;
+            this.Health = - HealthPoint;
         }
 
-        public void Drown()
+        public void CheckDrowning()
         {
-            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
-            t.Start();
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();       
             t.Interval = 2000;
             t.Tick += new EventHandler( T_drown_tick );
-            if( !_isInWater )
-            {
-                t.Stop();               
-            }
+            t.Start();
+        }
+
+        public void HungerTimer()
+        {
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Interval = 30000;
+            t.Tick += new EventHandler( T_hunger_tick );
+            t.Start();
+        }
+        public void ThirstTimer()
+        {
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Interval = 20000;
+            t.Tick += new EventHandler( T_thirst_tick );
+            t.Start();
+        }
+
+        private void T_thirst_tick( object sender, EventArgs e )
+        {
+            this.Thirst += 5;
+        }
+
+        private void T_hunger_tick( object sender, EventArgs e )
+        {
+            this.Hunger += 5;
         }
 
         private void T_drown_tick( object sender, EventArgs e )
         {
-            this.Hurt( 10 );
+            if( this._isInWater )
+            {
+                this.Hurt( 10 );
+            }
+            
         }
 
         public void AddToList( Box b )
@@ -242,11 +303,6 @@ namespace LiveIT2._1
                 this.IsInMovement = false;
             }
 
-            if( _isInWater )
-            {
-                this.Hurt( 1 );
-            }
-
             if (!this.IsInMovement)
             {
                 ChangePosition();
@@ -259,7 +315,8 @@ namespace LiveIT2._1
                     {
                         if (b.Ground == BoxGround.Water)
                         {
-                            _isInWater = true;                          
+                            _isInWater = true;
+
                             for (int i = 0; i < _map.Boxes.Length; i++)
                             {
                                 if (_map.Boxes[i].Area.IntersectsWith(this.FieldOfView) && _map.Boxes[i].Ground != BoxGround.Water)
@@ -277,15 +334,24 @@ namespace LiveIT2._1
                                     }
                                 }
                             }
-                            if (WalkableBoxes.Count != 0)
+                            if( this.Thirst >= 15 )
                             {
-                                Random r = new Random();
-                                ChangePosition(WalkableBoxes[r.Next(0,WalkableBoxes.Count)].Location);
+                                this.Speed = 0;
+                                this.Thirst -= 5;
                             }
                             else
                             {
-                                ChangePosition();
-                            }
+                                this.Speed = DefaultSpeed;
+                                if( WalkableBoxes.Count != 0 )
+                                {
+                                    Random r = new Random();
+                                    ChangePosition( WalkableBoxes[r.Next( 0, WalkableBoxes.Count )].Location );
+                                }
+                                else
+                                {
+                                    ChangePosition();
+                                }
+                            }       
 
                         }
                         else
@@ -329,6 +395,10 @@ namespace LiveIT2._1
 
                 }               
                 _map.ViewPort.DrawRectangleInViewPort(g, this.FieldOfView, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
+
+                g.DrawString( "Health " + this.Health.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point(this.RelativePosition.X,this.RelativePosition.Y - 20) );
+                g.DrawString( "Hunger " + this.Hunger.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X, this.RelativePosition.Y - 40 ) );
+                g.DrawString( "Thirst " + this.Thirst.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X + 100, this.RelativePosition.Y - 40 ) );
 
                 g.DrawString("Target pos : " + this.TargetLocation.X.ToString() + "\n" + this.TargetLocation.Y.ToString(), new Font("Arial", 20f), Brushes.Black, this.RelativePosition);
                 _map.ViewPort.DrawRectangleInViewPort(g, new Rectangle(this.TargetLocation, this.Area.Size), _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);

@@ -79,6 +79,11 @@ namespace LiveIT2._1
            
         }
 
+        public List<Animal> AnimalList
+        {
+            get { return _animalList; }
+        }
+
         public Rectangle Source
         {
             get { return _source; }

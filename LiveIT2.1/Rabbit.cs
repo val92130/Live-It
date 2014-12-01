@@ -17,6 +17,7 @@ namespace LiveIT2._1
             Position = startPosition;
             Size = new Size( 100, 100 );
             Speed = 20000;
+            DefaultSpeed = Speed;
             ViewDistance = 400;
         }
     }
