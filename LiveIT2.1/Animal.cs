@@ -27,7 +27,7 @@ namespace LiveIT2._1
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
-        bool _walking, _isInWater;
+        bool _walking, _isInWater, _isDrinking;
         private  Point _targetLocation;
         
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
@@ -161,7 +161,7 @@ namespace LiveIT2._1
 
         private void T_drown_tick( object sender, EventArgs e )
         {
-            if( this._isInWater )
+            if( this._isInWater && _isDrinking == false )
             {
                 this.Hurt( 10 );
             }
@@ -298,6 +298,7 @@ namespace LiveIT2._1
         }
         public virtual void Behavior()
         {
+            _isDrinking = false;
             if (this.FieldOfView.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
             {
                 this.IsInMovement = false;
@@ -336,6 +337,7 @@ namespace LiveIT2._1
                             }
                             if( this.Thirst >= 15 )
                             {
+                                this._isDrinking = true;
                                 this.Speed = 0;
                                 this.Thirst -= 5;
                             }
