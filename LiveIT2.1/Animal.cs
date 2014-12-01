@@ -18,7 +18,7 @@ namespace LiveIT2._1
          SizeF _direction;
          BoxGround _favoriteEnvironnment;
          AnimalTexture _texture;
-        List<Box> BoxList = new List<Box>();
+        internal List<Box> BoxList = new List<Box>();
         List<Box> WalkableBoxes = new List<Box>();
         int _viewDistance;
         int _speed;
@@ -27,7 +27,7 @@ namespace LiveIT2._1
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
-        bool _walking, _isInWater, _isDrinking;
+        internal bool _walking, _isInWater, _isDrinking, _isEating;
         private  Point _targetLocation;
         
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
@@ -92,7 +92,7 @@ namespace LiveIT2._1
             get { return _hunger; }
             internal set
             {
-                _hunger += value;
+                _hunger = value;
                 if( _hunger <= 0 )
                 {
                     _hunger = 0;
@@ -400,7 +400,7 @@ namespace LiveIT2._1
 
                 g.DrawString( "Health " + this.Health.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point(this.RelativePosition.X,this.RelativePosition.Y - 20) );
                 g.DrawString( "Hunger " + this.Hunger.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X, this.RelativePosition.Y - 40 ) );
-                g.DrawString( "Thirst " + this.Thirst.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X + 100, this.RelativePosition.Y - 40 ) );
+                g.DrawString( "Thirst " + this.Thirst.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X + 200, this.RelativePosition.Y - 40 ) );
 
                 g.DrawString("Target pos : " + this.TargetLocation.X.ToString() + "\n" + this.TargetLocation.Y.ToString(), new Font("Arial", 20f), Brushes.Black, this.RelativePosition);
                 _map.ViewPort.DrawRectangleInViewPort(g, new Rectangle(this.TargetLocation, this.Area.Size), _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
