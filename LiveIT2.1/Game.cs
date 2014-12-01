@@ -378,5 +378,10 @@ namespace LiveIT2._1
             }
             
         }
+
+        private void eagleToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedAnimal = AnimalTexture.Eagle;
+        }
     }
 }

@@ -52,6 +52,7 @@
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
+            this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -231,7 +232,8 @@
             this.rabbitToolStripMenuItem,
             this.lionToolStripMenuItem,
             this.elephantToolStripMenuItem,
-            this.cowToolStripMenuItem});
+            this.cowToolStripMenuItem,
+            this.eagleToolStripMenuItem});
             this.animalsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.animalsToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.animalsToolStripMenuItem.Name = "animalsToolStripMenuItem";
@@ -331,6 +333,13 @@
             this._exitButton.UseVisualStyleBackColor = false;
             this._exitButton.Click += new System.EventHandler(this._exitButton_Click);
             // 
+            // eagleToolStripMenuItem
+            // 
+            this.eagleToolStripMenuItem.Name = "eagleToolStripMenuItem";
+            this.eagleToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.eagleToolStripMenuItem.Text = "Eagle";
+            this.eagleToolStripMenuItem.Click += new System.EventHandler(this.eagleToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -398,6 +407,7 @@
         private System.Windows.Forms.Button _buttonFollowAnimal;
         private System.Windows.Forms.Button _exitButton;
         private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eagleToolStripMenuItem;
 
     }
 }
