@@ -43,8 +43,8 @@ namespace LiveIT2._1
         {
 
             Random t = new Random();
-            if( t.Next( 0, 1000 ) == 30 ) _map.IsRaining = true;
-            if( t.Next( 0, 1000 ) == 250 && _map.IsRaining )
+            if( t.Next( 0, 100 ) == 30 ) _map.IsRaining = true;
+            if( t.Next( 0, 100 ) == 25 && _map.IsRaining )
             {
                 _map.IsRaining = false;
             }
@@ -101,8 +101,9 @@ namespace LiveIT2._1
                 {
                     Rain();
                     this._isRaining = true;
+                    
                 }
-                
+                g.DrawImage(_texture.GetThunder(), _screen);
                 g.DrawImage( _texture.GetRain(), _screen );
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
@@ -113,10 +114,12 @@ namespace LiveIT2._1
         {
             System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
             t.Interval = 10000;
+           
             t.Tick += new EventHandler( T_rain_tick );
             t.Start();
             
         }
+       
 
         private void T_rain_tick( object sender, EventArgs e )
         {
@@ -145,6 +148,7 @@ namespace LiveIT2._1
             }
             
         }
+
 
         public void CreateAnimal(AnimalTexture animalType)
         {

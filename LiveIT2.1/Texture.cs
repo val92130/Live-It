@@ -15,16 +15,18 @@ namespace LiveIT2._1
         Bitmap _textureGrass,_textureGrass2, _textureDesert, _textureForest, _textureSnow, _textureMountain,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
-            _textureGiraffe,_textureLion, _textureRain;
+            _textureGiraffe,_textureLion, _textureRain,_textureThunder;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
-        Timer _animate, _rainTimer;
+        Timer _animate, _rainTimer, _thunderTimer;
         List <Bitmap> _waterList = new List<Bitmap>();
         List<Bitmap> _rainList = new List<Bitmap>();
+        List<Bitmap> _thunderList = new List<Bitmap>();
         int count = 0;
         int count2 = 0;
+        int count3 = 0;
         public Texture()
         {
-
+            _thunderTimer = new Timer();
             _animate = new Timer();
             _animate.Start();
             _animate.Interval = 10;
@@ -33,6 +35,11 @@ namespace LiveIT2._1
             _rainTimer.Start();
             _rainTimer.Interval = 10;
             _rainTimer.Tick += new EventHandler( T_rain_tick );
+
+            _thunderTimer.Start();
+            _thunderTimer.Interval = 10;
+            _thunderTimer.Tick += new EventHandler(T_Thunder_tick);
+
             _animate.Tick += new EventHandler( T_animateTick );
             _textureGrass = new Bitmap( @"..\..\..\assets\Grass.jpg");
             _textureGrass2 = new Bitmap(@"..\..\..\assets\Grass2.jpg");
@@ -86,8 +93,12 @@ namespace LiveIT2._1
 
             _textureWaterAnimated = new Bitmap( @"..\..\..\assets\Water\Water.jpg" );
 
+            _textureThunder = new Bitmap(@"..\..\..\assets\Thunder\0.gif");
+            _textureThunder.MakeTransparent(Color.Black);
+
             AddTexturesFromFolderToList( @"..\..\..\assets\Animated\", _waterList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Rain\", _rainList );
+            AddTexturesFromFolderToList(@"..\..\..\assets\Thunder\", _thunderList);
         }
 
         private void T_rain_tick( object sender, EventArgs e )
@@ -102,6 +113,20 @@ namespace LiveIT2._1
             else
             {
                 count2 = 0;
+            }
+        }
+        private void T_Thunder_tick(object sender, EventArgs e)
+        {
+            if (count3 + 1 <= _thunderList.Count)
+            {
+                _thunderList[count3].MakeTransparent(Color.FromArgb(1, 2, 3));
+                _textureThunder = _thunderList[count3];
+
+                count3++;
+            }
+            else
+            {
+                count3 = 0;
             }
         }
 
@@ -206,6 +231,10 @@ namespace LiveIT2._1
         public Bitmap GetRain()
         {
             return _textureRain;
+        }
+        public Bitmap GetThunder()
+        {
+            return _textureThunder;
         }
     }
 }
