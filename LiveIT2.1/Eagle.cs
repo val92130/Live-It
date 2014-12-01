@@ -17,7 +17,11 @@ namespace LiveIT2._1
         {
             Position = starPosition;
             Texture = AnimalTexture.Eagle;
-            Size = new Size( 300, 300 );
+            Size = new Size(250, 250);
+            FavoriteEnvironnment = BoxGround.Forest;
+            Speed = 15000;
+            DefaultSpeed = Speed;
+            ViewDistance = 400;
             TargetAnimals = new List<AnimalTexture>() { AnimalTexture.Rabbit, AnimalTexture.Cow, AnimalTexture.Gazelle };
         }
         public override void Behavior()

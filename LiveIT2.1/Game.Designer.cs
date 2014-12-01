@@ -47,12 +47,13 @@
             this.lionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.elephantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
-            this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -162,11 +163,11 @@
             this._fpsTextBox.Enabled = false;
             this._fpsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this._fpsTextBox.ForeColor = System.Drawing.Color.Black;
-            this._fpsTextBox.Location = new System.Drawing.Point(833, 34);
+            this._fpsTextBox.Location = new System.Drawing.Point(833, 37);
             this._fpsTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._fpsTextBox.Multiline = true;
             this._fpsTextBox.Name = "_fpsTextBox";
-            this._fpsTextBox.Size = new System.Drawing.Size(187, 685);
+            this._fpsTextBox.Size = new System.Drawing.Size(187, 682);
             this._fpsTextBox.TabIndex = 9;
             // 
             // button1
@@ -212,7 +213,7 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(121)))), ((int)(((byte)(53)))));
-            this.menuStrip1.Font = new System.Drawing.Font("Forte", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.animalsToolStripMenuItem,
             this.saveToolStripMenuItem,
@@ -220,7 +221,7 @@
             this.muteToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1020, 34);
+            this.menuStrip1.Size = new System.Drawing.Size(1020, 37);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -233,60 +234,68 @@
             this.lionToolStripMenuItem,
             this.elephantToolStripMenuItem,
             this.cowToolStripMenuItem,
-            this.eagleToolStripMenuItem});
+            this.eagleToolStripMenuItem,
+            this.gazelleToolStripMenuItem});
             this.animalsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.animalsToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.animalsToolStripMenuItem.Name = "animalsToolStripMenuItem";
-            this.animalsToolStripMenuItem.Size = new System.Drawing.Size(113, 30);
+            this.animalsToolStripMenuItem.Size = new System.Drawing.Size(110, 33);
             this.animalsToolStripMenuItem.Text = "Animals";
             // 
             // catToolStripMenuItem
             // 
             this.catToolStripMenuItem.Name = "catToolStripMenuItem";
-            this.catToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.catToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.catToolStripMenuItem.Text = "Cat";
             this.catToolStripMenuItem.Click += new System.EventHandler(this.catToolStripMenuItem_Click);
             // 
             // dogToolStripMenuItem
             // 
             this.dogToolStripMenuItem.Name = "dogToolStripMenuItem";
-            this.dogToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.dogToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.dogToolStripMenuItem.Text = "Dog";
             this.dogToolStripMenuItem.Click += new System.EventHandler(this.dogToolStripMenuItem_Click);
             // 
             // rabbitToolStripMenuItem
             // 
             this.rabbitToolStripMenuItem.Name = "rabbitToolStripMenuItem";
-            this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.rabbitToolStripMenuItem.Text = "Rabbit";
             this.rabbitToolStripMenuItem.Click += new System.EventHandler(this.rabbitToolStripMenuItem_Click);
             // 
             // lionToolStripMenuItem
             // 
             this.lionToolStripMenuItem.Name = "lionToolStripMenuItem";
-            this.lionToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.lionToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.lionToolStripMenuItem.Text = "Lion";
             this.lionToolStripMenuItem.Click += new System.EventHandler(this.lionToolStripMenuItem_Click);
             // 
             // elephantToolStripMenuItem
             // 
             this.elephantToolStripMenuItem.Name = "elephantToolStripMenuItem";
-            this.elephantToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.elephantToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.elephantToolStripMenuItem.Text = "Elephant";
             this.elephantToolStripMenuItem.Click += new System.EventHandler(this.elephantToolStripMenuItem_Click);
             // 
             // cowToolStripMenuItem
             // 
             this.cowToolStripMenuItem.Name = "cowToolStripMenuItem";
-            this.cowToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.cowToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.cowToolStripMenuItem.Text = "Cow";
             this.cowToolStripMenuItem.Click += new System.EventHandler(this.cowToolStripMenuItem_Click);
+            // 
+            // eagleToolStripMenuItem
+            // 
+            this.eagleToolStripMenuItem.Name = "eagleToolStripMenuItem";
+            this.eagleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.eagleToolStripMenuItem.Text = "Eagle";
+            this.eagleToolStripMenuItem.Click += new System.EventHandler(this.eagleToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(110)))), ((int)(((byte)(123)))));
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(69, 30);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(79, 33);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -294,7 +303,7 @@
             // 
             this.loadToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(110)))), ((int)(((byte)(123)))));
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(73, 30);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(79, 33);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -302,7 +311,7 @@
             // 
             this.muteToolStripMenuItem.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
-            this.muteToolStripMenuItem.Size = new System.Drawing.Size(81, 30);
+            this.muteToolStripMenuItem.Size = new System.Drawing.Size(78, 33);
             this.muteToolStripMenuItem.Text = "Mute";
             this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
             // 
@@ -333,16 +342,16 @@
             this._exitButton.UseVisualStyleBackColor = false;
             this._exitButton.Click += new System.EventHandler(this._exitButton_Click);
             // 
-            // eagleToolStripMenuItem
+            // gazelleToolStripMenuItem
             // 
-            this.eagleToolStripMenuItem.Name = "eagleToolStripMenuItem";
-            this.eagleToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
-            this.eagleToolStripMenuItem.Text = "Eagle";
-            this.eagleToolStripMenuItem.Click += new System.EventHandler(this.eagleToolStripMenuItem_Click);
+            this.gazelleToolStripMenuItem.Name = "gazelleToolStripMenuItem";
+            this.gazelleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.gazelleToolStripMenuItem.Text = "Gazelle";
+            this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
@@ -361,7 +370,7 @@
             this.Controls.Add(this._waterButton);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -408,6 +417,7 @@
         private System.Windows.Forms.Button _exitButton;
         private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eagleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gazelleToolStripMenuItem;
 
     }
 }

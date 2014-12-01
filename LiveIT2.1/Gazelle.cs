@@ -15,7 +15,7 @@ namespace LiveIT2._1
         {
             Texture = AnimalTexture.Gazelle;
             Position = startPosition;
-            Size = new Size(100, 100);
+            Size = new Size(180, 180);
             Speed = 20000;
             DefaultSpeed = Speed;
             ViewDistance = 400;

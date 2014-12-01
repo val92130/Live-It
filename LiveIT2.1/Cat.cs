@@ -26,17 +26,20 @@ namespace LiveIT2._1
         public override void Behavior()
         {
             base.Behavior();
-            if (this.AnimalsAround.Count != 0)
+            if (this.Hunger > 50)
             {
-                for (int i = 0; i < AnimalsAround.Count(); i++)
+                if (this.AnimalsAround.Count != 0)
                 {
-                    if (TargetAnimals.Contains(AnimalsAround[i].Texture))
+                    for (int i = 0; i < AnimalsAround.Count(); i++)
                     {
-                        ChangePosition(AnimalsAround[i].Position);
-                        this.AnimalsAround[i].Speed = (int)(this.Speed * 2.5); 
-                        if (this.Area.IntersectsWith(AnimalsAround[i].Area))
+                        if (TargetAnimals.Contains(AnimalsAround[i].Texture))
                         {
-                            AnimalsAround[i].Die();
+                            ChangePosition(AnimalsAround[i].Position);
+                            this.AnimalsAround[i].Speed = (int) (this.Speed*2.5);
+                            if (this.Area.IntersectsWith(AnimalsAround[i].Area))
+                            {
+                                AnimalsAround[i].Die();
+                            }
                         }
                     }
                 }

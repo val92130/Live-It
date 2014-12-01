@@ -20,6 +20,15 @@ namespace LiveIT2._1
             DefaultSpeed = Speed;
             ViewDistance = 400;
         }
+        public override void Behavior()
+        {
+            base.Behavior();
+            if (this.Hunger > 50)
+            {
+                
+            }
+
+        }
        
     }
 }

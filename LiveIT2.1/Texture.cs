@@ -53,7 +53,7 @@ namespace LiveIT2._1
             _textureEagle.MakeTransparent(Color.White);
             _textureEagle.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _textureGazelle = new Bitmap( @"..\..\..\assets\Animal\Lion.png" );
+            _textureGazelle = new Bitmap( @"..\..\..\assets\Animal\Gazelle.png" );
             _textureGazelle.MakeTransparent(Color.White);
             _textureGazelle.RotateFlip(RotateFlipType.Rotate180FlipY);
 

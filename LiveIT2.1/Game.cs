@@ -383,5 +383,10 @@ namespace LiveIT2._1
         {
             _selectedAnimal = AnimalTexture.Eagle;
         }
+
+        private void gazelleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _selectedAnimal = AnimalTexture.Gazelle;
+        }
     }
 }
