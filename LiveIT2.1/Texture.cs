@@ -61,6 +61,9 @@ namespace LiveIT2._1
             _textureDog.MakeTransparent(Color.White);
             _textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
 
+            _textureGiraffe = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+ 
+
             _brushGrass = new SolidBrush( Color.FromArgb( 59, 138, 33 ) );
             _brushDirt = new SolidBrush( Color.FromArgb( 169, 144, 104 ) );
             _brushWater = new SolidBrush( Color.FromArgb( 64, 85, 213 ) );
