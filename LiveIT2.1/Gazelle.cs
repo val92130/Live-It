@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 namespace LiveIT2._1
 {
     [Serializable]
-    public class Rabbit : Animal
+    public class Gazelle : Animal
     {
-        public Rabbit( Map map, Point startPosition )
-            : base( map, startPosition )
+        public Gazelle(Map map, Point startPosition)
+            : base(map, startPosition)
         {
-            Texture = AnimalTexture.Rabbit;
+            Texture = AnimalTexture.Gazelle;
             Position = startPosition;
-            Size = new Size( 100, 100 );
+            Size = new Size(100, 100);
             Speed = 20000;
             DefaultSpeed = Speed;
             ViewDistance = 400;
         }
-       
+
     }
 }

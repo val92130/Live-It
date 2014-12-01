@@ -14,9 +14,8 @@ namespace LiveIT2._1
     {
         Bitmap _textureGrass, _textureDesert, _textureForest, _textureSnow,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
-            _textureCow, _textureCat, _textureDog, _textureEagle,_textureFinch,_textureFlamingo,
-            _textureGiraffe, _textureLeopard,_textureLion,_textureLizards, _textureMonkey,
-            _textureRaccons, _textureTiger,_textureZebra;
+            _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
+            _textureGiraffe,_textureLion;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate;
         List <Bitmap> _waterList = new List<Bitmap>();
@@ -36,30 +35,38 @@ namespace LiveIT2._1
             _textureDirt = new Bitmap( @"..\..\..\assets\Dirt.jpg" );
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
-            _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+            _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
             _textureElephant.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureCow = new Bitmap( @"..\..\..\assets\Animal\Cow.png" );
+            _textureCow.MakeTransparent(Color.White);
+            _textureCow.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureCat = new Bitmap( @"..\..\..\assets\Animal\Cat.png" );
             _textureCat.MakeTransparent(Color.White);
             _textureCat.RotateFlip(RotateFlipType.Rotate180FlipY);
+
+            _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
+            _textureLion.MakeTransparent(Color.White);
+            _textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
+
+            _textureEagle = new Bitmap(@"..\..\..\assets\Animal\Eagle.png");
+            _textureEagle.MakeTransparent(Color.White);
+            _textureEagle.RotateFlip(RotateFlipType.Rotate180FlipY);
+
+            _textureGazelle = new Bitmap(@"..\..\..\assets\Animal\Gazelle.png");
+            _textureGazelle.MakeTransparent(Color.White);
+            _textureGazelle.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureDog = new Bitmap( @"..\..\..\assets\Animal\Dog.png" );
             _textureDog.MakeTransparent(Color.White);
             _textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureEagle = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureFinch = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureFlamingo = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+
             _textureGiraffe = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
             _textureLion = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureLizards = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureMonkey = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureLeopard = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureRaccons = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureTiger = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
-            _textureZebra = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+          
 
             _brushGrass = new SolidBrush( Color.FromArgb( 59, 138, 33 ) );
             _brushDirt = new SolidBrush( Color.FromArgb( 169, 144, 104 ) );
@@ -153,6 +160,10 @@ namespace LiveIT2._1
                     return _textureCow;
                 case "Dog":
                     return _textureDog;
+                case "Eagle":
+                    return _textureEagle;
+                case "Gazelle":
+                    return _textureGazelle;
                 default:
                     return _textureGrass;
             }

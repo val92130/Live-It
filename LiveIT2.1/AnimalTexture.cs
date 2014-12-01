@@ -15,7 +15,9 @@ namespace LiveIT2._1
        Cat = 3,
        Dog = 4,
        Elephant =5,
-       Lion = 6
+       Lion = 6,
+        Eagle = 7,
+        Gazelle = 8
     }  
 } 
 

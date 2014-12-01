@@ -65,6 +65,7 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gazelle.cs" />
     <Compile Include="LoopStream.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>

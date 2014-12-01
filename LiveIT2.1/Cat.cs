@@ -10,6 +10,7 @@ namespace LiveIT2._1
     [Serializable]
     public class Cat : Animal
     {
+        List<AnimalTexture> TargetAnimals;
         public Cat( Map map, Point starPosition )
             :base(map, starPosition)
         {
@@ -19,6 +20,7 @@ namespace LiveIT2._1
             Speed = 15000;
             DefaultSpeed = Speed;
             ViewDistance = 300;
+            TargetAnimals = new List<AnimalTexture>() { AnimalTexture.Rabbit};
         }
 
         public override void Behavior()
@@ -28,7 +30,7 @@ namespace LiveIT2._1
             {
                 for (int i = 0; i < AnimalsAround.Count(); i++)
                 {
-                    if (AnimalsAround[i].Texture == AnimalTexture.Rabbit)
+                    if (TargetAnimals.Contains(AnimalsAround[i].Texture))
                     {
                         ChangePosition(AnimalsAround[i].Position);
                         this.AnimalsAround[i].Speed = (int)(this.Speed * 2.5); 
