@@ -21,7 +21,7 @@ namespace LiveIT2._1
             Speed = 20000;
             DefaultSpeed = Speed;
             ViewDistance = 400;
-            Hunger = 45;
+            
         }
 
         public override void Behavior()
@@ -36,8 +36,8 @@ namespace LiveIT2._1
                     {
                         this.Speed = 0;
                         _isEating = true;
-                        Eat();                       
-                        BoxList[i].Ground = BoxGround.Dirt;
+                        Eat();
+                        BoxList[i].Ground = BoxGround.Grass2;
                     }
                     
                 }

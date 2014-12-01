@@ -17,6 +17,8 @@ namespace LiveIT2._1
         Water = 4,
         Forest = 5,
         Dirt = 6,
+        Grass2 = 7,
+        Mountain = 8,
         WaterTransitionLeft
     }  
 }
