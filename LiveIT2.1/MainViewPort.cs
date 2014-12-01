@@ -21,7 +21,7 @@ namespace LiveIT2._1
         Map _map;
         List<Box> _selectedBoxes;
         Texture _texture;
-        bool _changeTexture, _fillTexture,_putAnimal, _followAnimal;
+        bool _changeTexture, _fillTexture,_putAnimal, _followAnimal, _isRaining;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -34,16 +34,25 @@ namespace LiveIT2._1
             _miniMapViewPort = new Rectangle( 0, 0, _map.MapSize, _map.MapSize );
             _animalSelectorCursor = new Point( 0, 0 );
             _map.ViewPort = this;
+            _isRaining = false;
 
         }
 
 
         public void Draw( Graphics g )
         {
+
+            Random t = new Random();
+            if( t.Next( 0, 1000 ) == 30 ) _map.IsRaining = true;
+            if( t.Next( 0, 1000 ) == 250 && _map.IsRaining )
+            {
+                _map.IsRaining = false;
+            }
             _boxList = _map.GetOverlappedBoxes(_viewPort);
             _boxListMini = _map.GetOverlappedBoxes( _miniMapViewPort );
             _mouseRect.X = Cursor.Position.X - (_mouseRect.Width / 2);
             _mouseRect.Y = Cursor.Position.Y - (_mouseRect.Height / 2);
+            
 
             for( int i = 0; i < _boxList.Count; i++ )
             {
@@ -85,8 +94,56 @@ namespace LiveIT2._1
                 }
             }
 
+            if( _map.IsRaining )
+            {
+
+                if( this._isRaining == false )
+                {
+                    Rain();
+                    this._isRaining = true;
+                }
+                
+                g.DrawImage( _texture.GetRain(), _screen );
+            }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
+        }
+
+        private void Rain()
+        {
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Interval = 10000;
+            t.Tick += new EventHandler( T_rain_tick );
+            t.Start();
+            
+        }
+
+        private void T_rain_tick( object sender, EventArgs e )
+        {
+            if( _map.IsRaining )
+            {
+                Random r = new Random();
+                Point target = new Point( r.Next( 0, _map.MapSize ), r.Next( 0, _map.MapSize ) );
+                Rectangle targetRect = new Rectangle( target, new Size( r.Next( 0, 800 ), r.Next( 0, 800 ) ) );             
+                int top = targetRect.Top / _map.BoxSize;
+                int left = targetRect.Left / _map.BoxSize;
+                int bottom = (targetRect.Bottom - 1) / _map.BoxSize;
+                int right = (targetRect.Right - 1) / _map.BoxSize;
+                for( int i = top; i <= bottom; ++i )
+                {
+                    for( int j = left; j <= right; ++j )
+                    {
+                        if( _map[i, j] != null )
+                        {
+                            Box b = _map[j, i];
+                            b.Ground = BoxGround.Water;
+                            b.DrawTransitionTextures();
+                        }
+
+                    }
+                }
+            }
+            
         }
 
         public void CreateAnimal(AnimalTexture animalType)

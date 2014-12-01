@@ -13,9 +13,11 @@ namespace LiveIT2._1
     {
         private WaveOut waveOutBackGround;
         private WaveOut waveOutWater;
-        bool _isStopped, _isWater;
+        private WaveOut waveOutRain;
+        bool _isStopped, _isWater, _isRaining;
         List<Box> _boxes;
         List<BoxGround> _boxGrounds;
+        Map _map;
         public SoundEnvironment()
         {
             WaveFileReader readerBackGround = new WaveFileReader("../../../sounds/background.wav");
@@ -31,12 +33,23 @@ namespace LiveIT2._1
             waveOutWater.Init(loopWater);
             waveOutWater.Volume = 0.2f;
 
+            WaveFileReader readerRain = new WaveFileReader( "../../../sounds/rain.wav" );
+            LoopStream loopRain = new LoopStream( readerRain );
+            waveOutRain = new WaveOut();
+            waveOutRain.Init( loopRain );
+            waveOutRain.Volume = 1f;
+
             _boxGrounds = new List<BoxGround>();
         }
 
         public void LoadBoxes(List<Box> Boxes)
         {
             _boxes = Boxes;
+        }
+
+        public void LoadMap( Map map )
+        {
+            _map = map;
         }
 
         public void PlayAllSounds()
@@ -61,6 +74,23 @@ namespace LiveIT2._1
             if (_isWater && waveOutWater.PlaybackState == PlaybackState.Stopped && _isStopped == false)
             {
                 waveOutWater.Play();
+            }
+
+            if( _map.IsRaining )
+            {
+                _isRaining = true;
+            }
+            else
+            {
+                _isRaining = false;
+                if( waveOutRain.PlaybackState == PlaybackState.Playing )
+                {
+                    waveOutRain.Stop();
+                }
+            }
+            if( _isRaining && waveOutRain.PlaybackState == PlaybackState.Stopped && _isStopped == false )
+            {
+                waveOutRain.Play();
             }
         }
 

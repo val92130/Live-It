@@ -56,7 +56,7 @@ namespace LiveIT2._1
         public void Eat()
         {
             t  = new System.Windows.Forms.Timer();
-            t.Interval = 2000;
+            t.Interval = 5000;
             t.Start();
             t.Tick += new EventHandler( T_eat_tick );
         }
@@ -65,7 +65,7 @@ namespace LiveIT2._1
         {
             if( _isEating )
             {
-                this.Hunger -= 2;
+                this.Hunger -= 20;
             }           
         }
         

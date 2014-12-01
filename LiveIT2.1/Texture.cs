@@ -15,17 +15,24 @@ namespace LiveIT2._1
         Bitmap _textureGrass, _textureDesert, _textureForest, _textureSnow,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
-            _textureGiraffe,_textureLion;
+            _textureGiraffe,_textureLion, _textureRain;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
-        Timer _animate;
+        Timer _animate, _rainTimer;
         List <Bitmap> _waterList = new List<Bitmap>();
+        List<Bitmap> _rainList = new List<Bitmap>();
         int count = 0;
+        int count2 = 0;
         public Texture()
         {
 
             _animate = new Timer();
             _animate.Start();
             _animate.Interval = 10;
+            _rainTimer = new Timer();
+
+            _rainTimer.Start();
+            _rainTimer.Interval = 10;
+            _rainTimer.Tick += new EventHandler( T_rain_tick );
             _animate.Tick += new EventHandler( T_animateTick );
             _textureGrass = new Bitmap( @"..\..\..\assets\Grass.jpg");
 
@@ -33,6 +40,8 @@ namespace LiveIT2._1
             _textureSnow = new Bitmap( @"..\..\..\assets\Snow.jpg" );
             _textureDesert = new Bitmap( @"..\..\..\assets\Desert.jpg" );
             _textureDirt = new Bitmap( @"..\..\..\assets\Dirt.jpg" );
+
+           
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
@@ -71,9 +80,28 @@ namespace LiveIT2._1
             _brushForest = new SolidBrush( Color.FromArgb( 110, 121, 53 ) );
             _brushSnow = new SolidBrush( Color.FromArgb( 207, 206, 212 ) );
 
+           _textureRain = new Bitmap( @"..\..\..\assets\Rain\0.gif" );
+           _textureRain.MakeTransparent( Color.Black );
+
             _textureWaterAnimated = new Bitmap( @"..\..\..\assets\Water\Water.jpg" );
 
             AddTexturesFromFolderToList( @"..\..\..\assets\Animated\", _waterList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Rain\", _rainList );
+        }
+
+        private void T_rain_tick( object sender, EventArgs e )
+        {
+            if( count2 + 1 <= _rainList.Count )
+            {
+                _rainList[count2].MakeTransparent( Color.Black );
+                _textureRain = _rainList[count2];
+
+                count2++;
+            }
+            else
+            {
+                count2 = 0;
+            }
         }
 
         private void T_animateTick( object sender, EventArgs e )
@@ -87,6 +115,7 @@ namespace LiveIT2._1
             {
                 count = 0;
             }
+            
         }
 
         public void AddTexturesFromFolderToList( string Directory, List<Bitmap> list )
@@ -163,6 +192,11 @@ namespace LiveIT2._1
                 default:
                     return _textureGrass;
             }
+        }
+
+        public Bitmap GetRain()
+        {
+            return _textureRain;
         }
     }
 }

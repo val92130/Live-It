@@ -21,7 +21,7 @@ namespace LiveIT2._1
         List<Animal> _animals = new List<Animal>();
         [NonSerializedAttribute]
         MainViewPort _viewPort;
-        bool _showDebug;
+        bool _showDebug, _isRaining;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -98,26 +98,11 @@ namespace LiveIT2._1
             }
         }
 
-        //public List<Box> GetOverlappedBoxes(Rectangle viewPort)
-        //{
-        //    List<Box> boxList = new List<Box>();
-        //    for( int i = 0; i < _boxes.Length; i++ )
-        //    {
-        //        Box b = _boxes[i];
-
-        //        Rectangle rIntersect =  b.Area;
-        //        rIntersect.Intersect( viewPort );
-        //        if( rIntersect.IsEmpty ) continue;
-        //        rIntersect.Offset( -b.Area.Left, -b.Area.Top );
-        //        b.Source = b.Area;
-
-        //        if( _boxes[i].Area.IntersectsWith( viewPort ) )
-        //        {
-        //            boxList.Add( b );
-        //        }
-        //    }
-        //    return boxList;
-        //}
+        public bool IsRaining
+        {
+            get { return _isRaining; }
+            set { _isRaining = value; }
+        }
 
         public List<Box> GetOverlappedBoxes( Rectangle r )
         {

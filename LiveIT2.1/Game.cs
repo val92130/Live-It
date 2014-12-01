@@ -92,7 +92,7 @@ namespace LiveIT2._1
             fpst.Start();
             t.Start();
             _soundEnvironment = new SoundEnvironment();
-
+            _soundEnvironment.LoadMap( _map );
         }
 
         public void LoadMap(Map map)
@@ -167,7 +167,8 @@ namespace LiveIT2._1
         {
             Rectangle _rMouse = new Rectangle( new Point( Cursor.Position.X, Cursor.Position.Y ), _selectionCursorWidth );
             //_screenGraphic.Clear( Color.FromArgb( 255, Color.Black ) );
-            _viewPort.Draw( _screenGraphic );            
+            _viewPort.Draw( _screenGraphic ); 
+            
         }
 
         private void Form1_KeyDown( object sender, KeyEventArgs e )
