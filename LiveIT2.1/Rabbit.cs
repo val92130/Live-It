@@ -68,15 +68,7 @@ namespace LiveIT2._1
                 this.Hunger -= 2;
             }           
         }
-        public override void Behavior()
-        {
-            base.Behavior();
-            if (this.Hunger > 50)
-            {
-                
-            }
-
-        }
+        
        
     }
 }
