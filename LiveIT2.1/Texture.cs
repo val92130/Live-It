@@ -12,7 +12,7 @@ namespace LiveIT2._1
     [Serializable]
     public class Texture
     {
-        Bitmap _textureGrass, _textureDesert, _textureForest, _textureSnow,
+        Bitmap _textureGrass,_textureGrass2, _textureDesert, _textureForest, _textureSnow,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
             _textureGiraffe,_textureLion;
@@ -28,7 +28,7 @@ namespace LiveIT2._1
             _animate.Interval = 10;
             _animate.Tick += new EventHandler( T_animateTick );
             _textureGrass = new Bitmap( @"..\..\..\assets\Grass.jpg");
-
+            _textureGrass2 = new Bitmap(@"..\..\..\assets\Grass2.jpg");
             _textureForest = new Bitmap( @"..\..\..\assets\Forest.jpg" );
             _textureSnow = new Bitmap( @"..\..\..\assets\Snow.jpg" );
             _textureDesert = new Bitmap( @"..\..\..\assets\Desert.jpg" );
@@ -105,6 +105,8 @@ namespace LiveIT2._1
             {
                 case BoxGround.Grass:
                     return _textureGrass;
+                case BoxGround.Grass2:
+                    return _textureGrass2;
                 case BoxGround.Water:
                     return _textureWaterAnimated;
                 case BoxGround.Forest:
@@ -125,6 +127,8 @@ namespace LiveIT2._1
             switch( box.Ground )
             {
                 case BoxGround.Grass:
+                    return _brushGrass;
+                case BoxGround.Grass2:
                     return _brushGrass;
                 case BoxGround.Water:
                     return _brushWater;
