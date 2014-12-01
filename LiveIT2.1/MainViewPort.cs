@@ -136,7 +136,10 @@ namespace LiveIT2._1
                         if( _map[i, j] != null )
                         {
                             Box b = _map[j, i];
-                            b.Ground = BoxGround.Water;
+                            if( b.Ground == BoxGround.Grass && b.Ground == BoxGround.Grass2 )
+                            {
+                                b.Ground = BoxGround.Water;
+                            }
                             b.DrawTransitionTextures();
                         }
 
