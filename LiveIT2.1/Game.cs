@@ -388,5 +388,10 @@ namespace LiveIT2._1
         {
             _selectedAnimal = AnimalTexture.Gazelle;
         }
+
+        private void buttonMountain_Click(object sender, EventArgs e)
+        {
+            _selectedTexture = BoxGround.Mountain;
+        }
     }
 }

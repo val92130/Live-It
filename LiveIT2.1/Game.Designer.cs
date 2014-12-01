@@ -54,6 +54,7 @@
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
             this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonMountain = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -349,12 +350,27 @@
             this.gazelleToolStripMenuItem.Text = "Gazelle";
             this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
             // 
+            // buttonMountain
+            // 
+            this.buttonMountain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonMountain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMountain.ForeColor = System.Drawing.Color.Transparent;
+            this.buttonMountain.Location = new System.Drawing.Point(12, 479);
+            this.buttonMountain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonMountain.Name = "buttonMountain";
+            this.buttonMountain.Size = new System.Drawing.Size(111, 30);
+            this.buttonMountain.TabIndex = 19;
+            this.buttonMountain.Text = "Mountain";
+            this.buttonMountain.UseVisualStyleBackColor = false;
+            this.buttonMountain.Click += new System.EventHandler(this.buttonMountain_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this.buttonMountain);
             this.Controls.Add(this._exitButton);
             this.Controls.Add(this._buttonFollowAnimal);
             this.Controls.Add(this.AnimalButton);
@@ -418,6 +434,7 @@
         private System.Windows.Forms.ToolStripMenuItem muteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eagleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gazelleToolStripMenuItem;
+        private System.Windows.Forms.Button buttonMountain;
 
     }
 }

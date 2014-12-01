@@ -12,7 +12,7 @@ namespace LiveIT2._1
     [Serializable]
     public class Texture
     {
-        Bitmap _textureGrass,_textureGrass2, _textureDesert, _textureForest, _textureSnow,
+        Bitmap _textureGrass,_textureGrass2, _textureDesert, _textureForest, _textureSnow, _textureMountain,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
             _textureGiraffe,_textureLion;
@@ -33,6 +33,7 @@ namespace LiveIT2._1
             _textureSnow = new Bitmap( @"..\..\..\assets\Snow.jpg" );
             _textureDesert = new Bitmap( @"..\..\..\assets\Desert.jpg" );
             _textureDirt = new Bitmap( @"..\..\..\assets\Dirt.jpg" );
+            _textureMountain = new Bitmap(@"..\..\..\assets\Mountain.jpg");
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
@@ -117,6 +118,8 @@ namespace LiveIT2._1
                     return _textureDirt;
                 case BoxGround.Desert:
                     return _textureDesert;
+                case BoxGround.Mountain:
+                    return _textureMountain;
                 default:
                     return _textureGrass;
             }
@@ -140,6 +143,8 @@ namespace LiveIT2._1
                     return _brushDirt;
                 case BoxGround.Desert:
                     return _brushDesert;
+                case BoxGround.Mountain:
+                    return _brushDirt;
                 default:
                     return _brushGrass;
             }

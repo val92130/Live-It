@@ -21,7 +21,7 @@ namespace LiveIT2._1
             Speed = 20000;
             DefaultSpeed = Speed;
             ViewDistance = 400;
-            Hunger = 45;
+            
         }
 
         public override void Behavior()
