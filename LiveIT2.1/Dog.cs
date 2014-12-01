@@ -10,7 +10,7 @@ namespace LiveIT2._1
     [Serializable]
     public class Dog : Animal
     {
-
+        List<AnimalTexture> TargetAnimals;
         public Dog( Map map, Point starPosition )
             : base( map, starPosition )
         {
@@ -20,6 +20,7 @@ namespace LiveIT2._1
             Speed = 15000;
             DefaultSpeed = Speed;
             ViewDistance = 400;
+            TargetAnimals = new List<AnimalTexture>() { AnimalTexture.Rabbit, AnimalTexture.Cow };
         }
 
         public override void Behavior()
@@ -31,7 +32,7 @@ namespace LiveIT2._1
                 {
                     for( int i = 0; i < AnimalsAround.Count(); i++ )
                     {
-                        if( AnimalsAround[i].Texture == AnimalTexture.Rabbit || AnimalsAround[i].Texture == AnimalTexture.Cat )
+                        if( TargetAnimals.Contains(AnimalsAround[i].Texture))
                         {
                             ChangePosition( AnimalsAround[i].Position );
                             if( this.Area.IntersectsWith( AnimalsAround[i].Area ) )
