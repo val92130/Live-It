@@ -37,10 +37,10 @@ namespace LiveIT2._1
             _animalSelectorCursor = new Point( 0, 0 );
             _map.ViewPort = this;
             _isRaining = false;
-            _screenTop = new Rectangle(0, _screen.Top + 50, _screen.Width,150);
-            _screenBottom = new Rectangle( 0, _screen.Bottom - 100, _screen.Width, 150 );
-            _screenLeft = new Rectangle( 0, 0, 10, _screen.Height );
-            _screenRight = new Rectangle( _screen.Right - 10, 0, 10, _screen.Height );
+            _screenTop = new Rectangle(_screen.Width/2 - 400 , _screen.Top + 10, 800, 150);
+            _screenBottom = new Rectangle(_screen.Width / 2 - 400, _screen.Bottom - 100, 800, 150);
+            _screenLeft = new Rectangle(0, _screen.Height / 2 - 400, 10, 800);
+            _screenRight = new Rectangle(_screen.Right - 10, _screen.Height / 2 - 400, 10, 800);
 
         }
 
@@ -224,7 +224,7 @@ namespace LiveIT2._1
 
         public void MoveWithMouse()
         {
-            Rectangle cursorPos = new Rectangle( Cursor.Position, new Size( 50, 50 ) );
+            Rectangle cursorPos = new Rectangle( Cursor.Position, new Size( 10, 10 ) );
             int speed = 45;
             if( cursorPos.IntersectsWith( _screenTop ) )
             {
