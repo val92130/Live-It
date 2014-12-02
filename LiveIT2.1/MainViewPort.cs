@@ -16,12 +16,13 @@ namespace LiveIT2._1
         const int _minimalWidthInCentimeter = 600;
         List<Box> _boxList, _boxListMini;
         Point _animalSelectorCursor;
+        Point _vegetationSelectorCursor;
         private Rectangle _viewPort, _screen, _miniMap, _miniMapViewPort;
         Rectangle _mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0,0));
         Map _map;
         List<Box> _selectedBoxes;
         Texture _texture;
-        bool _changeTexture, _fillTexture,_putAnimal, _followAnimal, _isRaining;
+        bool _changeTexture, _fillTexture,_putAnimal, _followAnimal, _isRaining, _putVegetation;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -43,8 +44,8 @@ namespace LiveIT2._1
         {
 
             Random t = new Random();
-            if( t.Next( 0, 100 ) == 30 ) _map.IsRaining = true;
-            if( t.Next( 0, 100 ) == 25 && _map.IsRaining )
+            if( t.Next( 0, 40000 ) == 30 ) _map.IsRaining = true;
+            if( t.Next( 0, 10000 ) == 25 && _map.IsRaining )
             {
                 _map.IsRaining = false;
             }
@@ -79,9 +80,15 @@ namespace LiveIT2._1
                 _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
 
+            for( int i = 0; i < _map.Vegetation.Count; i++ )
+            {
+                _map.Vegetation[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+            }
+
             if( _changeTexture ) DrawMouseSelector( g );
             if (_fillTexture) FillMouseSelector(g);
             if(_putAnimal)PutAnimalSelector(g);
+            if( _putVegetation ) PutVegetationSelector( g );
             if( _followAnimal )
             {
                 foreach( Animal a in _map.Animals )
@@ -103,7 +110,7 @@ namespace LiveIT2._1
                     this._isRaining = true;
                     
                 }
-                g.DrawImage(_texture.GetThunder(), _screen);
+                //g.DrawImage(_texture.GetThunder(), _screen);
                 g.DrawImage( _texture.GetRain(), _screen );
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
@@ -188,6 +195,23 @@ namespace LiveIT2._1
 
             }
             _map.Animals.Add( a );
+        }
+
+        public void CreateVegetation( VegetationTexture texture )
+        {
+            Vegetation v;
+            switch( texture )
+            {
+                case VegetationTexture.Tree :
+                    v = new Tree( this._map, _vegetationSelectorCursor );
+                    break;
+                case VegetationTexture.Bush:
+                    v = new Bush( this._map, _vegetationSelectorCursor );
+                    break;
+                default :
+                    throw new NotSupportedException( "Unknown vegetation type" );
+            }
+            _map.Vegetation.Add( v );
         }
 
         public void Zoom( int meters )
@@ -311,9 +335,28 @@ namespace LiveIT2._1
                 {
                     count++;
                     _selectedBoxes.Add( _map[_boxList[i].Line, _boxList[i].Column] );
-                    _animalSelectorCursor.X =  _map[_boxList[i].Line, _boxList[i].Column].Area.X;
+                    _animalSelectorCursor.X = _map[_boxList[i].Line, _boxList[i].Column].Area.X;
                     _animalSelectorCursor.Y = _map[_boxList[i].Line, _boxList[i].Column].Area.Y;
-                    g.FillEllipse( new SolidBrush( Color.Red ), new Rectangle( _mouseRect.X, _mouseRect.Y , _mouseRect.Width, _mouseRect.Height ) );
+                    g.FillEllipse( new SolidBrush( Color.Brown ), new Rectangle( _mouseRect.X, _mouseRect.Y , _mouseRect.Width, _mouseRect.Height ) );
+                    g.DrawString( "Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font( "Arial", 10f ), Brushes.Aqua, _boxList[i].RelativePosition );
+                }
+            }
+        }
+        public void PutVegetationSelector( Graphics g )
+        {
+            int count = 0;
+            _selectedBoxes.Clear();
+            for( int i = 0; i < _boxList.Count; i++ )
+            {
+                _mouseRect.Width = _boxList[i].RelativeSize.Width / 4;
+                _mouseRect.Height = _boxList[i].RelativeSize.Height / 4;
+                if( _mouseRect.IntersectsWith( new Rectangle( _boxList[i].RelativePosition, _boxList[i].RelativeSize ) ) && count != 1 )
+                {
+                    count++;
+                    _selectedBoxes.Add( _map[_boxList[i].Line, _boxList[i].Column] );
+                    _vegetationSelectorCursor.X = _map[_boxList[i].Line, _boxList[i].Column].Area.X;
+                    _vegetationSelectorCursor.Y = _map[_boxList[i].Line, _boxList[i].Column].Area.Y;
+                    g.FillEllipse( new SolidBrush( Color.Brown ), new Rectangle( _mouseRect.X, _mouseRect.Y, _mouseRect.Width, _mouseRect.Height ) );
                     g.DrawString( "Box X :" + (_boxList[i].Area.X).ToString() + "\nBox Y :" + (_boxList[i].Area.Y).ToString() + "\nBox Texture : \n" + _boxList[i].Ground.ToString(), new Font( "Arial", 10f ), Brushes.Aqua, _boxList[i].RelativePosition );
                 }
             }
@@ -390,14 +433,20 @@ namespace LiveIT2._1
         public bool IsAnimalSelected
         {
             get { return _putAnimal; }
-            set { _putAnimal = value; _fillTexture = false; _changeTexture = false; _followAnimal = false; }
+            set { _putAnimal = value; _fillTexture = false; _changeTexture = false; _followAnimal = false; _putVegetation = false; }
+        }
+
+        public bool IsVegetationSelected
+        {
+            get { return _putVegetation; }
+            set { _putVegetation = value; _fillTexture = false; _changeTexture = false; _followAnimal = false; _putAnimal = false; }
         }
         public bool IsChangeTextureSelected
         {
             get { return _changeTexture; }
             set
             {
-                _changeTexture = value; _fillTexture = false; _putAnimal = false; _followAnimal = false;
+                _changeTexture = value; _fillTexture = false; _putAnimal = false; _followAnimal = false; _putVegetation = false;
                 
             }
         }
@@ -405,13 +454,13 @@ namespace LiveIT2._1
         public bool IsFillTextureSelected
         {
             get { return _fillTexture; }
-            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; _followAnimal = false; }
+            set { _fillTexture = value; _changeTexture = false; _putAnimal = false; _followAnimal = false; _putVegetation = false; }
         }
 
         public bool IsFollowAnimalSelected
         {
             get { return _followAnimal; }
-            set { _followAnimal = value; _changeTexture = false; _putAnimal = false; _fillTexture = false; }
+            set { _followAnimal = value; _changeTexture = false; _putAnimal = false; _fillTexture = false; _putVegetation = false; }
         }
 
         public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )

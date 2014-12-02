@@ -19,6 +19,7 @@ namespace LiveIT2._1
         Rectangle _source;
         Point _relativePosition;
         Size _relativeSize;
+        [NonSerializedAttribute]
         List<Animal> _animalList;
 
         public Box( int line, int column, Map map )
@@ -82,6 +83,7 @@ namespace LiveIT2._1
         public List<Animal> AnimalList
         {
             get { return _animalList; }
+            set { _animalList = value; }
         }
 
         public Rectangle Source

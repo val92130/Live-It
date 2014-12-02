@@ -19,6 +19,7 @@ namespace LiveIT2._1
         readonly int _boxSize;
         [NonSerializedAttribute]
         List<Animal> _animals = new List<Animal>();
+        List<Vegetation> _vegetation = new List<Vegetation>();
         [NonSerializedAttribute]
         MainViewPort _viewPort;
         bool _showDebug, _isRaining;
@@ -51,6 +52,12 @@ namespace LiveIT2._1
         {
             get { return _animals; }
             set { _animals = value; }
+        }
+
+        public List<Vegetation> Vegetation
+        {
+            get { return _vegetation; }
+            set { _vegetation = value; }
         }
 
         /// <summary>
@@ -127,21 +134,48 @@ namespace LiveIT2._1
             return boxList;
         }
 
+        public List<Animal> GetOverlappedAnimals( Rectangle r )
+        {
+            List<Animal> animalList = new List<Animal>();
+            for( int i =0; i < this.Animals.Count; i++ )
+            {
+                if( Animals[i].Area.IntersectsWith( r ) )
+                {
+                    animalList.Add( Animals[i] );
+                }
+            }
+                return animalList;
+        }
+        public List<Vegetation> GetOverlappedVegetation( Rectangle r )
+        {
+            List<Vegetation> vegetationList = new List<Vegetation>();
+            for( int i =0; i < this.Vegetation.Count; i++ )
+            {
+                if( Vegetation[i].Area.IntersectsWith( r ) )
+                {
+                    vegetationList.Add( Vegetation[i] );
+                }
+            }
+            return vegetationList;
+        }
+
         public void Save(string filename)
         {
             Stream stream = File.Open(filename, FileMode.Create);
             BinaryFormatter bFormatter = new BinaryFormatter();
-            bFormatter.Serialize(stream, this.Boxes);
+            bFormatter.Serialize(stream, this);
             stream.Close();
         }
 
-        public Box[] Load(string filename)
+        public Map Load(string filename)
         {
-            Stream stream = File.Open(filename, FileMode.Open);
+            Stream stream = File.Open( filename, FileMode.Open );
             BinaryFormatter bFormatter = new BinaryFormatter();
-            _boxes = (Box[])bFormatter.Deserialize(stream);
+            //_boxes = (Box[])bFormatter.Deserialize( stream );
+            Map _newMap = (Map)bFormatter.Deserialize( stream );
+            
             stream.Close();
-            return _boxes;
+            return _newMap;
         }
         public bool ShowDebug
         {

@@ -54,6 +54,7 @@
     <Compile Include="AnimalTexture.cs" />
     <Compile Include="Box.cs" />
     <Compile Include="BoxGround.cs" />
+    <Compile Include="Bush.cs" />
     <Compile Include="Cat.cs" />
     <Compile Include="Cow.cs" />
     <Compile Include="Dog.cs" />
@@ -88,6 +89,9 @@
     <Compile Include="Rabbit.cs" />
     <Compile Include="SoundEnvironment.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="Tree.cs" />
+    <Compile Include="Vegetation.cs" />
+    <Compile Include="VegetationTexture.cs" />
     <EmbeddedResource Include="Game.resx">
       <DependentUpon>Game.cs</DependentUpon>
     </EmbeddedResource>

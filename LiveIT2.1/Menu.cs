@@ -40,8 +40,14 @@ namespace LiveIT2._1
             {
                 this.Hide();
                 game.Show(this);
-                game.Map.Boxes = game.Map.Load(loadBox.FileName);
-                game.ViewPort.LoadMap(game.Map);
+
+                game.Map.Boxes = game.Map.Load( loadBox.FileName ).Boxes;
+                for( int i = 0; i < game.Map.Boxes.Count(); i++ )
+                {
+                    game.Map.Boxes[i].AnimalList = new List<Animal>();
+                }
+                game.Map.Vegetation = new List<Vegetation>();
+                game.Map.Animals = new List<Animal>();
             }
 
         }

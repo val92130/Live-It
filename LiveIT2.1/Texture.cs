@@ -15,7 +15,8 @@ namespace LiveIT2._1
         Bitmap _textureGrass,_textureGrass2, _textureDesert, _textureForest, _textureSnow, _textureMountain,
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
-            _textureGiraffe,_textureLion, _textureRain,_textureThunder;
+            _textureGiraffe,_textureLion, _textureRain,_textureThunder ;
+        Bitmap _textureTree, _textureBush;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
         List <Bitmap> _waterList = new List<Bitmap>();
@@ -49,7 +50,8 @@ namespace LiveIT2._1
             _textureDirt = new Bitmap( @"..\..\..\assets\Dirt.jpg" );
             _textureMountain = new Bitmap(@"..\..\..\assets\Mountain.jpg");
 
-           
+            _textureTree = new Bitmap( @"..\..\..\assets\Vegetation\Tree1.png" );
+            _textureBush = new Bitmap( @"..\..\..\assets\Vegetation\Bush1.png" );
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
@@ -176,6 +178,19 @@ namespace LiveIT2._1
                     return _textureMountain;
                 default:
                     return _textureGrass;
+            }
+        }
+
+        public Bitmap GetTexture( Vegetation vegetation )
+        {
+            switch( vegetation.Texture )
+            {
+                case VegetationTexture.Tree:
+                    return _textureTree;
+                case VegetationTexture.Bush :
+                    return _textureBush;
+                default:
+                    return _textureTree;
             }
         }
 

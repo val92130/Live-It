@@ -48,13 +48,16 @@
             this.elephantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
-            this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonMountain = new System.Windows.Forms.Button();
+            this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,6 +220,7 @@
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.animalsToolStripMenuItem,
+            this.vegetationToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.muteToolStripMenuItem});
@@ -242,6 +246,7 @@
             this.animalsToolStripMenuItem.Name = "animalsToolStripMenuItem";
             this.animalsToolStripMenuItem.Size = new System.Drawing.Size(110, 33);
             this.animalsToolStripMenuItem.Text = "Animals";
+            this.animalsToolStripMenuItem.Click += new System.EventHandler(this.animalsToolStripMenuItem_Click);
             // 
             // catToolStripMenuItem
             // 
@@ -291,6 +296,13 @@
             this.eagleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.eagleToolStripMenuItem.Text = "Eagle";
             this.eagleToolStripMenuItem.Click += new System.EventHandler(this.eagleToolStripMenuItem_Click);
+            // 
+            // gazelleToolStripMenuItem
+            // 
+            this.gazelleToolStripMenuItem.Name = "gazelleToolStripMenuItem";
+            this.gazelleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.gazelleToolStripMenuItem.Text = "Gazelle";
+            this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -343,13 +355,6 @@
             this._exitButton.UseVisualStyleBackColor = false;
             this._exitButton.Click += new System.EventHandler(this._exitButton_Click);
             // 
-            // gazelleToolStripMenuItem
-            // 
-            this.gazelleToolStripMenuItem.Name = "gazelleToolStripMenuItem";
-            this.gazelleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.gazelleToolStripMenuItem.Text = "Gazelle";
-            this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
-            // 
             // buttonMountain
             // 
             this.buttonMountain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -363,6 +368,30 @@
             this.buttonMountain.Text = "Mountain";
             this.buttonMountain.UseVisualStyleBackColor = false;
             this.buttonMountain.Click += new System.EventHandler(this.buttonMountain_Click);
+            // 
+            // vegetationToolStripMenuItem
+            // 
+            this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.treeToolStripMenuItem,
+            this.bushToolStripMenuItem});
+            this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
+            this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(140, 33);
+            this.vegetationToolStripMenuItem.Text = "Vegetation";
+            this.vegetationToolStripMenuItem.Click += new System.EventHandler(this.vegetationToolStripMenuItem_Click);
+            // 
+            // treeToolStripMenuItem
+            // 
+            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.treeToolStripMenuItem.Text = "Tree";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
+            // 
+            // bushToolStripMenuItem
+            // 
+            this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.bushToolStripMenuItem.Text = "Bush";
+            this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -435,6 +464,9 @@
         private System.Windows.Forms.ToolStripMenuItem eagleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gazelleToolStripMenuItem;
         private System.Windows.Forms.Button buttonMountain;
+        private System.Windows.Forms.ToolStripMenuItem vegetationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bushToolStripMenuItem;
 
     }
 }

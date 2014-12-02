@@ -33,6 +33,7 @@ namespace LiveIT2._1
         bool ShowDebugInfo = false;
 
         BoxGround _selectedTexture;
+        VegetationTexture _selectedVegetation;
 
         System.Windows.Forms.Timer t;
 
@@ -196,9 +197,17 @@ namespace LiveIT2._1
             {
                 _viewPort.CreateAnimal(_selectedAnimal);
             }
-            else
+            else if(_viewPort.IsChangeTextureSelected)
             {
                 _viewPort.ChangeTexture(_selectedTexture);
+            }
+            else if(_viewPort.IsVegetationSelected)
+            {
+                _viewPort.CreateVegetation( _selectedVegetation );
+            }
+            else if( _viewPort.IsFillTextureSelected )
+            {
+                _viewPort.ChangeTexture( _selectedTexture );
             }
         }
 
@@ -339,8 +348,13 @@ namespace LiveIT2._1
             loadBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
             if (loadBox.ShowDialog() == DialogResult.OK)
             {
-                _map.Boxes = _map.Load(loadBox.FileName);
-                _viewPort.LoadMap(_map);
+                _map.Boxes = _map.Load(loadBox.FileName).Boxes;
+                for( int i = 0; i < _map.Boxes.Count(); i++ )
+                {
+                    _map.Boxes[i].AnimalList = new List<Animal>();
+                }
+                _map.Vegetation = _map.Load( loadBox.FileName ).Vegetation;
+                _map.Animals = new List<Animal>();
             }
         }
 
@@ -393,6 +407,26 @@ namespace LiveIT2._1
         private void buttonMountain_Click(object sender, EventArgs e)
         {
             _selectedTexture = BoxGround.Mountain;
+        }
+
+        private void treeToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedVegetation = VegetationTexture.Tree;
+        }
+
+        private void vegetationToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _viewPort.IsVegetationSelected = true;
+        }
+
+        private void bushToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedVegetation = VegetationTexture.Bush;
+        }
+
+        private void animalsToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _viewPort.IsAnimalSelected = true;
         }
     }
 }
