@@ -58,6 +58,7 @@
             this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -216,7 +217,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(121)))), ((int)(((byte)(53)))));
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.animalsToolStripMenuItem,
@@ -373,7 +374,9 @@
             // 
             this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.treeToolStripMenuItem,
-            this.bushToolStripMenuItem});
+            this.bushToolStripMenuItem,
+            this.rockToolStripMenuItem});
+            this.vegetationToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
             this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(140, 33);
             this.vegetationToolStripMenuItem.Text = "Vegetation";
@@ -392,6 +395,13 @@
             this.bushToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
             this.bushToolStripMenuItem.Text = "Bush";
             this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
+            // 
+            // rockToolStripMenuItem
+            // 
+            this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.rockToolStripMenuItem.Text = "Rock";
+            this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -467,6 +477,7 @@
         private System.Windows.Forms.ToolStripMenuItem vegetationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bushToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rockToolStripMenuItem;
 
     }
 }

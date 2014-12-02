@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Gazelle.cs" />
     <Compile Include="LoopStream.cs" />
+    <Compile Include="Rock.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>

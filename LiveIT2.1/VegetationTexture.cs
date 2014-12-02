@@ -9,7 +9,11 @@ namespace LiveIT2._1
     public enum VegetationTexture
     {
         Tree,
+        Tree2,
+        Tree3,
         Bush,
-        Rock
+        Rock,
+        Rock2,
+        Rock3
     }
 }

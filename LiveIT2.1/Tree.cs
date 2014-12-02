@@ -13,8 +13,13 @@ namespace LiveIT2._1
         public Tree(Map map, Point StartPosition) 
             :base(map, StartPosition)
         {
-            Texture = VegetationTexture.Tree;
-            this.Size = new Size( 500, 500 );
+            Random r = new Random();
+            int _random = r.Next( 400, 650 );
+            List<VegetationTexture> RandomVegList = new List<VegetationTexture>() { VegetationTexture.Tree, VegetationTexture.Tree2, VegetationTexture.Tree3 };
+            Random r2 = new Random();
+
+            Texture = RandomVegList[r2.Next(0,RandomVegList.Count)];
+            this.Size = new Size( _random, _random );
         }
     }
 }

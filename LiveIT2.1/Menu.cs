@@ -46,7 +46,7 @@ namespace LiveIT2._1
                 {
                     game.Map.Boxes[i].AnimalList = new List<Animal>();
                 }
-                game.Map.Vegetation = new List<Vegetation>();
+                game.Map.Vegetation = game.Map.Load( loadBox.FileName ).Vegetation;
                 game.Map.Animals = new List<Animal>();
             }
 

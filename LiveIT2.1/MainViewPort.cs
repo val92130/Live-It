@@ -208,6 +208,9 @@ namespace LiveIT2._1
                 case VegetationTexture.Bush:
                     v = new Bush( this._map, _vegetationSelectorCursor );
                     break;
+                case VegetationTexture.Rock:
+                    v = new Rock( this._map, _vegetationSelectorCursor );
+                    break;
                 default :
                     throw new NotSupportedException( "Unknown vegetation type" );
             }

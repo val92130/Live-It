@@ -13,8 +13,10 @@ namespace LiveIT2._1
         public Bush(Map map, Point StartPosition) 
             :base(map, StartPosition)
         {
+            Random r = new Random();
+            int _random = r.Next( 100, 250 );
             this.Texture = VegetationTexture.Bush;
-            this.Size = new Size( 150, 150 );
+            this.Size = new Size( _random, _random );
         }
     }
 }

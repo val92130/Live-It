@@ -16,7 +16,7 @@ namespace LiveIT2._1
             _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
             _textureGiraffe,_textureLion, _textureRain,_textureThunder ;
-        Bitmap _textureTree, _textureBush;
+        Bitmap _textureTree, _textureTree2, _textureTree3, _textureBush, _textureRock, _textureRock2, _textureRock3;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
         List <Bitmap> _waterList = new List<Bitmap>();
@@ -51,7 +51,12 @@ namespace LiveIT2._1
             _textureMountain = new Bitmap(@"..\..\..\assets\Mountain.jpg");
 
             _textureTree = new Bitmap( @"..\..\..\assets\Vegetation\Tree1.png" );
+            _textureTree2 = new Bitmap( @"..\..\..\assets\Vegetation\Tree2.png" );
+            _textureTree3 = new Bitmap( @"..\..\..\assets\Vegetation\Tree3.png" );
             _textureBush = new Bitmap( @"..\..\..\assets\Vegetation\Bush1.png" );
+            _textureRock = new Bitmap( @"..\..\..\assets\Vegetation\Rock1.png" );
+            _textureRock2 = new Bitmap( @"..\..\..\assets\Vegetation\Rock2.png" );
+            _textureRock3 = new Bitmap( @"..\..\..\assets\Vegetation\Rock3.png" );
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
@@ -187,8 +192,18 @@ namespace LiveIT2._1
             {
                 case VegetationTexture.Tree:
                     return _textureTree;
+                case VegetationTexture.Tree2:
+                    return _textureTree2;
+                case VegetationTexture.Tree3:
+                    return _textureTree3;
                 case VegetationTexture.Bush :
                     return _textureBush;
+                case VegetationTexture.Rock :
+                    return _textureRock;
+                case VegetationTexture.Rock2:
+                    return _textureRock2;
+                case VegetationTexture.Rock3:
+                    return _textureRock3;
                 default:
                     return _textureTree;
             }

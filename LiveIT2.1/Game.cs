@@ -428,5 +428,10 @@ namespace LiveIT2._1
         {
             _viewPort.IsAnimalSelected = true;
         }
+
+        private void rockToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedVegetation = VegetationTexture.Rock;
+        }
     }
 }
