@@ -50,13 +50,13 @@ namespace LiveIT2._1
             _textureDirt = new Bitmap( @"..\..\..\assets\Dirt.jpg" );
             _textureMountain = new Bitmap(@"..\..\..\assets\Mountain.jpg");
 
-            _textureTree = new Bitmap( @"..\..\..\assets\Vegetation\Tree1.png" );
-            _textureTree2 = new Bitmap( @"..\..\..\assets\Vegetation\Tree2.png" );
-            _textureTree3 = new Bitmap( @"..\..\..\assets\Vegetation\Tree3.png" );
-            _textureBush = new Bitmap( @"..\..\..\assets\Vegetation\Bush1.png" );
-            _textureRock = new Bitmap( @"..\..\..\assets\Vegetation\Rock1.png" );
-            _textureRock2 = new Bitmap( @"..\..\..\assets\Vegetation\Rock2.png" );
-            _textureRock3 = new Bitmap( @"..\..\..\assets\Vegetation\Rock3.png" );
+            _textureTree = new Bitmap( @"..\..\..\assets\Vegetation\Tree1.gif" );
+            _textureTree2 = new Bitmap( @"..\..\..\assets\Vegetation\Tree2.gif" );
+            _textureTree3 = new Bitmap( @"..\..\..\assets\Vegetation\Tree3.gif" );
+            _textureBush = new Bitmap( @"..\..\..\assets\Vegetation\Bush1.gif" );
+            _textureRock = new Bitmap( @"..\..\..\assets\Vegetation\Rock1.gif" );
+            _textureRock2 = new Bitmap( @"..\..\..\assets\Vegetation\Rock2.gif" );
+            _textureRock3 = new Bitmap( @"..\..\..\assets\Vegetation\Rock3.gif" );
 
             _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
             _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
