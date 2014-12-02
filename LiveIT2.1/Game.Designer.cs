@@ -49,16 +49,16 @@
             this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
             this.buttonMountain = new System.Windows.Forms.Button();
-            this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -305,6 +305,39 @@
             this.gazelleToolStripMenuItem.Text = "Gazelle";
             this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
             // 
+            // vegetationToolStripMenuItem
+            // 
+            this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.treeToolStripMenuItem,
+            this.bushToolStripMenuItem,
+            this.rockToolStripMenuItem});
+            this.vegetationToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
+            this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
+            this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(140, 33);
+            this.vegetationToolStripMenuItem.Text = "Vegetation";
+            this.vegetationToolStripMenuItem.Click += new System.EventHandler(this.vegetationToolStripMenuItem_Click);
+            // 
+            // treeToolStripMenuItem
+            // 
+            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.treeToolStripMenuItem.Text = "Tree";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
+            // 
+            // bushToolStripMenuItem
+            // 
+            this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.bushToolStripMenuItem.Text = "Bush";
+            this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
+            // 
+            // rockToolStripMenuItem
+            // 
+            this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.rockToolStripMenuItem.Text = "Rock";
+            this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(110)))), ((int)(((byte)(123)))));
@@ -369,39 +402,6 @@
             this.buttonMountain.Text = "Mountain";
             this.buttonMountain.UseVisualStyleBackColor = false;
             this.buttonMountain.Click += new System.EventHandler(this.buttonMountain_Click);
-            // 
-            // vegetationToolStripMenuItem
-            // 
-            this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.treeToolStripMenuItem,
-            this.bushToolStripMenuItem,
-            this.rockToolStripMenuItem});
-            this.vegetationToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
-            this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
-            this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(140, 33);
-            this.vegetationToolStripMenuItem.Text = "Vegetation";
-            this.vegetationToolStripMenuItem.Click += new System.EventHandler(this.vegetationToolStripMenuItem_Click);
-            // 
-            // treeToolStripMenuItem
-            // 
-            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
-            this.treeToolStripMenuItem.Text = "Tree";
-            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
-            // 
-            // bushToolStripMenuItem
-            // 
-            this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
-            this.bushToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
-            this.bushToolStripMenuItem.Text = "Bush";
-            this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
-            // 
-            // rockToolStripMenuItem
-            // 
-            this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
-            this.rockToolStripMenuItem.Text = "Rock";
-            this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
             // 
             // Form1
             // 

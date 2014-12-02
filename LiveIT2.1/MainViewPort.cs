@@ -23,6 +23,7 @@ namespace LiveIT2._1
         List<Box> _selectedBoxes;
         Texture _texture;
         bool _changeTexture, _fillTexture,_putAnimal, _followAnimal, _isRaining, _putVegetation;
+        Rectangle _screenTop, _screenBottom, _screenLeft, _screenRight;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -36,13 +37,18 @@ namespace LiveIT2._1
             _animalSelectorCursor = new Point( 0, 0 );
             _map.ViewPort = this;
             _isRaining = false;
+            _screenTop = new Rectangle(0, _screen.Top + 50, _screen.Width,150);
+            _screenBottom = new Rectangle( 0, _screen.Bottom - 100, _screen.Width, 150 );
+            _screenLeft = new Rectangle( 0, 0, 10, _screen.Height );
+            _screenRight = new Rectangle( _screen.Right - 10, 0, 10, _screen.Height );
 
         }
 
 
         public void Draw( Graphics g )
         {
-
+            MoveWithMouse();
+            
             Random t = new Random();
             if( t.Next( 0, 40000 ) == 30 ) _map.IsRaining = true;
             if( t.Next( 0, 10000 ) == 25 && _map.IsRaining )
@@ -114,7 +120,6 @@ namespace LiveIT2._1
                 g.DrawImage( _texture.GetRain(), _screen );
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
-
         }
 
         private void Rain()
@@ -215,6 +220,28 @@ namespace LiveIT2._1
                     throw new NotSupportedException( "Unknown vegetation type" );
             }
             _map.Vegetation.Add( v );
+        }
+
+        public void MoveWithMouse()
+        {
+            Rectangle cursorPos = new Rectangle( Cursor.Position, new Size( 50, 50 ) );
+            int speed = 45;
+            if( cursorPos.IntersectsWith( _screenTop ) )
+            {
+                this.MoveY( - speed );
+            }
+            if( cursorPos.IntersectsWith( _screenBottom ) )
+            {
+                this.MoveY( speed );
+            }
+            if( cursorPos.IntersectsWith( _screenLeft ) )
+            {
+                this.MoveX( -speed );
+            }
+            if( cursorPos.IntersectsWith( _screenRight ) )
+            {
+                this.MoveX( speed );
+            }
         }
 
         public void Zoom( int meters )
