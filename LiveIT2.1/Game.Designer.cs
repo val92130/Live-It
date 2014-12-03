@@ -59,6 +59,7 @@
             this._exitButton = new System.Windows.Forms.Button();
             this.buttonMountain = new System.Windows.Forms.Button();
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
+            this.carButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -404,12 +405,27 @@
             this._buttonSpawnPlayer.UseVisualStyleBackColor = false;
             this._buttonSpawnPlayer.Click += new System.EventHandler(this._buttonSpawnPlayer_Click);
             // 
+            // carButton
+            // 
+            this.carButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.carButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.carButton.ForeColor = System.Drawing.Color.Transparent;
+            this.carButton.Location = new System.Drawing.Point(12, 57);
+            this.carButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.carButton.Name = "carButton";
+            this.carButton.Size = new System.Drawing.Size(205, 30);
+            this.carButton.TabIndex = 21;
+            this.carButton.Text = "Car";
+            this.carButton.UseVisualStyleBackColor = false;
+            this.carButton.Click += new System.EventHandler(this.carButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this.carButton);
             this.Controls.Add(this._buttonSpawnPlayer);
             this.Controls.Add(this.buttonMountain);
             this.Controls.Add(this._exitButton);
@@ -479,6 +495,7 @@
         private System.Windows.Forms.ToolStripMenuItem bushToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rockToolStripMenuItem;
         private System.Windows.Forms.Button _buttonSpawnPlayer;
+        private System.Windows.Forms.Button carButton;
 
     }
 }
