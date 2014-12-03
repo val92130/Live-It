@@ -26,7 +26,6 @@ namespace LiveIT2._1
         Rectangle _screenTop, _screenBottom, _screenLeft, _screenRight;
         Player _player;
         Car _car ;
-        List<Car> _carList = new List<Car>();
         public MainViewPort( Map map)
         {
             _map = map;
@@ -44,7 +43,7 @@ namespace LiveIT2._1
             _screenBottom = new Rectangle(_screen.Width / 2 - 400, _screen.Bottom - 100, 800, 150);
             _screenLeft = new Rectangle(0, _screen.Height / 2 - 400, 10, 800);
             _screenRight = new Rectangle(_screen.Right - 10, _screen.Height / 2 - 400, 10, 800);
-            
+            _car = new Car(_map, new Point(600,600));
 
         }
 
@@ -150,12 +149,8 @@ namespace LiveIT2._1
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
+
         }
-            foreach (Car car in _carList)
-            {
-                car.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture); 
-            }
-            
 
         private void Rain()
         {
@@ -243,7 +238,7 @@ namespace LiveIT2._1
         }
         public void SpawnCar(Point position)
         {
-            _carList.Add(new Car(_map, position));
+            _car = new Car(_map, position);
         }
 
         public void CreateVegetation( VegetationTexture texture )
