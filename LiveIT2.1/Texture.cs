@@ -26,6 +26,8 @@ namespace LiveIT2._1
         Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
         Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
 
+        Bitmap _playerTexture;
+
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
         Timer _animateAnimal;
@@ -134,6 +136,8 @@ namespace LiveIT2._1
             _textureCatLeft = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
             _textureCatRight = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Right\a.png" );
 
+
+            _playerTexture = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
                
 
             _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
@@ -572,6 +576,17 @@ namespace LiveIT2._1
                         default:
                             throw new NotSupportedException("No texture found for this direction");
                     }
+                default:
+                    return _textureGrass;
+            }
+        }
+
+        public Bitmap LoadTexture( Player player )
+        {
+            switch( player.Texture )
+            {
+                case PlayerTexture.MainPlayer:
+                    return _textureGrass;
                 default:
                     return _textureGrass;
             }
