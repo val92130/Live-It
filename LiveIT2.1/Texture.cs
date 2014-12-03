@@ -19,7 +19,7 @@ namespace LiveIT2._1
         Bitmap _textureTree, _textureTree2, _textureTree3, _textureBush, _textureRock, _textureRock2, _textureRock3;
         Bitmap _textureCatLeft, _textureCatUp, _textureCatDown, _textureCatRight;
         Bitmap _textureDogLeft, _textureDogUp, _textureDogDown, _textureDogRight;
-        Bitmap _textureEagleLeft, _textureEagleUp, _textureEagleDown, _textureCowRight;
+        Bitmap _textureEagleLeft, _textureEagleUp, _textureEagleDown, _textureEagleRight;
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
@@ -113,8 +113,8 @@ namespace LiveIT2._1
 
             _textureEagleDown = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Down\a.png");
             _textureEagleUp = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Up\a.png");
-            _textureEagleLeft = new Bitmap(@"..\..\..\assets\Animal\Eagle\Dog-Left\a.png");
-            _textureCowRight = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Right\a.png");
+            _textureEagleLeft = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Left\a.png");
+            _textureEagleRight = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Right\a.png");
 
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
@@ -164,10 +164,10 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Down\", _dogDownList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Up\", _dogUpList );
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Left\", _dogLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Right\", _dogRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Down\", _dogDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Up\", _dogUpList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Left\", _eagleLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Right\", _eagleRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Down\", _eagleDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Up\", _eagleUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -193,6 +193,14 @@ namespace LiveIT2._1
                 _textureDogRight = _dogRightList[_countAnimal];
 
                 _textureDogUp = _dogUpList[_countAnimal];
+
+                _textureEagleDown = _eagleDownList[_countAnimal];
+
+                _textureEagleLeft = _eagleLeftList[_countAnimal];
+
+                _textureEagleRight = _eagleRightList[_countAnimal];
+
+                _textureEagleUp = _eagleUpList[_countAnimal];
                 _countAnimal++;
             }
             else
@@ -346,6 +354,20 @@ namespace LiveIT2._1
                         default :
                             throw new NotSupportedException( "No texture found for this direction" );
                     }
+                case AnimalTexture.Eagle:
+                    switch (animal.MovingDirection)
+                    {
+                        case MovingDirection.Left:
+                            return _textureEagleLeft;
+                        case MovingDirection.Up:
+                            return _textureEagleUp;
+                        case MovingDirection.Down:
+                            return _textureEagleDown;
+                        case MovingDirection.Right:
+                            return _textureEagleRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
                 case AnimalTexture.Elephant:
                     return _textureElephant;
                 case AnimalTexture.Lion:
@@ -366,8 +388,8 @@ namespace LiveIT2._1
                         default:
                             throw new NotSupportedException( "No texture found for this direction" );
                     }
-                case AnimalTexture.Eagle:
-                    return _textureEagle;
+                
+                   
                 case AnimalTexture.Gazelle:
                     return _textureGazelle;
                 default:

@@ -19,7 +19,7 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Eagle;
             Size = new Size(250, 250);
             FavoriteEnvironnment = BoxGround.Forest;
-            Speed = 15000;
+            Speed = 150000;
             DefaultSpeed = Speed;
             ViewDistance = 400;
             TargetAnimals = new List<AnimalTexture>() { AnimalTexture.Rabbit, AnimalTexture.Cow, AnimalTexture.Gazelle };
