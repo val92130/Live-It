@@ -111,6 +111,10 @@ namespace LiveIT2._1
                     _player.Position = _carList[0].Position;
                 }
             }
+            foreach( Car car in _carList )
+            {
+                car.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+            }
 
             for( int i = 0; i < _map.Vegetation.Count; i++ )
             {
@@ -155,10 +159,7 @@ namespace LiveIT2._1
                 g.DrawImage( _texture.GetRain(), _screen );
             }
 
-            foreach( Car car in _carList )
-            {
-                car.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
-            }
+           
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
             if( TryEnter && !_map.IsInCar )
