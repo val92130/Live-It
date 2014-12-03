@@ -18,6 +18,7 @@ namespace LiveIT2._1
             _textureGiraffe,_textureLion, _textureRain,_textureThunder ;
         Bitmap _textureTree, _textureTree2, _textureTree3, _textureBush, _textureRock, _textureRock2, _textureRock3;
         Bitmap _textureCatLeft, _textureCatUp, _textureCatDown, _textureCatRight;
+        Bitmap _textureDogLeft, _textureDogUp, _textureDogDown, _textureDogRight;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
         Timer _animateCat;
@@ -30,13 +31,16 @@ namespace LiveIT2._1
         List<Bitmap> _catDownList = new List<Bitmap>();
         List<Bitmap> _catRightList = new List<Bitmap>();
 
+        List<Bitmap> _dogLeftList = new List<Bitmap>();
+        List<Bitmap> _dogUpList = new List<Bitmap>();
+        List<Bitmap> _dogDownList = new List<Bitmap>();
+        List<Bitmap> _dogRightList = new List<Bitmap>();
+
         int count = 0;
         int count2 = 0;
         int count3 = 0;
 
-        int _countCatLeft;
-        int _countCatUp;
-        int _countCat;
+        int _countAnimal;
 
         public Texture()
         {
@@ -91,8 +95,13 @@ namespace LiveIT2._1
             _textureCatDown = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Down\a.png" );
             _textureCatUp = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Up\a.png" );
             _textureCatLeft = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
-            _textureCatRight = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
-            _textureCatRight.RotateFlip( RotateFlipType.Rotate180FlipY );
+            _textureCatRight = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Right\a.png" );
+
+            _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
+            _textureDogUp = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Up\a.png" );
+            _textureDogLeft = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Left\a.png" );
+            _textureDogRight = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Right\a.png" );
+
 
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
@@ -136,28 +145,41 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Right\", _catRightList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Down\", _catDownList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Up\", _catUpList );
+
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Left\", _dogLeftList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Right\", _dogRightList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Down\", _dogDownList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Up\", _dogUpList );
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
         {
-            if( _countCat + 1 <= _catDownList.Count )
+            if( _countAnimal + 1 <= _catDownList.Count )
             {
-                _textureCatDown = _catDownList[_countCat];
-                _catDownList[_countCat].MakeTransparent( Color.White );
+                _textureCatDown = _catDownList[_countAnimal];
+                _catDownList[_countAnimal].MakeTransparent( Color.White );
 
-                _textureCatLeft = _catLeftList[_countCat];
-                _catLeftList[_countCat].MakeTransparent( Color.White );
+                _textureCatLeft = _catLeftList[_countAnimal];
+                _catLeftList[_countAnimal].MakeTransparent( Color.White );
 
-                _textureCatRight = _catRightList[_countCat];
-                _catRightList[_countCat].MakeTransparent( Color.White );
+                _textureCatRight = _catRightList[_countAnimal];
+                _catRightList[_countAnimal].MakeTransparent( Color.White );
 
-                _textureCatUp = _catUpList[_countCat];
-                _catUpList[_countCat].MakeTransparent( Color.White );
-                _countCat++;
+                _textureCatUp = _catUpList[_countAnimal];
+                _catUpList[_countAnimal].MakeTransparent( Color.White );
+
+                _textureDogDown = _dogDownList[_countAnimal];
+
+                _textureDogLeft = _dogLeftList[_countAnimal];
+
+                _textureDogRight = _dogRightList[_countAnimal];
+
+                _textureDogUp = _dogUpList[_countAnimal];
+                _countAnimal++;
             }
             else
             {
-                _countCat = 0;
+                _countAnimal = 0;
             }
         }
 
@@ -306,7 +328,6 @@ namespace LiveIT2._1
                         default :
                             throw new NotSupportedException( "No texture found for this direction" );
                     }
-                    //return _textureCat;
                 case AnimalTexture.Elephant:
                     return _textureElephant;
                 case AnimalTexture.Lion:
@@ -314,7 +335,19 @@ namespace LiveIT2._1
                 case AnimalTexture.Cow:
                     return _textureCow;
                 case AnimalTexture.Dog:
-                    return _textureDog;
+                    switch( animal.MovingDirection )
+                    {
+                        case MovingDirection.Left:
+                            return _textureDogLeft;
+                        case MovingDirection.Up:
+                            return _textureDogUp;
+                        case MovingDirection.Down:
+                            return _textureDogDown;
+                        case MovingDirection.Right:
+                            return _textureDogRight;
+                        default:
+                            throw new NotSupportedException( "No texture found for this direction" );
+                    }
                 case AnimalTexture.Eagle:
                     return _textureEagle;
                 case AnimalTexture.Gazelle:
