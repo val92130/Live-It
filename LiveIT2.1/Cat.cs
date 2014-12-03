@@ -17,7 +17,7 @@ namespace LiveIT2._1
             Texture = AnimalTexture.Cat;
             Size = new Size( 120, 120 );
             FavoriteEnvironnment = BoxGround.Grass;
-            Speed = 15000;
+            Speed = 20000;
             DefaultSpeed = Speed;
             ViewDistance = 300;
             TargetAnimals = new List<AnimalTexture>() { AnimalTexture.Rabbit};

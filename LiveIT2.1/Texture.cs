@@ -17,14 +17,27 @@ namespace LiveIT2._1
             _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
             _textureGiraffe,_textureLion, _textureRain,_textureThunder ;
         Bitmap _textureTree, _textureTree2, _textureTree3, _textureBush, _textureRock, _textureRock2, _textureRock3;
+        Bitmap _textureCatLeft, _textureCatUp, _textureCatDown, _textureCatRight;
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
+        Timer _animateCat;
         List <Bitmap> _waterList = new List<Bitmap>();
         List<Bitmap> _rainList = new List<Bitmap>();
         List<Bitmap> _thunderList = new List<Bitmap>();
+
+        List<Bitmap> _catLeftList = new List<Bitmap>();
+        List<Bitmap> _catUpList = new List<Bitmap>();
+        List<Bitmap> _catDownList = new List<Bitmap>();
+        List<Bitmap> _catRightList = new List<Bitmap>();
+
         int count = 0;
         int count2 = 0;
         int count3 = 0;
+
+        int _countCatLeft;
+        int _countCatUp;
+        int _countCat;
+
         public Texture()
         {
             _thunderTimer = new Timer();
@@ -32,6 +45,11 @@ namespace LiveIT2._1
             _animate.Start();
             _animate.Interval = 10;
             _rainTimer = new Timer();
+
+            _animateCat = new Timer();
+            _animateCat.Interval = 10;
+            _animateCat.Start();
+            _animateCat.Tick += new EventHandler( T_Cat_Anim );
 
             _rainTimer.Start();
             _rainTimer.Interval = 10;
@@ -68,6 +86,13 @@ namespace LiveIT2._1
             _textureCat = new Bitmap( @"..\..\..\assets\Animal\Cat.png" );
             _textureCat.MakeTransparent(Color.White);
             _textureCat.RotateFlip(RotateFlipType.Rotate180FlipY);
+
+
+            _textureCatDown = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Down\a.png" );
+            _textureCatUp = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Up\a.png" );
+            _textureCatLeft = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
+            _textureCatRight = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
+            _textureCatRight.RotateFlip( RotateFlipType.Rotate180FlipY );
 
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
@@ -106,6 +131,34 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList( @"..\..\..\assets\Animated\", _waterList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Rain\", _rainList );
             AddTexturesFromFolderToList(@"..\..\..\assets\Thunder\", _thunderList);
+
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Left\", _catLeftList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Right\", _catRightList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Down\", _catDownList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Up\", _catUpList );
+        }
+
+        private void T_Cat_Anim( object sender, EventArgs e )
+        {
+            if( _countCat + 1 <= _catDownList.Count )
+            {
+                _textureCatDown = _catDownList[_countCat];
+                _catDownList[_countCat].MakeTransparent( Color.White );
+
+                _textureCatLeft = _catLeftList[_countCat];
+                _catLeftList[_countCat].MakeTransparent( Color.White );
+
+                _textureCatRight = _catRightList[_countCat];
+                _catRightList[_countCat].MakeTransparent( Color.White );
+
+                _textureCatUp = _catUpList[_countCat];
+                _catUpList[_countCat].MakeTransparent( Color.White );
+                _countCat++;
+            }
+            else
+            {
+                _countCat = 0;
+            }
         }
 
         private void T_rain_tick( object sender, EventArgs e )
@@ -235,23 +288,36 @@ namespace LiveIT2._1
         }
         public Bitmap LoadTexture( Animal animal )
         {
-            switch( animal.Texture.ToString() )
+            switch( animal.Texture )
             {
-                case "Rabbit":
+                case AnimalTexture.Rabbit:
                     return _textureRabbit;
-                case "Cat":
-                    return _textureCat;
-                case "Elephant":
+                case AnimalTexture.Cat:
+                    switch( animal.MovingDirection )
+                    {
+                        case MovingDirection.Left :
+                            return _textureCatLeft;
+                        case MovingDirection.Up :
+                            return _textureCatUp;
+                        case MovingDirection.Down:
+                            return _textureCatDown;
+                        case MovingDirection.Right :
+                            return _textureCatRight;
+                        default :
+                            throw new NotSupportedException( "No texture found for this direction" );
+                    }
+                    //return _textureCat;
+                case AnimalTexture.Elephant:
                     return _textureElephant;
-                case "Lion":
+                case AnimalTexture.Lion:
                     return _textureLion;
-                case "Cow":
+                case AnimalTexture.Cow:
                     return _textureCow;
-                case "Dog":
+                case AnimalTexture.Dog:
                     return _textureDog;
-                case "Eagle":
+                case AnimalTexture.Eagle:
                     return _textureEagle;
-                case "Gazelle":
+                case AnimalTexture.Gazelle:
                     return _textureGazelle;
                 default:
                     return _textureGrass;

@@ -168,6 +168,30 @@ namespace LiveIT2._1
             
         }
 
+        public MovingDirection MovingDirection
+        {
+            get
+            {
+                if( this.Direction.Width > 0 && this.Direction.Width > this.Direction.Height )
+                {
+                    return MovingDirection.Right;
+                }
+                if( this.Direction.Width < 0 && this.Direction.Width > this.Direction.Height )
+                {
+                    return MovingDirection.Left;
+                }
+                if( this.Direction.Height > 0 && this.Direction.Height > this.Direction.Width )
+                {
+                    return MovingDirection.Down;
+                }
+                if( this.Direction.Height < 0 && this.Direction.Height > this.Direction.Width )
+                {
+                    return MovingDirection.Up;
+                }
+                return MovingDirection.Up;
+            }
+        }
+
         public void AddToList( Box b )
         {
             if( !BoxList.Contains( b ) )
@@ -415,7 +439,7 @@ namespace LiveIT2._1
             {
                 g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
             }
-            g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );          
+            g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
         }
 
         public void ChangePosition()
