@@ -28,7 +28,7 @@ namespace LiveIT2._1
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
-        Timer _animateCat;
+        Timer _animateAnimal;
         List <Bitmap> _waterList = new List<Bitmap>();
         List<Bitmap> _rainList = new List<Bitmap>();
         List<Bitmap> _thunderList = new List<Bitmap>();
@@ -87,10 +87,10 @@ namespace LiveIT2._1
             _animate.Interval = 10;
             _rainTimer = new Timer();
 
-            _animateCat = new Timer();
-            _animateCat.Interval = 10;
-            _animateCat.Start();
-            _animateCat.Tick += new EventHandler( T_Cat_Anim );
+            _animateAnimal = new Timer();
+            _animateAnimal.Interval = 15;
+            _animateAnimal.Start();
+            _animateAnimal.Tick += new EventHandler( T_Cat_Anim );
 
             _rainTimer.Start();
             _rainTimer.Interval = 10;
