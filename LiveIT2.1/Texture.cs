@@ -25,12 +25,13 @@ namespace LiveIT2._1
         Bitmap _textureRabbitLeft, _textureRabbitUp, _textureRabbitDown, _textureRabbitRight;
         Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
         Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
+        //Bitmap _textureCarLeft, _textureCarUp, _textureCarDown, _textureCarRight;
 
-        Bitmap _playerTexture;
+        Bitmap _playerTexture,_playerCarTexture;
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
-        Timer _animateAnimal;
+        Timer _animateAnimal, _animateCar;
         List <Bitmap> _waterList = new List<Bitmap>();
         List<Bitmap> _rainList = new List<Bitmap>();
         List<Bitmap> _thunderList = new List<Bitmap>();
@@ -75,11 +76,17 @@ namespace LiveIT2._1
         List<Bitmap> _gazelleDownList = new List<Bitmap>();
         List<Bitmap> _gazelleRightList = new List<Bitmap>();
 
+        //List<Bitmap> _carLeftList = new List<Bitmap>();
+        //List<Bitmap> _carUpList = new List<Bitmap>();
+        //List<Bitmap> _carDownList = new List<Bitmap>();
+        //List<Bitmap> _carRightList = new List<Bitmap>();
+
         int count = 0;
         int count2 = 0;
         int count3 = 0;
 
         int _countAnimal;
+        int _countCar;
 
         public Texture()
         {
@@ -93,6 +100,11 @@ namespace LiveIT2._1
             _animateAnimal.Interval = 15;
             _animateAnimal.Start();
             _animateAnimal.Tick += new EventHandler( T_Cat_Anim );
+
+            //_animateCar = new Timer();
+            //_animateCar.Interval = 15;
+            //_animateCar.Start();
+            //_animateCar.Tick += new EventHandler(T_Car_Anim);
 
             _rainTimer.Start();
             _rainTimer.Interval = 10;
@@ -138,6 +150,12 @@ namespace LiveIT2._1
 
 
             _playerTexture = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
+            _playerCarTexture = new Bitmap(@"..\..\..\assets\Car\car.png");
+
+            //_textureCarDown = new Bitmap(@"..\..\..\assets\Car\Car-Down\a.png");
+            //_textureCarUp = new Bitmap(@"..\..\..\assets\Car\Car-Up\a.png");
+            //_textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
+            //_textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
                
 
             _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
@@ -252,6 +270,11 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\", _gazelleRightList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", _gazelleDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", _gazelleUpList);
+
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Left\", _carLeftList);
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", _carRightList);
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", _carDownList);
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", _carUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -333,6 +356,7 @@ namespace LiveIT2._1
                 _countAnimal = 0;
             }
         }
+        
 
         private void T_rain_tick( object sender, EventArgs e )
         {
@@ -599,6 +623,16 @@ namespace LiveIT2._1
         public Bitmap GetThunder()
         {
             return _textureThunder;
+        }
+        public Bitmap LoadTexture(Car car)
+        {
+            switch (car.Texture)
+            {
+                case CarTexture.MainPlayerCar:
+                    return _playerCarTexture;
+                default:
+                    return _playerCarTexture;
+            }
         }
     }
 }
