@@ -21,7 +21,6 @@ namespace LiveIT2._1
             DefaultSpeed = Speed;
             ViewDistance = 400;
             TargetAnimals = new List<AnimalTexture>() { AnimalTexture.Rabbit, AnimalTexture.Cow };
-            Hunger = 50;
         }
 
         public override void Behavior()
