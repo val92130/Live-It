@@ -38,7 +38,6 @@
             this._fpsTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this._buttonExit = new System.Windows.Forms.Button();
-            this.AnimalButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.animalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,7 @@
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
             this.buttonMountain = new System.Windows.Forms.Button();
+            this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -201,19 +201,6 @@
             this._buttonExit.Text = "Exit";
             this._buttonExit.UseVisualStyleBackColor = false;
             this._buttonExit.Click += new System.EventHandler(this._buttonExit_Click);
-            // 
-            // AnimalButton
-            // 
-            this.AnimalButton.BackColor = System.Drawing.Color.DarkOrange;
-            this.AnimalButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AnimalButton.ForeColor = System.Drawing.Color.Transparent;
-            this.AnimalButton.Location = new System.Drawing.Point(12, 144);
-            this.AnimalButton.Name = "AnimalButton";
-            this.AnimalButton.Size = new System.Drawing.Size(203, 30);
-            this.AnimalButton.TabIndex = 14;
-            this.AnimalButton.Text = "Place Animal";
-            this.AnimalButton.UseVisualStyleBackColor = false;
-            this.AnimalButton.Click += new System.EventHandler(this.AnimalButton_Click);
             // 
             // menuStrip1
             // 
@@ -403,16 +390,30 @@
             this.buttonMountain.UseVisualStyleBackColor = false;
             this.buttonMountain.Click += new System.EventHandler(this.buttonMountain_Click);
             // 
+            // _buttonSpawnPlayer
+            // 
+            this._buttonSpawnPlayer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this._buttonSpawnPlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonSpawnPlayer.ForeColor = System.Drawing.Color.Transparent;
+            this._buttonSpawnPlayer.Location = new System.Drawing.Point(10, 143);
+            this._buttonSpawnPlayer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._buttonSpawnPlayer.Name = "_buttonSpawnPlayer";
+            this._buttonSpawnPlayer.Size = new System.Drawing.Size(205, 30);
+            this._buttonSpawnPlayer.TabIndex = 20;
+            this._buttonSpawnPlayer.Text = "Play";
+            this._buttonSpawnPlayer.UseVisualStyleBackColor = false;
+            this._buttonSpawnPlayer.Click += new System.EventHandler(this._buttonSpawnPlayer_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this._buttonSpawnPlayer);
             this.Controls.Add(this.buttonMountain);
             this.Controls.Add(this._exitButton);
             this.Controls.Add(this._buttonFollowAnimal);
-            this.Controls.Add(this.AnimalButton);
             this.Controls.Add(this._buttonExit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this._fpsTextBox);
@@ -457,7 +458,6 @@
         private System.Windows.Forms.TextBox _fpsTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button _buttonExit;
-        private System.Windows.Forms.Button AnimalButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem animalsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catToolStripMenuItem;
@@ -478,6 +478,7 @@
         private System.Windows.Forms.ToolStripMenuItem treeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bushToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rockToolStripMenuItem;
+        private System.Windows.Forms.Button _buttonSpawnPlayer;
 
     }
 }

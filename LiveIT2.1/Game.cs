@@ -433,5 +433,11 @@ namespace LiveIT2._1
         {
             _selectedVegetation = VegetationTexture.Rock;
         }
+
+        private void _buttonSpawnPlayer_Click( object sender, EventArgs e )
+        {
+            _viewPort.SpawnPlayer( new Point( 500, 500 ) );
+            _map.IsPlayer = true;
+        }
     }
 }

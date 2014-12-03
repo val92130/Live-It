@@ -21,6 +21,7 @@ namespace LiveIT2._1
         {
             _map = map;
             _position = startPosition;
+            _size = new Size( 100, 210 );
             _texture = PlayerTexture.MainPlayer;
         }
 

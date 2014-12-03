@@ -69,6 +69,8 @@
     <Compile Include="Gazelle.cs" />
     <Compile Include="LoopStream.cs" />
     <Compile Include="MovingDirection.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerTexture.cs" />
     <Compile Include="Rock.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>

@@ -23,6 +23,7 @@ namespace LiveIT2._1
         [NonSerializedAttribute]
         MainViewPort _viewPort;
         bool _showDebug, _isRaining;
+        bool _isPlayerSpawned;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -82,6 +83,11 @@ namespace LiveIT2._1
             set { _boxes = value; }
         }
 
+        public bool IsPlayer
+        {
+            get { return _isPlayerSpawned; }
+            set { _isPlayerSpawned = value; }
+        }
         
         public MainViewPort ViewPort
         {

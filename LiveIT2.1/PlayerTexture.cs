@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
-    class PlayerTexture
+    public enum PlayerTexture
     {
+        MainPlayer,
+        AlternatePlayer
     }
 }

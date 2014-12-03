@@ -24,6 +24,7 @@ namespace LiveIT2._1
         Texture _texture;
         bool _changeTexture, _fillTexture,_putAnimal, _followAnimal, _isRaining, _putVegetation;
         Rectangle _screenTop, _screenBottom, _screenLeft, _screenRight;
+        Player _player;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -71,7 +72,6 @@ namespace LiveIT2._1
                         }
                     }
                 _boxList[i].Draw( g, _screen, _texture, _viewPort );
-
             }
 
             for( int i = 0; i < _boxListMini.Count; i++ )
@@ -133,6 +133,11 @@ namespace LiveIT2._1
                 g.DrawImage( _texture.GetRain(), _screen );
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
+
+            if( _map.IsPlayer )
+            {
+                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+            }
         }
 
         private void Rain()
@@ -215,6 +220,10 @@ namespace LiveIT2._1
             _map.Animals.Add( a );
         }
 
+        public void SpawnPlayer( Point position )
+        {
+            _player = new Player( _map, position );
+        }
         public void CreateVegetation( VegetationTexture texture )
         {
             Vegetation v;

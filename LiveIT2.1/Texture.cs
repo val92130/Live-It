@@ -586,9 +586,9 @@ namespace LiveIT2._1
             switch( player.Texture )
             {
                 case PlayerTexture.MainPlayer:
-                    return _textureGrass;
+                    return _playerTexture;
                 default:
-                    return _textureGrass;
+                    return _playerTexture;
             }
         }
 
