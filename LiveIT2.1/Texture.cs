@@ -23,6 +23,8 @@ namespace LiveIT2._1
         Bitmap _textureCowLeft, _textureCowUp, _textureCowDown, _textureCowRight;
         Bitmap _textureLionLeft, _textureLionUp, _textureLionDown, _textureLionRight;
         Bitmap _textureRabbitLeft, _textureRabbitUp, _textureRabbitDown, _textureRabbitRight;
+        Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
+        //Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
@@ -60,6 +62,16 @@ namespace LiveIT2._1
         List<Bitmap> _rabbitUpList = new List<Bitmap>();
         List<Bitmap> _rabbitDownList = new List<Bitmap>();
         List<Bitmap> _rabbitRightList = new List<Bitmap>();
+
+        List<Bitmap> _elephantLeftList = new List<Bitmap>();
+        List<Bitmap> _elephantUpList = new List<Bitmap>();
+        List<Bitmap> _elephantDownList = new List<Bitmap>();
+        List<Bitmap> _elephantRightList = new List<Bitmap>();
+
+        //List<Bitmap> _gazelleLeftList = new List<Bitmap>();
+        //List<Bitmap> _gazelleUpList = new List<Bitmap>();
+        //List<Bitmap> _gazelleDownList = new List<Bitmap>();
+        //List<Bitmap> _gazelleRightList = new List<Bitmap>();
 
         int count = 0;
         int count2 = 0;
@@ -149,6 +161,16 @@ namespace LiveIT2._1
             _textureRabbitLeft = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\a.png");
             _textureRabbitRight = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\a.png");
 
+            _textureElephantDown = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Down\a.png");
+            _textureElephantUp = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Up\a.png");
+            _textureElephantLeft = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Left\a.png");
+            _textureElephantRight = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Right\a.png");
+
+            //_textureGazelleDown = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\a.png");
+            //_textureGazelleUp = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\a.png");
+            //_textureGazelleLeft = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\a.png");
+            //_textureGazelleRight = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\a.png");
+
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
             _textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
@@ -216,6 +238,16 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\", _rabbitRightList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\", _rabbitDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\", _rabbitUpList);
+
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Left\", _elephantLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Right\", _elephantRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Down\", _elephantDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Up\", _elephantUpList);
+
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\", _gazelleLeftList);
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\", _gazelleRightList);
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", _gazelleDownList);
+            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", _gazelleUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -273,6 +305,22 @@ namespace LiveIT2._1
                 _textureRabbitRight = _rabbitRightList[_countAnimal];
 
                 _textureRabbitUp = _rabbitUpList[_countAnimal];
+
+                _textureElephantDown = _elephantDownList[_countAnimal];
+
+                _textureElephantLeft = _elephantLeftList[_countAnimal];
+
+                _textureElephantRight = _elephantRightList[_countAnimal];
+
+                _textureElephantUp = _elephantUpList[_countAnimal];
+
+                //_textureGazelleDown = _gazelleDownList[_countAnimal];
+
+                //_textureGazelleLeft = _gazelleLeftList[_countAnimal];
+
+                //_textureGazelleRight = _gazelleRightList[_countAnimal];
+
+                //_textureGazelleUp = _gazelleUpList[_countAnimal];
 
                 _countAnimal++;
             }
@@ -454,7 +502,19 @@ namespace LiveIT2._1
                             throw new NotSupportedException("No texture found for this direction");
                     }
                 case AnimalTexture.Elephant:
-                    return _textureElephant;
+                    switch (animal.MovingDirection)
+                    {
+                        case MovingDirection.Left:
+                            return _textureElephantLeft;
+                        case MovingDirection.Up:
+                            return _textureElephantUp;
+                        case MovingDirection.Down:
+                            return _textureElephantDown;
+                        case MovingDirection.Right:
+                            return _textureElephantRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
                 case AnimalTexture.Lion:
                     switch (animal.MovingDirection)
                     {
@@ -497,10 +557,21 @@ namespace LiveIT2._1
                         default:
                             throw new NotSupportedException( "No texture found for this direction" );
                     }
-                
-                   
                 case AnimalTexture.Gazelle:
                     return _textureGazelle;
+                    //switch (animal.MovingDirection)
+                    //{
+                    //    case MovingDirection.Left:
+                    //        return _textureGazelleLeft;
+                    //    case MovingDirection.Up:
+                    //        return _textureGazelleUp;
+                    //    case MovingDirection.Down:
+                    //        return _textureGazelleDown;
+                    //    case MovingDirection.Right:
+                    //        return _textureGazelleRight;
+                    //    default:
+                    //        throw new NotSupportedException("No texture found for this direction");
+                    //}
                 default:
                     return _textureGrass;
             }
