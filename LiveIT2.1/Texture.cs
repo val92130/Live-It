@@ -218,6 +218,15 @@ namespace LiveIT2._1
                 _textureEagleRight = _eagleRightList[_countAnimal];
 
                 _textureEagleUp = _eagleUpList[_countAnimal];
+
+                _textureCowDown = _cowDownList[_countAnimal];
+
+                _textureCowLeft = _cowLeftList[_countAnimal];
+
+                _textureCowRight = _cowRightList[_countAnimal];
+
+                _textureCowUp = _cowUpList[_countAnimal];
+
                 _countAnimal++;
             }
             else
