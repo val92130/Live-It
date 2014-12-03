@@ -28,6 +28,7 @@ namespace LiveIT2._1
         Player _player;
         Car _car ;
         List<Car> _carList = new List<Car>();
+        SoundEnvironment _sounds;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -53,7 +54,25 @@ namespace LiveIT2._1
         public void Draw( Graphics g )
         {
             MoveWithMouse();
-            
+
+            if (_viewPort.Left < 0)
+            {
+                _viewPort.X = 0;
+            }
+
+            if (_viewPort.Top < 0)
+            {
+                _viewPort.Y = 0;
+            }
+            if (_viewPort.Bottom > _map.MapSize )
+            {
+                _viewPort.Y = _map.MapSize - _viewPort.Height ;
+            }
+            if (_viewPort.Right > _map.MapSize)
+            {
+                _viewPort.X = _map.MapSize - _viewPort.Width;
+            }
+
             Random t = new Random();
             if( t.Next( 0, 50000 ) == 30 ) _map.IsRaining = true;
             if( t.Next( 0, 20000 ) == 40 && _map.IsRaining )
@@ -95,6 +114,28 @@ namespace LiveIT2._1
             }
             if( _map.IsPlayer )
             {
+
+                if (_player.Position.X < 0)
+                {
+                    _player.Position = new Point(0, _player.Position.Y);
+                }
+                if (_player.Position.Y < 0)
+                {
+                    _player.Position = new Point(_player.Position.X, 0);
+                }
+
+                if (_player.Position.X > _map.MapSize - _player.Area.Width)
+                {
+                    _player.Position = new Point(_map.MapSize - _player.Area.Width, _player.Position.Y);
+                }
+                if (_player.Position.Y > _map.MapSize - _player.Area.Width)
+                {
+                    _player.Position = new Point(_player.Position.X, _map.MapSize - _player.Area.Width);
+                }
+
+                
+                _player.BoxList = _map.GetOverlappedBoxes(_player.AreaBottom);
+
                 g.DrawString( _player.MovingDirection.ToString(), new Font( "Arial", 10f ), Brushes.Black, _player.RelativePosition );
 
                 if( !_player.IsMoving )
@@ -108,7 +149,25 @@ namespace LiveIT2._1
 
                 if( _map.IsInCar )
                 {
-                    _player.Position = _carList[0].Position;
+                    if (_player.Car.Position.X < 0)
+                    {
+                        _player.Car.Position = new Point(0, _player.Car.Position.Y);
+                    }
+                    if (_player.Car.Position.Y < 0)
+                    {
+                        _player.Car.Position = new Point(_player.Car.Position.X, 0);
+                    }
+
+                    if (_player.Car.Position.X > _map.MapSize - _player.Car.Area.Width)
+                    {
+                        _player.Car.Position = new Point(_map.MapSize - _player.Car.Area.Width, _player.Car.Position.Y);
+                    }
+                    if (_player.Car.Position.Y > _map.MapSize - _player.Car.Area.Width)
+                    {
+                        _player.Car.Position = new Point(_player.Car.Position.X, _map.MapSize - _player.Car.Area.Width);
+                    }
+
+                    _player.Position = _player.Car.Position;
                 }
             }
             foreach( Car car in _carList )
@@ -168,7 +227,10 @@ namespace LiveIT2._1
                 {
                     if( _player.Area.IntersectsWith( car.Area ) && _map.IsInCar == false )
                     {
+                        _sounds.StartEngine();
                         _map.IsInCar = true;
+                        _player.Car = car;
+                        
                     }
                 }
             }
@@ -351,6 +413,7 @@ namespace LiveIT2._1
         public Rectangle ViewPort
         {
             get { return _viewPort; }
+            set { _viewPort = value; }
         }
 
         public Rectangle MiniMap
@@ -491,25 +554,28 @@ namespace LiveIT2._1
                 {
                     _player.MovingDirection = MovingDirection.Left;
                 }
+                
                 _player.Position = new Point(_player.Position.X + (centimeters / 2), _player.Position.Y);
                 _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
                 _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
                 _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+
+                
             }
             else if( _map.IsPlayer && _map.IsInCar )
             {
                 if( centimeters > 0 )
                 {
-                    _carList[0].MovingDirection = MovingDirection.Right;
+                    _player.Car.MovingDirection = MovingDirection.Right;
                 }
                 else
                 {
-                    _carList[0].MovingDirection = MovingDirection.Left;
+                    _player.Car.MovingDirection = MovingDirection.Left;
                 }
-                _carList[0].Position = new Point( _carList[0].Position.X + (centimeters * 2), _carList[0].Position.Y );
+                _player.Car.Position = new Point(_player.Car.Position.X + (centimeters * 2), _player.Car.Position.Y);
                 _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _carList[0].Area.X - (_viewPort.Size.Width / 2) + (_carList[0].Area.Width / 2);
-                _viewPort.Y = _carList[0].Area.Y - (_viewPort.Size.Height / 2) + (_carList[0].Area.Height / 2);
+                _viewPort.X = _player.Car.Area.X - (_viewPort.Size.Width / 2) + (_player.Car.Area.Width / 2);
+                _viewPort.Y = _player.Car.Area.Y - (_viewPort.Size.Height / 2) + (_player.Car.Area.Height / 2);
             }
             
         }
@@ -533,21 +599,24 @@ namespace LiveIT2._1
                 _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
                 _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
                 _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+
+                
+                
             }
             else if( _map.IsPlayer && _map.IsInCar )
             {
                 if( centimeters > 0 )
                 {
-                    _carList[0].MovingDirection = MovingDirection.Down;
+                    _player.Car.MovingDirection = MovingDirection.Down;
                 }
                 else
                 {
-                    _carList[0].MovingDirection = MovingDirection.Up;
+                    _player.Car.MovingDirection = MovingDirection.Up;
                 }
-                _carList[0].Position = new Point( _carList[0].Position.X, _carList[0].Position.Y + (centimeters * 2) );
+                _player.Car.Position = new Point(_player.Car.Position.X, _player.Car.Position.Y + (centimeters * 2));
                 _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _carList[0].Area.X - (_viewPort.Size.Width / 2) + (_carList[0].Area.Width / 2);
-                _viewPort.Y = _carList[0].Area.Y - (_viewPort.Size.Height / 2) + (_carList[0].Area.Height / 2);
+                _viewPort.X = _player.Car.Area.X - (_viewPort.Size.Width / 2) + (_player.Car.Area.Width / 2);
+                _viewPort.Y = _player.Car.Area.Y - (_viewPort.Size.Height / 2) + (_player.Car.Area.Height / 2);
             }
             
         }
@@ -650,6 +719,13 @@ namespace LiveIT2._1
         {
             get { return _player; }
         }
+
+        public SoundEnvironment SoundEnvironment
+        {
+            get { return _sounds; }
+            set { _sounds = value; }
+        }
+
 
         public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )
         {

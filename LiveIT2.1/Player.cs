@@ -17,6 +17,8 @@ namespace LiveIT2._1
         private  int _speed;
         MovingDirection _movingDirection;
         bool _isMoving;
+        Car _car;
+        List<Box> _boxList;
         
 
         public Player( Map map, Point startPosition )
@@ -31,6 +33,11 @@ namespace LiveIT2._1
         {
             get { return new Rectangle( _position, _size ); }
         }
+        public Rectangle AreaBottom
+        {
+            get { return new Rectangle(new Point(_position.X, _position.Y + (_size.Height/2)), new Size(_size.Width, _size.Height/2)); }
+        }
+
 
         public Point Position
         {
@@ -84,6 +91,18 @@ namespace LiveIT2._1
         {
             get { return _isMoving; }
             set { _isMoving = value; }
+        }
+
+        public Car Car
+        {
+            get { return _car; }
+            set { _car = value; }
+        }
+
+        public List<Box> BoxList
+        {
+            get { return _boxList; }
+            set { _boxList = value; }
         }
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )

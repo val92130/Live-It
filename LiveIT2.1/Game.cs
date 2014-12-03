@@ -28,6 +28,8 @@ namespace LiveIT2._1
         bool down;
         bool ctrl;
 
+        Point _playerPosition;
+
         AnimalTexture _selectedAnimal;
 
         bool ShowDebugInfo = false;
@@ -90,10 +92,16 @@ namespace LiveIT2._1
             t.Interval = 10;
             t.Tick += new EventHandler( t_Tick );
 
+            Random r = new Random();
+            int _random = r.Next(0, _map.MapSize);
+            _playerPosition = new Point(_random, _random);
+
+
             fpst.Start();
             t.Start();
             _soundEnvironment = new SoundEnvironment();
             _soundEnvironment.LoadMap( _map );
+            _viewPort.SoundEnvironment = _soundEnvironment;
         }
 
         public void LoadMap(Map map)
@@ -151,6 +159,7 @@ namespace LiveIT2._1
             g.DrawImage(_background, new Point(0,0));
             _soundEnvironment.LoadBoxes(_viewPort.BoxList);
             _soundEnvironment.PlayAllSounds();
+            _soundEnvironment.PlayerSounds();
             Interlocked.Increment(ref _fpsCount);
                       
         }
@@ -174,10 +183,10 @@ namespace LiveIT2._1
 
         private void Form1_KeyDown( object sender, KeyEventArgs e )
         {
-            if( e.KeyCode == Keys.Z ) { up = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
-            if( e.KeyCode == Keys.Q ) { left = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
-            if( e.KeyCode == Keys.S ) { down = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
-            if( e.KeyCode == Keys.D ) { right = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
+            if (e.KeyCode == Keys.Z) { up = true; if (_map.IsPlayer) _viewPort.Player.IsMoving = true; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = true; }
+            if (e.KeyCode == Keys.Q) { left = true; if (_map.IsPlayer) _viewPort.Player.IsMoving = true; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = true; }
+            if (e.KeyCode == Keys.S) { down = true; if (_map.IsPlayer) _viewPort.Player.IsMoving = true; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = true; }
+            if (e.KeyCode == Keys.D) { right = true; if (_map.IsPlayer) _viewPort.Player.IsMoving = true; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = true; }
             if( e.KeyCode == Keys.E ) {
                 
                 if( _map.IsInCar )
@@ -196,12 +205,19 @@ namespace LiveIT2._1
 
         private void Form1_KeyUp( object sender, KeyEventArgs e )
         {
-            if( e.KeyCode == Keys.Z ) { up = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
-            if( e.KeyCode == Keys.Q ) { left = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
-            if( e.KeyCode == Keys.S ) { down = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
-            if( e.KeyCode == Keys.D ) { right = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
+            if (e.KeyCode == Keys.Z) { up = false; if (_map.IsPlayer) _viewPort.Player.IsMoving = false; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = false; }
+            if (e.KeyCode == Keys.Q) { left = false; if (_map.IsPlayer) _viewPort.Player.IsMoving = false; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = false; }
+            if (e.KeyCode == Keys.S) { down = false; if (_map.IsPlayer) _viewPort.Player.IsMoving = false; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = false; }
+            if (e.KeyCode == Keys.D) { right = false; if (_map.IsPlayer) _viewPort.Player.IsMoving = false; if (_map.IsInCar) _viewPort.Player.Car.IsMoving = false; }
             if( e.KeyCode == Keys.E ) { _viewPort.TryEnter = false; }
             if( e.KeyCode == Keys.ControlKey ) { ctrl = false; }
+            if (e.KeyCode == Keys.R)
+            {
+                if (_map.IsInCar)
+                {
+                    _viewPort.Player.Car.ToggleRadio();
+                }
+            }
         }
 
         private void Form1_MouseClick( object sender, MouseEventArgs e )
@@ -450,25 +466,31 @@ namespace LiveIT2._1
 
         private void _buttonSpawnPlayer_Click( object sender, EventArgs e )
         {
-            _viewPort.SpawnPlayer( new Point( 1000, 1000 ) );
+            
+
             
             if( !_map.IsPlayer )
             {
+                _viewPort.SpawnPlayer(_playerPosition);
                 _map.IsPlayer = true;
                 _buttonSpawnPlayer.Text = "Quit";
                 _viewPort.InitSpawn();
             }
             else
             {
+                _playerPosition = _map.ViewPort.Player.Position;
                 _map.IsPlayer = false;
+                _map.IsInCar = false;
                 _buttonSpawnPlayer.Text = "Play";
+                _map.ViewPort.ViewPort = new Rectangle(_map.ViewPort.ViewPort.Location, new Size(800,800));
             }
         }
 
         private void carButton_Click(object sender, EventArgs e)
         {
-            _viewPort.SpawnCar(new Point(1000, 1000));
-
+            Random r = new Random();
+            int _random = r.Next(_viewPort.ViewPort.X, _viewPort.ViewPort.Right);
+            _viewPort.SpawnCar(new Point(_random, _random));
         }
     }
 }

@@ -15,15 +15,24 @@ namespace LiveIT2._1
         CarTexture _texture;
         SizeF _direction;
         private  int _speed;
+        bool _isMoving;
+        bool _isRadioPlaying;
         MovingDirection _movingDirection;
+        RadioSongs _radio;
         
 
         public Car( Map map, Point startPosition )
         {
             _map = map;
             _position = startPosition;
-            _size = new Size( 200, 300 );
+            _size = new Size( 400, 400 );
             _texture = CarTexture.MainPlayerCar;
+
+            Array values = Enum.GetValues(typeof(RadioSongs));
+            Random random = new Random();
+            RadioSongs randomRadio = (RadioSongs)values.GetValue(random.Next(values.Length));
+            _radio = randomRadio;
+
         }
 
         public Rectangle Area
@@ -75,6 +84,35 @@ namespace LiveIT2._1
         {
             get { return _speed; }
             set { _speed = value; }
+        }
+
+        public bool IsMoving
+        {
+            get { return _isMoving; }
+            set { _isMoving = value; }
+        }
+
+        public void ToggleRadio()
+        {
+            if (_isRadioPlaying == true)
+            {
+                _isRadioPlaying = false;
+            }
+            else
+            {
+                _isRadioPlaying = true;
+            }
+        }
+
+        public bool IsRadioPlaying
+        {
+            get { return _isRadioPlaying; }
+        }
+
+        public RadioSongs RadioSong
+        {
+            get { return _radio; }
+            internal set { _radio = value; }
         }
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
