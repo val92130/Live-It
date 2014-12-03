@@ -22,6 +22,7 @@ namespace LiveIT2._1
         Bitmap _textureEagleLeft, _textureEagleUp, _textureEagleDown, _textureEagleRight;
         Bitmap _textureCowLeft, _textureCowUp, _textureCowDown, _textureCowRight;
         Bitmap _textureLionLeft, _textureLionUp, _textureLionDown, _textureLionRight;
+        Bitmap _textureRabbitLeft, _textureRabbitUp, _textureRabbitDown, _textureRabbitRight;
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
@@ -54,6 +55,11 @@ namespace LiveIT2._1
         List<Bitmap> _lionUpList = new List<Bitmap>();
         List<Bitmap> _lionDownList = new List<Bitmap>();
         List<Bitmap> _lionRightList = new List<Bitmap>();
+
+        List<Bitmap> _rabbitLeftList = new List<Bitmap>();
+        List<Bitmap> _rabbitUpList = new List<Bitmap>();
+        List<Bitmap> _rabbitDownList = new List<Bitmap>();
+        List<Bitmap> _rabbitRightList = new List<Bitmap>();
 
         int count = 0;
         int count2 = 0;
@@ -138,6 +144,11 @@ namespace LiveIT2._1
             _textureLionLeft = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Left\a.png");
             _textureLionRight = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Right\a.png");
 
+            _textureRabbitDown = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\a.png");
+            _textureRabbitUp = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\a.png");
+            _textureRabbitLeft = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\a.png");
+            _textureRabbitRight = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\a.png");
+
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
             _textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
@@ -196,10 +207,10 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Down\", _cowDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Up\", _cowUpList);
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Left\", _lionLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Right\", _lionRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Down\", _lionDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Up\", _lionUpList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\", _rabbitLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\", _rabbitRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\", _rabbitDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\", _rabbitUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -249,6 +260,14 @@ namespace LiveIT2._1
                 _textureLionRight = _lionRightList[_countAnimal];
 
                 _textureLionUp = _lionUpList[_countAnimal];
+
+                _textureRabbitDown = _rabbitDownList[_countAnimal];
+
+                _textureRabbitLeft = _rabbitLeftList[_countAnimal];
+
+                _textureRabbitRight = _rabbitRightList[_countAnimal];
+
+                _textureRabbitUp = _rabbitUpList[_countAnimal];
 
                 _countAnimal++;
             }
@@ -388,7 +407,19 @@ namespace LiveIT2._1
             switch( animal.Texture )
             {
                 case AnimalTexture.Rabbit:
-                    return _textureRabbit;
+                    switch (animal.MovingDirection)
+                    {
+                        case MovingDirection.Left:
+                            return _textureRabbitLeft;
+                        case MovingDirection.Up:
+                            return _textureRabbitUp;
+                        case MovingDirection.Down:
+                            return _textureRabbitDown;
+                        case MovingDirection.Right:
+                            return _textureRabbitRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
                 case AnimalTexture.Cat:
                     switch( animal.MovingDirection )
                     {
