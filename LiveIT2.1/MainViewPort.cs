@@ -93,16 +93,15 @@ namespace LiveIT2._1
             }
             if( _map.IsPlayer )
             {
-                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
-                _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
-                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                
+                
                 g.DrawString( _player.MovingDirection.ToString(), new Font( "Arial", 10f ), Brushes.Black, _player.RelativePosition );
 
                 if( !_player.IsMoving )
                 {
                     _player.MovingDirection = MovingDirection.Idle;
                 }
+                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
 
             for( int i = 0; i < _map.Vegetation.Count; i++ )
@@ -460,7 +459,10 @@ namespace LiveIT2._1
                 {
                     _player.MovingDirection = MovingDirection.Left;
                 }
-                _player.Position = new Point(_player.Position.X + centimeters, _player.Position.Y);
+                _player.Position = new Point(_player.Position.X + (centimeters / 2), _player.Position.Y);
+                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
+                _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
+                _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
             }
             
         }
@@ -480,9 +482,19 @@ namespace LiveIT2._1
                 {
                     _player.MovingDirection = MovingDirection.Up;
                 }
-                _player.Position = new Point( _player.Position.X, _player.Position.Y + centimeters );
+                _player.Position = new Point( _player.Position.X, _player.Position.Y + (centimeters / 2) );
+                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
+                _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
+                _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
             }
             
+        }
+
+        public void InitSpawn()
+        {
+            _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
+            _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
+            _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
         }
 
         /// <summary>
