@@ -93,7 +93,7 @@ namespace LiveIT2._1
             }
             if( _map.IsPlayer )
             {
-                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
+                _viewPort.Size = new Size( _screen.Width, _screen.Height );
                 _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
                 _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
                 _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
@@ -149,7 +149,12 @@ namespace LiveIT2._1
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
+            if( _map.IsPlayer )
+            {
+                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                _car.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
 
+            }
         }
 
         private void Rain()

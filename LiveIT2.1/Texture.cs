@@ -25,6 +25,7 @@ namespace LiveIT2._1
         Bitmap _textureRabbitLeft, _textureRabbitUp, _textureRabbitDown, _textureRabbitRight;
         Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
         Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
+        Bitmap _texturePlayerLeft, _texturePlayerRight, _texturePlayerUp, _texturePlayerDown, _texturePlayerIdle;
         //Bitmap _textureCarLeft, _textureCarUp, _textureCarDown, _textureCarRight;
 
         Bitmap _playerTexture,_playerCarTexture;
@@ -32,6 +33,8 @@ namespace LiveIT2._1
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
         Timer _animateAnimal, _animateCar;
+        Timer _animatePlayer;
+
         List <Bitmap> _waterList = new List<Bitmap>();
         List<Bitmap> _rainList = new List<Bitmap>();
         List<Bitmap> _thunderList = new List<Bitmap>();
@@ -76,6 +79,11 @@ namespace LiveIT2._1
         List<Bitmap> _gazelleDownList = new List<Bitmap>();
         List<Bitmap> _gazelleRightList = new List<Bitmap>();
 
+        List<Bitmap> _playerLeftList = new List<Bitmap>();
+        List<Bitmap> _playerUpList = new List<Bitmap>();
+        List<Bitmap> _playerDownList = new List<Bitmap>();
+        List<Bitmap> _playerRightList = new List<Bitmap>();
+
         //List<Bitmap> _carLeftList = new List<Bitmap>();
         //List<Bitmap> _carUpList = new List<Bitmap>();
         //List<Bitmap> _carDownList = new List<Bitmap>();
@@ -84,6 +92,8 @@ namespace LiveIT2._1
         int count = 0;
         int count2 = 0;
         int count3 = 0;
+
+        int countPlayer;
 
         int _countAnimal;
         int _countCar;
@@ -100,6 +110,11 @@ namespace LiveIT2._1
             _animateAnimal.Interval = 15;
             _animateAnimal.Start();
             _animateAnimal.Tick += new EventHandler( T_Cat_Anim );
+
+            _animatePlayer = new Timer();
+            _animatePlayer.Interval = 10;
+            _animatePlayer.Start();
+            _animatePlayer.Tick += new EventHandler( T_Player_Anim );
 
             //_animateCar = new Timer();
             //_animateCar.Interval = 15;
@@ -193,6 +208,12 @@ namespace LiveIT2._1
             _textureGazelleLeft = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\a.png");
             _textureGazelleRight = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\a.png");
 
+            _texturePlayerDown = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
+            _texturePlayerUp = new Bitmap( @"..\..\..\assets\Player\Player-Up\a.png" );
+            _texturePlayerLeft = new Bitmap( @"..\..\..\assets\Player\Player-Left\a.png" );
+            _texturePlayerRight = new Bitmap( @"..\..\..\assets\Player\Player-Right\a.png" );
+            _texturePlayerIdle = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
+
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
             _textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
@@ -271,10 +292,39 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", _gazelleDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", _gazelleUpList);
 
+            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Left\", _playerLeftList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Right\", _playerRightList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Down\", _playerDownList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Up\", _playerUpList );
+
             //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Left\", _carLeftList);
             //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", _carRightList);
             //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", _carDownList);
             //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", _carUpList);
+        }
+
+        private void T_Player_Anim( object sender, EventArgs e )
+        {
+            if( countPlayer + 1 <= _playerLeftList.Count )
+            {
+                _texturePlayerDown = _playerDownList[countPlayer];
+                _playerDownList[countPlayer].MakeTransparent( Color.White );
+
+                _texturePlayerLeft = _playerLeftList[countPlayer];
+                _playerLeftList[countPlayer].MakeTransparent( Color.White );
+
+                _texturePlayerRight = _playerRightList[countPlayer];
+                _playerRightList[countPlayer].MakeTransparent( Color.White );
+
+                _texturePlayerUp = _playerUpList[countPlayer];
+                _playerUpList[countPlayer].MakeTransparent( Color.White );
+
+                countPlayer++;
+            }
+            else
+            {
+                countPlayer = 0;
+            }
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -610,7 +660,21 @@ namespace LiveIT2._1
             switch( player.Texture )
             {
                 case PlayerTexture.MainPlayer:
-                    return _playerTexture;
+                    switch( player.MovingDirection )
+                    {
+                        case MovingDirection.Up :
+                            return _texturePlayerUp;
+                        case MovingDirection.Down:
+                            return _texturePlayerDown;
+                        case MovingDirection.Left:
+                            return _texturePlayerLeft;
+                        case MovingDirection.Right:
+                            return _texturePlayerRight;
+                        case MovingDirection.Idle:
+                            return _texturePlayerIdle;
+                        default :
+                            return _texturePlayerIdle;
+                    }
                 default:
                     return _playerTexture;
             }
