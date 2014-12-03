@@ -15,6 +15,7 @@ namespace LiveIT2._1
         CarTexture _texture;
         SizeF _direction;
         private  int _speed;
+        MovingDirection _movingDirection;
         
 
         public Car( Map map, Point startPosition )
@@ -65,7 +66,11 @@ namespace LiveIT2._1
             get { return _direction; }
             internal set { _direction = value; }
         }
-
+        public MovingDirection MovingDirection
+        {
+            get { return _movingDirection; }
+            set { _movingDirection = value; }
+        }
         public int Speed
         {
             get { return _speed; }
