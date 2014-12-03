@@ -26,7 +26,7 @@ namespace LiveIT2._1
         Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
         Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
         Bitmap _texturePlayerLeft, _texturePlayerRight, _texturePlayerUp, _texturePlayerDown, _texturePlayerIdle;
-        //Bitmap _textureCarLeft, _textureCarUp, _textureCarDown, _textureCarRight;
+        Bitmap _textureCarLeft, _textureCarUp, _textureCarDown, _textureCarRight;
 
         Bitmap _playerTexture,_playerCarTexture;
 
@@ -84,10 +84,10 @@ namespace LiveIT2._1
         List<Bitmap> _playerDownList = new List<Bitmap>();
         List<Bitmap> _playerRightList = new List<Bitmap>();
 
-        //List<Bitmap> _carLeftList = new List<Bitmap>();
-        //List<Bitmap> _carUpList = new List<Bitmap>();
-        //List<Bitmap> _carDownList = new List<Bitmap>();
-        //List<Bitmap> _carRightList = new List<Bitmap>();
+        List<Bitmap> _carLeftList = new List<Bitmap>();
+        List<Bitmap> _carUpList = new List<Bitmap>();
+        List<Bitmap> _carDownList = new List<Bitmap>();
+        List<Bitmap> _carRightList = new List<Bitmap>();
 
         int count = 0;
         int count2 = 0;
@@ -96,7 +96,7 @@ namespace LiveIT2._1
         int countPlayer;
 
         int _countAnimal;
-        int _countCar;
+        int countCar;
 
         public Texture()
         {
@@ -116,10 +116,10 @@ namespace LiveIT2._1
             _animatePlayer.Start();
             _animatePlayer.Tick += new EventHandler( T_Player_Anim );
 
-            //_animateCar = new Timer();
-            //_animateCar.Interval = 15;
-            //_animateCar.Start();
-            //_animateCar.Tick += new EventHandler(T_Car_Anim);
+            _animateCar = new Timer();
+            _animateCar.Interval = 10;
+            _animateCar.Start();
+            _animateCar.Tick += new EventHandler(T_Car_Anim);
 
             _rainTimer.Start();
             _rainTimer.Interval = 10;
@@ -167,10 +167,10 @@ namespace LiveIT2._1
             _playerTexture = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
             _playerCarTexture = new Bitmap(@"..\..\..\assets\Car\car.png");
 
-            //_textureCarDown = new Bitmap(@"..\..\..\assets\Car\Car-Down\a.png");
-            //_textureCarUp = new Bitmap(@"..\..\..\assets\Car\Car-Up\a.png");
-            //_textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
-            //_textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
+            _textureCarDown = new Bitmap(@"..\..\..\assets\Car\Car-Down\a.png");
+            _textureCarUp = new Bitmap(@"..\..\..\assets\Car\Car-Up\a.png");
+            _textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
+            _textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
                
 
             _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
@@ -297,10 +297,10 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Down\", _playerDownList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Up\", _playerUpList );
 
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Left\", _carLeftList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", _carRightList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", _carDownList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", _carUpList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Left\", _carLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", _carRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", _carDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", _carUpList);
         }
 
         private void T_Player_Anim( object sender, EventArgs e )
@@ -324,6 +324,29 @@ namespace LiveIT2._1
             else
             {
                 countPlayer = 0;
+            }
+        }
+        private void T_Car_Anim(object sender, EventArgs e)
+        {
+            if (countCar + 1 <= _carLeftList.Count)
+            {
+                _textureCarDown = _carDownList[countCar];
+                _carDownList[countCar].MakeTransparent(Color.White);
+
+                _textureCarLeft = _carLeftList[countCar];
+                _carLeftList[countCar].MakeTransparent(Color.White);
+
+                _textureCarRight = _carRightList[countCar];
+                _carRightList[countCar].MakeTransparent(Color.White);
+
+                _textureCarUp = _carUpList[countCar];
+                _carUpList[countCar].MakeTransparent(Color.White);
+
+                countCar++;
+            }
+            else
+            {
+                countCar = 0;
             }
         }
 
@@ -693,7 +716,20 @@ namespace LiveIT2._1
             switch (car.Texture)
             {
                 case CarTexture.MainPlayerCar:
-                    return _playerCarTexture;
+                    switch (car.MovingDirection)
+                    {
+                        case MovingDirection.Up:
+                            return _textureCarUp;
+                        case MovingDirection.Down:
+                            return _textureCarDown;
+                        case MovingDirection.Left:
+                            return _textureCarLeft;
+                        case MovingDirection.Right:
+                            return _textureCarRight;
+                        
+                        default:
+                            return _textureCarRight;
+                    }
                 default:
                     return _playerCarTexture;
             }
