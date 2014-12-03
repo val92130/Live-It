@@ -50,8 +50,8 @@ namespace LiveIT2._1
             MoveWithMouse();
             
             Random t = new Random();
-            if( t.Next( 0, 40000 ) == 30 ) _map.IsRaining = true;
-            if( t.Next( 0, 10000 ) == 25 && _map.IsRaining )
+            if( t.Next( 0, 100 ) == 30 ) _map.IsRaining = true;
+            if( t.Next( 0, 1000 ) == 40 && _map.IsRaining )
             {
                 _map.IsRaining = false;
             }

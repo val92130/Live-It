@@ -24,7 +24,7 @@ namespace LiveIT2._1
         Bitmap _textureLionLeft, _textureLionUp, _textureLionDown, _textureLionRight;
         Bitmap _textureRabbitLeft, _textureRabbitUp, _textureRabbitDown, _textureRabbitRight;
         Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
-        //Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
+        Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
@@ -68,10 +68,10 @@ namespace LiveIT2._1
         List<Bitmap> _elephantDownList = new List<Bitmap>();
         List<Bitmap> _elephantRightList = new List<Bitmap>();
 
-        //List<Bitmap> _gazelleLeftList = new List<Bitmap>();
-        //List<Bitmap> _gazelleUpList = new List<Bitmap>();
-        //List<Bitmap> _gazelleDownList = new List<Bitmap>();
-        //List<Bitmap> _gazelleRightList = new List<Bitmap>();
+        List<Bitmap> _gazelleLeftList = new List<Bitmap>();
+        List<Bitmap> _gazelleUpList = new List<Bitmap>();
+        List<Bitmap> _gazelleDownList = new List<Bitmap>();
+        List<Bitmap> _gazelleRightList = new List<Bitmap>();
 
         int count = 0;
         int count2 = 0;
@@ -88,7 +88,7 @@ namespace LiveIT2._1
             _rainTimer = new Timer();
 
             _animateCat = new Timer();
-            _animateCat.Interval = 10;
+            _animateCat.Interval = 15;
             _animateCat.Start();
             _animateCat.Tick += new EventHandler( T_Cat_Anim );
 
@@ -166,10 +166,10 @@ namespace LiveIT2._1
             _textureElephantLeft = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Left\a.png");
             _textureElephantRight = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Right\a.png");
 
-            //_textureGazelleDown = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\a.png");
-            //_textureGazelleUp = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\a.png");
-            //_textureGazelleLeft = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\a.png");
-            //_textureGazelleRight = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\a.png");
+            _textureGazelleDown = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\a.png");
+            _textureGazelleUp = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\a.png");
+            _textureGazelleLeft = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\a.png");
+            _textureGazelleRight = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\a.png");
 
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
@@ -244,10 +244,10 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Down\", _elephantDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Up\", _elephantUpList);
 
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\", _gazelleLeftList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\", _gazelleRightList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", _gazelleDownList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", _gazelleUpList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\", _gazelleLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\", _gazelleRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", _gazelleDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", _gazelleUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -314,13 +314,13 @@ namespace LiveIT2._1
 
                 _textureElephantUp = _elephantUpList[_countAnimal];
 
-                //_textureGazelleDown = _gazelleDownList[_countAnimal];
+                _textureGazelleDown = _gazelleDownList[_countAnimal];
 
-                //_textureGazelleLeft = _gazelleLeftList[_countAnimal];
+                _textureGazelleLeft = _gazelleLeftList[_countAnimal];
 
-                //_textureGazelleRight = _gazelleRightList[_countAnimal];
+                _textureGazelleRight = _gazelleRightList[_countAnimal];
 
-                //_textureGazelleUp = _gazelleUpList[_countAnimal];
+                _textureGazelleUp = _gazelleUpList[_countAnimal];
 
                 _countAnimal++;
             }
@@ -558,20 +558,20 @@ namespace LiveIT2._1
                             throw new NotSupportedException( "No texture found for this direction" );
                     }
                 case AnimalTexture.Gazelle:
-                    return _textureGazelle;
-                    //switch (animal.MovingDirection)
-                    //{
-                    //    case MovingDirection.Left:
-                    //        return _textureGazelleLeft;
-                    //    case MovingDirection.Up:
-                    //        return _textureGazelleUp;
-                    //    case MovingDirection.Down:
-                    //        return _textureGazelleDown;
-                    //    case MovingDirection.Right:
-                    //        return _textureGazelleRight;
-                    //    default:
-                    //        throw new NotSupportedException("No texture found for this direction");
-                    //}
+                    
+                    switch (animal.MovingDirection)
+                    {
+                        case MovingDirection.Left:
+                            return _textureGazelleLeft;
+                        case MovingDirection.Up:
+                            return _textureGazelleUp;
+                        case MovingDirection.Down:
+                            return _textureGazelleDown;
+                        case MovingDirection.Right:
+                            return _textureGazelleRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
                 default:
                     return _textureGrass;
             }
