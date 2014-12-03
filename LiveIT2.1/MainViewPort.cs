@@ -89,6 +89,19 @@ namespace LiveIT2._1
                 }
                 
             }
+            if( _map.IsPlayer )
+            {
+                _viewPort.Size = new Size( _screen.Width, _screen.Height );
+                _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
+                _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                g.DrawString( _player.MovingDirection.ToString(), new Font( "Arial", 10f ), Brushes.Black, _player.RelativePosition );
+
+                if( !_player.IsMoving )
+                {
+                    _player.MovingDirection = MovingDirection.Idle;
+                }
+            }
 
             for( int i = 0; i < _map.Vegetation.Count; i++ )
             {
@@ -134,10 +147,6 @@ namespace LiveIT2._1
             }         
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
-            if( _map.IsPlayer )
-            {
-                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
-            }
         }
 
         private void Rain()
@@ -268,29 +277,37 @@ namespace LiveIT2._1
 
         public void Zoom( int meters )
         {
-            _viewPort.Width += meters;
-            _viewPort.Height += meters;
-            if( _viewPort.Width < _minimalWidthInCentimeter && _viewPort.Height < _minimalWidthInCentimeter )
+            if( !_map.IsPlayer )
             {
-                _viewPort.Width = _minimalWidthInCentimeter;
-                _viewPort.Height = _minimalWidthInCentimeter;
-            }
+                _viewPort.Width += meters;
+                _viewPort.Height += meters;
+                if( _viewPort.Width < _minimalWidthInCentimeter && _viewPort.Height < _minimalWidthInCentimeter )
+                {
+                    _viewPort.Width = _minimalWidthInCentimeter;
+                    _viewPort.Height = _minimalWidthInCentimeter;
+                }
 
-            if( _viewPort.Width > _map.MapSize )
-            {
-                _viewPort.Height = _map.MapSize;
-                _viewPort.Width = _map.MapSize;
+                if( _viewPort.Width > _map.MapSize )
+                {
+                    _viewPort.Height = _map.MapSize;
+                    _viewPort.Width = _map.MapSize;
+                }
             }
+            
                        
         }
 
         public void Offset( Point delta )
         {
-            _viewPort.Offset( delta );
-            if( _viewPort.X < 0 ) _viewPort.X = 0;
-            if( _viewPort.Y < 0 ) _viewPort.Y = 0;
-            if( _viewPort.Right > _map.MapSize ) _viewPort.X = _map.MapSize - _viewPort.Width;
-            if( _viewPort.Bottom > _map.MapSize ) _viewPort.Y = _map.MapSize - _viewPort.Height;
+            if( !_map.IsPlayer )
+            {
+                _viewPort.Offset( delta );
+                if( _viewPort.X < 0 ) _viewPort.X = 0;
+                if( _viewPort.Y < 0 ) _viewPort.Y = 0;
+                if( _viewPort.Right > _map.MapSize ) _viewPort.X = _map.MapSize - _viewPort.Width;
+                if( _viewPort.Bottom > _map.MapSize ) _viewPort.Y = _map.MapSize - _viewPort.Height;
+            } 
+            
         }
 
         public Rectangle ScreenSize
@@ -421,11 +438,43 @@ namespace LiveIT2._1
 
         public void MoveX(int centimeters) 
         {
-            Offset( new Point( centimeters, 0 ) );
+            if( !_map.IsPlayer )
+            {
+                Offset( new Point( centimeters, 0 ) );
+            }
+            else
+            {
+                if( centimeters > 0 )
+                {
+                    _player.MovingDirection = MovingDirection.Right;
+                }
+                else
+                {
+                    _player.MovingDirection = MovingDirection.Left;
+                }
+                _player.Position = new Point(_player.Position.X + centimeters, _player.Position.Y);
+            }
+            
         }
         public void MoveY( int centimeters )
         {
-            Offset( new Point( 0, centimeters ) );
+            if( !_map.IsPlayer )
+            {
+                Offset( new Point( 0, centimeters ) );
+            }
+            else
+            {
+                if( centimeters > 0 )
+                {
+                    _player.MovingDirection = MovingDirection.Down;
+                }
+                else
+                {
+                    _player.MovingDirection = MovingDirection.Up;
+                }
+                _player.Position = new Point( _player.Position.X, _player.Position.Y + centimeters );
+            }
+            
         }
 
         /// <summary>
@@ -513,6 +562,11 @@ namespace LiveIT2._1
         {
             get { return _followAnimal; }
             set { _followAnimal = value; _changeTexture = false; _putAnimal = false; _fillTexture = false; _putVegetation = false; }
+        }
+
+        public Player Player
+        {
+            get { return _player; }
         }
 
         public void DrawRectangleInViewPort( Graphics g,Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )

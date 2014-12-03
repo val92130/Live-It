@@ -174,19 +174,19 @@ namespace LiveIT2._1
 
         private void Form1_KeyDown( object sender, KeyEventArgs e )
         {
-            if( e.KeyCode == Keys.Z ) { up = true; }
-            if( e.KeyCode == Keys.Q ) { left = true; }
-            if( e.KeyCode == Keys.S ) { down = true; }
-            if( e.KeyCode == Keys.D ) { right = true; }
-            if( e.KeyCode == Keys.ControlKey ) { ctrl = true; }
+            if( e.KeyCode == Keys.Z ) { up = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
+            if( e.KeyCode == Keys.Q ) { left = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
+            if( e.KeyCode == Keys.S ) { down = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
+            if( e.KeyCode == Keys.D ) { right = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
+            if( e.KeyCode == Keys.ControlKey ) { ctrl = true;  }
         }
 
         private void Form1_KeyUp( object sender, KeyEventArgs e )
         {
-            if( e.KeyCode == Keys.Z ) { up = false; }
-            if( e.KeyCode == Keys.Q ) { left = false; }
-            if( e.KeyCode == Keys.S ) { down = false; }
-            if( e.KeyCode == Keys.D ) { right = false; }
+            if( e.KeyCode == Keys.Z ) { up = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
+            if( e.KeyCode == Keys.Q ) { left = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
+            if( e.KeyCode == Keys.S ) { down = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
+            if( e.KeyCode == Keys.D ) { right = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
             if( e.KeyCode == Keys.ControlKey ) { ctrl = false; }
         }
 
@@ -436,8 +436,18 @@ namespace LiveIT2._1
 
         private void _buttonSpawnPlayer_Click( object sender, EventArgs e )
         {
-            _viewPort.SpawnPlayer( new Point( 500, 500 ) );
-            _map.IsPlayer = true;
+            _viewPort.SpawnPlayer( new Point( 5000, 5000 ) );
+            
+            if( !_map.IsPlayer )
+            {
+                _map.IsPlayer = true;
+                _buttonSpawnPlayer.Text = "Quit";
+            }
+            else
+            {
+                _map.IsPlayer = false;
+                _buttonSpawnPlayer.Text = "Play";
+            }
         }
     }
 }

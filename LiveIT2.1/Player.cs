@@ -15,6 +15,8 @@ namespace LiveIT2._1
         PlayerTexture _texture;
         SizeF _direction;
         private  int _speed;
+        MovingDirection _movingDirection;
+        bool _isMoving;
         
 
         public Player( Map map, Point startPosition )
@@ -66,10 +68,22 @@ namespace LiveIT2._1
             internal set { _direction = value; }
         }
 
+        public MovingDirection MovingDirection
+        {
+            get { return _movingDirection; }
+            set { _movingDirection = value; }
+        }
+
         public int Speed
         {
             get { return _speed; }
             set { _speed = value; }
+        }
+
+        public bool IsMoving
+        {
+            get { return _isMoving; }
+            set { _isMoving = value; }
         }
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )

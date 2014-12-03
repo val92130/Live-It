@@ -11,6 +11,7 @@ namespace LiveIT2._1
         Up,
         Down,
         Left,
-        Right
+        Right,
+        Idle
     }
 }
