@@ -16,8 +16,10 @@ namespace LiveIT2._1
             : base( map, starPosition )
         {
             Position = starPosition;
+            Random r = new Random();
+            int _random = r.Next(150,350);
             Texture = AnimalTexture.Eagle;
-            Size = new Size(250, 250);
+            Size = new Size( _random, _random );
             FavoriteEnvironnment = BoxGround.Forest;
             Speed = 150000;
             DefaultSpeed = Speed;

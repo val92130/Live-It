@@ -50,8 +50,8 @@ namespace LiveIT2._1
             MoveWithMouse();
             
             Random t = new Random();
-            if( t.Next( 0, 100 ) == 30 ) _map.IsRaining = true;
-            if( t.Next( 0, 1000 ) == 40 && _map.IsRaining )
+            if( t.Next( 0, 50000 ) == 30 ) _map.IsRaining = true;
+            if( t.Next( 0, 20000 ) == 40 && _map.IsRaining )
             {
                 _map.IsRaining = false;
             }
@@ -83,12 +83,25 @@ namespace LiveIT2._1
 
             for( int i = 0; i < _map.Animals.Count; i++ )
             {
-                _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                if( _map.Animals[i].Texture != AnimalTexture.Eagle )
+                {
+                    _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                }
+                
             }
 
             for( int i = 0; i < _map.Vegetation.Count; i++ )
             {
                 _map.Vegetation[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+            }
+
+            for( int i = 0; i < _map.Animals.Count; i++ )
+            {
+                if( _map.Animals[i].Texture == AnimalTexture.Eagle )
+                {
+                    _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                }
+
             }
 
             if( _changeTexture ) DrawMouseSelector( g );
