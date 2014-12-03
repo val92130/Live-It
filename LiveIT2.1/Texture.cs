@@ -21,6 +21,7 @@ namespace LiveIT2._1
         Bitmap _textureDogLeft, _textureDogUp, _textureDogDown, _textureDogRight;
         Bitmap _textureEagleLeft, _textureEagleUp, _textureEagleDown, _textureEagleRight;
         Bitmap _textureCowLeft, _textureCowUp, _textureCowDown, _textureCowRight;
+        Bitmap _textureLionLeft, _textureLionUp, _textureLionDown, _textureLionRight;
 
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
@@ -48,6 +49,11 @@ namespace LiveIT2._1
         List<Bitmap> _cowUpList = new List<Bitmap>();
         List<Bitmap> _cowDownList = new List<Bitmap>();
         List<Bitmap> _cowRightList = new List<Bitmap>();
+
+        List<Bitmap> _lionLeftList = new List<Bitmap>();
+        List<Bitmap> _lionUpList = new List<Bitmap>();
+        List<Bitmap> _lionDownList = new List<Bitmap>();
+        List<Bitmap> _lionRightList = new List<Bitmap>();
 
         int count = 0;
         int count2 = 0;
@@ -127,6 +133,11 @@ namespace LiveIT2._1
             _textureCowLeft = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Left\a.png");
             _textureCowRight = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Right\a.png");
 
+            _textureLionDown = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Down\a.png");
+            _textureLionUp = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Up\a.png");
+            _textureLionLeft = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Left\a.png");
+            _textureLionRight = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Right\a.png");
+
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
             _textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
@@ -185,6 +196,10 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Down\", _cowDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Up\", _cowUpList);
 
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Left\", _lionLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Right\", _lionRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Down\", _lionDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Up\", _lionUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
@@ -226,6 +241,14 @@ namespace LiveIT2._1
                 _textureCowRight = _cowRightList[_countAnimal];
 
                 _textureCowUp = _cowUpList[_countAnimal];
+
+                _textureLionDown = _lionDownList[_countAnimal];
+
+                _textureLionLeft = _lionLeftList[_countAnimal];
+
+                _textureLionRight = _lionRightList[_countAnimal];
+
+                _textureLionUp = _lionUpList[_countAnimal];
 
                 _countAnimal++;
             }
@@ -397,7 +420,19 @@ namespace LiveIT2._1
                 case AnimalTexture.Elephant:
                     return _textureElephant;
                 case AnimalTexture.Lion:
-                    return _textureLion;
+                    switch (animal.MovingDirection)
+                    {
+                        case MovingDirection.Left:
+                            return _textureLionLeft;
+                        case MovingDirection.Up:
+                            return _textureLionUp;
+                        case MovingDirection.Down:
+                            return _textureLionDown;
+                        case MovingDirection.Right:
+                            return _textureLionRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
                 case AnimalTexture.Cow:
                     switch (animal.MovingDirection)
                     {
