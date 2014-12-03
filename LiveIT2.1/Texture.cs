@@ -19,6 +19,8 @@ namespace LiveIT2._1
         Bitmap _textureTree, _textureTree2, _textureTree3, _textureBush, _textureRock, _textureRock2, _textureRock3;
         Bitmap _textureCatLeft, _textureCatUp, _textureCatDown, _textureCatRight;
         Bitmap _textureDogLeft, _textureDogUp, _textureDogDown, _textureDogRight;
+        Bitmap _textureEagleLeft, _textureEagleUp, _textureEagleDown, _textureCowRight;
+
         Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
         Timer _animate, _rainTimer, _thunderTimer;
         Timer _animateCat;
@@ -35,6 +37,11 @@ namespace LiveIT2._1
         List<Bitmap> _dogUpList = new List<Bitmap>();
         List<Bitmap> _dogDownList = new List<Bitmap>();
         List<Bitmap> _dogRightList = new List<Bitmap>();
+
+        List<Bitmap> _eagleLeftList = new List<Bitmap>();
+        List<Bitmap> _eagleUpList = new List<Bitmap>();
+        List<Bitmap> _eagleDownList = new List<Bitmap>();
+        List<Bitmap> _eagleRightList = new List<Bitmap>();
 
         int count = 0;
         int count2 = 0;
@@ -97,11 +104,17 @@ namespace LiveIT2._1
             _textureCatLeft = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
             _textureCatRight = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Right\a.png" );
 
+               
+
             _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
             _textureDogUp = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Up\a.png" );
             _textureDogLeft = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Left\a.png" );
             _textureDogRight = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Right\a.png" );
 
+            _textureEagleDown = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Down\a.png");
+            _textureEagleUp = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Up\a.png");
+            _textureEagleLeft = new Bitmap(@"..\..\..\assets\Animal\Eagle\Dog-Left\a.png");
+            _textureCowRight = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Right\a.png");
 
             _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
             _textureLion.MakeTransparent(Color.White);
@@ -150,6 +163,11 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Right\", _dogRightList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Down\", _dogDownList );
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Up\", _dogUpList );
+
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Left\", _dogLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Right\", _dogRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Down\", _dogDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Up\", _dogUpList);
         }
 
         private void T_Cat_Anim( object sender, EventArgs e )
