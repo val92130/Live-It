@@ -207,6 +207,11 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Down\", _cowDownList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Up\", _cowUpList);
 
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Left\", _lionLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Right\", _lionRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Down\", _lionDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Up\", _lionUpList);
+
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\", _rabbitLeftList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\", _rabbitRightList);
             AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\", _rabbitDownList);
