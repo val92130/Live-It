@@ -449,5 +449,11 @@ namespace LiveIT2._1
                 _buttonSpawnPlayer.Text = "Play";
             }
         }
+
+        private void carButton_Click(object sender, EventArgs e)
+        {
+            _viewPort.SpawnCar(new Point(300, 300));
+
+        }
     }
 }
