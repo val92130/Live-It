@@ -442,6 +442,7 @@ namespace LiveIT2._1
             {
                 _map.IsPlayer = true;
                 _buttonSpawnPlayer.Text = "Quit";
+                _viewPort.InitSpawn();
             }
             else
             {
