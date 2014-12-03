@@ -338,7 +338,7 @@ namespace LiveIT2._1
                 {
                     if (b != null)
                     {
-                        if (b.Ground == BoxGround.Water)
+                        if (b.Ground == BoxGround.Water && this.Texture != AnimalTexture.Eagle)
                         {
                             _isInWater = true;
 
