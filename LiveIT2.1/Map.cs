@@ -24,6 +24,7 @@ namespace LiveIT2._1
         MainViewPort _viewPort;
         bool _showDebug, _isRaining;
         bool _isPlayerSpawned;
+        bool _isInCar;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -115,6 +116,20 @@ namespace LiveIT2._1
         {
             get { return _isRaining; }
             set { _isRaining = value; }
+        }
+
+        public bool IsInCar
+        {
+            get { return _isInCar; }
+            set { _isInCar = value; }
+        }
+
+        public void ExitCar()
+        {
+            if( this.IsInCar )
+            {
+                this.IsInCar = false;
+            }
         }
 
         public List<Box> GetOverlappedBoxes( Rectangle r )

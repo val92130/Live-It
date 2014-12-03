@@ -178,6 +178,19 @@ namespace LiveIT2._1
             if( e.KeyCode == Keys.Q ) { left = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
             if( e.KeyCode == Keys.S ) { down = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
             if( e.KeyCode == Keys.D ) { right = true; if( _map.IsPlayer ) _viewPort.Player.IsMoving = true; }
+            if( e.KeyCode == Keys.E ) {
+                
+                if( _map.IsInCar )
+                {
+                    _viewPort.TryEnter = false;
+                    _map.ExitCar();
+                    
+                }
+                else
+                {
+                    _viewPort.TryEnter = true;
+                }
+            }
             if( e.KeyCode == Keys.ControlKey ) { ctrl = true;  }
         }
 
@@ -187,6 +200,7 @@ namespace LiveIT2._1
             if( e.KeyCode == Keys.Q ) { left = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
             if( e.KeyCode == Keys.S ) { down = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
             if( e.KeyCode == Keys.D ) { right = false; if( _map.IsPlayer ) _viewPort.Player.IsMoving = false; }
+            if( e.KeyCode == Keys.E ) { _viewPort.TryEnter = false; }
             if( e.KeyCode == Keys.ControlKey ) { ctrl = false; }
         }
 
@@ -436,7 +450,7 @@ namespace LiveIT2._1
 
         private void _buttonSpawnPlayer_Click( object sender, EventArgs e )
         {
-            _viewPort.SpawnPlayer( new Point( 5000, 5000 ) );
+            _viewPort.SpawnPlayer( new Point( 1000, 1000 ) );
             
             if( !_map.IsPlayer )
             {
@@ -453,7 +467,7 @@ namespace LiveIT2._1
 
         private void carButton_Click(object sender, EventArgs e)
         {
-            _viewPort.SpawnCar(new Point(300, 300));
+            _viewPort.SpawnCar(new Point(1000, 1000));
 
         }
     }

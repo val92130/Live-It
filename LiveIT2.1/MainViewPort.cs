@@ -23,6 +23,7 @@ namespace LiveIT2._1
         List<Box> _selectedBoxes;
         Texture _texture;
         bool _changeTexture, _fillTexture,_putAnimal, _followAnimal, _isRaining, _putVegetation;
+        bool _tryEnter;
         Rectangle _screenTop, _screenBottom, _screenLeft, _screenRight;
         Player _player;
         Car _car ;
@@ -94,15 +95,21 @@ namespace LiveIT2._1
             }
             if( _map.IsPlayer )
             {
-                
-                
                 g.DrawString( _player.MovingDirection.ToString(), new Font( "Arial", 10f ), Brushes.Black, _player.RelativePosition );
 
                 if( !_player.IsMoving )
                 {
                     _player.MovingDirection = MovingDirection.Idle;
                 }
-                _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                if( !_map.IsInCar )
+                {
+                    _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                }
+
+                if( _map.IsInCar )
+                {
+                    _player.Position = _carList[0].Position;
+                }
             }
 
             for( int i = 0; i < _map.Vegetation.Count; i++ )
@@ -154,7 +161,16 @@ namespace LiveIT2._1
             }
             DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
 
-
+            if( TryEnter && !_map.IsInCar )
+            {
+                foreach( Car car in _carList )
+                {
+                    if( _player.Area.IntersectsWith( car.Area ) && _map.IsInCar == false )
+                    {
+                        _map.IsInCar = true;
+                    }
+                }
+            }
         }
 
         private void Rain()
@@ -243,7 +259,10 @@ namespace LiveIT2._1
         }
         public void SpawnCar(Point position)
         {
-            _carList.Add(new Car(_map, position));
+            if( _carList.Count >= 0 )
+            {
+                _carList.Add( new Car( _map, position ) );
+            }   
         }
 
         public void CreateVegetation( VegetationTexture texture )
@@ -449,13 +468,19 @@ namespace LiveIT2._1
             get { return _boxList; }
         }
 
+        public bool TryEnter
+        {
+            get { return _tryEnter; }
+            set { _tryEnter = value; }
+        }
+
         public void MoveX(int centimeters) 
         {
             if( !_map.IsPlayer )
             {
                 Offset( new Point( centimeters, 0 ) );
             }
-            else
+            else if( _map.IsPlayer && _map.IsInCar == false)
             {
                 if( centimeters > 0 )
                 {
@@ -470,6 +495,21 @@ namespace LiveIT2._1
                 _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
                 _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
             }
+            else if( _map.IsPlayer && _map.IsInCar )
+            {
+                if( centimeters > 0 )
+                {
+                    _carList[0].MovingDirection = MovingDirection.Right;
+                }
+                else
+                {
+                    _carList[0].MovingDirection = MovingDirection.Left;
+                }
+                _carList[0].Position = new Point( _carList[0].Position.X + (centimeters * 2), _carList[0].Position.Y );
+                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
+                _viewPort.X = _carList[0].Area.X - (_viewPort.Size.Width / 2) + (_carList[0].Area.Width / 2);
+                _viewPort.Y = _carList[0].Area.Y - (_viewPort.Size.Height / 2) + (_carList[0].Area.Height / 2);
+            }
             
         }
         public void MoveY( int centimeters )
@@ -478,7 +518,7 @@ namespace LiveIT2._1
             {
                 Offset( new Point( 0, centimeters ) );
             }
-            else
+            else if( _map.IsPlayer && _map.IsInCar == false )
             {
                 if( centimeters > 0 )
                 {
@@ -492,6 +532,21 @@ namespace LiveIT2._1
                 _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
                 _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
                 _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+            }
+            else if( _map.IsPlayer && _map.IsInCar )
+            {
+                if( centimeters > 0 )
+                {
+                    _carList[0].MovingDirection = MovingDirection.Down;
+                }
+                else
+                {
+                    _carList[0].MovingDirection = MovingDirection.Up;
+                }
+                _carList[0].Position = new Point( _carList[0].Position.X, _carList[0].Position.Y + (centimeters * 2) );
+                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
+                _viewPort.X = _carList[0].Area.X - (_viewPort.Size.Width / 2) + (_carList[0].Area.Width / 2);
+                _viewPort.Y = _carList[0].Area.Y - (_viewPort.Size.Height / 2) + (_carList[0].Area.Height / 2);
             }
             
         }
