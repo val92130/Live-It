@@ -15,7 +15,7 @@ namespace LiveIT2._1
         {
             Position = startPosition;
             Texture = CarTexture.Tank;
-            Size = new Size(300, 400);
+            Size = new Size(800, 800);
             Speed = 20000;
 
         }
