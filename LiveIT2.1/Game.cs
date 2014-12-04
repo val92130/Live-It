@@ -492,5 +492,12 @@ namespace LiveIT2._1
             int _random = r.Next(_viewPort.ViewPort.X, _viewPort.ViewPort.Right);
             _viewPort.SpawnCar(new Point(_random, _random));
         }
+
+        private void tank_button_Click(object sender, EventArgs e)
+        {
+            Random r2 = new Random();
+            int _random2 = r2.Next(_viewPort.ViewPort.X, _viewPort.ViewPort.Right);
+            _viewPort.SpawnTank(new Point(_random2, _random2));
+        }
     }
 }

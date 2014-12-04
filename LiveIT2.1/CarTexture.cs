@@ -9,6 +9,7 @@ namespace LiveIT2._1
     public enum CarTexture
     {
         MainPlayerCar,
-        AlternatePlayerCar
+        AlternatePlayerCar,
+        Tank
     }
 }

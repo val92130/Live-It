@@ -95,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rabbit.cs" />
     <Compile Include="SoundEnvironment.cs" />
+    <Compile Include="Tank.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Tree.cs" />
     <Compile Include="Vegetation.cs" />

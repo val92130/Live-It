@@ -27,7 +27,9 @@ namespace LiveIT2._1
         Rectangle _screenTop, _screenBottom, _screenLeft, _screenRight;
         Player _player;
         Car _car ;
+        Tank _tank;
         List<Car> _carList = new List<Car>();
+        List<Tank> _tankList = new List<Tank>();
         SoundEnvironment _sounds;
         public MainViewPort( Map map)
         {
@@ -47,6 +49,7 @@ namespace LiveIT2._1
             _screenLeft = new Rectangle(0, _screen.Height / 2 - 400, 10, 800);
             _screenRight = new Rectangle(_screen.Right - 10, _screen.Height / 2 - 400, 10, 800);
             _car = new Car(_map, new Point(600,600));
+            _tank = new Tank(_map, new Point(700, 700));
 
         }
 
@@ -174,7 +177,10 @@ namespace LiveIT2._1
             {
                 car.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
             }
-
+            foreach (Tank tank in _tankList)
+            {
+                tank.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
+            }
             for( int i = 0; i < _map.Vegetation.Count; i++ )
             {
                 _map.Vegetation[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
@@ -233,6 +239,7 @@ namespace LiveIT2._1
                         
                     }
                 }
+               
             }
         }
 
@@ -325,7 +332,15 @@ namespace LiveIT2._1
             if( _carList.Count >= 0 )
             {
                 _carList.Add( new Car( _map, position ) );
+
             }   
+        }
+        public void SpawnTank(Point position)
+        {
+            if (_carList.Count >= 0)
+            {
+                _carList.Add(new Tank(_map, position));
+            }
         }
 
         public void CreateVegetation( VegetationTexture texture )

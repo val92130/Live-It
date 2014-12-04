@@ -18,6 +18,7 @@ namespace LiveIT2._1
         MovingDirection _movingDirection;
         bool _isMoving;
         Car _car;
+        Tank _tank;
         List<Box> _boxList;
         
 
@@ -98,6 +99,7 @@ namespace LiveIT2._1
             get { return _car; }
             set { _car = value; }
         }
+
 
         public List<Box> BoxList
         {

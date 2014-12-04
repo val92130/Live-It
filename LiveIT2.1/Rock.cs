@@ -19,6 +19,9 @@ namespace LiveIT2._1
             Random r2 = new Random();
             Texture = RandomVegList[r2.Next( 0, RandomVegList.Count )];
             this.Size = new Size( _random, _random );
+            
         }
+       
     }
+    
 }

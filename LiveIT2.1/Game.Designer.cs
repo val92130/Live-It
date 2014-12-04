@@ -60,6 +60,7 @@
             this.buttonMountain = new System.Windows.Forms.Button();
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this.carButton = new System.Windows.Forms.Button();
+            this.tank_button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -419,12 +420,27 @@
             this.carButton.UseVisualStyleBackColor = false;
             this.carButton.Click += new System.EventHandler(this.carButton_Click);
             // 
+            // tank_button
+            // 
+            this.tank_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.tank_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tank_button.ForeColor = System.Drawing.Color.Transparent;
+            this.tank_button.Location = new System.Drawing.Point(223, 57);
+            this.tank_button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tank_button.Name = "tank_button";
+            this.tank_button.Size = new System.Drawing.Size(205, 30);
+            this.tank_button.TabIndex = 22;
+            this.tank_button.Text = "Tank";
+            this.tank_button.UseVisualStyleBackColor = false;
+            this.tank_button.Click += new System.EventHandler(this.tank_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this.tank_button);
             this.Controls.Add(this.carButton);
             this.Controls.Add(this._buttonSpawnPlayer);
             this.Controls.Add(this.buttonMountain);
@@ -496,6 +512,7 @@
         private System.Windows.Forms.ToolStripMenuItem rockToolStripMenuItem;
         private System.Windows.Forms.Button _buttonSpawnPlayer;
         private System.Windows.Forms.Button carButton;
+        private System.Windows.Forms.Button tank_button;
 
     }
 }
