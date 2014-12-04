@@ -28,6 +28,7 @@ namespace LiveIT2._1
         Bitmap _texturePlayerLeft, _texturePlayerRight, _texturePlayerUp, _texturePlayerDown, _texturePlayerIdle;
         Bitmap _textureCarLeft, _textureCarUp, _textureCarDown, _textureCarRight;
         Bitmap _textureTankUp,_textureTankDown,_textureTankLeft,_textureTankRight ;
+        Bitmap _textureBlood;
 
         Bitmap _playerTexture, _playerCarTexture, _playerTankTexture;
 
@@ -242,7 +243,10 @@ namespace LiveIT2._1
             _textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
 
             _textureGiraffe = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
- 
+
+
+            _textureBlood = new Bitmap( @"..\..\..\assets\Blood\Blood.gif" );
+            _textureBlood.MakeTransparent( Color.White );
 
             _brushGrass = new SolidBrush( Color.FromArgb( 59, 138, 33 ) );
             _brushDirt = new SolidBrush( Color.FromArgb( 169, 144, 104 ) );
@@ -723,6 +727,11 @@ namespace LiveIT2._1
         public Bitmap GetThunder()
         {
             return _textureThunder;
+        }
+
+        public Bitmap GetBlood()
+        {
+            return _textureBlood;
         }
         public Bitmap LoadTexture(Car car)
         {

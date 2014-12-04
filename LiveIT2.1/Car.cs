@@ -11,6 +11,7 @@ namespace LiveIT2._1
     {
         Map _map;
         Point _position, _relativePosition;
+        List<Box> BoxList;
         Size _size, _relativeSize;
         CarTexture _texture;
         SizeF _direction;
@@ -32,6 +33,7 @@ namespace LiveIT2._1
             Random random = new Random();
             RadioSongs randomRadio = (RadioSongs)values.GetValue(random.Next(values.Length));
             _radio = randomRadio;
+            BoxList = new List<Box>();
 
         }
 
@@ -117,6 +119,25 @@ namespace LiveIT2._1
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
         {
+            for( int i = 0; i < BoxList.Count; i++ )
+            {
+                if( BoxList[i].AnimalList.Count > 0 )
+                {
+                    for( int j = 0; j < BoxList[i].AnimalList.Count; i++ )
+                    {
+                        if( BoxList[i].AnimalList[j] != null && BoxList[i].AnimalList[j].Area.IntersectsWith( this.Area ) )
+                        {
+                            if( BoxList[i].AnimalList[j].Texture != AnimalTexture.Eagle )
+                            {
+                                BoxList[i].AnimalList[j].Die();
+                            }
+                            
+                        }
+                    }
+                }
+            }
+
+            BoxList = _map.GetOverlappedBoxes( this.Area );
 
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
@@ -140,6 +161,8 @@ namespace LiveIT2._1
                 g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
             }
             g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+
+          
         }
     }
 }

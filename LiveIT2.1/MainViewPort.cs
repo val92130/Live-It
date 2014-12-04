@@ -105,6 +105,13 @@ namespace LiveIT2._1
                 _boxListMini[i].DrawMiniMap( g, _miniMap, _texture, _miniMapViewPort );
             }
 
+
+            foreach( Rectangle r in _map.BloodList )
+            {
+                DrawBloodInViewPort( g, r, _screen, _viewPort, _miniMap, _miniMapViewPort );
+            }
+
+
             g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
             for( int i = 0; i < _map.Animals.Count; i++ )
@@ -760,6 +767,22 @@ namespace LiveIT2._1
 
             g.DrawRectangle( Pens.Blue, new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
             g.DrawRectangle(Pens.Blue, new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
+        }
+
+        public void DrawBloodInViewPort( Graphics g, Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap )
+        {
+            int newSize = (int)(((double)source.Width / (double)viewPort.Width) * target.Width + 1);
+            int newHeight = (int)(((double)source.Height / (double)viewPort.Width) * target.Width + 1);
+            int newXpos = (int)(source.X / (source.Width / (((double)source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (source.Width / (((double)source.Width / (double)viewPort.Width) * target.Width)));
+            int newYpos = (int)(source.Y / (source.Width / (((double)source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (source.Width / (((double)source.Width / (double)viewPort.Width) * target.Width)));
+
+            int newSizeMini = (int)(((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
+            int newHeightMini = (int)(((double)source.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
+            int newXposMini = (int)(source.X / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.X / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+            int newYposMini = (int)(source.Y / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width))) - (int)(viewPortMiniMap.Y / (source.Width / (((double)source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+
+            g.DrawImage( _texture.GetBlood(), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newHeight ) );
+            g.DrawRectangle( Pens.Red, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
         }
         public void DrawRectangleInViewPort( Graphics g, Rectangle source, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Animal animal, Texture t )
         {

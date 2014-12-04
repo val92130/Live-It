@@ -25,6 +25,7 @@ namespace LiveIT2._1
         bool _showDebug, _isRaining;
         bool _isPlayerSpawned;
         bool _isInCar;
+        List<Rectangle> _bloodList = new List<Rectangle>();
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -117,6 +118,13 @@ namespace LiveIT2._1
             get { return _isRaining; }
             set { _isRaining = value; }
         }
+
+        public List<Rectangle> BloodList
+        {
+            get { return _bloodList; }
+            set { _bloodList = value; }
+        }
+
 
         public bool IsInCar
         {

@@ -29,6 +29,8 @@ namespace LiveIT2._1
         List<Animal> _animalsAround =  new List<Animal>();
         internal bool _walking, _isInWater, _isDrinking, _isEating;
         private  Point _targetLocation;
+        Graphics _graphics;
+        Texture _textureGraphics;
         
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
         {
@@ -274,6 +276,9 @@ namespace LiveIT2._1
 
         public void Die()
         {
+            //Rectangle r = new Rectangle(this.RelativePosition, this.RelativeSize);
+
+            _map.BloodList.Add( this.Area); 
             foreach( Box b in _map.Boxes )
             {
                 b.RemoveFromList( this );
@@ -393,6 +398,9 @@ namespace LiveIT2._1
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
         {
 
+            _graphics = g;
+
+            _textureGraphics = texture;
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);
             int newXpos = (int)(this.Area.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (this.Area.Width / (((double)this.Area.Width / (double)viewPort.Width) * target.Width)));
