@@ -90,10 +90,10 @@ namespace LiveIT2._1
         List<Bitmap> _carDownList = new List<Bitmap>();
         List<Bitmap> _carRightList = new List<Bitmap>();
 
-        //List<Bitmap> _tankLeftList = new List<Bitmap>();
-        //List<Bitmap> _tankUpList = new List<Bitmap>();
-        //List<Bitmap> _tankDownList = new List<Bitmap>();
-        //List<Bitmap> _tankRightList = new List<Bitmap>();
+        List<Bitmap> _tankLeftList = new List<Bitmap>();
+        List<Bitmap> _tankUpList = new List<Bitmap>();
+        List<Bitmap> _tankDownList = new List<Bitmap>();
+        List<Bitmap> _tankRightList = new List<Bitmap>();
 
 
         int count = 0;
@@ -180,10 +180,10 @@ namespace LiveIT2._1
             _textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
             _textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
 
-            //_textureTankDown = new Bitmap(@"..\..\..\assets\Tank\Tank-Down\a.png");
-            //_textureTankUp = new Bitmap(@"..\..\..\assets\Tank\Tank-Up\a.png");
-            //_textureTankLeft = new Bitmap(@"..\..\..\assets\Tank\Tank-Left\a.png");
-            //_textureTankRight = new Bitmap(@"..\..\..\assets\Tank\Tank-Right\a.png");
+            _textureTankDown = new Bitmap(@"..\..\..\assets\Tank\Tank-Down\a.png");
+            _textureTankUp = new Bitmap(@"..\..\..\assets\Tank\Tank-Up\a.png");
+            _textureTankLeft = new Bitmap(@"..\..\..\assets\Tank\Tank-Left\a.png");
+            _textureTankRight = new Bitmap(@"..\..\..\assets\Tank\Tank-Right\a.png");
                
 
             _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
@@ -316,10 +316,10 @@ namespace LiveIT2._1
             AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", _carUpList);
 
 
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Left\", _tankLeftList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Right\", _tankRightList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Down\", _tankDownList);
-            //AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Up\", _tankUpList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Left\", _tankLeftList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Right\", _tankRightList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Down\", _tankDownList);
+            AddTexturesFromFolderToList(@"..\..\..\assets\Tank\Tank-Up\", _tankUpList);
         }
 
         private void T_Player_Anim( object sender, EventArgs e )
@@ -750,7 +750,20 @@ namespace LiveIT2._1
                             return _textureCarRight;
                     }
                 case CarTexture.Tank:
-                    return _playerTankTexture;
+                    switch (car.MovingDirection)
+                    {
+                        case MovingDirection.Up:
+                            return _textureTankUp;
+                        case MovingDirection.Down:
+                            return _textureTankDown;
+                        case MovingDirection.Left:
+                            return _textureTankLeft;
+                        case MovingDirection.Right:
+                            return _textureTankRight;
+
+                        default:
+                            return _textureTankRight;
+                    }
                 default:
                     return _playerCarTexture;
             }
