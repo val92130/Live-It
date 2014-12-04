@@ -28,6 +28,7 @@ namespace LiveIT2._1
             _position = startPosition;
             _size = new Size( 100, 210 );
             _texture = PlayerTexture.MainPlayer;
+            _speed = 50;
         }
 
         public Rectangle Area

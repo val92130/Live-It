@@ -168,10 +168,21 @@ namespace LiveIT2._1
         public void MoveRectangle( Direction d )
         {
             int speed = 45;
-            if( d == Direction.Down ) { _viewPort.MoveY(speed); }
-            if (d == Direction.Up) { _viewPort.MoveY(-speed); }
-            if (d == Direction.Right) { _viewPort.MoveX(speed); }
-            if (d == Direction.Left) { _viewPort.MoveX(-speed); }
+            if( _map.IsPlayer )
+            {
+                if( d == Direction.Down ) { _viewPort.MoveY( _map.ViewPort.Player.Speed ); }
+                if( d == Direction.Up ) { _viewPort.MoveY( -_map.ViewPort.Player.Speed ); }
+                if( d == Direction.Right ) { _viewPort.MoveX( _map.ViewPort.Player.Speed ); }
+                if( d == Direction.Left ) { _viewPort.MoveX( -_map.ViewPort.Player.Speed ); }
+            }
+            else
+            {
+                if( d == Direction.Down ) { _viewPort.MoveY( speed ); }
+                if( d == Direction.Up ) { _viewPort.MoveY( -speed ); }
+                if( d == Direction.Right ) { _viewPort.MoveX( speed ); }
+                if( d == Direction.Left ) { _viewPort.MoveX( -speed ); }
+            }
+            
         }
         public void Draw()
         {

@@ -367,22 +367,26 @@ namespace LiveIT2._1
         {
             Rectangle cursorPos = new Rectangle( Cursor.Position, new Size( 10, 10 ) );
             int speed = 45;
-            if( cursorPos.IntersectsWith( _screenTop ) )
+            if( !_map.IsPlayer )
             {
-                this.MoveY( - speed );
+                if( cursorPos.IntersectsWith( _screenTop ) )
+                {
+                    this.MoveY( -speed );
+                }
+                if( cursorPos.IntersectsWith( _screenBottom ) )
+                {
+                    this.MoveY( speed );
+                }
+                if( cursorPos.IntersectsWith( _screenLeft ) )
+                {
+                    this.MoveX( -speed );
+                }
+                if( cursorPos.IntersectsWith( _screenRight ) )
+                {
+                    this.MoveX( speed );
+                }
             }
-            if( cursorPos.IntersectsWith( _screenBottom ) )
-            {
-                this.MoveY( speed );
-            }
-            if( cursorPos.IntersectsWith( _screenLeft ) )
-            {
-                this.MoveX( -speed );
-            }
-            if( cursorPos.IntersectsWith( _screenRight ) )
-            {
-                this.MoveX( speed );
-            }
+
         }
 
         public void Zoom( int meters )
