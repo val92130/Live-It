@@ -34,12 +34,16 @@ namespace LiveIT2._1
             RadioSongs randomRadio = (RadioSongs)values.GetValue(random.Next(values.Length));
             _radio = randomRadio;
             BoxList = new List<Box>();
+            this.Speed = 200;
 
         }
 
         public Rectangle Area
         {
-            get { return new Rectangle( _position, _size ); }
+            get
+            {
+                return new Rectangle(_position, _size);
+            }
         }
 
         public Point Position
@@ -119,25 +123,31 @@ namespace LiveIT2._1
 
         public virtual void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
         {
-            for( int i = 0; i < BoxList.Count; i++ )
+
+
+            if (this.IsMoving)
             {
-                if( BoxList[i].AnimalList.Count > 0 )
+                for (int i = 0; i < BoxList.Count; i++)
                 {
-                    for( int j = 0; j < BoxList[i].AnimalList.Count; i++ )
+                    for (int j = 0; j < _map.Animals.Count; j++)
                     {
-                        if( BoxList[i].AnimalList[j] != null && BoxList[i].AnimalList[j].Area.IntersectsWith( this.Area ) )
+                        if (_map.Animals[j].Area.IntersectsWith(this.Area) && _map.Animals[j].Texture != AnimalTexture.Eagle)
                         {
-                            if( BoxList[i].AnimalList[j].Texture != AnimalTexture.Eagle )
-                            {
-                                BoxList[i].AnimalList[j].Die();
-                            }
-                            
+                            _map.Animals[j].Die();
                         }
                     }
                 }
             }
-
             BoxList = _map.GetOverlappedBoxes( this.Area );
+
+
+            if (_map.ShowDebug)
+            {
+                foreach (Box b in BoxList)
+                {
+                    g.DrawRectangle(Pens.Red, new Rectangle(b.RelativePosition, b.RelativeSize));
+                }
+            }
 
             int newWidth = (int)(((double)this.Area.Width / (double)viewPort.Width) * target.Width + 1);
             int newHeight = (int)(((double)this.Area.Height / (double)viewPort.Width) * target.Width + 1);

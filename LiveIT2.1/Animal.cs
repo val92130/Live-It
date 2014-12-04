@@ -27,7 +27,7 @@ namespace LiveIT2._1
         Point _relativePosition;
         Size _relativeSize;
         List<Animal> _animalsAround =  new List<Animal>();
-        internal bool _walking, _isInWater, _isDrinking, _isEating;
+        internal bool _walking, _isInWater, _isDrinking, _isEating, _isDead;
         private  Point _targetLocation;
         Graphics _graphics;
         Texture _textureGraphics;
@@ -47,6 +47,12 @@ namespace LiveIT2._1
         {
             get { return _walking; }
             set { _walking = value; }
+        }
+
+        public bool IsDead
+        {
+            get { return _isDead; }
+            internal set { _isDead = value; }
         }
         public Animal( Map map, Point position )
         {
@@ -277,8 +283,9 @@ namespace LiveIT2._1
         public void Die()
         {
             //Rectangle r = new Rectangle(this.RelativePosition, this.RelativeSize);
-
-            _map.BloodList.Add( this.Area); 
+            this.IsDead = true;
+            _map.BloodList.Add( this.Area);
+            _map.DeadAnimals += 1;
             foreach( Box b in _map.Boxes )
             {
                 b.RemoveFromList( this );

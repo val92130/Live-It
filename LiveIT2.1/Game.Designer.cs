@@ -61,6 +61,9 @@
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this.carButton = new System.Windows.Forms.Button();
             this.tank_button = new System.Windows.Forms.Button();
+            this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sportCarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -211,6 +214,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.animalsToolStripMenuItem,
             this.vegetationToolStripMenuItem,
+            this.vehiclesToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.muteToolStripMenuItem});
@@ -309,21 +313,21 @@
             // treeToolStripMenuItem
             // 
             this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
             this.treeToolStripMenuItem.Text = "Tree";
             this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
             // 
             // bushToolStripMenuItem
             // 
             this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
-            this.bushToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
             this.bushToolStripMenuItem.Text = "Bush";
             this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
             // 
             // rockToolStripMenuItem
             // 
             this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
             this.rockToolStripMenuItem.Text = "Rock";
             this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
             // 
@@ -360,7 +364,7 @@
             this._buttonFollowAnimal.Name = "_buttonFollowAnimal";
             this._buttonFollowAnimal.Size = new System.Drawing.Size(203, 32);
             this._buttonFollowAnimal.TabIndex = 17;
-            this._buttonFollowAnimal.Text = "Follow Animal";
+            this._buttonFollowAnimal.Text = "Follow animal Mode";
             this._buttonFollowAnimal.UseVisualStyleBackColor = false;
             this._buttonFollowAnimal.Click += new System.EventHandler(this._buttonFollowAnimal_Click);
             // 
@@ -433,6 +437,30 @@
             this.tank_button.Text = "Tank";
             this.tank_button.UseVisualStyleBackColor = false;
             this.tank_button.Click += new System.EventHandler(this.tank_button_Click);
+            // 
+            // vehiclesToolStripMenuItem
+            // 
+            this.vehiclesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sportCarToolStripMenuItem,
+            this.tankToolStripMenuItem});
+            this.vehiclesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
+            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
+            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(117, 33);
+            this.vehiclesToolStripMenuItem.Text = "Vehicles";
+            // 
+            // sportCarToolStripMenuItem
+            // 
+            this.sportCarToolStripMenuItem.Name = "sportCarToolStripMenuItem";
+            this.sportCarToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.sportCarToolStripMenuItem.Text = "Sport Car";
+            this.sportCarToolStripMenuItem.Click += new System.EventHandler(this.sportCarToolStripMenuItem_Click);
+            // 
+            // tankToolStripMenuItem
+            // 
+            this.tankToolStripMenuItem.Name = "tankToolStripMenuItem";
+            this.tankToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.tankToolStripMenuItem.Text = "Tank";
+            this.tankToolStripMenuItem.Click += new System.EventHandler(this.tankToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -513,6 +541,9 @@
         private System.Windows.Forms.Button _buttonSpawnPlayer;
         private System.Windows.Forms.Button carButton;
         private System.Windows.Forms.Button tank_button;
+        private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sportCarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tankToolStripMenuItem;
 
     }
 }

@@ -31,6 +31,9 @@ namespace LiveIT2._1
         List<Car> _carList = new List<Car>();
         List<Tank> _tankList = new List<Tank>();
         SoundEnvironment _sounds;
+        bool _hasClicked;
+        bool _isFollowingAnAnimal;
+        Animal _followedAnimal;
         public MainViewPort( Map map)
         {
             _map = map;
@@ -58,24 +61,24 @@ namespace LiveIT2._1
         {
             MoveWithMouse();
 
-            if (_viewPort.Left < 0)
+            AdjustViewPort();
+
+            if (!_followAnimal)
             {
-                _viewPort.X = 0;
+                _followedAnimal = null;
             }
 
-            if (_viewPort.Top < 0)
+            if (this.IsFollowingAnAnimal)
             {
-                _viewPort.Y = 0;
+                if (_followedAnimal != null)
+                {
+                    AdjustViewPort(_followedAnimal);
+                }
+                else
+                {
+                    _isFollowingAnAnimal = false;
+                }
             }
-            if (_viewPort.Bottom > _map.MapSize )
-            {
-                _viewPort.Y = _map.MapSize - _viewPort.Height ;
-            }
-            if (_viewPort.Right > _map.MapSize)
-            {
-                _viewPort.X = _map.MapSize - _viewPort.Width;
-            }
-
             Random t = new Random();
             if( t.Next( 0, 50000 ) == 30 ) _map.IsRaining = true;
             if( t.Next( 0, 20000 ) == 40 && _map.IsRaining )
@@ -86,24 +89,9 @@ namespace LiveIT2._1
             _boxListMini = _map.GetOverlappedBoxes( _miniMapViewPort );
             _mouseRect.X = Cursor.Position.X - (_mouseRect.Width / 2);
             _mouseRect.Y = Cursor.Position.Y - (_mouseRect.Height / 2);
-            
 
-            for( int i = 0; i < _boxList.Count; i++ )
-            {
-                    for( int j = 0; j < _map.Animals.Count(); j++ )
-                    {
-                        if (_map.Animals[j].Area.IntersectsWith(_boxList[i].Area))
-                        {
-                            _boxList[i].AddAnimal(_map.Animals[j]);
-                        }
-                    }
-                _boxList[i].Draw( g, _screen, _texture, _viewPort );
-            }
 
-            for( int i = 0; i < _boxListMini.Count; i++ )
-            {
-                _boxListMini[i].DrawMiniMap( g, _miniMap, _texture, _miniMapViewPort );
-            }
+            DrawBoxes(g);
 
 
             foreach( Rectangle r in _map.BloodList )
@@ -114,15 +102,231 @@ namespace LiveIT2._1
 
             g.DrawRectangle( Pens.White, new Rectangle(_miniMap.X, _miniMap.Y, _miniMap.Width, _miniMap.Height + 20) );
 
-            for( int i = 0; i < _map.Animals.Count; i++ )
+            DrawLandAnimals(g);
+
+            PlayerBehavior(g);
+
+            DrawCars(g);
+
+            DrawVegetation(g);
+
+            DrawFlyingAnimals(g);
+
+            if( _changeTexture ) DrawMouseSelector( g );
+            if (_fillTexture) FillMouseSelector(g);
+            if(_putAnimal)PutAnimalSelector(g);
+            if( _putVegetation ) PutVegetationSelector( g );
+
+            AnimalFollowing(g);
+
+            MakeRain(g);
+          
+            DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
+
+            CheckIfPlayerHasEnteredACar();
+
+            _hasClicked = false;
+        }
+
+        private void CheckIfPlayerHasEnteredACar()
+        {
+            if (TryEnter && !_map.IsInCar)
             {
-                if( _map.Animals[i].Texture != AnimalTexture.Eagle )
+                foreach (Car car in _carList)
                 {
-                    _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                    if (_player.Area.IntersectsWith(car.Area) && _map.IsInCar == false)
+                    {
+                        _sounds.StartEngine();
+                        _map.IsInCar = true;
+                        _player.Car = car;
+
+                    }
                 }
-                
+
             }
-            if( _map.IsPlayer )
+        }
+
+        private void MakeRain(Graphics g)
+        {
+
+            if (_map.IsRaining)
+            {
+
+                if (this._isRaining == false)
+                {
+                    Rain();
+                    this._isRaining = true;
+
+                }
+                //g.DrawImage(_texture.GetThunder(), _screen);
+                g.DrawImage(_texture.GetRain(), _screen);
+            }
+        }
+
+        private void AnimalFollowing(Graphics g)
+        {
+            if (_followAnimal && _hasClicked)
+            {
+                foreach (Animal a in _map.Animals)
+                {
+                    if (_mouseRect.IntersectsWith(new Rectangle(a.RelativePosition, a.RelativeSize)))
+                    {
+                        if (_followedAnimal != null )
+                        {
+                            if (_followedAnimal == a || _followedAnimal.IsDead)
+                            {
+                                _followedAnimal = null;
+                            }
+                        }
+                        else
+                        {
+                            _followedAnimal = a;
+                            _isFollowingAnAnimal = true;
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (_followedAnimal == null)
+                        {
+                            _isFollowingAnAnimal = false;
+                        }
+                        
+                    }
+                }
+            }
+
+            if (_followedAnimal != null)
+            {
+                if (_followedAnimal.IsDead)
+                {
+                    _isFollowingAnAnimal = false;
+                }
+
+                if (_followAnimal && _map.ShowDebug)
+                {
+                    g.DrawRectangle(Pens.Red, new Rectangle(_followedAnimal.RelativePosition, _followedAnimal.RelativeSize));
+                }
+
+            }
+        }
+
+        private void DrawFlyingAnimals(Graphics g)
+        {
+
+            for (int i = 0; i < _map.Animals.Count; i++)
+            {
+                if (_map.Animals[i].Texture == AnimalTexture.Eagle)
+                {
+                    _map.Animals[i].Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
+                }
+
+            }
+        }
+
+        private void DrawVegetation(Graphics g)
+        {
+            for (int i = 0; i < _map.Vegetation.Count; i++)
+            {
+                _map.Vegetation[i].Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
+            }
+        }
+
+        private void DrawLandAnimals(Graphics g)
+        {
+            for (int i = 0; i < _map.Animals.Count; i++)
+            {
+                if (_map.Animals[i].Texture != AnimalTexture.Eagle)
+                {
+                    _map.Animals[i].Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
+                }
+
+            }
+        }
+
+        private void DrawBoxes(Graphics g)
+        {
+            for (int i = 0; i < _boxList.Count; i++)
+            {
+                for (int j = 0; j < _map.Animals.Count(); j++)
+                {
+                    if (_map.Animals[j].Area.IntersectsWith(_boxList[i].Area))
+                    {
+                        _boxList[i].AddAnimal(_map.Animals[j]);
+                    }
+                }
+                _boxList[i].Draw(g, _screen, _texture, _viewPort);
+            }
+
+            for (int i = 0; i < _boxListMini.Count; i++)
+            {
+                _boxListMini[i].DrawMiniMap(g, _miniMap, _texture, _miniMapViewPort);
+            }
+        }
+
+        private void AdjustViewPort()
+        {
+            if (_viewPort.Left < 0)
+            {
+                _viewPort.X = 0;
+            }
+
+            if (_viewPort.Top < 0)
+            {
+                _viewPort.Y = 0;
+            }
+            if (_viewPort.Bottom > _map.MapSize)
+            {
+                _viewPort.Y = _map.MapSize - _viewPort.Height;
+            }
+            if (_viewPort.Right > _map.MapSize)
+            {
+                _viewPort.X = _map.MapSize - _viewPort.Width;
+            }
+        }
+
+        private void AdjustViewPort(Animal a)
+        {
+            _viewPort.Size = new Size(_screen.Width * 2, _screen.Height * 2);
+            _viewPort.X = _followedAnimal.Area.X - (_viewPort.Size.Width / 2) + (_followedAnimal.Area.Width / 2);
+            _viewPort.Y = _followedAnimal.Area.Y - (_viewPort.Size.Height / 2) + (_followedAnimal.Area.Height / 2);
+
+            if (_viewPort.Left < 0)
+            {
+                _viewPort.X = 0;
+            }
+
+            if (_viewPort.Top < 0)
+            {
+                _viewPort.Y = 0;
+            }
+            if (_viewPort.Bottom > _map.MapSize)
+            {
+                _viewPort.Y = _map.MapSize - _viewPort.Height;
+            }
+            if (_viewPort.Right > _map.MapSize)
+            {
+                _viewPort.X = _map.MapSize - _viewPort.Width;
+            }
+
+
+        }
+
+        private void DrawCars(Graphics g)
+        {
+            foreach (Car car in _carList)
+            {
+                car.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
+            }
+            foreach (Tank tank in _tankList)
+            {
+                tank.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
+            }
+        }
+
+        private void PlayerBehavior(Graphics g)
+        {
+            if (_map.IsPlayer)
             {
 
                 if (_player.Position.X < 0)
@@ -143,21 +347,20 @@ namespace LiveIT2._1
                     _player.Position = new Point(_player.Position.X, _map.MapSize - _player.Area.Width);
                 }
 
-                
+
                 _player.BoxList = _map.GetOverlappedBoxes(_player.AreaBottom);
 
-                g.DrawString( _player.MovingDirection.ToString(), new Font( "Arial", 10f ), Brushes.Black, _player.RelativePosition );
 
-                if( !_player.IsMoving )
+                if (!_player.IsMoving)
                 {
                     _player.MovingDirection = MovingDirection.Idle;
                 }
-                if( !_map.IsInCar )
+                if (!_map.IsInCar)
                 {
-                    _player.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
+                    _player.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
                 }
 
-                if( _map.IsInCar )
+                if (_map.IsInCar)
                 {
                     if (_player.Car.Position.X < 0)
                     {
@@ -179,74 +382,6 @@ namespace LiveIT2._1
 
                     _player.Position = _player.Car.Position;
                 }
-            }
-            foreach( Car car in _carList )
-            {
-                car.Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
-            }
-            foreach (Tank tank in _tankList)
-            {
-                tank.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
-            }
-            for( int i = 0; i < _map.Vegetation.Count; i++ )
-            {
-                _map.Vegetation[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
-            }
-
-            for( int i = 0; i < _map.Animals.Count; i++ )
-            {
-                if( _map.Animals[i].Texture == AnimalTexture.Eagle )
-                {
-                    _map.Animals[i].Draw( g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture );
-                }
-
-            }
-
-            if( _changeTexture ) DrawMouseSelector( g );
-            if (_fillTexture) FillMouseSelector(g);
-            if(_putAnimal)PutAnimalSelector(g);
-            if( _putVegetation ) PutVegetationSelector( g );
-            if( _followAnimal )
-            {
-                foreach( Animal a in _map.Animals )
-                {
-                    if( _mouseRect.IntersectsWith( new Rectangle( a.RelativePosition, a.RelativeSize ) ) )
-                    {
-                        _viewPort.X = a.Position.X - (_viewPort.Width /2);
-                        _viewPort.Y = a.Position.Y - (_viewPort.Height /2);
-                    }
-                }
-            }
-
-            if( _map.IsRaining )
-            {
-
-                if( this._isRaining == false )
-                {
-                    Rain();
-                    this._isRaining = true;
-                    
-                }
-                //g.DrawImage(_texture.GetThunder(), _screen);
-                g.DrawImage( _texture.GetRain(), _screen );
-            }
-
-           
-            DrawViewPortMiniMap( g, _viewPort, _miniMap, _miniMapViewPort );
-
-            if( TryEnter && !_map.IsInCar )
-            {
-                foreach( Car car in _carList )
-                {
-                    if( _player.Area.IntersectsWith( car.Area ) && _map.IsInCar == false )
-                    {
-                        _sounds.StartEngine();
-                        _map.IsInCar = true;
-                        _player.Car = car;
-                        
-                    }
-                }
-               
             }
         }
 
@@ -564,6 +699,12 @@ namespace LiveIT2._1
             set { _tryEnter = value; }
         }
 
+        public bool HasClicked
+        {
+            get { return _hasClicked; }
+            set { _hasClicked = value; }
+        }
+
         public void MoveX(int centimeters) 
         {
             if( !_map.IsPlayer )
@@ -580,11 +721,13 @@ namespace LiveIT2._1
                 {
                     _player.MovingDirection = MovingDirection.Left;
                 }
+                    _player.Position = new Point(_player.Position.X + (centimeters / 2), _player.Position.Y);
+                    _viewPort.Size = new Size(_screen.Width * 2, _screen.Height * 2);
+                    _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
+                    _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
                 
-                _player.Position = new Point(_player.Position.X + (centimeters / 2), _player.Position.Y);
-                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
-                _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+                
+
 
                 
             }
@@ -598,10 +741,12 @@ namespace LiveIT2._1
                 {
                     _player.Car.MovingDirection = MovingDirection.Left;
                 }
-                _player.Car.Position = new Point(_player.Car.Position.X + (centimeters * 2), _player.Car.Position.Y);
-                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _player.Car.Area.X - (_viewPort.Size.Width / 2) + (_player.Car.Area.Width / 2);
-                _viewPort.Y = _player.Car.Area.Y - (_viewPort.Size.Height / 2) + (_player.Car.Area.Height / 2);
+                    _player.Car.Position = new Point(_player.Car.Position.X + (centimeters * 2), _player.Car.Position.Y);
+                    _viewPort.Size = new Size(_screen.Width * 2, _screen.Height * 2);
+                    _viewPort.X = _player.Car.Area.X - (_viewPort.Size.Width / 2) + (_player.Car.Area.Width / 2);
+                    _viewPort.Y = _player.Car.Area.Y - (_viewPort.Size.Height / 2) + (_player.Car.Area.Height / 2);
+                
+                
             }
             
         }
@@ -621,13 +766,12 @@ namespace LiveIT2._1
                 {
                     _player.MovingDirection = MovingDirection.Up;
                 }
-                _player.Position = new Point( _player.Position.X, _player.Position.Y + (centimeters / 2) );
-                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
-                _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+                    _player.Position = new Point(_player.Position.X, _player.Position.Y + (centimeters / 2));
+                    _viewPort.Size = new Size(_screen.Width * 2, _screen.Height * 2);
+                    _viewPort.X = _player.Area.X - (_viewPort.Size.Width / 2) + (_player.Area.Width / 2);
+                    _viewPort.Y = _player.Area.Y - (_viewPort.Size.Height / 2) + (_player.Area.Height / 2);
+                
 
-                
-                
             }
             else if( _map.IsPlayer && _map.IsInCar )
             {
@@ -639,10 +783,12 @@ namespace LiveIT2._1
                 {
                     _player.Car.MovingDirection = MovingDirection.Up;
                 }
-                _player.Car.Position = new Point(_player.Car.Position.X, _player.Car.Position.Y + (centimeters * 2));
-                _viewPort.Size = new Size( _screen.Width * 2, _screen.Height * 2 );
-                _viewPort.X = _player.Car.Area.X - (_viewPort.Size.Width / 2) + (_player.Car.Area.Width / 2);
-                _viewPort.Y = _player.Car.Area.Y - (_viewPort.Size.Height / 2) + (_player.Car.Area.Height / 2);
+                    _player.Car.Position = new Point(_player.Car.Position.X, _player.Car.Position.Y + (centimeters * 2));
+                    _viewPort.Size = new Size(_screen.Width * 2, _screen.Height * 2);
+                    _viewPort.X = _player.Car.Area.X - (_viewPort.Size.Width / 2) + (_player.Car.Area.Width / 2);
+                    _viewPort.Y = _player.Car.Area.Y - (_viewPort.Size.Height / 2) + (_player.Car.Area.Height / 2);
+                
+
             }
             
         }
@@ -712,6 +858,17 @@ namespace LiveIT2._1
         {
             get { return _putAnimal; }
             set { _putAnimal = value; _fillTexture = false; _changeTexture = false; _followAnimal = false; _putVegetation = false; }
+        }
+
+        public bool IsFollowingAnAnimal
+        {
+            get { return _isFollowingAnAnimal; }
+            private set { _isFollowingAnAnimal = value; }
+        }
+
+        public bool IsFollowMode
+        {
+            get { return _followAnimal; }
         }
 
         public bool IsVegetationSelected

@@ -179,10 +179,10 @@ namespace LiveIT2._1
             _textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
             _textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
 
-            _textureTankUp = new Bitmap(@"..\..\..\assets\Tank\Tank-Up\a.png");
-            _textureTankDown = new Bitmap( @"..\..\..\assets\Tank\Tank-Down\a.png" );
-            _textureTankLeft = new Bitmap( @"..\..\..\assets\Tank\Tank-Left\a.png" );
-            _textureTankRight = new Bitmap( @"..\..\..\assets\Tank\Tank-Right\a.png" );
+            _textureTankUp = new Bitmap(@"..\..\..\assets\Tank\Tank-Up\b.png");
+            _textureTankDown = new Bitmap( @"..\..\..\assets\Tank\Tank-Down\b.png" );
+            _textureTankLeft = new Bitmap( @"..\..\..\assets\Tank\Tank-Left\b.png" );
+            _textureTankRight = new Bitmap( @"..\..\..\assets\Tank\Tank-Right\b.png" );
                
 
             _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
@@ -246,7 +246,6 @@ namespace LiveIT2._1
 
 
             _textureBlood = new Bitmap( @"..\..\..\assets\Blood\Blood.gif" );
-            _textureBlood.MakeTransparent( Color.White );
 
             _brushGrass = new SolidBrush( Color.FromArgb( 59, 138, 33 ) );
             _brushDirt = new SolidBrush( Color.FromArgb( 169, 144, 104 ) );
@@ -264,7 +263,7 @@ namespace LiveIT2._1
             _textureThunder.MakeTransparent(Color.Black);
 
             AddTexturesFromFolderToList( @"..\..\..\assets\Animated\", _waterList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Rain\", _rainList );
+            AddTexturesFromFolderToList( @"..\..\..\assets\Rain2\", _rainList );
             AddTexturesFromFolderToList(@"..\..\..\assets\Thunder\", _thunderList);
 
             AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Left\", _catLeftList );
@@ -452,7 +451,7 @@ namespace LiveIT2._1
         {
             if( count2 + 1 <= _rainList.Count )
             {
-                _rainList[count2].MakeTransparent( Color.Black );
+                _rainList[count2].MakeTransparent( Color.White );
                 _textureRain = _rainList[count2];
 
                 count2++;

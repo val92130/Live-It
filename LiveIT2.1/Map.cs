@@ -26,6 +26,7 @@ namespace LiveIT2._1
         bool _isPlayerSpawned;
         bool _isInCar;
         List<Rectangle> _bloodList = new List<Rectangle>();
+        int _deadAnimals;
 
         public Map( int boxCountPerLine, int boxSizeInMeter )
         {
@@ -33,6 +34,7 @@ namespace LiveIT2._1
             _boxes = new Box[boxCountPerLine * boxCountPerLine];
             _boxSize = boxSizeInMeter * 100;
             int count = 0;
+            _deadAnimals = 0;
             for( int i = 0; i < _boxCountPerLine; i++ )
             {
                 for( int j = 0; j < _boxCountPerLine; j++ )
@@ -61,6 +63,17 @@ namespace LiveIT2._1
         {
             get { return _vegetation; }
             set { _vegetation = value; }
+        }
+
+        public int GetLivingAnimals
+        {
+            get { return _animals.Count(); }
+        }
+
+        public int DeadAnimals
+        {
+            get { return _deadAnimals; }
+            set { _deadAnimals = value; }
         }
 
         /// <summary>

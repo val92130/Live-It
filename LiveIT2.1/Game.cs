@@ -161,6 +161,15 @@ namespace LiveIT2._1
             _soundEnvironment.PlayAllSounds();
             _soundEnvironment.PlayerSounds();
             Interlocked.Increment(ref _fpsCount);
+
+            if (_viewPort.IsFollowMode)
+            {
+                _buttonFollowAnimal.Text = "Quit following mode";
+            }
+            else
+            {
+                _buttonFollowAnimal.Text = "Follow animal mode";
+            }
                       
         }
 
@@ -233,7 +242,8 @@ namespace LiveIT2._1
 
         private void Form1_MouseClick( object sender, MouseEventArgs e )
         {
-            
+            _viewPort.HasClicked = true;
+
             if (_viewPort.IsAnimalSelected)
             {
                 _viewPort.CreateAnimal(_selectedAnimal);
@@ -325,6 +335,8 @@ namespace LiveIT2._1
                 ShowDebugInfo = true;
                 _map.ShowDebug = false;
             }
+
+            
         }
 
         private void _buttonExit_Click(object sender, EventArgs e)
@@ -370,7 +382,16 @@ namespace LiveIT2._1
         }
         private void _buttonFollowAnimal_Click( object sender, EventArgs e )
         {
-            _viewPort.IsFollowAnimalSelected = true;
+            if (_viewPort.IsFollowAnimalSelected == true)
+            {
+                _viewPort.IsFollowAnimalSelected = false;
+            }
+            else
+            {
+                _viewPort.IsFollowAnimalSelected = true;
+                
+            }
+            
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -505,6 +526,20 @@ namespace LiveIT2._1
         }
 
         private void tank_button_Click(object sender, EventArgs e)
+        {
+            Random r2 = new Random();
+            int _random2 = r2.Next(_viewPort.ViewPort.X, _viewPort.ViewPort.Right);
+            _viewPort.SpawnTank(new Point(_random2, _random2));
+        }
+
+        private void sportCarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            int _random = r.Next(_viewPort.ViewPort.X, _viewPort.ViewPort.Right);
+            _viewPort.SpawnCar(new Point(_random, _random));
+        }
+
+        private void tankToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Random r2 = new Random();
             int _random2 = r2.Next(_viewPort.ViewPort.X, _viewPort.ViewPort.Right);
