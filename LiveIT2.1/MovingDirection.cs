@@ -13,5 +13,6 @@ namespace LiveIT2._1
         Left,
         Right,
         Idle
+        
     }
 }

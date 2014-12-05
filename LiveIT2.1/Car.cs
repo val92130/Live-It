@@ -138,6 +138,7 @@ namespace LiveIT2._1
                     }
                 }
             }
+
             BoxList = _map.GetOverlappedBoxes( this.Area );
 
 
