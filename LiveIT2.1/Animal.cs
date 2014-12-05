@@ -385,6 +385,18 @@ namespace LiveIT2._1
             {
                 foreach (Box b in BoxList)
                 {
+                    foreach (Vegetation vegetation in _map.Vegetation)
+                        if (vegetation.Area.IntersectsWith(this.Area))
+                        {
+                            {
+                                if (vegetation.Texture == VegetationTexture.Rock ||
+                                    vegetation.Texture == VegetationTexture.Rock2 ||
+                                    vegetation.Texture == VegetationTexture.Rock3)
+                                {
+                                    ChangePosition();                                 
+                                }
+                            }
+                        }
                     if (b != null)
                     {
                         if (b.Ground == BoxGround.Water && this.Texture != AnimalTexture.Eagle)

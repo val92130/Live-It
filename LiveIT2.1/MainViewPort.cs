@@ -360,6 +360,24 @@ namespace LiveIT2._1
                     _player.Draw(g, _screen, _viewPort, _miniMap, _miniMapViewPort, _texture);
                 }
 
+                if (_player.IsMoving)
+                {
+                    foreach (Vegetation vegetation in _map.Vegetation)
+                    {
+                        if (vegetation.Area.IntersectsWith(Player.Area))
+                        {
+                            {
+                                if (vegetation.Texture == VegetationTexture.Rock ||
+                                    vegetation.Texture == VegetationTexture.Rock2 ||
+                                    vegetation.Texture == VegetationTexture.Rock3)
+                                {
+                                    Player.notAlloudToMove();
+                                }
+                            }
+                        }
+                    }
+                }
+
                 if (_map.IsInCar)
                 {
                     if (_player.Car.Position.X < 0)

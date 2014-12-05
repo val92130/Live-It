@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
@@ -133,6 +134,11 @@ namespace LiveIT2._1
                 g.DrawImage( texture.LoadTexture( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newWidth, newHeight ) );
             }
             g.DrawRectangle( Pens.Black, new Rectangle( newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini ) );
+        }
+
+        public void notAlloudToMove()
+        {           
+            this.Position = new Point(this.Area.X - 100, this.Area.Y);        
         }
     }
 }
