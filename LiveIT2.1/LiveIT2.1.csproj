@@ -70,11 +70,13 @@
     </Compile>
     <Compile Include="Gazelle.cs" />
     <Compile Include="LoopStream.cs" />
+    <Compile Include="Missile.cs" />
     <Compile Include="MovingDirection.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerTexture.cs" />
     <Compile Include="RadioSongs.cs" />
     <Compile Include="Rock.cs" />
+    <Compile Include="SexType.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>

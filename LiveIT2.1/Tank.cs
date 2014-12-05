@@ -17,6 +17,16 @@ namespace LiveIT2._1
             Texture = CarTexture.Tank;
             Size = new Size(1000, 1000);
             Speed = 20000;
+        }
+
+        public void Shoot()
+        {
+
+        }
+
+        public override void Draw( Graphics g, Rectangle target, Rectangle viewPort, Rectangle targetMiniMap, Rectangle viewPortMiniMap, Texture texture )
+        {
+            base.Draw( g, target, viewPort, targetMiniMap, viewPortMiniMap, texture );
 
         }
     }

@@ -31,6 +31,7 @@ namespace LiveIT2._1
         private  Point _targetLocation;
         Graphics _graphics;
         Texture _textureGraphics;
+        SexType _sexType;
         
         public Animal(Map map, Point position, Size size, AnimalTexture texture)
         {
@@ -64,11 +65,25 @@ namespace LiveIT2._1
             CheckDrowning();
             HungerTimer();
             ThirstTimer();
+
+            Array values = Enum.GetValues( typeof( SexType ) );
+            Random random = new Random();
+            SexType randomSex = (SexType)values.GetValue( random.Next( values.Length ) );
+            _sexType = randomSex;
         }
 
         public Rectangle FieldOfView
         {
             get { return new Rectangle(this.Position.X - (_viewDistance / 2), this.Position.Y - (_viewDistance / 2), _viewDistance * 2, _viewDistance * 2); }
+        }
+
+        public SexType Sex
+        {
+            get
+            {
+                return _sexType;
+            }
+            internal set { _sexType = value; }
         }
 
         public int ViewDistance
@@ -344,6 +359,28 @@ namespace LiveIT2._1
             {
                 ChangePosition();
             }
+
+            // BREEDING
+            for( int i = 0; i < _animalsAround.Count; i++ )
+            {
+                if( _animalsAround[i].Texture == this.Texture )
+                {
+                    if( this.Sex != _animalsAround[i].Sex )
+                    {
+                        if( this.Hunger < 20 && _animalsAround[i].Hunger < 20 && this.Health > 70 && _animalsAround[i].Health > 70 )
+                        {
+                            ChangePosition( _animalsAround[i].Position );
+                            if( this.Area.IntersectsWith( _animalsAround[i].Area ) )
+                            {
+                                this.Hunger += 30;
+                                _animalsAround[i].Hunger += 30;
+                                _map.ViewPort.CreateAnimal( this.Texture );
+                            }
+                        }
+                    }
+                }
+            }
+
             if (BoxList.Count() != 0)
             {
                 foreach (Box b in BoxList)
@@ -440,6 +477,7 @@ namespace LiveIT2._1
                 g.DrawString( "Health " + this.Health.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point(this.RelativePosition.X,this.RelativePosition.Y - 20) );
                 g.DrawString( "Hunger " + this.Hunger.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X, this.RelativePosition.Y - 40 ) );
                 g.DrawString( "Thirst " + this.Thirst.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X + 200, this.RelativePosition.Y - 40 ) );
+                g.DrawString( "Sex " + this.Sex.ToString(), new Font( "Arial", 20f ), Brushes.Black, new Point( this.RelativePosition.X + 200, this.RelativePosition.Y +200 ) );
 
                 g.DrawString("Target pos : " + this.TargetLocation.X.ToString() + "\n" + this.TargetLocation.Y.ToString(), new Font("Arial", 20f), Brushes.Black, this.RelativePosition);
                 _map.ViewPort.DrawRectangleInViewPort(g, new Rectangle(this.TargetLocation, this.Area.Size), _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMap, _map.ViewPort.MiniMapViewPort);
