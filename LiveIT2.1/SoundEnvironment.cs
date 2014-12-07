@@ -1,338 +1,490 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
-using NAudio.Wave;
-using NAudio;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SoundEnvironment.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The sound environment.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace LiveIT2._1
 {
+    using System.Collections.Generic;
+
+    using LiveIT2._1.Enums;
+
+    using NAudio.Wave;
+
+    /// <summary>
+    /// The sound environment.
+    /// </summary>
     public class SoundEnvironment
     {
-        private WaveOut waveOutBackGround;
-        private WaveOut waveOutWater;
-        private WaveOut waveOutRain;
-        private WaveOut waveOutStep;
-        private WaveOut waveOutStep_water;
-        private WaveOut waveOutCarIdle;
-        private WaveOut waveOutCarStarting;
-        private WaveOut waveOutCarRunning;
-        private WaveOut waveOutRadioMusicTrap;
-        private WaveOut waveOutRadioMusicElectro;
-        private WaveOut waveOutRadioMusicRap;
+        #region Fields
 
+        /// <summary>
+        /// The _box grounds.
+        /// </summary>
+        private readonly List<EBoxGround> _boxGrounds;
+
+        /// <summary>
+        /// The _player box grounds.
+        /// </summary>
+        private readonly List<EBoxGround> _playerBoxGrounds;
+
+        /// <summary>
+        /// The wave out back ground.
+        /// </summary>
+        private readonly WaveOut waveOutBackGround;
+
+        /// <summary>
+        /// The wave out car idle.
+        /// </summary>
+        private readonly WaveOut waveOutCarIdle;
+
+        /// <summary>
+        /// The wave out car running.
+        /// </summary>
+        private readonly WaveOut waveOutCarRunning;
+
+        /// <summary>
+        /// The wave out car starting.
+        /// </summary>
+        private readonly WaveOut waveOutCarStarting;
+
+        /// <summary>
+        /// The wave out radio music electro.
+        /// </summary>
+        private readonly WaveOut waveOutRadioMusicElectro;
+
+        /// <summary>
+        /// The wave out radio music rap.
+        /// </summary>
+        private readonly WaveOut waveOutRadioMusicRap;
+
+        /// <summary>
+        /// The wave out radio music trap.
+        /// </summary>
+        private readonly WaveOut waveOutRadioMusicTrap;
+
+        /// <summary>
+        /// The wave out rain.
+        /// </summary>
+        private readonly WaveOut waveOutRain;
+
+        /// <summary>
+        /// The wave out step.
+        /// </summary>
+        private readonly WaveOut waveOutStep;
+
+        /// <summary>
+        /// The wave out step_water.
+        /// </summary>
+        private readonly WaveOut waveOutStep_water;
+
+        /// <summary>
+        /// The wave out water.
+        /// </summary>
+        private readonly WaveOut waveOutWater;
+
+        /// <summary>
+        /// The _boxes.
+        /// </summary>
+        private List<Box> _boxes;
+
+        /// <summary>
+        /// The _is raining.
+        /// </summary>
+        private bool _isRaining;
+
+        /// <summary>
+        /// The _is stopped.
+        /// </summary>
+        private bool _isStopped;
+
+        /// <summary>
+        /// The _is water.
+        /// </summary>
+        private bool _isWater;
+
+        /// <summary>
+        /// The _map.
+        /// </summary>
+        private Map _map;
+
+        /// <summary>
+        /// The wave out radio actual.
+        /// </summary>
         private WaveOut waveOutRadioActual;
 
-        bool _isStopped, _isWater, _isRaining;
-        List<Box> _boxes;
-        List<BoxGround> _boxGrounds;
-        List<BoxGround> _playerBoxGrounds;
-        Map _map;
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SoundEnvironment"/> class.
+        /// </summary>
         public SoundEnvironment()
         {
-            WaveFileReader readerBackGround = new WaveFileReader("../../../sounds/background.wav");
-            LoopStream loopBackGround = new LoopStream(readerBackGround);
-            waveOutBackGround = new WaveOut();
-            waveOutBackGround.Init(loopBackGround);
-            waveOutBackGround.Volume = 0.7f;
-            waveOutBackGround.Play();
+            var readerBackGround = new WaveFileReader("../../../sounds/background.wav");
+            var loopBackGround = new LoopStream(readerBackGround);
+            this.waveOutBackGround = new WaveOut();
+            this.waveOutBackGround.Init(loopBackGround);
+            this.waveOutBackGround.Volume = 0.7f;
+            this.waveOutBackGround.Play();
 
-            WaveFileReader readerWater = new WaveFileReader("../../../sounds/river.wav");
-            LoopStream loopWater = new LoopStream(readerWater);
-            waveOutWater = new WaveOut();
-            waveOutWater.Init(loopWater);
-            waveOutWater.Volume = 0.2f;
+            var readerWater = new WaveFileReader("../../../sounds/river.wav");
+            var loopWater = new LoopStream(readerWater);
+            this.waveOutWater = new WaveOut();
+            this.waveOutWater.Init(loopWater);
+            this.waveOutWater.Volume = 0.2f;
 
-            WaveFileReader readerRain = new WaveFileReader( "../../../sounds/rain.wav" );
-            LoopStream loopRain = new LoopStream( readerRain );
-            waveOutRain = new WaveOut();
-            waveOutRain.Init( loopRain );
-            waveOutRain.Volume = 0.6f;
+            var readerRain = new WaveFileReader("../../../sounds/rain.wav");
+            var loopRain = new LoopStream(readerRain);
+            this.waveOutRain = new WaveOut();
+            this.waveOutRain.Init(loopRain);
+            this.waveOutRain.Volume = 0.6f;
 
-            WaveFileReader readerStep = new WaveFileReader("../../../sounds/Player/step.wav");
-            LoopStream loopStep = new LoopStream(readerStep);
-            waveOutStep = new WaveOut();
-            waveOutStep.Init(loopStep);
-            waveOutStep.Volume = 0.5f;
+            var readerStep = new WaveFileReader("../../../sounds/Player/step.wav");
+            var loopStep = new LoopStream(readerStep);
+            this.waveOutStep = new WaveOut();
+            this.waveOutStep.Init(loopStep);
+            this.waveOutStep.Volume = 0.5f;
 
-            WaveFileReader readerStep_water = new WaveFileReader("../../../sounds/Player/step_water.wav");
-            LoopStream loopStep_water = new LoopStream(readerStep_water);
-            waveOutStep_water = new WaveOut();
-            waveOutStep_water.Init(loopStep_water);
-            waveOutStep_water.Volume = 0.2f;
+            var readerStep_water = new WaveFileReader("../../../sounds/Player/step_water.wav");
+            var loopStep_water = new LoopStream(readerStep_water);
+            this.waveOutStep_water = new WaveOut();
+            this.waveOutStep_water.Init(loopStep_water);
+            this.waveOutStep_water.Volume = 0.2f;
 
-            WaveFileReader readerCarIdle = new WaveFileReader("../../../sounds/Car/Idle.wav");
-            LoopStream loopCarIdle = new LoopStream(readerCarIdle);
-            waveOutCarIdle = new WaveOut();
-            waveOutCarIdle.Init(loopCarIdle);
-            waveOutCarIdle.Volume = 0.5f;
+            var readerCarIdle = new WaveFileReader("../../../sounds/Car/Idle.wav");
+            var loopCarIdle = new LoopStream(readerCarIdle);
+            this.waveOutCarIdle = new WaveOut();
+            this.waveOutCarIdle.Init(loopCarIdle);
+            this.waveOutCarIdle.Volume = 0.5f;
 
-            WaveFileReader readerCarRunning = new WaveFileReader("../../../sounds/Car/Running.wav");
-            LoopStream loopCarRunning = new LoopStream(readerCarRunning);
-            waveOutCarRunning = new WaveOut();
-            waveOutCarRunning.Init(loopCarRunning);
-            waveOutCarRunning.Volume = 0.5f;
+            var readerCarRunning = new WaveFileReader("../../../sounds/Car/Running.wav");
+            var loopCarRunning = new LoopStream(readerCarRunning);
+            this.waveOutCarRunning = new WaveOut();
+            this.waveOutCarRunning.Init(loopCarRunning);
+            this.waveOutCarRunning.Volume = 0.5f;
 
-            WaveFileReader readerCarStarting = new WaveFileReader("../../../sounds/Car/StartEngine.wav");
-            waveOutCarStarting = new WaveOut();
-            waveOutCarStarting.Init(readerCarStarting);
-            waveOutCarStarting.Volume = 0.5f;
+            var readerCarStarting = new WaveFileReader("../../../sounds/Car/StartEngine.wav");
+            this.waveOutCarStarting = new WaveOut();
+            this.waveOutCarStarting.Init(readerCarStarting);
+            this.waveOutCarStarting.Volume = 0.5f;
 
-            WaveFileReader readerRadioMusic1 = new WaveFileReader("../../../sounds/Music/Trap.wav");
-            LoopStream loopRadioMusic1 = new LoopStream(readerRadioMusic1);
-            waveOutRadioMusicTrap = new WaveOut();
-            waveOutRadioMusicTrap.Init(loopRadioMusic1);
-            waveOutRadioMusicTrap.Volume = 0.5f;
+            var readerRadioMusic1 = new WaveFileReader("../../../sounds/Music/Trap.wav");
+            var loopRadioMusic1 = new LoopStream(readerRadioMusic1);
+            this.waveOutRadioMusicTrap = new WaveOut();
+            this.waveOutRadioMusicTrap.Init(loopRadioMusic1);
+            this.waveOutRadioMusicTrap.Volume = 0.5f;
 
-            WaveFileReader readerRadioMusicElectro = new WaveFileReader("../../../sounds/Music/Electro.wav");
-            LoopStream loopRadioMusicElectro = new LoopStream(readerRadioMusicElectro);
-            waveOutRadioMusicElectro = new WaveOut();
-            waveOutRadioMusicElectro.Init(loopRadioMusicElectro);
-            waveOutRadioMusicElectro.Volume = 0.5f;
+            var readerRadioMusicElectro = new WaveFileReader("../../../sounds/Music/Electro.wav");
+            var loopRadioMusicElectro = new LoopStream(readerRadioMusicElectro);
+            this.waveOutRadioMusicElectro = new WaveOut();
+            this.waveOutRadioMusicElectro.Init(loopRadioMusicElectro);
+            this.waveOutRadioMusicElectro.Volume = 0.5f;
 
-            WaveFileReader readerRadioMusicRap = new WaveFileReader("../../../sounds/Music/Rap.wav");
-            LoopStream loopRadioMusicRap = new LoopStream(readerRadioMusicRap);
-            waveOutRadioMusicRap = new WaveOut();
-            waveOutRadioMusicRap.Init(loopRadioMusicRap);
-            waveOutRadioMusicRap.Volume = 0.5f;
+            var readerRadioMusicRap = new WaveFileReader("../../../sounds/Music/Rap.wav");
+            var loopRadioMusicRap = new LoopStream(readerRadioMusicRap);
+            this.waveOutRadioMusicRap = new WaveOut();
+            this.waveOutRadioMusicRap.Init(loopRadioMusicRap);
+            this.waveOutRadioMusicRap.Volume = 0.5f;
 
-            waveOutRadioActual = new WaveOut();
+            this.waveOutRadioActual = new WaveOut();
 
-            _boxGrounds = new List<BoxGround>();
-            _playerBoxGrounds = new List<BoxGround>();
+            this._boxGrounds = new List<EBoxGround>();
+            this._playerBoxGrounds = new List<EBoxGround>();
         }
 
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets a value indicating whether is stopped.
+        /// </summary>
+        public bool IsStopped
+        {
+            get
+            {
+                return this._isStopped;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The car sounds.
+        /// </summary>
+        public void CarSounds()
+        {
+            if (this._map.IsPlayer)
+            {
+                if (this._map.IsInCar)
+                {
+                    switch (this._map.ViewPort.Player.Car.ERadioSong)
+                    {
+                        case ERadioSongs.Electro:
+                            this.waveOutRadioActual = this.waveOutRadioMusicElectro;
+                            break;
+                        case ERadioSongs.Trap:
+                            this.waveOutRadioActual = this.waveOutRadioMusicTrap;
+                            break;
+                        case ERadioSongs.Rap:
+                            this.waveOutRadioActual = this.waveOutRadioMusicRap;
+                            break;
+                        default:
+                            this.waveOutRadioActual = this.waveOutRadioMusicTrap;
+                            break;
+                    }
+
+                    if (this._map.ViewPort.Player.Car.IsRadioPlaying
+                        && this.waveOutRadioActual.PlaybackState != PlaybackState.Playing)
+                    {
+                        this.waveOutRadioActual.Play();
+                    }
+
+                    if (!this._map.ViewPort.Player.Car.IsRadioPlaying
+                        && this.waveOutRadioActual.PlaybackState == PlaybackState.Playing)
+                    {
+                        this.waveOutRadioActual.Pause();
+                    }
+
+                    if (!this._map.ViewPort.Player.Car.IsMoving
+                        && this.waveOutCarIdle.PlaybackState == PlaybackState.Stopped
+                        && this.waveOutCarStarting.PlaybackState == PlaybackState.Stopped)
+                    {
+                        this.waveOutCarIdle.Play();
+                        if (this.waveOutCarRunning.PlaybackState == PlaybackState.Playing)
+                        {
+                            this.waveOutCarRunning.Stop();
+                        }
+                    }
+
+                    if (this._map.ViewPort.Player.Car.IsMoving
+                        && this.waveOutCarStarting.PlaybackState == PlaybackState.Stopped)
+                    {
+                        this.waveOutCarRunning.Play();
+                        if (this.waveOutCarIdle.PlaybackState == PlaybackState.Playing)
+                        {
+                            this.waveOutCarIdle.Stop();
+                        }
+                    }
+                }
+                else
+                {
+                    if (this.waveOutCarIdle.PlaybackState == PlaybackState.Playing)
+                    {
+                        this.waveOutCarIdle.Stop();
+                    }
+
+                    if (this.waveOutCarRunning.PlaybackState == PlaybackState.Playing)
+                    {
+                        this.waveOutCarRunning.Stop();
+                    }
+
+                    if (this.waveOutRadioActual.PlaybackState == PlaybackState.Playing)
+                    {
+                        this.waveOutRadioActual.Stop();
+                    }
+                }
+            }
+            else
+            {
+                if (this.waveOutRadioActual.PlaybackState == PlaybackState.Playing)
+                {
+                    this.waveOutRadioActual.Stop();
+                }
+
+                if (this.waveOutCarIdle.PlaybackState == PlaybackState.Playing)
+                {
+                    this.waveOutCarIdle.Stop();
+                }
+
+                if (this.waveOutCarRunning.PlaybackState == PlaybackState.Playing)
+                {
+                    this.waveOutCarRunning.Stop();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The load boxes.
+        /// </summary>
+        /// <param name="Boxes">
+        /// The boxes.
+        /// </param>
         public void LoadBoxes(List<Box> Boxes)
         {
-            _boxes = Boxes;
+            this._boxes = Boxes;
         }
 
-        public void LoadMap( Map map )
+        /// <summary>
+        /// The load map.
+        /// </summary>
+        /// <param name="map">
+        /// The map.
+        /// </param>
+        public void LoadMap(Map map)
         {
-            _map = map;
+            this._map = map;
         }
 
+        /// <summary>
+        /// The play all sounds.
+        /// </summary>
         public void PlayAllSounds()
         {
-            _boxGrounds.Clear();
-            CarSounds();
-            foreach (Box box in _boxes)
+            this._boxGrounds.Clear();
+            this.CarSounds();
+            foreach (Box box in this._boxes)
             {
-                _boxGrounds.Add(box.Ground);
-            }
-            if (_boxGrounds.Contains(BoxGround.Water))
-            {
-                _isWater = true;
-            }
-            else
-            {
-                _isWater = false;
-                if (waveOutWater.PlaybackState == PlaybackState.Playing)
-                {
-                    waveOutWater.Stop();
-                }
-            }
-            if (_isWater && waveOutWater.PlaybackState == PlaybackState.Stopped && _isStopped == false)
-            {
-                waveOutWater.Play();
+                this._boxGrounds.Add(box.Ground);
             }
 
-            if( _map.IsRaining )
+            if (this._boxGrounds.Contains(EBoxGround.Water))
             {
-                _isRaining = true;
+                this._isWater = true;
             }
             else
             {
-                _isRaining = false;
-                if( waveOutRain.PlaybackState == PlaybackState.Playing )
+                this._isWater = false;
+                if (this.waveOutWater.PlaybackState == PlaybackState.Playing)
                 {
-                    waveOutRain.Stop();
+                    this.waveOutWater.Stop();
                 }
             }
-            if( _isRaining && waveOutRain.PlaybackState == PlaybackState.Stopped && _isStopped == false )
+
+            if (this._isWater && this.waveOutWater.PlaybackState == PlaybackState.Stopped && this._isStopped == false)
             {
-                waveOutRain.Play();
+                this.waveOutWater.Play();
+            }
+
+            if (this._map.IsRaining)
+            {
+                this._isRaining = true;
+            }
+            else
+            {
+                this._isRaining = false;
+                if (this.waveOutRain.PlaybackState == PlaybackState.Playing)
+                {
+                    this.waveOutRain.Stop();
+                }
+            }
+
+            if (this._isRaining && this.waveOutRain.PlaybackState == PlaybackState.Stopped && this._isStopped == false)
+            {
+                this.waveOutRain.Play();
             }
         }
 
+        /// <summary>
+        /// The player sounds.
+        /// </summary>
         public void PlayerSounds()
         {
-            if (_map.IsPlayer)
+            if (this._map.IsPlayer)
             {
-                _playerBoxGrounds.Clear();
+                this._playerBoxGrounds.Clear();
                 int _count = 0;
-                foreach (Box b in _map.ViewPort.Player.BoxList)
+                foreach (Box b in this._map.ViewPort.Player.BoxList)
                 {
                     if (_count == 0)
                     {
-                        _playerBoxGrounds.Add(b.Ground);
+                        this._playerBoxGrounds.Add(b.Ground);
                     }
-                    _count++;
-                    
-                }
-                if (_map.ViewPort.Player.MovingDirection != MovingDirection.Idle)
-                {
 
-                    if (_playerBoxGrounds.Contains(BoxGround.Water))
+                    _count++;
+                }
+
+                if (this._map.ViewPort.Player.EMovingDirection != EMovingDirection.Idle)
+                {
+                    if (this._playerBoxGrounds.Contains(EBoxGround.Water))
                     {
-                        if (waveOutStep_water.PlaybackState == PlaybackState.Stopped)
+                        if (this.waveOutStep_water.PlaybackState == PlaybackState.Stopped)
                         {
-                            waveOutStep_water.Play();
+                            this.waveOutStep_water.Play();
                         }
-                        if (waveOutStep.PlaybackState == PlaybackState.Playing)
+
+                        if (this.waveOutStep.PlaybackState == PlaybackState.Playing)
                         {
-                            waveOutStep.Stop();
+                            this.waveOutStep.Stop();
                         }
                     }
                     else
                     {
-                        if (waveOutStep.PlaybackState == PlaybackState.Stopped)
+                        if (this.waveOutStep.PlaybackState == PlaybackState.Stopped)
                         {
-                            waveOutStep.Play();
+                            this.waveOutStep.Play();
                         }
-                        if (waveOutStep_water.PlaybackState == PlaybackState.Playing)
+
+                        if (this.waveOutStep_water.PlaybackState == PlaybackState.Playing)
                         {
-                            waveOutStep_water.Stop();
+                            this.waveOutStep_water.Stop();
                         }
                     }
-                    
                 }
                 else
                 {
-                    if (waveOutStep.PlaybackState == PlaybackState.Playing)
+                    if (this.waveOutStep.PlaybackState == PlaybackState.Playing)
                     {
-                        waveOutStep.Stop();
+                        this.waveOutStep.Stop();
                     }
-                    if (waveOutStep_water.PlaybackState == PlaybackState.Playing)
+
+                    if (this.waveOutStep_water.PlaybackState == PlaybackState.Playing)
                     {
-                        waveOutStep_water.Stop();
+                        this.waveOutStep_water.Stop();
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// The start engine.
+        /// </summary>
         public void StartEngine()
         {
-            waveOutCarStarting.Play();
+            this.waveOutCarStarting.Play();
         }
 
-        public void CarSounds()
-        {
-            if (_map.IsPlayer)
-            {
-                if (_map.IsInCar)
-                {
-                    switch (_map.ViewPort.Player.Car.RadioSong)
-                    {
-                        case RadioSongs.Electro :
-                            waveOutRadioActual = waveOutRadioMusicElectro;
-                            break;
-                        case RadioSongs.Trap :
-                            waveOutRadioActual = waveOutRadioMusicTrap;
-                            break;
-                        case RadioSongs.Rap:
-                            waveOutRadioActual = waveOutRadioMusicRap;
-                            break;
-                        default :
-                            waveOutRadioActual = waveOutRadioMusicTrap;
-                            break;
-                    }
-
-                    if (_map.ViewPort.Player.Car.IsRadioPlaying && waveOutRadioActual.PlaybackState != PlaybackState.Playing)
-                    {
-                        waveOutRadioActual.Play();
-                    }
-
-                    if (!_map.ViewPort.Player.Car.IsRadioPlaying && waveOutRadioActual.PlaybackState == PlaybackState.Playing)
-                    {
-                        waveOutRadioActual.Pause();
-                    }
-                    if (!_map.ViewPort.Player.Car.IsMoving && waveOutCarIdle.PlaybackState == PlaybackState.Stopped && waveOutCarStarting.PlaybackState == PlaybackState.Stopped)
-                    {
-                        waveOutCarIdle.Play();
-                        if (waveOutCarRunning.PlaybackState == PlaybackState.Playing)
-                        {
-                            waveOutCarRunning.Stop();
-                        }
-                    }
-                    if (_map.ViewPort.Player.Car.IsMoving && waveOutCarStarting.PlaybackState == PlaybackState.Stopped)
-                    {
-                        waveOutCarRunning.Play();
-                        if (waveOutCarIdle.PlaybackState == PlaybackState.Playing)
-                        {
-                            waveOutCarIdle.Stop();
-                        }
-                    }
-                }
-                else
-                {
-                    if (waveOutCarIdle.PlaybackState == PlaybackState.Playing)
-                    {
-                        waveOutCarIdle.Stop();
-                    }
-                    if (waveOutCarRunning.PlaybackState == PlaybackState.Playing)
-                    {
-                        waveOutCarRunning.Stop();
-                    }
-                    if (waveOutRadioActual.PlaybackState == PlaybackState.Playing)
-                    {
-                        waveOutRadioActual.Stop();
-                    }
-                }
-            }
-            else
-            {
-                if (waveOutRadioActual.PlaybackState == PlaybackState.Playing)
-                {
-                    waveOutRadioActual.Stop();
-                }
-                if (waveOutCarIdle.PlaybackState == PlaybackState.Playing)
-                {
-                    waveOutCarIdle.Stop();
-                }
-                if (waveOutCarRunning.PlaybackState == PlaybackState.Playing)
-                {
-                    waveOutCarRunning.Stop();
-                }
-            }
-        }
-
+        /// <summary>
+        /// The toggle mute.
+        /// </summary>
         public void ToggleMute()
         {
-            if( _isStopped == false )
+            if (this._isStopped == false)
             {
                 try
                 {
-                    waveOutBackGround.Stop();
-                    if (waveOutWater.PlaybackState == PlaybackState.Playing)
+                    this.waveOutBackGround.Stop();
+                    if (this.waveOutWater.PlaybackState == PlaybackState.Playing)
                     {
-                        waveOutWater.Stop();
+                        this.waveOutWater.Stop();
                     }
-                    _isStopped = true;
+
+                    this._isStopped = true;
                 }
                 catch
                 {
-
                 }
             }
             else
             {
-                if (_isWater && waveOutWater.PlaybackState == PlaybackState.Stopped)
+                if (this._isWater && this.waveOutWater.PlaybackState == PlaybackState.Stopped)
                 {
-                    waveOutWater.Play();
+                    this.waveOutWater.Play();
                 }
-                waveOutBackGround.Play();
-                _isStopped = false;
+
+                this.waveOutBackGround.Play();
+                this._isStopped = false;
             }
-
         }
 
-        public bool IsStopped
-        {
-            get { return _isStopped; }
-        }
-
+        #endregion
     }
 }

@@ -1,775 +1,1559 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Texture.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The texture.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace LiveIT2._1
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Windows.Forms;
+
+    using LiveIT2._1.Animals;
+    using LiveIT2._1.Enums;
+    using LiveIT2._1.Vehicules;
+
+    /// <summary>
+    /// The texture.
+    /// </summary>
     [Serializable]
     public class Texture
     {
-        Bitmap _textureGrass,_textureGrass2, _textureDesert, _textureForest, _textureSnow, _textureMountain,
-            _textureDirt, _textureWaterAnimated,_textureRabbit,_textureElephant,
-            _textureCow, _textureCat, _textureDog, _textureEagle,_textureGazelle,
-            _textureGiraffe,_textureLion, _textureRain,_textureThunder ;
-        Bitmap _textureTree, _textureTree2, _textureTree3, _textureBush, _textureRock, _textureRock2, _textureRock3;
-        Bitmap _textureCatLeft, _textureCatUp, _textureCatDown, _textureCatRight;
-        Bitmap _textureDogLeft, _textureDogUp, _textureDogDown, _textureDogRight;
-        Bitmap _textureEagleLeft, _textureEagleUp, _textureEagleDown, _textureEagleRight;
-        Bitmap _textureCowLeft, _textureCowUp, _textureCowDown, _textureCowRight;
-        Bitmap _textureLionLeft, _textureLionUp, _textureLionDown, _textureLionRight;
-        Bitmap _textureRabbitLeft, _textureRabbitUp, _textureRabbitDown, _textureRabbitRight;
-        Bitmap _textureElephantLeft, _textureElephantUp, _textureElephantDown, _textureElephantRight;
-        Bitmap _textureGazelleLeft, _textureGazelleUp, _textureGazelleDown, _textureGazelleRight;
-        Bitmap _texturePlayerLeft, _texturePlayerRight, _texturePlayerUp, _texturePlayerDown, _texturePlayerIdle;
-        Bitmap _textureCarLeft, _textureCarUp, _textureCarDown, _textureCarRight;
-        Bitmap _textureTankUp,_textureTankDown,_textureTankLeft,_textureTankRight ;
-        Bitmap _textureBlood;
+        #region Fields
 
-        Bitmap _playerTexture, _playerCarTexture, _playerTankTexture;
+        /// <summary>
+        /// The _brush desert.
+        /// </summary>
+        private readonly Brush _brushDesert;
 
-        Brush _brushGrass, _brushWater, _brushDesert, _brushForest, _brushSnow, _brushDirt;
-        Timer _animate, _rainTimer, _thunderTimer;
-        Timer _animateAnimal, _animateCar;
-        Timer _animatePlayer;
+        /// <summary>
+        /// The _brush dirt.
+        /// </summary>
+        private readonly Brush _brushDirt;
 
-        List <Bitmap> _waterList = new List<Bitmap>();
-        List<Bitmap> _rainList = new List<Bitmap>();
-        List<Bitmap> _thunderList = new List<Bitmap>();
+        /// <summary>
+        /// The _brush forest.
+        /// </summary>
+        private readonly Brush _brushForest;
 
-        List<Bitmap> _catLeftList = new List<Bitmap>();
-        List<Bitmap> _catUpList = new List<Bitmap>();
-        List<Bitmap> _catDownList = new List<Bitmap>();
-        List<Bitmap> _catRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _brush grass.
+        /// </summary>
+        private readonly Brush _brushGrass;
 
-        List<Bitmap> _dogLeftList = new List<Bitmap>();
-        List<Bitmap> _dogUpList = new List<Bitmap>();
-        List<Bitmap> _dogDownList = new List<Bitmap>();
-        List<Bitmap> _dogRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _brush snow.
+        /// </summary>
+        private readonly Brush _brushSnow;
 
-        List<Bitmap> _eagleLeftList = new List<Bitmap>();
-        List<Bitmap> _eagleUpList = new List<Bitmap>();
-        List<Bitmap> _eagleDownList = new List<Bitmap>();
-        List<Bitmap> _eagleRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _brush water.
+        /// </summary>
+        private readonly Brush _brushWater;
 
-        List<Bitmap> _cowLeftList = new List<Bitmap>();
-        List<Bitmap> _cowUpList = new List<Bitmap>();
-        List<Bitmap> _cowDownList = new List<Bitmap>();
-        List<Bitmap> _cowRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _car down list.
+        /// </summary>
+        private readonly List<Bitmap> _carDownList = new List<Bitmap>();
 
-        List<Bitmap> _lionLeftList = new List<Bitmap>();
-        List<Bitmap> _lionUpList = new List<Bitmap>();
-        List<Bitmap> _lionDownList = new List<Bitmap>();
-        List<Bitmap> _lionRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _car left list.
+        /// </summary>
+        private readonly List<Bitmap> _carLeftList = new List<Bitmap>();
 
-        List<Bitmap> _rabbitLeftList = new List<Bitmap>();
-        List<Bitmap> _rabbitUpList = new List<Bitmap>();
-        List<Bitmap> _rabbitDownList = new List<Bitmap>();
-        List<Bitmap> _rabbitRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _car right list.
+        /// </summary>
+        private readonly List<Bitmap> _carRightList = new List<Bitmap>();
 
-        List<Bitmap> _elephantLeftList = new List<Bitmap>();
-        List<Bitmap> _elephantUpList = new List<Bitmap>();
-        List<Bitmap> _elephantDownList = new List<Bitmap>();
-        List<Bitmap> _elephantRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _car up list.
+        /// </summary>
+        private readonly List<Bitmap> _carUpList = new List<Bitmap>();
 
-        List<Bitmap> _gazelleLeftList = new List<Bitmap>();
-        List<Bitmap> _gazelleUpList = new List<Bitmap>();
-        List<Bitmap> _gazelleDownList = new List<Bitmap>();
-        List<Bitmap> _gazelleRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _cat down list.
+        /// </summary>
+        private readonly List<Bitmap> _catDownList = new List<Bitmap>();
 
-        List<Bitmap> _playerLeftList = new List<Bitmap>();
-        List<Bitmap> _playerUpList = new List<Bitmap>();
-        List<Bitmap> _playerDownList = new List<Bitmap>();
-        List<Bitmap> _playerRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _cat left list.
+        /// </summary>
+        private readonly List<Bitmap> _catLeftList = new List<Bitmap>();
 
-        List<Bitmap> _carLeftList = new List<Bitmap>();
-        List<Bitmap> _carUpList = new List<Bitmap>();
-        List<Bitmap> _carDownList = new List<Bitmap>();
-        List<Bitmap> _carRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _cat right list.
+        /// </summary>
+        private readonly List<Bitmap> _catRightList = new List<Bitmap>();
 
-        List<Bitmap> _tankLeftList = new List<Bitmap>();
-        List<Bitmap> _tankUpList = new List<Bitmap>();
-        List<Bitmap> _tankDownList = new List<Bitmap>();
-        List<Bitmap> _tankRightList = new List<Bitmap>();
+        /// <summary>
+        /// The _cat up list.
+        /// </summary>
+        private readonly List<Bitmap> _catUpList = new List<Bitmap>();
 
+        /// <summary>
+        /// The _cow down list.
+        /// </summary>
+        private readonly List<Bitmap> _cowDownList = new List<Bitmap>();
 
-        int count = 0;
-        int count2 = 0;
-        int count3 = 0;
+        /// <summary>
+        /// The _cow left list.
+        /// </summary>
+        private readonly List<Bitmap> _cowLeftList = new List<Bitmap>();
 
-        int countPlayer;
+        /// <summary>
+        /// The _cow right list.
+        /// </summary>
+        private readonly List<Bitmap> _cowRightList = new List<Bitmap>();
 
-        int _countAnimal;
-        int countCar;
+        /// <summary>
+        /// The _cow up list.
+        /// </summary>
+        private readonly List<Bitmap> _cowUpList = new List<Bitmap>();
 
+        /// <summary>
+        /// The _dog down list.
+        /// </summary>
+        private readonly List<Bitmap> _dogDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _dog left list.
+        /// </summary>
+        private readonly List<Bitmap> _dogLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _dog right list.
+        /// </summary>
+        private readonly List<Bitmap> _dogRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _dog up list.
+        /// </summary>
+        private readonly List<Bitmap> _dogUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _eagle down list.
+        /// </summary>
+        private readonly List<Bitmap> _eagleDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _eagle left list.
+        /// </summary>
+        private readonly List<Bitmap> _eagleLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _eagle right list.
+        /// </summary>
+        private readonly List<Bitmap> _eagleRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _eagle up list.
+        /// </summary>
+        private readonly List<Bitmap> _eagleUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _elephant down list.
+        /// </summary>
+        private readonly List<Bitmap> _elephantDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _elephant left list.
+        /// </summary>
+        private readonly List<Bitmap> _elephantLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _elephant right list.
+        /// </summary>
+        private readonly List<Bitmap> _elephantRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _elephant up list.
+        /// </summary>
+        private readonly List<Bitmap> _elephantUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _gazelle down list.
+        /// </summary>
+        private readonly List<Bitmap> _gazelleDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _gazelle left list.
+        /// </summary>
+        private readonly List<Bitmap> _gazelleLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _gazelle right list.
+        /// </summary>
+        private readonly List<Bitmap> _gazelleRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _gazelle up list.
+        /// </summary>
+        private readonly List<Bitmap> _gazelleUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _lion down list.
+        /// </summary>
+        private readonly List<Bitmap> _lionDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _lion left list.
+        /// </summary>
+        private readonly List<Bitmap> _lionLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _lion right list.
+        /// </summary>
+        private readonly List<Bitmap> _lionRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _lion up list.
+        /// </summary>
+        private readonly List<Bitmap> _lionUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _player car texture.
+        /// </summary>
+        private readonly Bitmap _playerCarTexture;
+
+        /// <summary>
+        /// The _player down list.
+        /// </summary>
+        private readonly List<Bitmap> _playerDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _player left list.
+        /// </summary>
+        private readonly List<Bitmap> _playerLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _player right list.
+        /// </summary>
+        private readonly List<Bitmap> _playerRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _player texture.
+        /// </summary>
+        private readonly Bitmap _playerTexture;
+
+        /// <summary>
+        /// The _player up list.
+        /// </summary>
+        private readonly List<Bitmap> _playerUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _rabbit down list.
+        /// </summary>
+        private readonly List<Bitmap> _rabbitDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _rabbit left list.
+        /// </summary>
+        private readonly List<Bitmap> _rabbitLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _rabbit right list.
+        /// </summary>
+        private readonly List<Bitmap> _rabbitRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _rabbit up list.
+        /// </summary>
+        private readonly List<Bitmap> _rabbitUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _rain list.
+        /// </summary>
+        private readonly List<Bitmap> _rainList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _texture blood.
+        /// </summary>
+        private readonly Bitmap _textureBlood;
+
+        /// <summary>
+        /// The _texture bush.
+        /// </summary>
+        private readonly Bitmap _textureBush;
+
+        /// <summary>
+        /// The _texture desert.
+        /// </summary>
+        private readonly Bitmap _textureDesert;
+
+        /// <summary>
+        /// The _texture dirt.
+        /// </summary>
+        private readonly Bitmap _textureDirt;
+
+        /// <summary>
+        /// The _texture forest.
+        /// </summary>
+        private readonly Bitmap _textureForest;
+
+        /// <summary>
+        /// The _texture grass.
+        /// </summary>
+        private readonly Bitmap _textureGrass;
+
+        /// <summary>
+        /// The _texture grass 2.
+        /// </summary>
+        private readonly Bitmap _textureGrass2;
+
+        /// <summary>
+        /// The _texture mountain.
+        /// </summary>
+        private readonly Bitmap _textureMountain;
+
+        /// <summary>
+        /// The _texture player idle.
+        /// </summary>
+        private readonly Bitmap _texturePlayerIdle;
+
+        /// <summary>
+        /// The _texture rock.
+        /// </summary>
+        private readonly Bitmap _textureRock;
+
+        /// <summary>
+        /// The _texture rock 2.
+        /// </summary>
+        private readonly Bitmap _textureRock2;
+
+        /// <summary>
+        /// The _texture rock 3.
+        /// </summary>
+        private readonly Bitmap _textureRock3;
+
+        /// <summary>
+        /// The _texture snow.
+        /// </summary>
+        private readonly Bitmap _textureSnow;
+
+        /// <summary>
+        /// The _texture tank down.
+        /// </summary>
+        private readonly Bitmap _textureTankDown;
+
+        /// <summary>
+        /// The _texture tank left.
+        /// </summary>
+        private readonly Bitmap _textureTankLeft;
+
+        /// <summary>
+        /// The _texture tank right.
+        /// </summary>
+        private readonly Bitmap _textureTankRight;
+
+        /// <summary>
+        /// The _texture tank up.
+        /// </summary>
+        private readonly Bitmap _textureTankUp;
+
+        /// <summary>
+        /// The _texture tree.
+        /// </summary>
+        private readonly Bitmap _textureTree;
+
+        /// <summary>
+        /// The _texture tree 2.
+        /// </summary>
+        private readonly Bitmap _textureTree2;
+
+        /// <summary>
+        /// The _texture tree 3.
+        /// </summary>
+        private readonly Bitmap _textureTree3;
+
+        /// <summary>
+        /// The _thunder list.
+        /// </summary>
+        private readonly List<Bitmap> _thunderList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _water list.
+        /// </summary>
+        private readonly List<Bitmap> _waterList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _animate.
+        /// </summary>
+        private Timer _animate;
+
+        /// <summary>
+        /// The _animate animal.
+        /// </summary>
+        private Timer _animateAnimal;
+
+        /// <summary>
+        /// The _animate car.
+        /// </summary>
+        private Timer _animateCar;
+
+        /// <summary>
+        /// The _animate player.
+        /// </summary>
+        private Timer _animatePlayer;
+
+        /// <summary>
+        /// The _count animal.
+        /// </summary>
+        private int _countAnimal;
+
+        /// <summary>
+        /// The _player tank texture.
+        /// </summary>
+        private Bitmap _playerTankTexture;
+
+        /// <summary>
+        /// The _rain timer.
+        /// </summary>
+        private Timer _rainTimer;
+
+        /// <summary>
+        /// The _tank down list.
+        /// </summary>
+        private List<Bitmap> _tankDownList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _tank left list.
+        /// </summary>
+        private List<Bitmap> _tankLeftList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _tank right list.
+        /// </summary>
+        private List<Bitmap> _tankRightList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _tank up list.
+        /// </summary>
+        private List<Bitmap> _tankUpList = new List<Bitmap>();
+
+        /// <summary>
+        /// The _texture car down.
+        /// </summary>
+        private Bitmap _textureCarDown;
+
+        /// <summary>
+        /// The _texture car left.
+        /// </summary>
+        private Bitmap _textureCarLeft;
+
+        /// <summary>
+        /// The _texture car right.
+        /// </summary>
+        private Bitmap _textureCarRight;
+
+        /// <summary>
+        /// The _texture car up.
+        /// </summary>
+        private Bitmap _textureCarUp;
+
+        /// <summary>
+        /// The _texture cat.
+        /// </summary>
+        private Bitmap _textureCat;
+
+        /// <summary>
+        /// The _texture cat down.
+        /// </summary>
+        private Bitmap _textureCatDown;
+
+        /// <summary>
+        /// The _texture cat left.
+        /// </summary>
+        private Bitmap _textureCatLeft;
+
+        /// <summary>
+        /// The _texture cat right.
+        /// </summary>
+        private Bitmap _textureCatRight;
+
+        /// <summary>
+        /// The _texture cat up.
+        /// </summary>
+        private Bitmap _textureCatUp;
+
+        /// <summary>
+        /// The _texture cow.
+        /// </summary>
+        private Bitmap _textureCow;
+
+        /// <summary>
+        /// The _texture cow down.
+        /// </summary>
+        private Bitmap _textureCowDown;
+
+        /// <summary>
+        /// The _texture cow left.
+        /// </summary>
+        private Bitmap _textureCowLeft;
+
+        /// <summary>
+        /// The _texture cow right.
+        /// </summary>
+        private Bitmap _textureCowRight;
+
+        /// <summary>
+        /// The _texture cow up.
+        /// </summary>
+        private Bitmap _textureCowUp;
+
+        /// <summary>
+        /// The _texture dog.
+        /// </summary>
+        private Bitmap _textureDog;
+
+        /// <summary>
+        /// The _texture dog down.
+        /// </summary>
+        private Bitmap _textureDogDown;
+
+        /// <summary>
+        /// The _texture dog left.
+        /// </summary>
+        private Bitmap _textureDogLeft;
+
+        /// <summary>
+        /// The _texture dog right.
+        /// </summary>
+        private Bitmap _textureDogRight;
+
+        /// <summary>
+        /// The _texture dog up.
+        /// </summary>
+        private Bitmap _textureDogUp;
+
+        /// <summary>
+        /// The _texture eagle.
+        /// </summary>
+        private Bitmap _textureEagle;
+
+        /// <summary>
+        /// The _texture eagle down.
+        /// </summary>
+        private Bitmap _textureEagleDown;
+
+        /// <summary>
+        /// The _texture eagle left.
+        /// </summary>
+        private Bitmap _textureEagleLeft;
+
+        /// <summary>
+        /// The _texture eagle right.
+        /// </summary>
+        private Bitmap _textureEagleRight;
+
+        /// <summary>
+        /// The _texture eagle up.
+        /// </summary>
+        private Bitmap _textureEagleUp;
+
+        /// <summary>
+        /// The _texture elephant.
+        /// </summary>
+        private Bitmap _textureElephant;
+
+        /// <summary>
+        /// The _texture elephant down.
+        /// </summary>
+        private Bitmap _textureElephantDown;
+
+        /// <summary>
+        /// The _texture elephant left.
+        /// </summary>
+        private Bitmap _textureElephantLeft;
+
+        /// <summary>
+        /// The _texture elephant right.
+        /// </summary>
+        private Bitmap _textureElephantRight;
+
+        /// <summary>
+        /// The _texture elephant up.
+        /// </summary>
+        private Bitmap _textureElephantUp;
+
+        /// <summary>
+        /// The _texture gazelle.
+        /// </summary>
+        private Bitmap _textureGazelle;
+
+        /// <summary>
+        /// The _texture gazelle down.
+        /// </summary>
+        private Bitmap _textureGazelleDown;
+
+        /// <summary>
+        /// The _texture gazelle left.
+        /// </summary>
+        private Bitmap _textureGazelleLeft;
+
+        /// <summary>
+        /// The _texture gazelle right.
+        /// </summary>
+        private Bitmap _textureGazelleRight;
+
+        /// <summary>
+        /// The _texture gazelle up.
+        /// </summary>
+        private Bitmap _textureGazelleUp;
+
+        /// <summary>
+        /// The _texture giraffe.
+        /// </summary>
+        private Bitmap _textureGiraffe;
+
+        /// <summary>
+        /// The _texture lion.
+        /// </summary>
+        private Bitmap _textureLion;
+
+        /// <summary>
+        /// The _texture lion down.
+        /// </summary>
+        private Bitmap _textureLionDown;
+
+        /// <summary>
+        /// The _texture lion left.
+        /// </summary>
+        private Bitmap _textureLionLeft;
+
+        /// <summary>
+        /// The _texture lion right.
+        /// </summary>
+        private Bitmap _textureLionRight;
+
+        /// <summary>
+        /// The _texture lion up.
+        /// </summary>
+        private Bitmap _textureLionUp;
+
+        /// <summary>
+        /// The _texture player down.
+        /// </summary>
+        private Bitmap _texturePlayerDown;
+
+        /// <summary>
+        /// The _texture player left.
+        /// </summary>
+        private Bitmap _texturePlayerLeft;
+
+        /// <summary>
+        /// The _texture player right.
+        /// </summary>
+        private Bitmap _texturePlayerRight;
+
+        /// <summary>
+        /// The _texture player up.
+        /// </summary>
+        private Bitmap _texturePlayerUp;
+
+        /// <summary>
+        /// The _texture rabbit.
+        /// </summary>
+        private Bitmap _textureRabbit;
+
+        /// <summary>
+        /// The _texture rabbit down.
+        /// </summary>
+        private Bitmap _textureRabbitDown;
+
+        /// <summary>
+        /// The _texture rabbit left.
+        /// </summary>
+        private Bitmap _textureRabbitLeft;
+
+        /// <summary>
+        /// The _texture rabbit right.
+        /// </summary>
+        private Bitmap _textureRabbitRight;
+
+        /// <summary>
+        /// The _texture rabbit up.
+        /// </summary>
+        private Bitmap _textureRabbitUp;
+
+        /// <summary>
+        /// The _texture rain.
+        /// </summary>
+        private Bitmap _textureRain;
+
+        /// <summary>
+        /// The _texture thunder.
+        /// </summary>
+        private Bitmap _textureThunder;
+
+        /// <summary>
+        /// The _texture water animated.
+        /// </summary>
+        private Bitmap _textureWaterAnimated;
+
+        /// <summary>
+        /// The _thunder timer.
+        /// </summary>
+        private Timer _thunderTimer;
+
+        /// <summary>
+        /// The count.
+        /// </summary>
+        private int count;
+
+        /// <summary>
+        /// The count 2.
+        /// </summary>
+        private int count2;
+
+        /// <summary>
+        /// The count 3.
+        /// </summary>
+        private int count3;
+
+        /// <summary>
+        /// The count car.
+        /// </summary>
+        private int countCar;
+
+        /// <summary>
+        /// The count player.
+        /// </summary>
+        private int countPlayer;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Texture"/> class.
+        /// </summary>
         public Texture()
         {
-            _thunderTimer = new Timer();
-            _animate = new Timer();
-            _animate.Start();
-            _animate.Interval = 10;
-            _rainTimer = new Timer();
+            this._thunderTimer = new Timer();
+            this._animate = new Timer();
+            this._animate.Start();
+            this._animate.Interval = 10;
+            this._rainTimer = new Timer();
 
-            _animateAnimal = new Timer();
-            _animateAnimal.Interval = 15;
-            _animateAnimal.Start();
-            _animateAnimal.Tick += new EventHandler( T_Cat_Anim );
+            this._animateAnimal = new Timer();
+            this._animateAnimal.Interval = 15;
+            this._animateAnimal.Start();
+            this._animateAnimal.Tick += this.T_Cat_Anim;
 
-            _animatePlayer = new Timer();
-            _animatePlayer.Interval = 10;
-            _animatePlayer.Start();
-            _animatePlayer.Tick += new EventHandler( T_Player_Anim );
+            this._animatePlayer = new Timer();
+            this._animatePlayer.Interval = 10;
+            this._animatePlayer.Start();
+            this._animatePlayer.Tick += this.T_Player_Anim;
 
-            _animateCar = new Timer();
-            _animateCar.Interval = 10;
-            _animateCar.Start();
-            _animateCar.Tick += new EventHandler(T_Car_Anim);
+            this._animateCar = new Timer();
+            this._animateCar.Interval = 10;
+            this._animateCar.Start();
+            this._animateCar.Tick += this.T_Car_Anim;
 
-            _rainTimer.Start();
-            _rainTimer.Interval = 10;
-            _rainTimer.Tick += new EventHandler( T_rain_tick );
+            this._rainTimer.Start();
+            this._rainTimer.Interval = 10;
+            this._rainTimer.Tick += this.T_rain_tick;
 
-            _thunderTimer.Start();
-            _thunderTimer.Interval = 10;
-            _thunderTimer.Tick += new EventHandler(T_Thunder_tick);
+            this._thunderTimer.Start();
+            this._thunderTimer.Interval = 10;
+            this._thunderTimer.Tick += this.T_Thunder_tick;
 
-            _animate.Tick += new EventHandler( T_animateTick );
-            _textureGrass = new Bitmap( @"..\..\..\assets\Grass.jpg");
-            _textureGrass2 = new Bitmap(@"..\..\..\assets\Grass2.jpg");
-            _textureForest = new Bitmap( @"..\..\..\assets\Forest.jpg" );
-            _textureSnow = new Bitmap( @"..\..\..\assets\Snow.jpg" );
-            _textureDesert = new Bitmap( @"..\..\..\assets\Desert.jpg" );
-            _textureDirt = new Bitmap( @"..\..\..\assets\Dirt.jpg" );
-            _textureMountain = new Bitmap(@"..\..\..\assets\Mountain.jpg");
+            this._animate.Tick += this.T_animateTick;
+            this._textureGrass = new Bitmap(@"..\..\..\assets\Grass.jpg");
+            this._textureGrass2 = new Bitmap(@"..\..\..\assets\Grass2.jpg");
+            this._textureForest = new Bitmap(@"..\..\..\assets\Forest.jpg");
+            this._textureSnow = new Bitmap(@"..\..\..\assets\Snow.jpg");
+            this._textureDesert = new Bitmap(@"..\..\..\assets\Desert.jpg");
+            this._textureDirt = new Bitmap(@"..\..\..\assets\Dirt.jpg");
+            this._textureMountain = new Bitmap(@"..\..\..\assets\Mountain.jpg");
 
-            _textureTree = new Bitmap( @"..\..\..\assets\Vegetation\Tree1.gif" );
-            _textureTree2 = new Bitmap( @"..\..\..\assets\Vegetation\Tree2.gif" );
-            _textureTree3 = new Bitmap( @"..\..\..\assets\Vegetation\Tree3.gif" );
-            _textureBush = new Bitmap( @"..\..\..\assets\Vegetation\Bush1.gif" );
-            _textureRock = new Bitmap( @"..\..\..\assets\Vegetation\Rock1.gif" );
-            _textureRock2 = new Bitmap( @"..\..\..\assets\Vegetation\Rock2.gif" );
-            _textureRock3 = new Bitmap( @"..\..\..\assets\Vegetation\Rock3.gif" );
+            this._textureTree = new Bitmap(@"..\..\..\assets\Vegetation\Tree1.gif");
+            this._textureTree2 = new Bitmap(@"..\..\..\assets\Vegetation\Tree2.gif");
+            this._textureTree3 = new Bitmap(@"..\..\..\assets\Vegetation\Tree3.gif");
+            this._textureBush = new Bitmap(@"..\..\..\assets\Vegetation\Bush1.gif");
+            this._textureRock = new Bitmap(@"..\..\..\assets\Vegetation\Rock1.gif");
+            this._textureRock2 = new Bitmap(@"..\..\..\assets\Vegetation\Rock2.gif");
+            this._textureRock3 = new Bitmap(@"..\..\..\assets\Vegetation\Rock3.gif");
 
-            _textureRabbit = new Bitmap( @"..\..\..\assets\Animal\Rabbit.png" );
-            _textureElephant = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );            
-            _textureElephant.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureRabbit = new Bitmap(@"..\..\..\assets\Animal\Rabbit.png");
+            this._textureElephant = new Bitmap(@"..\..\..\assets\Animal\Elephant.png");
+            this._textureElephant.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _textureCow = new Bitmap( @"..\..\..\assets\Animal\Cow.png" );
-            _textureCow.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureCow = new Bitmap(@"..\..\..\assets\Animal\Cow.png");
+            this._textureCow.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _textureCat = new Bitmap( @"..\..\..\assets\Animal\Cat.png" );
-            _textureCat.MakeTransparent(Color.White);
-            _textureCat.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureCat = new Bitmap(@"..\..\..\assets\Animal\Cat.png");
+            this._textureCat.MakeTransparent(Color.White);
+            this._textureCat.RotateFlip(RotateFlipType.Rotate180FlipY);
 
+            this._textureCatDown = new Bitmap(@"..\..\..\assets\Animal\Cat\Cat-Down\a.png");
+            this._textureCatUp = new Bitmap(@"..\..\..\assets\Animal\Cat\Cat-Up\a.png");
+            this._textureCatLeft = new Bitmap(@"..\..\..\assets\Animal\Cat\Cat-Left\a.png");
+            this._textureCatRight = new Bitmap(@"..\..\..\assets\Animal\Cat\Cat-Right\a.png");
 
-            _textureCatDown = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Down\a.png" );
-            _textureCatUp = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Up\a.png" );
-            _textureCatLeft = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Left\a.png" );
-            _textureCatRight = new Bitmap( @"..\..\..\assets\Animal\Cat\Cat-Right\a.png" );
+            this._playerTexture = new Bitmap(@"..\..\..\assets\Player\Player-Down\a.png");
+            this._playerCarTexture = new Bitmap(@"..\..\..\assets\Car\car.png");
+            this._textureCarDown = new Bitmap(@"..\..\..\assets\Car\Car-Down\a.png");
+            this._textureCarUp = new Bitmap(@"..\..\..\assets\Car\Car-Up\a.png");
+            this._textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
+            this._textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
 
+            this._textureTankUp = new Bitmap(@"..\..\..\assets\Tank\Tank-Up\b.png");
+            this._textureTankDown = new Bitmap(@"..\..\..\assets\Tank\Tank-Down\b.png");
+            this._textureTankLeft = new Bitmap(@"..\..\..\assets\Tank\Tank-Left\b.png");
+            this._textureTankRight = new Bitmap(@"..\..\..\assets\Tank\Tank-Right\b.png");
 
-            _playerTexture = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
-            _playerCarTexture = new Bitmap(@"..\..\..\assets\Car\car.png");
-            _textureCarDown = new Bitmap(@"..\..\..\assets\Car\Car-Down\a.png");
-            _textureCarUp = new Bitmap(@"..\..\..\assets\Car\Car-Up\a.png");
-            _textureCarLeft = new Bitmap(@"..\..\..\assets\Car\Car-Left\a.png");
-            _textureCarRight = new Bitmap(@"..\..\..\assets\Car\Car-Right\a.png");
+            this._textureDogDown = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Down\a.png");
+            this._textureDogUp = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Up\a.png");
+            this._textureDogLeft = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Left\a.png");
+            this._textureDogRight = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Right\a.png");
 
-            _textureTankUp = new Bitmap(@"..\..\..\assets\Tank\Tank-Up\b.png");
-            _textureTankDown = new Bitmap( @"..\..\..\assets\Tank\Tank-Down\b.png" );
-            _textureTankLeft = new Bitmap( @"..\..\..\assets\Tank\Tank-Left\b.png" );
-            _textureTankRight = new Bitmap( @"..\..\..\assets\Tank\Tank-Right\b.png" );
-               
+            this._textureEagleDown = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Down\a.png");
+            this._textureEagleUp = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Up\a.png");
+            this._textureEagleLeft = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Left\a.png");
+            this._textureEagleRight = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Right\a.png");
 
-            _textureDogDown = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Down\a.png" );
-            _textureDogUp = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Up\a.png" );
-            _textureDogLeft = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Left\a.png" );
-            _textureDogRight = new Bitmap( @"..\..\..\assets\Animal\Dog\Dog-Right\a.png" );
+            this._textureCowDown = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Down\a.png");
+            this._textureCowUp = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Up\a.png");
+            this._textureCowLeft = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Left\a.png");
+            this._textureCowRight = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Right\a.png");
 
-            _textureEagleDown = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Down\a.png");
-            _textureEagleUp = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Up\a.png");
-            _textureEagleLeft = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Left\a.png");
-            _textureEagleRight = new Bitmap(@"..\..\..\assets\Animal\Eagle\Eagle-Right\a.png");
+            this._textureLionDown = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Down\a.png");
+            this._textureLionUp = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Up\a.png");
+            this._textureLionLeft = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Left\a.png");
+            this._textureLionRight = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Right\a.png");
 
-            _textureCowDown = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Down\a.png");
-            _textureCowUp = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Up\a.png");
-            _textureCowLeft = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Left\a.png");
-            _textureCowRight = new Bitmap(@"..\..\..\assets\Animal\Cow\Cow-Right\a.png");
+            this._textureRabbitDown = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\a.png");
+            this._textureRabbitUp = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\a.png");
+            this._textureRabbitLeft = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\a.png");
+            this._textureRabbitRight = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\a.png");
 
-            _textureLionDown = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Down\a.png");
-            _textureLionUp = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Up\a.png");
-            _textureLionLeft = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Left\a.png");
-            _textureLionRight = new Bitmap(@"..\..\..\assets\Animal\Lion\Lion-Right\a.png");
+            this._textureElephantDown = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Down\a.png");
+            this._textureElephantUp = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Up\a.png");
+            this._textureElephantLeft = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Left\a.png");
+            this._textureElephantRight = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Right\a.png");
 
-            _textureRabbitDown = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\a.png");
-            _textureRabbitUp = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\a.png");
-            _textureRabbitLeft = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\a.png");
-            _textureRabbitRight = new Bitmap(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\a.png");
+            this._textureGazelleDown = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\a.png");
+            this._textureGazelleUp = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\a.png");
+            this._textureGazelleLeft = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\a.png");
+            this._textureGazelleRight = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\a.png");
 
-            _textureElephantDown = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Down\a.png");
-            _textureElephantUp = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Up\a.png");
-            _textureElephantLeft = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Left\a.png");
-            _textureElephantRight = new Bitmap(@"..\..\..\assets\Animal\Elephant\Elephant-Right\a.png");
+            this._texturePlayerDown = new Bitmap(@"..\..\..\assets\Player\Player-Down\a.png");
+            this._texturePlayerUp = new Bitmap(@"..\..\..\assets\Player\Player-Up\a.png");
+            this._texturePlayerLeft = new Bitmap(@"..\..\..\assets\Player\Player-Left\a.png");
+            this._texturePlayerRight = new Bitmap(@"..\..\..\assets\Player\Player-Right\a.png");
+            this._texturePlayerIdle = new Bitmap(@"..\..\..\assets\Player\Player-Down\a.png");
 
-            _textureGazelleDown = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\a.png");
-            _textureGazelleUp = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\a.png");
-            _textureGazelleLeft = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\a.png");
-            _textureGazelleRight = new Bitmap(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\a.png");
+            this._textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
+            this._textureLion.MakeTransparent(Color.White);
+            this._textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _texturePlayerDown = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
-            _texturePlayerUp = new Bitmap( @"..\..\..\assets\Player\Player-Up\a.png" );
-            _texturePlayerLeft = new Bitmap( @"..\..\..\assets\Player\Player-Left\a.png" );
-            _texturePlayerRight = new Bitmap( @"..\..\..\assets\Player\Player-Right\a.png" );
-            _texturePlayerIdle = new Bitmap( @"..\..\..\assets\Player\Player-Down\a.png" );
+            this._textureEagle = new Bitmap(@"..\..\..\assets\Animal\Eagle.png");
+            this._textureEagle.MakeTransparent(Color.White);
+            this._textureEagle.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _textureLion = new Bitmap(@"..\..\..\assets\Animal\Lion.png");
-            _textureLion.MakeTransparent(Color.White);
-            _textureLion.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureGazelle = new Bitmap(@"..\..\..\assets\Animal\Gazelle.png");
+            this._textureGazelle.MakeTransparent(Color.White);
+            this._textureGazelle.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _textureEagle = new Bitmap(@"..\..\..\assets\Animal\Eagle.png");
-            _textureEagle.MakeTransparent(Color.White);
-            _textureEagle.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureDog = new Bitmap(@"..\..\..\assets\Animal\Dog.png");
+            this._textureDog.MakeTransparent(Color.White);
+            this._textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
 
-            _textureGazelle = new Bitmap( @"..\..\..\assets\Animal\Gazelle.png" );
-            _textureGazelle.MakeTransparent(Color.White);
-            _textureGazelle.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureGiraffe = new Bitmap(@"..\..\..\assets\Animal\Elephant.png");
 
-            _textureDog = new Bitmap( @"..\..\..\assets\Animal\Dog.png" );
-            _textureDog.MakeTransparent(Color.White);
-            _textureDog.RotateFlip(RotateFlipType.Rotate180FlipY);
+            this._textureBlood = new Bitmap(@"..\..\..\assets\Blood\Blood.gif");
 
-            _textureGiraffe = new Bitmap( @"..\..\..\assets\Animal\Elephant.png" );
+            this._brushGrass = new SolidBrush(Color.FromArgb(59, 138, 33));
+            this._brushDirt = new SolidBrush(Color.FromArgb(169, 144, 104));
+            this._brushWater = new SolidBrush(Color.FromArgb(64, 85, 213));
+            this._brushDesert = new SolidBrush(Color.FromArgb(173, 128, 109));
+            this._brushForest = new SolidBrush(Color.FromArgb(110, 121, 53));
+            this._brushSnow = new SolidBrush(Color.FromArgb(207, 206, 212));
 
+            this._textureRain = new Bitmap(@"..\..\..\assets\Rain\0.gif");
+            this._textureRain.MakeTransparent(Color.Black);
 
-            _textureBlood = new Bitmap( @"..\..\..\assets\Blood\Blood.gif" );
+            this._textureWaterAnimated = new Bitmap(@"..\..\..\assets\Water\Water.jpg");
 
-            _brushGrass = new SolidBrush( Color.FromArgb( 59, 138, 33 ) );
-            _brushDirt = new SolidBrush( Color.FromArgb( 169, 144, 104 ) );
-            _brushWater = new SolidBrush( Color.FromArgb( 64, 85, 213 ) );
-            _brushDesert = new SolidBrush( Color.FromArgb( 173, 128, 109 ) );
-            _brushForest = new SolidBrush( Color.FromArgb( 110, 121, 53 ) );
-            _brushSnow = new SolidBrush( Color.FromArgb( 207, 206, 212 ) );
+            this._textureThunder = new Bitmap(@"..\..\..\assets\Thunder\0.gif");
+            this._textureThunder.MakeTransparent(Color.Black);
 
-           _textureRain = new Bitmap( @"..\..\..\assets\Rain\0.gif" );
-           _textureRain.MakeTransparent( Color.Black );
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animated\", this._waterList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Rain2\", this._rainList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Thunder\", this._thunderList);
 
-            _textureWaterAnimated = new Bitmap( @"..\..\..\assets\Water\Water.jpg" );
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cat\Cat-Left\", this._catLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cat\Cat-Right\", this._catRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cat\Cat-Down\", this._catDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cat\Cat-Up\", this._catUpList);
 
-            _textureThunder = new Bitmap(@"..\..\..\assets\Thunder\0.gif");
-            _textureThunder.MakeTransparent(Color.Black);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Dog\Dog-Left\", this._dogLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Dog\Dog-Right\", this._dogRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Dog\Dog-Down\", this._dogDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Dog\Dog-Up\", this._dogUpList);
 
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animated\", _waterList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Rain2\", _rainList );
-            AddTexturesFromFolderToList(@"..\..\..\assets\Thunder\", _thunderList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Left\", this._eagleLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Right\", this._eagleRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Down\", this._eagleDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Up\", this._eagleUpList);
 
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Left\", _catLeftList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Right\", _catRightList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Down\", _catDownList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Cat\Cat-Up\", _catUpList );
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Left\", this._cowLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Right\", this._cowRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Down\", this._cowDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Up\", this._cowUpList);
 
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Left\", _dogLeftList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Right\", _dogRightList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Down\", _dogDownList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Animal\Dog\Dog-Up\", _dogUpList );
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Left\", this._lionLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Right\", this._lionRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Down\", this._lionDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Up\", this._lionUpList);
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Left\", _eagleLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Right\", _eagleRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Down\", _eagleDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Eagle\Eagle-Up\", _eagleUpList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\", this._rabbitLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\", this._rabbitRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\", this._rabbitDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\", this._rabbitUpList);
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Left\", _cowLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Right\", _cowRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Down\", _cowDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Cow\Cow-Up\", _cowUpList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Left\", this._elephantLeftList);
+            this.AddTexturesFromFolderToList(
+                @"..\..\..\assets\Animal\Elephant\Elephant-Right\", 
+                this._elephantRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Down\", this._elephantDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Up\", this._elephantUpList);
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Left\", _lionLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Right\", _lionRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Down\", _lionDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Lion\Lion-Up\", _lionUpList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\", this._gazelleLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\", this._gazelleRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", this._gazelleDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", this._gazelleUpList);
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Left\", _rabbitLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Right\", _rabbitRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Down\", _rabbitDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Rabbit\Rabbit-Up\", _rabbitUpList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Player\Player-Left\", this._playerLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Player\Player-Right\", this._playerRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Player\Player-Down\", this._playerDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Player\Player-Up\", this._playerUpList);
 
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Left\", _elephantLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Right\", _elephantRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Down\", _elephantDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Elephant\Elephant-Up\", _elephantUpList);
-
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Left\", _gazelleLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Right\", _gazelleRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Down\", _gazelleDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Animal\Gazelle\Gazelle-Up\", _gazelleUpList);
-
-            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Left\", _playerLeftList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Right\", _playerRightList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Down\", _playerDownList );
-            AddTexturesFromFolderToList( @"..\..\..\assets\Player\Player-Up\", _playerUpList );
-
-            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Left\", _carLeftList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", _carRightList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", _carDownList);
-            AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", _carUpList);
-
-
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Left\", this._carLeftList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", this._carRightList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", this._carDownList);
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", this._carUpList);
         }
 
-        private void T_Player_Anim( object sender, EventArgs e )
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The add textures from folder to list.
+        /// </summary>
+        /// <param name="Directory">
+        /// The directory.
+        /// </param>
+        /// <param name="list">
+        /// The list.
+        /// </param>
+        public void AddTexturesFromFolderToList(string Directory, List<Bitmap> list)
         {
-            if( countPlayer + 1 <= _playerLeftList.Count )
+            string[] filePaths = System.IO.Directory.GetFiles(Directory);
+            Array.Sort(filePaths);
+            foreach (string images in filePaths)
             {
-                _texturePlayerDown = _playerDownList[countPlayer];
-                _playerDownList[countPlayer].MakeTransparent( Color.White );
-
-                _texturePlayerLeft = _playerLeftList[countPlayer];
-                _playerLeftList[countPlayer].MakeTransparent( Color.White );
-
-                _texturePlayerRight = _playerRightList[countPlayer];
-                _playerRightList[countPlayer].MakeTransparent( Color.White );
-
-                _texturePlayerUp = _playerUpList[countPlayer];
-                _playerUpList[countPlayer].MakeTransparent( Color.White );
-
-                countPlayer++;
-            }
-            else
-            {
-                countPlayer = 0;
-            }
-        }
-        private void T_Car_Anim(object sender, EventArgs e)
-        {
-            if (countCar + 1 <= _carLeftList.Count)
-            {
-                _textureCarDown = _carDownList[countCar];
-                _carDownList[countCar].MakeTransparent(Color.White);
-
-                _textureCarLeft = _carLeftList[countCar];
-                _carLeftList[countCar].MakeTransparent(Color.White);
-
-                _textureCarRight = _carRightList[countCar];
-                _carRightList[countCar].MakeTransparent(Color.White);
-
-                _textureCarUp = _carUpList[countCar];
-                _carUpList[countCar].MakeTransparent(Color.White);
-
-                countCar++;
-            }
-            else
-            {
-                countCar = 0;
+                var _tempBmp = new Bitmap(images);
+                list.Add(_tempBmp);
             }
         }
 
-        private void T_Cat_Anim( object sender, EventArgs e )
-        {
-            if( _countAnimal + 1 <= _catDownList.Count )
-            {
-                _textureCatDown = _catDownList[_countAnimal];
-                _catDownList[_countAnimal].MakeTransparent( Color.White );
-
-                _textureCatLeft = _catLeftList[_countAnimal];
-                _catLeftList[_countAnimal].MakeTransparent( Color.White );
-
-                _textureCatRight = _catRightList[_countAnimal];
-                _catRightList[_countAnimal].MakeTransparent( Color.White );
-
-                _textureCatUp = _catUpList[_countAnimal];
-                _catUpList[_countAnimal].MakeTransparent( Color.White );
-
-                _textureDogDown = _dogDownList[_countAnimal];
-
-                _textureDogLeft = _dogLeftList[_countAnimal];
-
-                _textureDogRight = _dogRightList[_countAnimal];
-
-                _textureDogUp = _dogUpList[_countAnimal];
-
-                _textureEagleDown = _eagleDownList[_countAnimal];
-
-                _textureEagleLeft = _eagleLeftList[_countAnimal];
-
-                _textureEagleRight = _eagleRightList[_countAnimal];
-
-                _textureEagleUp = _eagleUpList[_countAnimal];
-
-                _textureCowDown = _cowDownList[_countAnimal];
-
-                _textureCowLeft = _cowLeftList[_countAnimal];
-
-                _textureCowRight = _cowRightList[_countAnimal];
-
-                _textureCowUp = _cowUpList[_countAnimal];
-
-                _textureLionDown = _lionDownList[_countAnimal];
-
-                _textureLionLeft = _lionLeftList[_countAnimal];
-
-                _textureLionRight = _lionRightList[_countAnimal];
-
-                _textureLionUp = _lionUpList[_countAnimal];
-
-                _textureRabbitDown = _rabbitDownList[_countAnimal];
-
-                _textureRabbitLeft = _rabbitLeftList[_countAnimal];
-
-                _textureRabbitRight = _rabbitRightList[_countAnimal];
-
-                _textureRabbitUp = _rabbitUpList[_countAnimal];
-
-                _textureElephantDown = _elephantDownList[_countAnimal];
-
-                _textureElephantLeft = _elephantLeftList[_countAnimal];
-
-                _textureElephantRight = _elephantRightList[_countAnimal];
-
-                _textureElephantUp = _elephantUpList[_countAnimal];
-
-                _textureGazelleDown = _gazelleDownList[_countAnimal];
-
-                _textureGazelleLeft = _gazelleLeftList[_countAnimal];
-
-                _textureGazelleRight = _gazelleRightList[_countAnimal];
-
-                _textureGazelleUp = _gazelleUpList[_countAnimal];
-
-                _countAnimal++;
-            }
-            else
-            {
-                _countAnimal = 0;
-            }
-        }
-        
-
-        private void T_rain_tick( object sender, EventArgs e )
-        {
-            if( count2 + 1 <= _rainList.Count )
-            {
-                _rainList[count2].MakeTransparent( Color.White );
-                _textureRain = _rainList[count2];
-
-                count2++;
-            }
-            else
-            {
-                count2 = 0;
-            }
-        }
-        private void T_Thunder_tick(object sender, EventArgs e)
-        {
-            if (count3 + 1 <= _thunderList.Count)
-            {
-                _thunderList[count3].MakeTransparent(Color.FromArgb(1, 2, 3));
-                _textureThunder = _thunderList[count3];
-
-                count3++;
-            }
-            else
-            {
-                count3 = 0;
-            }
-        }
-
-        private void T_animateTick( object sender, EventArgs e )
-        {
-            if( count + 1 <= _waterList.Count )
-            {
-                _textureWaterAnimated = _waterList[count];
-                count++;
-            }
-            else
-            {
-                count = 0;
-            }
-            
-        }
-
-        public void AddTexturesFromFolderToList( string Directory, List<Bitmap> list )
-        {
-            string[] filePaths = System.IO.Directory.GetFiles( Directory );
-            Array.Sort<string>( filePaths );
-            foreach( string images in filePaths )
-            {
-                Bitmap _tempBmp = new Bitmap( images );
-                list.Add( _tempBmp );
-            }
-        }
-        public Bitmap GetTexture( Box box )
-        {
-            switch( box.Ground )
-            {
-                case BoxGround.Grass:
-                    return _textureGrass;
-                case BoxGround.Grass2:
-                    return _textureGrass2;
-                case BoxGround.Water:
-                    return _textureWaterAnimated;
-                case BoxGround.Forest:
-                    return _textureForest;
-                case BoxGround.Snow:
-                    return _textureSnow;
-                case BoxGround.Dirt:
-                    return _textureDirt;
-                case BoxGround.Desert:
-                    return _textureDesert;
-                case BoxGround.Mountain:
-                    return _textureMountain;
-                default:
-                    return _textureGrass;
-            }
-        }
-
-        public Bitmap GetTexture( Vegetation vegetation )
-        {
-            switch( vegetation.Texture )
-            {
-                case VegetationTexture.Tree:
-                    return _textureTree;
-                case VegetationTexture.Tree2:
-                    return _textureTree2;
-                case VegetationTexture.Tree3:
-                    return _textureTree3;
-                case VegetationTexture.Bush :
-                    return _textureBush;
-                case VegetationTexture.Rock :
-                    return _textureRock;
-                case VegetationTexture.Rock2:
-                    return _textureRock2;
-                case VegetationTexture.Rock3:
-                    return _textureRock3;
-                default:
-                    return _textureTree;
-            }
-        }
-
-        public Brush GetColor( Box box )
-        {
-            switch( box.Ground )
-            {
-                case BoxGround.Grass:
-                    return _brushGrass;
-                case BoxGround.Grass2:
-                    return _brushGrass;
-                case BoxGround.Water:
-                    return _brushWater;
-                case BoxGround.Forest:
-                    return _brushForest;
-                case BoxGround.Snow:
-                    return _brushSnow;
-                case BoxGround.Dirt:
-                    return _brushDirt;
-                case BoxGround.Desert:
-                    return _brushDesert;
-                case BoxGround.Mountain:
-                    return _brushDirt;
-                default:
-                    return _brushGrass;
-            }
-        }
-        public Bitmap LoadTexture( Animal animal )
-        {
-            switch( animal.Texture )
-            {
-                case AnimalTexture.Rabbit:
-                    switch (animal.MovingDirection)
-                    {
-                        case MovingDirection.Left:
-                            return _textureRabbitLeft;
-                        case MovingDirection.Up:
-                            return _textureRabbitUp;
-                        case MovingDirection.Down:
-                            return _textureRabbitDown;
-                        case MovingDirection.Right:
-                            return _textureRabbitRight;
-                        default:
-                            throw new NotSupportedException("No texture found for this direction");
-                    }
-                case AnimalTexture.Cat:
-                    switch( animal.MovingDirection )
-                    {
-                        case MovingDirection.Left :
-                            return _textureCatLeft;
-                        case MovingDirection.Up :
-                            return _textureCatUp;
-                        case MovingDirection.Down:
-                            return _textureCatDown;
-                        case MovingDirection.Right :
-                            return _textureCatRight;
-                        default :
-                            throw new NotSupportedException( "No texture found for this direction" );
-                    }
-                case AnimalTexture.Eagle:
-                    switch (animal.MovingDirection)
-                    {
-                        case MovingDirection.Left:
-                            return _textureEagleLeft;
-                        case MovingDirection.Up:
-                            return _textureEagleUp;
-                        case MovingDirection.Down:
-                            return _textureEagleDown;
-                        case MovingDirection.Right:
-                            return _textureEagleRight;
-                        default:
-                            throw new NotSupportedException("No texture found for this direction");
-                    }
-                case AnimalTexture.Elephant:
-                    switch (animal.MovingDirection)
-                    {
-                        case MovingDirection.Left:
-                            return _textureElephantLeft;
-                        case MovingDirection.Up:
-                            return _textureElephantUp;
-                        case MovingDirection.Down:
-                            return _textureElephantDown;
-                        case MovingDirection.Right:
-                            return _textureElephantRight;
-                        default:
-                            throw new NotSupportedException("No texture found for this direction");
-                    }
-                case AnimalTexture.Lion:
-                    switch (animal.MovingDirection)
-                    {
-                        case MovingDirection.Left:
-                            return _textureLionLeft;
-                        case MovingDirection.Up:
-                            return _textureLionUp;
-                        case MovingDirection.Down:
-                            return _textureLionDown;
-                        case MovingDirection.Right:
-                            return _textureLionRight;
-                        default:
-                            throw new NotSupportedException("No texture found for this direction");
-                    }
-                case AnimalTexture.Cow:
-                    switch (animal.MovingDirection)
-                    {
-                        case MovingDirection.Left:
-                            return _textureCowLeft;
-                        case MovingDirection.Up:
-                            return _textureCowUp;
-                        case MovingDirection.Down:
-                            return _textureCowDown;
-                        case MovingDirection.Right:
-                            return _textureCowRight;
-                        default:
-                            throw new NotSupportedException("No texture found for this direction");
-                    }
-                case AnimalTexture.Dog:
-                    switch( animal.MovingDirection )
-                    {
-                        case MovingDirection.Left:
-                            return _textureDogLeft;
-                        case MovingDirection.Up:
-                            return _textureDogUp;
-                        case MovingDirection.Down:
-                            return _textureDogDown;
-                        case MovingDirection.Right:
-                            return _textureDogRight;
-                        default:
-                            throw new NotSupportedException( "No texture found for this direction" );
-                    }
-                case AnimalTexture.Gazelle:
-                    
-                    switch (animal.MovingDirection)
-                    {
-                        case MovingDirection.Left:
-                            return _textureGazelleLeft;
-                        case MovingDirection.Up:
-                            return _textureGazelleUp;
-                        case MovingDirection.Down:
-                            return _textureGazelleDown;
-                        case MovingDirection.Right:
-                            return _textureGazelleRight;
-                        default:
-                            throw new NotSupportedException("No texture found for this direction");
-                    }
-                default:
-                    return _textureGrass;
-            }
-        }
-
-        public Bitmap LoadTexture( Player player )
-        {
-            switch( player.Texture )
-            {
-                case PlayerTexture.MainPlayer:
-                    switch( player.MovingDirection )
-                    {
-                        case MovingDirection.Up :
-                            return _texturePlayerUp;
-                        case MovingDirection.Down:
-                            return _texturePlayerDown;
-                        case MovingDirection.Left:
-                            return _texturePlayerLeft;
-                        case MovingDirection.Right:
-                            return _texturePlayerRight;
-                        case MovingDirection.Idle:
-                            return _texturePlayerIdle;
-                        default :
-                            return _texturePlayerIdle;
-                    }
-                default:
-                    return _playerTexture;
-            }
-        }
-
-        public Bitmap GetRain()
-        {
-            return _textureRain;
-        }
-        public Bitmap GetThunder()
-        {
-            return _textureThunder;
-        }
-
+        /// <summary>
+        /// The get blood.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
         public Bitmap GetBlood()
         {
-            return _textureBlood;
+            return this._textureBlood;
         }
+
+        /// <summary>
+        /// The get color.
+        /// </summary>
+        /// <param name="box">
+        /// The box.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Brush"/>.
+        /// </returns>
+        public Brush GetColor(Box box)
+        {
+            switch (box.Ground)
+            {
+                case EBoxGround.Grass:
+                    return this._brushGrass;
+                case EBoxGround.Grass2:
+                    return this._brushGrass;
+                case EBoxGround.Water:
+                    return this._brushWater;
+                case EBoxGround.Forest:
+                    return this._brushForest;
+                case EBoxGround.Snow:
+                    return this._brushSnow;
+                case EBoxGround.Dirt:
+                    return this._brushDirt;
+                case EBoxGround.Desert:
+                    return this._brushDesert;
+                case EBoxGround.Mountain:
+                    return this._brushDirt;
+                default:
+                    return this._brushGrass;
+            }
+        }
+
+        /// <summary>
+        /// The get rain.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
+        public Bitmap GetRain()
+        {
+            return this._textureRain;
+        }
+
+        /// <summary>
+        /// The get texture.
+        /// </summary>
+        /// <param name="box">
+        /// The box.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
+        public Bitmap GetTexture(Box box)
+        {
+            switch (box.Ground)
+            {
+                case EBoxGround.Grass:
+                    return this._textureGrass;
+                case EBoxGround.Grass2:
+                    return this._textureGrass2;
+                case EBoxGround.Water:
+                    return this._textureWaterAnimated;
+                case EBoxGround.Forest:
+                    return this._textureForest;
+                case EBoxGround.Snow:
+                    return this._textureSnow;
+                case EBoxGround.Dirt:
+                    return this._textureDirt;
+                case EBoxGround.Desert:
+                    return this._textureDesert;
+                case EBoxGround.Mountain:
+                    return this._textureMountain;
+                default:
+                    return this._textureGrass;
+            }
+        }
+
+        /// <summary>
+        /// The get texture.
+        /// </summary>
+        /// <param name="vegetation">
+        /// The vegetation.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
+        public Bitmap GetTexture(Vegetation vegetation)
+        {
+            switch (vegetation.Texture)
+            {
+                case EVegetationTexture.Tree:
+                    return this._textureTree;
+                case EVegetationTexture.Tree2:
+                    return this._textureTree2;
+                case EVegetationTexture.Tree3:
+                    return this._textureTree3;
+                case EVegetationTexture.Bush:
+                    return this._textureBush;
+                case EVegetationTexture.Rock:
+                    return this._textureRock;
+                case EVegetationTexture.Rock2:
+                    return this._textureRock2;
+                case EVegetationTexture.Rock3:
+                    return this._textureRock3;
+                default:
+                    return this._textureTree;
+            }
+        }
+
+        /// <summary>
+        /// The get thunder.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
+        public Bitmap GetThunder()
+        {
+            return this._textureThunder;
+        }
+
+        /// <summary>
+        /// The load texture.
+        /// </summary>
+        /// <param name="animal">
+        /// The animal.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
+        /// <exception cref="NotSupportedException">
+        /// </exception>
+        public Bitmap LoadTexture(Animal animal)
+        {
+            switch (animal.Texture)
+            {
+                case EAnimalTexture.Rabbit:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureRabbitLeft;
+                        case EMovingDirection.Up:
+                            return this._textureRabbitUp;
+                        case EMovingDirection.Down:
+                            return this._textureRabbitDown;
+                        case EMovingDirection.Right:
+                            return this._textureRabbitRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Cat:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureCatLeft;
+                        case EMovingDirection.Up:
+                            return this._textureCatUp;
+                        case EMovingDirection.Down:
+                            return this._textureCatDown;
+                        case EMovingDirection.Right:
+                            return this._textureCatRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Eagle:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureEagleLeft;
+                        case EMovingDirection.Up:
+                            return this._textureEagleUp;
+                        case EMovingDirection.Down:
+                            return this._textureEagleDown;
+                        case EMovingDirection.Right:
+                            return this._textureEagleRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Elephant:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureElephantLeft;
+                        case EMovingDirection.Up:
+                            return this._textureElephantUp;
+                        case EMovingDirection.Down:
+                            return this._textureElephantDown;
+                        case EMovingDirection.Right:
+                            return this._textureElephantRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Lion:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureLionLeft;
+                        case EMovingDirection.Up:
+                            return this._textureLionUp;
+                        case EMovingDirection.Down:
+                            return this._textureLionDown;
+                        case EMovingDirection.Right:
+                            return this._textureLionRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Cow:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureCowLeft;
+                        case EMovingDirection.Up:
+                            return this._textureCowUp;
+                        case EMovingDirection.Down:
+                            return this._textureCowDown;
+                        case EMovingDirection.Right:
+                            return this._textureCowRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Dog:
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureDogLeft;
+                        case EMovingDirection.Up:
+                            return this._textureDogUp;
+                        case EMovingDirection.Down:
+                            return this._textureDogDown;
+                        case EMovingDirection.Right:
+                            return this._textureDogRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                case EAnimalTexture.Gazelle:
+
+                    switch (animal.EMovingDirection)
+                    {
+                        case EMovingDirection.Left:
+                            return this._textureGazelleLeft;
+                        case EMovingDirection.Up:
+                            return this._textureGazelleUp;
+                        case EMovingDirection.Down:
+                            return this._textureGazelleDown;
+                        case EMovingDirection.Right:
+                            return this._textureGazelleRight;
+                        default:
+                            throw new NotSupportedException("No texture found for this direction");
+                    }
+
+                default:
+                    return this._textureGrass;
+            }
+        }
+
+        /// <summary>
+        /// The load texture.
+        /// </summary>
+        /// <param name="player">
+        /// The player.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
+        public Bitmap LoadTexture(Player player)
+        {
+            switch (player.Texture)
+            {
+                case EPlayerTexture.MainPlayer:
+                    switch (player.EMovingDirection)
+                    {
+                        case EMovingDirection.Up:
+                            return this._texturePlayerUp;
+                        case EMovingDirection.Down:
+                            return this._texturePlayerDown;
+                        case EMovingDirection.Left:
+                            return this._texturePlayerLeft;
+                        case EMovingDirection.Right:
+                            return this._texturePlayerRight;
+                        case EMovingDirection.Idle:
+                            return this._texturePlayerIdle;
+                        default:
+                            return this._texturePlayerIdle;
+                    }
+
+                default:
+                    return this._playerTexture;
+            }
+        }
+
+        /// <summary>
+        /// The load texture.
+        /// </summary>
+        /// <param name="car">
+        /// The car.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Bitmap"/>.
+        /// </returns>
         public Bitmap LoadTexture(Car car)
         {
             switch (car.Texture)
             {
-                case CarTexture.MainPlayerCar:
-                    switch (car.MovingDirection)
+                case ECarTexture.MainPlayerCar:
+                    switch (car.EMovingDirection)
                     {
-                        case MovingDirection.Up:
-                            return _textureCarUp;
-                        case MovingDirection.Down:
-                            return _textureCarDown;
-                        case MovingDirection.Left:
-                            return _textureCarLeft;
-                        case MovingDirection.Right:
-                            return _textureCarRight;
-                        
-                        default:
-                            return _textureCarRight;
-                    }
-                case CarTexture.Tank:
-                    switch (car.MovingDirection)
-                    {
-                        case MovingDirection.Up:
-                            return _textureTankUp;
-                        case MovingDirection.Down:
-                           return _textureTankDown;
-                        case MovingDirection.Left:
-                           return _textureTankLeft;
-                        case MovingDirection.Right:
-                           return _textureTankRight;
+                        case EMovingDirection.Up:
+                            return this._textureCarUp;
+                        case EMovingDirection.Down:
+                            return this._textureCarDown;
+                        case EMovingDirection.Left:
+                            return this._textureCarLeft;
+                        case EMovingDirection.Right:
+                            return this._textureCarRight;
 
                         default:
-                           return _textureTankUp;
+                            return this._textureCarRight;
                     }
+
+                case ECarTexture.Tank:
+                    switch (car.EMovingDirection)
+                    {
+                        case EMovingDirection.Up:
+                            return this._textureTankUp;
+                        case EMovingDirection.Down:
+                            return this._textureTankDown;
+                        case EMovingDirection.Left:
+                            return this._textureTankLeft;
+                        case EMovingDirection.Right:
+                            return this._textureTankRight;
+
+                        default:
+                            return this._textureTankUp;
+                    }
+
                 default:
-                    return _playerCarTexture;
+                    return this._playerCarTexture;
             }
         }
-       
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The t_ car_ anim.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void T_Car_Anim(object sender, EventArgs e)
+        {
+            if (this.countCar + 1 <= this._carLeftList.Count)
+            {
+                this._textureCarDown = this._carDownList[this.countCar];
+                this._carDownList[this.countCar].MakeTransparent(Color.White);
+
+                this._textureCarLeft = this._carLeftList[this.countCar];
+                this._carLeftList[this.countCar].MakeTransparent(Color.White);
+
+                this._textureCarRight = this._carRightList[this.countCar];
+                this._carRightList[this.countCar].MakeTransparent(Color.White);
+
+                this._textureCarUp = this._carUpList[this.countCar];
+                this._carUpList[this.countCar].MakeTransparent(Color.White);
+
+                this.countCar++;
+            }
+            else
+            {
+                this.countCar = 0;
+            }
         }
+
+        /// <summary>
+        /// The t_ cat_ anim.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void T_Cat_Anim(object sender, EventArgs e)
+        {
+            if (this._countAnimal + 1 <= this._catDownList.Count)
+            {
+                this._textureCatDown = this._catDownList[this._countAnimal];
+                this._catDownList[this._countAnimal].MakeTransparent(Color.White);
+
+                this._textureCatLeft = this._catLeftList[this._countAnimal];
+                this._catLeftList[this._countAnimal].MakeTransparent(Color.White);
+
+                this._textureCatRight = this._catRightList[this._countAnimal];
+                this._catRightList[this._countAnimal].MakeTransparent(Color.White);
+
+                this._textureCatUp = this._catUpList[this._countAnimal];
+                this._catUpList[this._countAnimal].MakeTransparent(Color.White);
+
+                this._textureDogDown = this._dogDownList[this._countAnimal];
+
+                this._textureDogLeft = this._dogLeftList[this._countAnimal];
+
+                this._textureDogRight = this._dogRightList[this._countAnimal];
+
+                this._textureDogUp = this._dogUpList[this._countAnimal];
+
+                this._textureEagleDown = this._eagleDownList[this._countAnimal];
+
+                this._textureEagleLeft = this._eagleLeftList[this._countAnimal];
+
+                this._textureEagleRight = this._eagleRightList[this._countAnimal];
+
+                this._textureEagleUp = this._eagleUpList[this._countAnimal];
+
+                this._textureCowDown = this._cowDownList[this._countAnimal];
+
+                this._textureCowLeft = this._cowLeftList[this._countAnimal];
+
+                this._textureCowRight = this._cowRightList[this._countAnimal];
+
+                this._textureCowUp = this._cowUpList[this._countAnimal];
+
+                this._textureLionDown = this._lionDownList[this._countAnimal];
+
+                this._textureLionLeft = this._lionLeftList[this._countAnimal];
+
+                this._textureLionRight = this._lionRightList[this._countAnimal];
+
+                this._textureLionUp = this._lionUpList[this._countAnimal];
+
+                this._textureRabbitDown = this._rabbitDownList[this._countAnimal];
+
+                this._textureRabbitLeft = this._rabbitLeftList[this._countAnimal];
+
+                this._textureRabbitRight = this._rabbitRightList[this._countAnimal];
+
+                this._textureRabbitUp = this._rabbitUpList[this._countAnimal];
+
+                this._textureElephantDown = this._elephantDownList[this._countAnimal];
+
+                this._textureElephantLeft = this._elephantLeftList[this._countAnimal];
+
+                this._textureElephantRight = this._elephantRightList[this._countAnimal];
+
+                this._textureElephantUp = this._elephantUpList[this._countAnimal];
+
+                this._textureGazelleDown = this._gazelleDownList[this._countAnimal];
+
+                this._textureGazelleLeft = this._gazelleLeftList[this._countAnimal];
+
+                this._textureGazelleRight = this._gazelleRightList[this._countAnimal];
+
+                this._textureGazelleUp = this._gazelleUpList[this._countAnimal];
+
+                this._countAnimal++;
+            }
+            else
+            {
+                this._countAnimal = 0;
+            }
+        }
+
+        /// <summary>
+        /// The t_ player_ anim.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void T_Player_Anim(object sender, EventArgs e)
+        {
+            if (this.countPlayer + 1 <= this._playerLeftList.Count)
+            {
+                this._texturePlayerDown = this._playerDownList[this.countPlayer];
+                this._playerDownList[this.countPlayer].MakeTransparent(Color.White);
+
+                this._texturePlayerLeft = this._playerLeftList[this.countPlayer];
+                this._playerLeftList[this.countPlayer].MakeTransparent(Color.White);
+
+                this._texturePlayerRight = this._playerRightList[this.countPlayer];
+                this._playerRightList[this.countPlayer].MakeTransparent(Color.White);
+
+                this._texturePlayerUp = this._playerUpList[this.countPlayer];
+                this._playerUpList[this.countPlayer].MakeTransparent(Color.White);
+
+                this.countPlayer++;
+            }
+            else
+            {
+                this.countPlayer = 0;
+            }
+        }
+
+        /// <summary>
+        /// The t_ thunder_tick.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void T_Thunder_tick(object sender, EventArgs e)
+        {
+            if (this.count3 + 1 <= this._thunderList.Count)
+            {
+                this._thunderList[this.count3].MakeTransparent(Color.FromArgb(1, 2, 3));
+                this._textureThunder = this._thunderList[this.count3];
+
+                this.count3++;
+            }
+            else
+            {
+                this.count3 = 0;
+            }
+        }
+
+        /// <summary>
+        /// The t_animate tick.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void T_animateTick(object sender, EventArgs e)
+        {
+            if (this.count + 1 <= this._waterList.Count)
+            {
+                this._textureWaterAnimated = this._waterList[this.count];
+                this.count++;
+            }
+            else
+            {
+                this.count = 0;
+            }
+        }
+
+        /// <summary>
+        /// The t_rain_tick.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void T_rain_tick(object sender, EventArgs e)
+        {
+            if (this.count2 + 1 <= this._rainList.Count)
+            {
+                this._rainList[this.count2].MakeTransparent(Color.White);
+                this._textureRain = this._rainList[this.count2];
+
+                this.count2++;
+            }
+            else
+            {
+                this.count2 = 0;
+            }
+        }
+
+        #endregion
     }
+}

@@ -7,6 +7,8 @@ using System.Windows.Forms;
 
 namespace LiveIT2._1
 {
+    using LiveIT2._1.Gui;
+
     static class Program
     {
         /// <summary>

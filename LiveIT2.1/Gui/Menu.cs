@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace LiveIT2._1
+﻿namespace LiveIT2._1.Gui
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using LiveIT2._1.Animals;
+
     public partial class Menu : Form
     {
         public Menu()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void newGame_Click(object sender, EventArgs e)

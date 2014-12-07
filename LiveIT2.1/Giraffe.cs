@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1
 {
+    using LiveIT2._1.Animals;
+    using LiveIT2._1.Enums;
+
     [Serializable]
     public class Giraffe : Animal
     {
@@ -15,7 +18,7 @@ namespace LiveIT2._1
             : base( map, starPosition )
         {
             Position = starPosition;
-            Texture = AnimalTexture.Elephant;
+            Texture = EAnimalTexture.Elephant;
             Size = new Size( 500, 500 );
         }
     }

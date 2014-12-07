@@ -1,176 +1,366 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Box.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The box.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace LiveIT2._1
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+
+    using LiveIT2._1.Animals;
+    using LiveIT2._1.Enums;
+
+    /// <summary>
+    /// The box.
+    /// </summary>
     [Serializable]
     public class Box
     {
-         Map _map;
-        int _line;
-        int _column;
-        BoxGround _ground;
-        Rectangle _source;
-        Point _relativePosition;
-        Size _relativeSize;
-        [NonSerializedAttribute]
-        List<Animal> _animalList;
+        #region Fields
 
-        public Box( int line, int column, Map map )
+        /// <summary>
+        /// The _column.
+        /// </summary>
+        private readonly int _column;
+
+        /// <summary>
+        /// The _line.
+        /// </summary>
+        private readonly int _line;
+
+        /// <summary>
+        /// The _animal list.
+        /// </summary>
+        [NonSerialized]
+        private List<Animal> _animalList;
+
+        /// <summary>
+        /// The _ground.
+        /// </summary>
+        private EBoxGround _ground;
+
+        /// <summary>
+        /// The _map.
+        /// </summary>
+        private Map _map;
+
+        /// <summary>
+        /// The _relative position.
+        /// </summary>
+        private Point _relativePosition;
+
+        /// <summary>
+        /// The _relative size.
+        /// </summary>
+        private Size _relativeSize;
+
+        /// <summary>
+        /// The _source.
+        /// </summary>
+        private Rectangle _source;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Box"/> class.
+        /// </summary>
+        /// <param name="line">
+        /// The line.
+        /// </param>
+        /// <param name="column">
+        /// The column.
+        /// </param>
+        /// <param name="map">
+        /// The map.
+        /// </param>
+        public Box(int line, int column, Map map)
         {
-            _map = map;
-            _line = line;
-            _column = column;
-            _ground = BoxGround.Grass;
-            _relativePosition = new Point(line, column);
-            _relativeSize = new Size(_map.BoxSize, _map.BoxSize);
-            _animalList = new List<Animal>();
+            this._map = map;
+            this._line = line;
+            this._column = column;
+            this._ground = EBoxGround.Grass;
+            this._relativePosition = new Point(line, column);
+            this._relativeSize = new Size(this._map.BoxSize, this._map.BoxSize);
+            this._animalList = new List<Animal>();
         }
 
-        public Point Location
-        {
-            get { return new Point(_line*_map.BoxSize, _column*_map.BoxSize); }
-        }
+        #endregion
 
-        public Rectangle Area
-        {
-            get { return new Rectangle( Location, new Size( _map.BoxSize, _map.BoxSize )); }
-        }
+        #region Public Properties
 
-        public BoxGround Ground
-        {
-            get { return _ground; }
-            set { _ground = value; }
-        }
-        public Box Top
-        {
-            get { return _map[_line, _column - 1]; }
-        }
-
-        public Box Bottom
-        {
-            get { return _map[_line, _column + 1]; }
-        }
-
-        public Box Left
-        {
-            get { return _map[_line - 1, _column]; }
-        }
-
-        public Box Right
-        {
-            get { return _map[_line + 1, _column]; }
-        }
-
-
-        public int Line
-        {
-            get { return _line; }
-          
-        }
-        public int Column
-        {
-            get { return _column; }
-           
-        }
-
+        /// <summary>
+        /// Gets or sets the animal list.
+        /// </summary>
         public List<Animal> AnimalList
         {
-            get { return _animalList; }
-            set { _animalList = value; }
-        }
-
-        public Rectangle Source
-        {
-            get { return _source; }
-            set { _source = value; }
-        }
-
-        public void LoadMap(Map map)
-        {
-            _map = map;
-        }
-
-        public void AddAnimal(Animal a)
-        {
-            if (!_animalList.Contains(a))
+            get
             {
-                a.AddToList( this );
-                _animalList.Add(a);
+                return this._animalList;
             }
-        }
 
-        public void RemoveFromList(Animal a)
-        {
-            if (_animalList.Contains(a))
+            set
             {
-                a.RemoveFromList( this );
-                _animalList.Remove(a);
-            }
-        }
-
-        public void DrawTransitionTextures()
-        {
-            if (this.Ground == BoxGround.Water)
-            {
-
-                if (this.Top != null && this.Top.Ground != BoxGround.Water )
-                {
-                    this.Top.Ground = BoxGround.Dirt;
-                }
-
-                if (this.Left != null && this.Left.Ground != BoxGround.Water)
-                {
-                    this.Left.Ground = BoxGround.Dirt;
-                }
-                if (this.Right != null && this.Right.Ground != BoxGround.Water)
-                {
-                    this.Right.Ground = BoxGround.Dirt;
-                }
-                if (this.Bottom != null && this.Bottom.Ground != BoxGround.Water)
-                {
-                    this.Bottom.Ground = BoxGround.Dirt;
-                }                
+                this._animalList = value;
             }
         }
 
         /// <summary>
-        /// Gets the position of the box in the viewport
+        /// Gets the area.
+        /// </summary>
+        public Rectangle Area
+        {
+            get
+            {
+                return new Rectangle(this.Location, new Size(this._map.BoxSize, this._map.BoxSize));
+            }
+        }
+
+        /// <summary>
+        /// Gets the bottom.
+        /// </summary>
+        public Box Bottom
+        {
+            get
+            {
+                return this._map[this._line, this._column + 1];
+            }
+        }
+
+        /// <summary>
+        /// Gets the column.
+        /// </summary>
+        public int Column
+        {
+            get
+            {
+                return this._column;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the ground.
+        /// </summary>
+        public EBoxGround Ground
+        {
+            get
+            {
+                return this._ground;
+            }
+
+            set
+            {
+                this._ground = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the left.
+        /// </summary>
+        public Box Left
+        {
+            get
+            {
+                return this._map[this._line - 1, this._column];
+            }
+        }
+
+        /// <summary>
+        /// Gets the line.
+        /// </summary>
+        public int Line
+        {
+            get
+            {
+                return this._line;
+            }
+        }
+
+        /// <summary>
+        /// Gets the location.
+        /// </summary>
+        public Point Location
+        {
+            get
+            {
+                return new Point(this._line * this._map.BoxSize, this._column * this._map.BoxSize);
+            }
+        }
+
+        /// <summary>
+        ///     Gets the position of the box in the viewport
         /// </summary>
         public Point RelativePosition
         {
-            get { return _relativePosition; }
+            get
+            {
+                return this._relativePosition;
+            }
         }
 
         /// <summary>
-        /// Gets the size of the box in pixels in the viewport
+        ///     Gets the size of the box in pixels in the viewport
         /// </summary>
         public Size RelativeSize
         {
-            get { return _relativeSize; }
+            get
+            {
+                return this._relativeSize;
+            }
         }
+
+        /// <summary>
+        /// Gets the right.
+        /// </summary>
+        public Box Right
+        {
+            get
+            {
+                return this._map[this._line + 1, this._column];
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        public Rectangle Source
+        {
+            get
+            {
+                return this._source;
+            }
+
+            set
+            {
+                this._source = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the top.
+        /// </summary>
+        public Box Top
+        {
+            get
+            {
+                return this._map[this._line, this._column - 1];
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The add animal.
+        /// </summary>
+        /// <param name="a">
+        /// The a.
+        /// </param>
+        public void AddAnimal(Animal a)
+        {
+            if (!this._animalList.Contains(a))
+            {
+                a.AddToList(this);
+                this._animalList.Add(a);
+            }
+        }
+
+        /// <summary>
+        /// The draw transition textures.
+        /// </summary>
+        public void DrawTransitionTextures()
+        {
+            if (this.Ground == EBoxGround.Water)
+            {
+                if (this.Top != null && this.Top.Ground != EBoxGround.Water)
+                {
+                    this.Top.Ground = EBoxGround.Dirt;
+                }
+
+                if (this.Left != null && this.Left.Ground != EBoxGround.Water)
+                {
+                    this.Left.Ground = EBoxGround.Dirt;
+                }
+
+                if (this.Right != null && this.Right.Ground != EBoxGround.Water)
+                {
+                    this.Right.Ground = EBoxGround.Dirt;
+                }
+
+                if (this.Bottom != null && this.Bottom.Ground != EBoxGround.Water)
+                {
+                    this.Bottom.Ground = EBoxGround.Dirt;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The load map.
+        /// </summary>
+        /// <param name="map">
+        /// The map.
+        /// </param>
+        public void LoadMap(Map map)
+        {
+            this._map = map;
+        }
+
+        /// <summary>
+        /// The remove from list.
+        /// </summary>
+        /// <param name="a">
+        /// The a.
+        /// </param>
+        public void RemoveFromList(Animal a)
+        {
+            if (this._animalList.Contains(a))
+            {
+                a.RemoveFromList(this);
+                this._animalList.Remove(a);
+            }
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Draw the box in the targeted Rectangle
         /// </summary>
-        /// <param name="g"></param>
-        /// <param name="target">Rectangle in pixel in the Graphics.</param>
-        /// <param name="textures">Texture object to apply the texture on the box </param>
-        internal void Draw( Graphics g, Rectangle target, Texture textures, Rectangle viewPort)
-        {        
-            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width + 2);
-            int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
-            int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
-            _relativePosition.X = newXpos;
-            _relativePosition.Y = newYpos;
-            _relativeSize.Height = newSize;
-            _relativeSize.Width = newSize;
+        /// <param name="g">
+        /// </param>
+        /// <param name="target">
+        /// Rectangle in pixel in the Graphics.
+        /// </param>
+        /// <param name="textures">
+        /// Texture object to apply the texture on the box 
+        /// </param>
+        /// <param name="viewPort">
+        /// The view Port.
+        /// </param>
+        internal void Draw(Graphics g, Rectangle target, Texture textures, Rectangle viewPort)
+        {
+            var newSize = (int)((this.Source.Width / (double)viewPort.Width) * target.Width + 2);
+            int newXpos =
+                (int)(this.Area.X / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)))
+                - (int)
+                  (viewPort.X / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)));
+            int newYpos =
+                (int)(this.Area.Y / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)))
+                - (int)
+                  (viewPort.Y / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)));
+            this._relativePosition.X = newXpos;
+            this._relativePosition.Y = newYpos;
+            this._relativeSize.Height = newSize;
+            this._relativeSize.Width = newSize;
 
             if (viewPort.Width < 5000)
             {
@@ -178,27 +368,52 @@ namespace LiveIT2._1
             }
             else
             {
-                g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));               
+                g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));
             }
 
-            for (int i = 0; i < _animalList.Count; i++)
+            for (int i = 0; i < this._animalList.Count; i++)
             {
-                if (!_animalList[i].Area.IntersectsWith(this.Area))
+                if (!this._animalList[i].Area.IntersectsWith(this.Area))
                 {
-                    RemoveFromList(_animalList[i]);
+                    this.RemoveFromList(this._animalList[i]);
                 }
             }
 
-            DrawTransitionTextures();
+            this.DrawTransitionTextures();
         }
-        internal void DrawMiniMap( Graphics g, Rectangle target, Texture textures, Rectangle viewPort )
-        {
-            int newSize = (int)(((double)this.Source.Width / (double)viewPort.Width) * target.Width);
-            int newXpos = (int)(this.Area.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.X / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
-            int newYpos = (int)(this.Area.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width))) - (int)(viewPort.Y / (_map.BoxSize / (((double)this.Source.Width / (double)viewPort.Width) * target.Width)));
 
-            g.FillRectangle( textures.GetColor( this ), new Rectangle( newXpos + target.X, newYpos + target.Y, newSize, newSize ) );
+        /// <summary>
+        /// The draw mini map.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        /// <param name="target">
+        /// The target.
+        /// </param>
+        /// <param name="textures">
+        /// The textures.
+        /// </param>
+        /// <param name="viewPort">
+        /// The view port.
+        /// </param>
+        internal void DrawMiniMap(Graphics g, Rectangle target, Texture textures, Rectangle viewPort)
+        {
+            var newSize = (int)((this.Source.Width / (double)viewPort.Width) * target.Width);
+            int newXpos =
+                (int)(this.Area.X / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)))
+                - (int)
+                  (viewPort.X / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)));
+            int newYpos =
+                (int)(this.Area.Y / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)))
+                - (int)
+                  (viewPort.Y / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)));
+
+            g.FillRectangle(
+                textures.GetColor(this), 
+                new Rectangle(newXpos + target.X, newYpos + target.Y, newSize, newSize));
         }
-        
+
+        #endregion
     }
 }
