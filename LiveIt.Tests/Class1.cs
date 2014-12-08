@@ -9,6 +9,8 @@ using System.Drawing;
 
 namespace LiveIT2._1
 {
+    using LiveIT2._1.Terrain;
+
     [TestFixture]
     public class Class1
     {

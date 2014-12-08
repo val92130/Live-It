@@ -1,50 +1,49 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Tree.cs" company="">
+// <copyright file="Rock.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The tree.
+//   The rock.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Vegetation
 {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
 
     /// <summary>
-    /// The tree.
+    ///     The rock.
     /// </summary>
     [Serializable]
-    public class Tree : Vegetation
+    public class Rock : Vegetation
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tree"/> class.
+        /// Initializes a new instance of the <see cref="Rock"/> class.
         /// </summary>
-        /// <param name="map">
-        /// The map.
+        /// <param name="_map">
+        /// The _map.
         /// </param>
         /// <param name="StartPosition">
         /// The start position.
         /// </param>
-        public Tree(Map map, Point StartPosition)
-            : base(map, StartPosition)
+        public Rock(Map _map, Point StartPosition)
+            : base(_map, StartPosition)
         {
             var r = new Random();
-            int _random = r.Next(400, 650);
+            int _random = r.Next(50, 300);
             var RandomVegList = new List<EVegetationTexture>
                                     {
-                                        EVegetationTexture.Tree, 
-                                        EVegetationTexture.Tree2, 
-                                        EVegetationTexture.Tree3
+                                        EVegetationTexture.Rock, 
+                                        EVegetationTexture.Rock2, 
+                                        EVegetationTexture.Rock3
                                     };
             var r2 = new Random();
-
             this.Texture = RandomVegList[r2.Next(0, RandomVegList.Count)];
             this.Size = new Size(_random, _random);
         }

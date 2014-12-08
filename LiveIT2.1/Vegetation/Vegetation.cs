@@ -6,16 +6,17 @@
 //   The vegetation.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Vegetation
 {
     using System;
     using System.Drawing;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
+    using LiveIT2._1.Textures;
 
     /// <summary>
-    /// The vegetation.
+    ///     The vegetation.
     /// </summary>
     [Serializable]
     public class Vegetation
@@ -23,32 +24,32 @@ namespace LiveIT2._1
         #region Fields
 
         /// <summary>
-        /// The _map.
+        ///     The _map.
         /// </summary>
         private Map _map;
 
         /// <summary>
-        /// The _position.
+        ///     The _position.
         /// </summary>
         private Point _position;
 
         /// <summary>
-        /// The _relative position.
+        ///     The _relative position.
         /// </summary>
         private Point _relativePosition;
 
         /// <summary>
-        /// The _relative size.
+        ///     The _relative size.
         /// </summary>
         private Size _relativeSize;
 
         /// <summary>
-        /// The _size.
+        ///     The _size.
         /// </summary>
         private Size _size;
 
         /// <summary>
-        /// The _texture.
+        ///     The _texture.
         /// </summary>
         private EVegetationTexture _texture;
 
@@ -78,7 +79,7 @@ namespace LiveIT2._1
         #region Public Properties
 
         /// <summary>
-        /// Gets the area.
+        ///     Gets the area.
         /// </summary>
         public Rectangle Area
         {
@@ -89,7 +90,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the position.
+        ///     Gets or sets the position.
         /// </summary>
         public Point Position
         {
@@ -105,7 +106,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the relative position.
+        ///     Gets or sets the relative position.
         /// </summary>
         public Point RelativePosition
         {
@@ -121,7 +122,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the relative size.
+        ///     Gets or sets the relative size.
         /// </summary>
         public Size RelativeSize
         {
@@ -137,7 +138,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the size.
+        ///     Gets or sets the size.
         /// </summary>
         public Size Size
         {
@@ -153,7 +154,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the texture.
+        ///     Gets or sets the texture.
         /// </summary>
         public EVegetationTexture Texture
         {

@@ -1,22 +1,19 @@
-﻿using NAudio.Wave;
-using NAudio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LiveIT2._1
+﻿namespace LiveIT2._1.Animation
 {
+    using NAudio.Wave;
+
     public class LoopStream : WaveStream
     {
         WaveStream sourceStream;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="LoopStream"/> class. 
         /// Creates a new Loop stream
         /// </summary>
-        /// <param name="sourceStream">The stream to read from. Note: the Read method of this stream should return 0 when it reaches the end
-        /// or else we will not loop to the start again.</param>
+        /// <param name="sourceStream">
+        /// The stream to read from. Note: the Read method of this stream should return 0 when it reaches the end
+        /// or else we will not loop to the start again.
+        /// </param>
         public LoopStream(WaveStream sourceStream)
         {
             this.sourceStream = sourceStream;
@@ -33,7 +30,7 @@ namespace LiveIT2._1
         /// </summary>
         public override WaveFormat WaveFormat
         {
-            get { return sourceStream.WaveFormat; }
+            get { return this.sourceStream.WaveFormat; }
         }
 
         /// <summary>
@@ -41,7 +38,7 @@ namespace LiveIT2._1
         /// </summary>
         public override long Length
         {
-            get { return sourceStream.Length; }
+            get { return this.sourceStream.Length; }
         }
 
         /// <summary>
@@ -49,8 +46,8 @@ namespace LiveIT2._1
         /// </summary>
         public override long Position
         {
-            get { return sourceStream.Position; }
-            set { sourceStream.Position = value; }
+            get { return this.sourceStream.Position; }
+            set { this.sourceStream.Position = value; }
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -59,16 +56,16 @@ namespace LiveIT2._1
 
             while (totalBytesRead < count)
             {
-                int bytesRead = sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
+                int bytesRead = this.sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
                 if (bytesRead == 0)
                 {
-                    if (sourceStream.Position == 0 || !EnableLooping)
+                    if (this.sourceStream.Position == 0 || !this.EnableLooping)
                     {
                         // something wrong with the source stream
                         break;
                     }
                     // loop
-                    sourceStream.Position = 0;
+                    this.sourceStream.Position = 0;
                 }
                 totalBytesRead += bytesRead;
             }

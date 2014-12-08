@@ -6,8 +6,7 @@
 //   The map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Terrain
 {
     using System;
     using System.Collections.Generic;
@@ -17,9 +16,11 @@ namespace LiveIT2._1
     using System.Runtime.Serialization.Formatters.Binary;
 
     using LiveIT2._1.Animals;
+    using LiveIT2._1.Vegetation;
+    using LiveIT2._1.Viewport;
 
     /// <summary>
-    /// The map.
+    ///     The map.
     /// </summary>
     [Serializable]
     public class Map
@@ -27,64 +28,64 @@ namespace LiveIT2._1
         #region Fields
 
         /// <summary>
-        /// The _box count per line.
+        ///     The _box count per line.
         /// </summary>
         private readonly int _boxCountPerLine;
 
         // Box size in centimeter.
         /// <summary>
-        /// The _box size.
+        ///     The _box size.
         /// </summary>
         private readonly int _boxSize;
 
         /// <summary>
-        /// The _animals.
+        ///     The _animals.
         /// </summary>
         [NonSerialized]
         private List<Animal> _animals = new List<Animal>();
 
         /// <summary>
-        /// The _blood list.
+        ///     The _blood list.
         /// </summary>
         private List<Rectangle> _bloodList = new List<Rectangle>();
 
         /// <summary>
-        /// The _boxes.
+        ///     The _boxes.
         /// </summary>
         private Box[] _boxes;
 
         /// <summary>
-        /// The _dead animals.
+        ///     The _dead animals.
         /// </summary>
         private int _deadAnimals;
 
         /// <summary>
-        /// The _is in car.
+        ///     The _is in car.
         /// </summary>
         private bool _isInCar;
 
         /// <summary>
-        /// The _is player spawned.
+        ///     The _is player spawned.
         /// </summary>
         private bool _isPlayerSpawned;
 
         /// <summary>
-        /// The _is raining.
+        ///     The _is raining.
         /// </summary>
         private bool _isRaining;
 
         /// <summary>
-        /// The _show debug.
+        ///     The _show debug.
         /// </summary>
         private bool _showDebug;
 
         /// <summary>
-        /// The _vegetation.
+        ///     The _vegetation.
         /// </summary>
         private List<Vegetation> _vegetation = new List<Vegetation>();
 
         /// <summary>
-        /// The _view port.
+        ///     The _view port.
         /// </summary>
         [NonSerialized]
         private MainViewPort _viewPort;
@@ -123,7 +124,7 @@ namespace LiveIT2._1
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the animals.
+        ///     Gets or sets the animals.
         /// </summary>
         public List<Animal> Animals
         {
@@ -139,7 +140,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the blood list.
+        ///     Gets or sets the blood list.
         /// </summary>
         public List<Rectangle> BloodList
         {
@@ -177,7 +178,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the boxes.
+        ///     Gets or sets the boxes.
         /// </summary>
         public Box[] Boxes
         {
@@ -193,7 +194,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the dead animals.
+        ///     Gets or sets the dead animals.
         /// </summary>
         public int DeadAnimals
         {
@@ -209,7 +210,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the get living animals.
+        ///     Gets the get living animals.
         /// </summary>
         public int GetLivingAnimals
         {
@@ -220,7 +221,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is in car.
+        ///     Gets or sets a value indicating whether is in car.
         /// </summary>
         public bool IsInCar
         {
@@ -236,7 +237,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is player.
+        ///     Gets or sets a value indicating whether is player.
         /// </summary>
         public bool IsPlayer
         {
@@ -252,7 +253,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is raining.
+        ///     Gets or sets a value indicating whether is raining.
         /// </summary>
         public bool IsRaining
         {
@@ -279,7 +280,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether show debug.
+        ///     Gets or sets a value indicating whether show debug.
         /// </summary>
         public bool ShowDebug
         {
@@ -295,7 +296,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the vegetation.
+        ///     Gets or sets the vegetation.
         /// </summary>
         public List<Vegetation> Vegetation
         {
@@ -311,7 +312,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the view port.
+        ///     Gets or sets the view port.
         /// </summary>
         public MainViewPort ViewPort
         {
@@ -359,7 +360,7 @@ namespace LiveIT2._1
         #region Public Methods and Operators
 
         /// <summary>
-        /// The exit car.
+        ///     The exit car.
         /// </summary>
         public void ExitCar()
         {

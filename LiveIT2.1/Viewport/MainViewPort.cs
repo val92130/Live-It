@@ -6,8 +6,7 @@
 //   The main view port.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Viewport
 {
     using System;
     using System.Collections.Generic;
@@ -16,11 +15,16 @@ namespace LiveIT2._1
     using System.Windows.Forms;
 
     using LiveIT2._1.Animals;
+    using LiveIT2._1.Animation;
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Player;
+    using LiveIT2._1.Terrain;
+    using LiveIT2._1.Textures;
+    using LiveIT2._1.Vegetation;
     using LiveIT2._1.Vehicules;
 
     /// <summary>
-    /// The main view port.
+    ///     The main view port.
     /// </summary>
     [Serializable]
     public partial class MainViewPort
@@ -28,149 +32,149 @@ namespace LiveIT2._1
         #region Fields
 
         /// <summary>
-        /// The _car list.
+        ///     The _car list.
         /// </summary>
         private readonly List<Car> carList = new List<Car>();
 
         /// <summary>
-        /// The _mini map view port.
+        ///     The _mini map view port.
         /// </summary>
         private readonly Rectangle miniMapViewPort;
 
         /// <summary>
-        /// The _screen bottom.
+        ///     The _screen bottom.
         /// </summary>
         private readonly Rectangle screenBottom;
 
         /// <summary>
-        /// The _screen left.
+        ///     The _screen left.
         /// </summary>
         private readonly Rectangle screenLeft;
 
         /// <summary>
-        /// The _screen right.
+        ///     The _screen right.
         /// </summary>
         private readonly Rectangle screenRight;
 
         /// <summary>
-        /// The _screen top.
+        ///     The _screen top.
         /// </summary>
         private readonly Rectangle screenTop;
 
         /// <summary>
-        /// The _selected boxes.
+        ///     The _selected boxes.
         /// </summary>
         private readonly List<Box> selectedBoxes;
 
         /// <summary>
-        /// The _tank list.
+        ///     The _tank list.
         /// </summary>
         private readonly List<Tank> tankList = new List<Tank>();
 
         /// <summary>
-        /// The _texture.
+        ///     The _texture.
         /// </summary>
         private readonly Texture texture;
 
         /// <summary>
-        /// The _animal selector cursor.
+        ///     The _follow animal.
+        /// </summary>
+        private bool followAnimal;
+
+        /// <summary>
+        ///     The _followed animal.
+        /// </summary>
+        private Animal followedAnimal;
+
+        /// <summary>
+        ///     The _is following an animal.
+        /// </summary>
+        private bool isFollowingAnAnimal;
+
+        /// <summary>
+        ///     The _is raining.
+        /// </summary>
+        private bool isRaining;
+
+        /// <summary>
+        ///     The _map.
+        /// </summary>
+        private Map map;
+
+        /// <summary>
+        ///     The _mini map.
+        /// </summary>
+        private Rectangle miniMap;
+
+        /// <summary>
+        ///     The _put animal.
+        /// </summary>
+        private bool putAnimal;
+
+        /// <summary>
+        ///     The _put vegetation.
+        /// </summary>
+        private bool putVegetation;
+
+        /// <summary>
+        ///     The _screen.
+        /// </summary>
+        private Rectangle screen;
+
+        /// <summary>
+        ///     The _sounds.
+        /// </summary>
+        private SoundEnvironment sounds;
+
+        /// <summary>
+        ///     The _try enter.
+        /// </summary>
+        private bool tryEnter;
+
+        /// <summary>
+        ///     The _vegetation selector cursor.
+        /// </summary>
+        private Point vegetationSelectorCursor;
+
+        /// <summary>
+        ///     The _view port.
+        /// </summary>
+        private Rectangle viewPort;
+
+        /// <summary>
+        ///     The _animal selector cursor.
         /// </summary>
         private Point animalSelectorCursor;
 
         /// <summary>
-        /// The _box list.
+        ///     The _box list.
         /// </summary>
         private List<Box> boxList;
 
         /// <summary>
-        /// The _box list mini.
+        ///     The _box list mini.
         /// </summary>
         private List<Box> boxListMini;
 
         /// <summary>
-        /// The _change texture.
+        ///     The _change texture.
         /// </summary>
         private bool changeTexture;
 
         /// <summary>
-        /// The _fill texture.
+        ///     The _fill texture.
         /// </summary>
         private bool fillTexture;
 
         /// <summary>
-        /// The _follow animal.
-        /// </summary>
-        private bool _followAnimal;
-
-        /// <summary>
-        /// The _followed animal.
-        /// </summary>
-        private Animal _followedAnimal;
-
-        /// <summary>
-        /// The _is following an animal.
-        /// </summary>
-        private bool _isFollowingAnAnimal;
-
-        /// <summary>
-        /// The _is raining.
-        /// </summary>
-        private bool _isRaining;
-
-        /// <summary>
-        /// The _map.
-        /// </summary>
-        private Map _map;
-
-        /// <summary>
-        /// The _mini map.
-        /// </summary>
-        private Rectangle _miniMap;
-
-        /// <summary>
-        /// The _mouse rect.
+        ///     The _mouse rect.
         /// </summary>
         private Rectangle mouseRect = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), new Size(0, 0));
 
         /// <summary>
-        /// The _player.
+        ///     The _player.
         /// </summary>
         private Player player;
-
-        /// <summary>
-        /// The _put animal.
-        /// </summary>
-        private bool _putAnimal;
-
-        /// <summary>
-        /// The _put vegetation.
-        /// </summary>
-        private bool _putVegetation;
-
-        /// <summary>
-        /// The _screen.
-        /// </summary>
-        private Rectangle _screen;
-
-        /// <summary>
-        /// The _sounds.
-        /// </summary>
-        private SoundEnvironment _sounds;
-
-        /// <summary>
-        /// The _try enter.
-        /// </summary>
-        private bool _tryEnter;
-
-        /// <summary>
-        /// The _vegetation selector cursor.
-        /// </summary>
-        private Point _vegetationSelectorCursor;
-
-        /// <summary>
-        /// The _view port.
-        /// </summary>
-        private Rectangle _viewPort;
 
         #endregion
 
@@ -184,23 +188,24 @@ namespace LiveIT2._1
         /// </param>
         public MainViewPort(Map map)
         {
-            this._map = map;
+            this.map = map;
             this.texture = new Texture();
             this.selectedBoxes = new List<Box>();
-            this._screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            this._viewPort = new Rectangle(0, 0, 800, 800);
-            this._miniMap = new Rectangle(0, 0, 250, 250);
-            this._miniMap.Y = this._screen.Bottom - this._miniMap.Height;
-            this.miniMapViewPort = new Rectangle(0, 0, this._map.MapSize, this._map.MapSize);
+            this.screen = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            this.viewPort = new Rectangle(0, 0, 800, 800);
+            this.miniMap = new Rectangle(0, 0, 250, 250);
+            this.miniMap.Y = this.screen.Bottom - this.miniMap.Height;
+            this.miniMapViewPort = new Rectangle(0, 0, this.map.MapSize, this.map.MapSize);
             this.animalSelectorCursor = new Point(0, 0);
-            this._map.ViewPort = this;
-            this._isRaining = false;
-            this.screenTop = new Rectangle((this._screen.Width / 2) - 400, this._screen.Top + 10, 800, 150);
-            this.screenBottom = new Rectangle(this._screen.Width / 2 - 400, this._screen.Bottom - 100, 800, 150);
-            this.screenLeft = new Rectangle(0, this._screen.Height / 2 - 400, 10, 800);
-            this.screenRight = new Rectangle(this._screen.Right - 10, this._screen.Height / 2 - 400, 10, 800);
-            //this._car = new Car(this._map, new Point(600, 600));
-            //this._tank = new Tank(this._map, new Point(700, 700));
+            this.map.ViewPort = this;
+            this.isRaining = false;
+            this.screenTop = new Rectangle((this.screen.Width / 2) - 400, this.screen.Top + 10, 800, 150);
+            this.screenBottom = new Rectangle(this.screen.Width / 2 - 400, this.screen.Bottom - 100, 800, 150);
+            this.screenLeft = new Rectangle(0, this.screen.Height / 2 - 400, 10, 800);
+            this.screenRight = new Rectangle(this.screen.Right - 10, this.screen.Height / 2 - 400, 10, 800);
+
+            // this._car = new Car(this._map, new Point(600, 600));
+            // this._tank = new Tank(this._map, new Point(700, 700));
         }
 
         #endregion
@@ -208,7 +213,7 @@ namespace LiveIT2._1
         #region Public Properties
 
         /// <summary>
-        /// Gets the box list.
+        ///     Gets the box list.
         /// </summary>
         public List<Box> BoxList
         {
@@ -219,32 +224,32 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether has clicked.
+        ///     Gets or sets a value indicating whether has clicked.
         /// </summary>
         public bool HasClicked { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is animal selected.
+        ///     Gets or sets a value indicating whether is animal selected.
         /// </summary>
         public bool IsAnimalSelected
         {
             get
             {
-                return this._putAnimal;
+                return this.putAnimal;
             }
 
             set
             {
-                this._putAnimal = value;
+                this.putAnimal = value;
                 this.fillTexture = false;
                 this.changeTexture = false;
-                this._followAnimal = false;
-                this._putVegetation = false;
+                this.followAnimal = false;
+                this.putVegetation = false;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is change texture selected.
+        ///     Gets or sets a value indicating whether is change texture selected.
         /// </summary>
         public bool IsChangeTextureSelected
         {
@@ -257,14 +262,14 @@ namespace LiveIT2._1
             {
                 this.changeTexture = value;
                 this.fillTexture = false;
-                this._putAnimal = false;
-                this._followAnimal = false;
-                this._putVegetation = false;
+                this.putAnimal = false;
+                this.followAnimal = false;
+                this.putVegetation = false;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is fill texture selected.
+        ///     Gets or sets a value indicating whether is fill texture selected.
         /// </summary>
         public bool IsFillTextureSelected
         {
@@ -277,92 +282,92 @@ namespace LiveIT2._1
             {
                 this.fillTexture = value;
                 this.changeTexture = false;
-                this._putAnimal = false;
-                this._followAnimal = false;
-                this._putVegetation = false;
+                this.putAnimal = false;
+                this.followAnimal = false;
+                this.putVegetation = false;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is follow animal selected.
+        ///     Gets or sets a value indicating whether is follow animal selected.
         /// </summary>
         public bool IsFollowAnimalSelected
         {
             get
             {
-                return this._followAnimal;
+                return this.followAnimal;
             }
 
             set
             {
-                this._followAnimal = value;
+                this.followAnimal = value;
                 this.changeTexture = false;
-                this._putAnimal = false;
+                this.putAnimal = false;
                 this.fillTexture = false;
-                this._putVegetation = false;
+                this.putVegetation = false;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating whether is follow mode.
+        ///     Gets a value indicating whether is follow mode.
         /// </summary>
         public bool IsFollowMode
         {
             get
             {
-                return this._followAnimal;
+                return this.followAnimal;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating whether is following an animal.
+        ///     Gets a value indicating whether is following an animal.
         /// </summary>
         public bool IsFollowingAnAnimal
         {
             get
             {
-                return this._isFollowingAnAnimal;
+                return this.isFollowingAnAnimal;
             }
 
             private set
             {
-                this._isFollowingAnAnimal = value;
+                this.isFollowingAnAnimal = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is vegetation selected.
+        ///     Gets or sets a value indicating whether is vegetation selected.
         /// </summary>
         public bool IsVegetationSelected
         {
             get
             {
-                return this._putVegetation;
+                return this.putVegetation;
             }
 
             set
             {
-                this._putVegetation = value;
+                this.putVegetation = value;
                 this.fillTexture = false;
                 this.changeTexture = false;
-                this._followAnimal = false;
-                this._putAnimal = false;
+                this.followAnimal = false;
+                this.putAnimal = false;
             }
         }
 
         /// <summary>
-        /// Gets the mini map.
+        ///     Gets the mini map.
         /// </summary>
         public Rectangle MiniMap
         {
             get
             {
-                return this._miniMap;
+                return this.miniMap;
             }
         }
 
         /// <summary>
-        /// Gets the mini map view port.
+        ///     Gets the mini map view port.
         /// </summary>
         public Rectangle MiniMapViewPort
         {
@@ -373,7 +378,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the mouse selector.
+        ///     Gets or sets the mouse selector.
         /// </summary>
         public Rectangle MouseSelector
         {
@@ -389,7 +394,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the player.
+        ///     Gets the player.
         /// </summary>
         public Player Player
         {
@@ -400,18 +405,18 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the screen size.
+        ///     Gets the screen size.
         /// </summary>
         public Rectangle ScreenSize
         {
             get
             {
-                return this._screen;
+                return this.screen;
             }
         }
 
         /// <summary>
-        /// Gets the selected box.
+        ///     Gets the selected box.
         /// </summary>
         public List<Box> SelectedBox
         {
@@ -422,50 +427,50 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the sound environment.
+        ///     Gets or sets the sound environment.
         /// </summary>
         public SoundEnvironment SoundEnvironment
         {
             get
             {
-                return this._sounds;
+                return this.sounds;
             }
 
             set
             {
-                this._sounds = value;
+                this.sounds = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether try enter.
+        ///     Gets or sets a value indicating whether try enter.
         /// </summary>
         public bool TryEnter
         {
             get
             {
-                return this._tryEnter;
+                return this.tryEnter;
             }
 
             set
             {
-                this._tryEnter = value;
+                this.tryEnter = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the view port.
+        ///     Gets or sets the view port.
         /// </summary>
         public Rectangle ViewPort
         {
             get
             {
-                return this._viewPort;
+                return this.viewPort;
             }
 
             set
             {
-                this._viewPort = value;
+                this.viewPort = value;
             }
         }
 
@@ -512,34 +517,34 @@ namespace LiveIT2._1
             switch (eAnimalType.ToString())
             {
                 case "Dog":
-                    a = new Dog(this._map, this.animalSelectorCursor);
+                    a = new Dog(this.map, this.animalSelectorCursor);
                     break;
                 case "Cat":
-                    a = new Cat(this._map, this.animalSelectorCursor);
+                    a = new Cat(this.map, this.animalSelectorCursor);
                     break;
                 case "Lion":
-                    a = new Lion(this._map, this.animalSelectorCursor);
+                    a = new Lion(this.map, this.animalSelectorCursor);
                     break;
                 case "Rabbit":
-                    a = new Rabbit(this._map, this.animalSelectorCursor);
+                    a = new Rabbit(this.map, this.animalSelectorCursor);
                     break;
                 case "Elephant":
-                    a = new Elephant(this._map, this.animalSelectorCursor);
+                    a = new Elephant(this.map, this.animalSelectorCursor);
                     break;
                 case "Cow":
-                    a = new Cow(this._map, this.animalSelectorCursor);
+                    a = new Cow(this.map, this.animalSelectorCursor);
                     break;
                 case "Eagle":
-                    a = new Eagle(this._map, this.animalSelectorCursor);
+                    a = new Eagle(this.map, this.animalSelectorCursor);
                     break;
                 case "Gazelle":
-                    a = new Gazelle(this._map, this.animalSelectorCursor);
+                    a = new Gazelle(this.map, this.animalSelectorCursor);
                     break;
                 default:
                     throw new NotSupportedException("Unknown animal type");
             }
 
-            this._map.Animals.Add(a);
+            this.map.Animals.Add(a);
         }
 
         /// <summary>
@@ -556,19 +561,19 @@ namespace LiveIT2._1
             switch (texture)
             {
                 case EVegetationTexture.Tree:
-                    v = new Tree(this._map, this._vegetationSelectorCursor);
+                    v = new Tree(this.map, this.vegetationSelectorCursor);
                     break;
                 case EVegetationTexture.Bush:
-                    v = new Bush(this._map, this._vegetationSelectorCursor);
+                    v = new Bush(this.map, this.vegetationSelectorCursor);
                     break;
                 case EVegetationTexture.Rock:
-                    v = new Rock(this._map, this._vegetationSelectorCursor);
+                    v = new Rock(this.map, this.vegetationSelectorCursor);
                     break;
                 default:
                     throw new NotSupportedException("Unknown vegetation type");
             }
 
-            this._map.Vegetation.Add(v);
+            this.map.Vegetation.Add(v);
         }
 
         /// <summary>
@@ -583,20 +588,20 @@ namespace LiveIT2._1
 
             this.AdjustViewPort();
 
-            if (!this._followAnimal)
+            if (!this.followAnimal)
             {
-                this._followedAnimal = null;
+                this.followedAnimal = null;
             }
 
             if (this.IsFollowingAnAnimal)
             {
-                if (this._followedAnimal != null)
+                if (this.followedAnimal != null)
                 {
-                    this.AdjustViewPort(this._followedAnimal);
+                    this.AdjustViewPort(this.followedAnimal);
                 }
                 else
                 {
-                    this._isFollowingAnAnimal = false;
+                    this.isFollowingAnAnimal = false;
                 }
             }
 
@@ -604,29 +609,29 @@ namespace LiveIT2._1
             var t = new Random();
             if (t.Next(MinStartRain, MaxStartRain) == 30)
             {
-                this._map.IsRaining = true;
+                this.map.IsRaining = true;
             }
 
-            if (t.Next(MinStopRain, MaxStopRain) == 40 && this._map.IsRaining)
+            if (t.Next(MinStopRain, MaxStopRain) == 40 && this.map.IsRaining)
             {
-                this._map.IsRaining = false;
+                this.map.IsRaining = false;
             }
 
-            this.boxList = this._map.GetOverlappedBoxes(this._viewPort);
-            this.boxListMini = this._map.GetOverlappedBoxes(this.miniMapViewPort);
+            this.boxList = this.map.GetOverlappedBoxes(this.viewPort);
+            this.boxListMini = this.map.GetOverlappedBoxes(this.miniMapViewPort);
             this.mouseRect.X = Cursor.Position.X - (this.mouseRect.Width / 2);
             this.mouseRect.Y = Cursor.Position.Y - (this.mouseRect.Height / 2);
 
             this.DrawBoxes(g);
 
-            foreach (Rectangle r in this._map.BloodList)
+            foreach (Rectangle r in this.map.BloodList)
             {
-                this.DrawBloodInViewPort(g, r, this._screen, this._viewPort, this._miniMap, this.miniMapViewPort);
+                this.DrawBloodInViewPort(g, r, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort);
             }
 
             g.DrawRectangle(
                 Pens.White, 
-                new Rectangle(this._miniMap.X, this._miniMap.Y, this._miniMap.Width, this._miniMap.Height + 20));
+                new Rectangle(this.miniMap.X, this.miniMap.Y, this.miniMap.Width, this.miniMap.Height + 20));
 
             this.DrawLandAnimals(g);
 
@@ -648,12 +653,12 @@ namespace LiveIT2._1
                 this.FillMouseSelector(g);
             }
 
-            if (this._putAnimal)
+            if (this.putAnimal)
             {
                 this.PutAnimalSelector(g);
             }
 
-            if (this._putVegetation)
+            if (this.putVegetation)
             {
                 this.PutVegetationSelector(g);
             }
@@ -662,7 +667,7 @@ namespace LiveIT2._1
 
             this.MakeRain(g);
 
-            this.DrawViewPortMiniMap(g, this._viewPort, this._miniMap, this.miniMapViewPort);
+            this.DrawViewPortMiniMap(g, this.viewPort, this.miniMap, this.miniMapViewPort);
 
             this.CheckIfPlayerHasEnteredACar();
 
@@ -740,7 +745,7 @@ namespace LiveIT2._1
             this.selectedBoxes.Clear();
             for (int i = 0; i < this.boxList.Count; i++)
             {
-                if (!this.mouseRect.IntersectsWith(this._miniMap))
+                if (!this.mouseRect.IntersectsWith(this.miniMap))
                 {
                     if (
                         this.mouseRect.IntersectsWith(
@@ -757,7 +762,7 @@ namespace LiveIT2._1
                             g.DrawRectangle(
                                 Pens.White, 
                                 new Rectangle(this.boxList[i].RelativePosition, this.boxList[i].RelativeSize));
-                            this.selectedBoxes.Add(this._map[this.boxList[i].Line, this.boxList[i].Column]);
+                            this.selectedBoxes.Add(this.map[this.boxList[i].Line, this.boxList[i].Column]);
                         }
 
                         g.DrawString(
@@ -995,17 +1000,13 @@ namespace LiveIT2._1
                         new Rectangle(this.boxList[i].RelativePosition, this.boxList[i].RelativeSize)) && count != 1)
                 {
                     count++;
-                    this.selectedBoxes.Add(this._map[this.boxList[i].Line, this.boxList[i].Column]);
+                    this.selectedBoxes.Add(this.map[this.boxList[i].Line, this.boxList[i].Column]);
                     g.FillEllipse(
                         new SolidBrush(Color.FromArgb(52, 152, 219)), 
-                        new Rectangle(
-                            this.mouseRect.X, 
-                            this.mouseRect.Y, 
-                            this.mouseRect.Width, 
-                            this.mouseRect.Height));
+                        new Rectangle(this.mouseRect.X, this.mouseRect.Y, this.mouseRect.Width, this.mouseRect.Height));
                     g.DrawString(
-                        "Box X :" + this.boxList[i].Area.X + "\nBox Y :" + this.boxList[i].Area.Y
-                        + "\nBox Texture : \n" + this.boxList[i].Ground, 
+                        "Box X :" + this.boxList[i].Area.X + "\nBox Y :" + this.boxList[i].Area.Y + "\nBox Texture : \n"
+                        + this.boxList[i].Ground, 
                         new Font("Arial", 10f), 
                         Brushes.Aqua, 
                         this.boxList[i].RelativePosition);
@@ -1014,13 +1015,13 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The init spawn.
+        ///     The init spawn.
         /// </summary>
         public void InitSpawn()
         {
-            this._viewPort.Size = new Size(this._screen.Width * 2, this._screen.Height * 2);
-            this._viewPort.X = this.player.Area.X - (this._viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
-            this._viewPort.Y = this.player.Area.Y - (this._viewPort.Size.Height / 2) + (this.player.Area.Height / 2);
+            this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+            this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
+            this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2) + (this.player.Area.Height / 2);
         }
 
         /// <summary>
@@ -1031,36 +1032,36 @@ namespace LiveIT2._1
         /// </param>
         public void LoadMap(Map map)
         {
-            this._map = map;
+            this.map = map;
         }
 
         /// <summary>
-        /// The move with mouse.
+        ///     The move with mouse.
         /// </summary>
         public void MoveWithMouse()
         {
             var cursorPos = new Rectangle(Cursor.Position, new Size(10, 10));
-            int speed = 45;
-            if (!this._map.IsPlayer)
+            const int Speed = 45;
+            if (!this.map.IsPlayer)
             {
                 if (cursorPos.IntersectsWith(this.screenTop))
                 {
-                    this.MoveY(-speed);
+                    this.MoveY(-Speed);
                 }
 
                 if (cursorPos.IntersectsWith(this.screenBottom))
                 {
-                    this.MoveY(speed);
+                    this.MoveY(Speed);
                 }
 
                 if (cursorPos.IntersectsWith(this.screenLeft))
                 {
-                    this.MoveX(-speed);
+                    this.MoveX(-Speed);
                 }
 
                 if (cursorPos.IntersectsWith(this.screenRight))
                 {
-                    this.MoveX(speed);
+                    this.MoveX(Speed);
                 }
             }
         }
@@ -1073,46 +1074,49 @@ namespace LiveIT2._1
         /// </param>
         public void MoveX(int centimeters)
         {
-            if (!this._map.IsPlayer)
+            if (!this.map.IsPlayer)
             {
                 this.Offset(new Point(centimeters, 0));
             }
-            else if (this._map.IsPlayer && this._map.IsInCar == false)
+            else
             {
-                if (centimeters > 0)
+                if (this.map.IsPlayer && this.map.IsInCar == false)
                 {
-                    this.player.EMovingDirection = EMovingDirection.Right;
-                }
-                else
-                {
-                    this.player.EMovingDirection = EMovingDirection.Left;
-                }
+                    if (centimeters <= 0)
+                    {
+                        this.player.EMovingDirection = EMovingDirection.Left;
+                    }
+                    else
+                    {
+                        this.player.EMovingDirection = EMovingDirection.Right;
+                    }
 
-                this.player.Position = new Point(this.player.Position.X + (centimeters / 2), this.player.Position.Y);
-                this._viewPort.Size = new Size(this._screen.Width * 2, this._screen.Height * 2);
-                this._viewPort.X = this.player.Area.X - (this._viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
-                this._viewPort.Y = this.player.Area.Y - (this._viewPort.Size.Height / 2)
-                                   + (this.player.Area.Height / 2);
-            }
-            else if (this._map.IsPlayer && this._map.IsInCar)
-            {
-                if (centimeters > 0)
-                {
-                    this.player.Car.EMovingDirection = EMovingDirection.Right;
+                    this.player.Position = new Point(this.player.Position.X + (centimeters / 2), this.player.Position.Y);
+                    this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+                    this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
+                    this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2)
+                                      + (this.player.Area.Height / 2);
                 }
-                else
+                else if (this.map.IsPlayer && this.map.IsInCar)
                 {
-                    this.player.Car.EMovingDirection = EMovingDirection.Left;
-                }
+                    if (centimeters > 0)
+                    {
+                        this.player.Car.EMovingDirection = EMovingDirection.Right;
+                    }
+                    else
+                    {
+                        this.player.Car.EMovingDirection = EMovingDirection.Left;
+                    }
 
-                this.player.Car.Position = new Point(
-                    this.player.Car.Position.X + (centimeters * 2), 
-                    this.player.Car.Position.Y);
-                this._viewPort.Size = new Size(this._screen.Width * 2, this._screen.Height * 2);
-                this._viewPort.X = this.player.Car.Area.X - (this._viewPort.Size.Width / 2)
-                                   + (this.player.Car.Area.Width / 2);
-                this._viewPort.Y = this.player.Car.Area.Y - (this._viewPort.Size.Height / 2)
-                                   + (this.player.Car.Area.Height / 2);
+                    this.player.Car.Position = new Point(
+                        this.player.Car.Position.X + (centimeters * 2),
+                        this.player.Car.Position.Y);
+                    this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+                    this.viewPort.X = this.player.Car.Area.X - (this.viewPort.Size.Width / 2)
+                                      + (this.player.Car.Area.Width / 2);
+                    this.viewPort.Y = this.player.Car.Area.Y - (this.viewPort.Size.Height / 2)
+                                      + (this.player.Car.Area.Height / 2);
+                }
             }
         }
 
@@ -1124,11 +1128,11 @@ namespace LiveIT2._1
         /// </param>
         public void MoveY(int centimeters)
         {
-            if (!this._map.IsPlayer)
+            if (!this.map.IsPlayer)
             {
                 this.Offset(new Point(0, centimeters));
             }
-            else if (this._map.IsPlayer && this._map.IsInCar == false)
+            else if (this.map.IsPlayer && this.map.IsInCar == false)
             {
                 if (centimeters > 0)
                 {
@@ -1140,12 +1144,11 @@ namespace LiveIT2._1
                 }
 
                 this.player.Position = new Point(this.player.Position.X, this.player.Position.Y + (centimeters / 2));
-                this._viewPort.Size = new Size(this._screen.Width * 2, this._screen.Height * 2);
-                this._viewPort.X = this.player.Area.X - (this._viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
-                this._viewPort.Y = this.player.Area.Y - (this._viewPort.Size.Height / 2)
-                                   + (this.player.Area.Height / 2);
+                this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+                this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
+                this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2) + (this.player.Area.Height / 2);
             }
-            else if (this._map.IsPlayer && this._map.IsInCar)
+            else if (this.map.IsPlayer && this.map.IsInCar)
             {
                 if (centimeters > 0)
                 {
@@ -1159,10 +1162,10 @@ namespace LiveIT2._1
                 this.player.Car.Position = new Point(
                     this.player.Car.Position.X, 
                     this.player.Car.Position.Y + (centimeters * 2));
-                this._viewPort.Size = new Size(this._screen.Width * 2, this._screen.Height * 2);
-                this._viewPort.X = this.player.Car.Area.X - (this._viewPort.Size.Width / 2)
+                this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+                this.viewPort.X = this.player.Car.Area.X - (this.viewPort.Size.Width / 2)
                                    + (this.player.Car.Area.Width / 2);
-                this._viewPort.Y = this.player.Car.Area.Y - (this._viewPort.Size.Height / 2)
+                this.viewPort.Y = this.player.Car.Area.Y - (this.viewPort.Size.Height / 2)
                                    + (this.player.Car.Area.Height / 2);
             }
         }
@@ -1175,27 +1178,27 @@ namespace LiveIT2._1
         /// </param>
         public void Offset(Point delta)
         {
-            if (!this._map.IsPlayer)
+            if (!this.map.IsPlayer)
             {
-                this._viewPort.Offset(delta);
-                if (this._viewPort.X < 0)
+                this.viewPort.Offset(delta);
+                if (this.viewPort.X < 0)
                 {
-                    this._viewPort.X = 0;
+                    this.viewPort.X = 0;
                 }
 
-                if (this._viewPort.Y < 0)
+                if (this.viewPort.Y < 0)
                 {
-                    this._viewPort.Y = 0;
+                    this.viewPort.Y = 0;
                 }
 
-                if (this._viewPort.Right > this._map.MapSize)
+                if (this.viewPort.Right > this.map.MapSize)
                 {
-                    this._viewPort.X = this._map.MapSize - this._viewPort.Width;
+                    this.viewPort.X = this.map.MapSize - this.viewPort.Width;
                 }
 
-                if (this._viewPort.Bottom > this._map.MapSize)
+                if (this.viewPort.Bottom > this.map.MapSize)
                 {
-                    this._viewPort.Y = this._map.MapSize - this._viewPort.Height;
+                    this.viewPort.Y = this.map.MapSize - this.viewPort.Height;
                 }
             }
         }
@@ -1219,19 +1222,15 @@ namespace LiveIT2._1
                         new Rectangle(this.boxList[i].RelativePosition, this.boxList[i].RelativeSize)) && count != 1)
                 {
                     count++;
-                    this.selectedBoxes.Add(this._map[this.boxList[i].Line, this.boxList[i].Column]);
-                    this.animalSelectorCursor.X = this._map[this.boxList[i].Line, this.boxList[i].Column].Area.X;
-                    this.animalSelectorCursor.Y = this._map[this.boxList[i].Line, this.boxList[i].Column].Area.Y;
+                    this.selectedBoxes.Add(this.map[this.boxList[i].Line, this.boxList[i].Column]);
+                    this.animalSelectorCursor.X = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.X;
+                    this.animalSelectorCursor.Y = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.Y;
                     g.FillEllipse(
                         new SolidBrush(Color.Brown), 
-                        new Rectangle(
-                            this.mouseRect.X, 
-                            this.mouseRect.Y, 
-                            this.mouseRect.Width, 
-                            this.mouseRect.Height));
+                        new Rectangle(this.mouseRect.X, this.mouseRect.Y, this.mouseRect.Width, this.mouseRect.Height));
                     g.DrawString(
-                        "Box X :" + this.boxList[i].Area.X + "\nBox Y :" + this.boxList[i].Area.Y
-                        + "\nBox Texture : \n" + this.boxList[i].Ground, 
+                        "Box X :" + this.boxList[i].Area.X + "\nBox Y :" + this.boxList[i].Area.Y + "\nBox Texture : \n"
+                        + this.boxList[i].Ground, 
                         new Font("Arial", 10f), 
                         Brushes.Aqua, 
                         this.boxList[i].RelativePosition);
@@ -1258,19 +1257,15 @@ namespace LiveIT2._1
                         new Rectangle(this.boxList[i].RelativePosition, this.boxList[i].RelativeSize)) && count != 1)
                 {
                     count++;
-                    this.selectedBoxes.Add(this._map[this.boxList[i].Line, this.boxList[i].Column]);
-                    this._vegetationSelectorCursor.X = this._map[this.boxList[i].Line, this.boxList[i].Column].Area.X;
-                    this._vegetationSelectorCursor.Y = this._map[this.boxList[i].Line, this.boxList[i].Column].Area.Y;
+                    this.selectedBoxes.Add(this.map[this.boxList[i].Line, this.boxList[i].Column]);
+                    this.vegetationSelectorCursor.X = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.X;
+                    this.vegetationSelectorCursor.Y = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.Y;
                     g.FillEllipse(
                         new SolidBrush(Color.Brown), 
-                        new Rectangle(
-                            this.mouseRect.X, 
-                            this.mouseRect.Y, 
-                            this.mouseRect.Width, 
-                            this.mouseRect.Height));
+                        new Rectangle(this.mouseRect.X, this.mouseRect.Y, this.mouseRect.Width, this.mouseRect.Height));
                     g.DrawString(
-                        "Box X :" + this.boxList[i].Area.X + "\nBox Y :" + this.boxList[i].Area.Y
-                        + "\nBox Texture : \n" + this.boxList[i].Ground, 
+                        "Box X :" + this.boxList[i].Area.X + "\nBox Y :" + this.boxList[i].Area.Y + "\nBox Texture : \n"
+                        + this.boxList[i].Ground, 
                         new Font("Arial", 10f), 
                         Brushes.Aqua, 
                         this.boxList[i].RelativePosition);
@@ -1288,7 +1283,7 @@ namespace LiveIT2._1
         {
             if (this.carList.Count >= 0)
             {
-                this.carList.Add(new Car(this._map, position));
+                this.carList.Add(new Car(this.map, position));
             }
         }
 
@@ -1300,7 +1295,7 @@ namespace LiveIT2._1
         /// </param>
         public void SpawnPlayer(Point position)
         {
-            this.player = new Player(this._map, position);
+            this.player = new Player(this.map, position);
         }
 
         /// <summary>
@@ -1313,7 +1308,7 @@ namespace LiveIT2._1
         {
             if (this.carList.Count >= 0)
             {
-                this.carList.Add(new Tank(this._map, position));
+                this.carList.Add(new Tank(this.map, position));
             }
         }
 
@@ -1325,21 +1320,20 @@ namespace LiveIT2._1
         /// </param>
         public void Zoom(int meters)
         {
-            if (!this._map.IsPlayer)
+            if (!this.map.IsPlayer)
             {
-                this._viewPort.Width += meters;
-                this._viewPort.Height += meters;
-                if (this._viewPort.Width < MinimalWidthInCentimeter
-                    && this._viewPort.Height < MinimalWidthInCentimeter)
+                this.viewPort.Width += meters;
+                this.viewPort.Height += meters;
+                if (this.viewPort.Width < MinimalWidthInCentimeter && this.viewPort.Height < MinimalWidthInCentimeter)
                 {
-                    this._viewPort.Width = MinimalWidthInCentimeter;
-                    this._viewPort.Height = MinimalWidthInCentimeter;
+                    this.viewPort.Width = MinimalWidthInCentimeter;
+                    this.viewPort.Height = MinimalWidthInCentimeter;
                 }
 
-                if (this._viewPort.Width > this._map.MapSize)
+                if (this.viewPort.Width > this.map.MapSize)
                 {
-                    this._viewPort.Height = this._map.MapSize;
-                    this._viewPort.Width = this._map.MapSize;
+                    this.viewPort.Height = this.map.MapSize;
+                    this.viewPort.Width = this.map.MapSize;
                 }
             }
         }
@@ -1349,28 +1343,28 @@ namespace LiveIT2._1
         #region Methods
 
         /// <summary>
-        /// The adjust view port.
+        ///     The adjust view port.
         /// </summary>
         private void AdjustViewPort()
         {
-            if (this._viewPort.Left < 0)
+            if (this.viewPort.Left < 0)
             {
-                this._viewPort.X = 0;
+                this.viewPort.X = 0;
             }
 
-            if (this._viewPort.Top < 0)
+            if (this.viewPort.Top < 0)
             {
-                this._viewPort.Y = 0;
+                this.viewPort.Y = 0;
             }
 
-            if (this._viewPort.Bottom > this._map.MapSize)
+            if (this.viewPort.Bottom > this.map.MapSize)
             {
-                this._viewPort.Y = this._map.MapSize - this._viewPort.Height;
+                this.viewPort.Y = this.map.MapSize - this.viewPort.Height;
             }
 
-            if (this._viewPort.Right > this._map.MapSize)
+            if (this.viewPort.Right > this.map.MapSize)
             {
-                this._viewPort.X = this._map.MapSize - this._viewPort.Width;
+                this.viewPort.X = this.map.MapSize - this.viewPort.Width;
             }
         }
 
@@ -1382,30 +1376,30 @@ namespace LiveIT2._1
         /// </param>
         private void AdjustViewPort(Animal a)
         {
-            this._viewPort.Size = new Size(this._screen.Width * 2, this._screen.Height * 2);
-            this._viewPort.X = this._followedAnimal.Area.X - (this._viewPort.Size.Width / 2)
-                               + (this._followedAnimal.Area.Width / 2);
-            this._viewPort.Y = this._followedAnimal.Area.Y - (this._viewPort.Size.Height / 2)
-                               + (this._followedAnimal.Area.Height / 2);
+            this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+            this.viewPort.X = this.followedAnimal.Area.X - (this.viewPort.Size.Width / 2)
+                               + (this.followedAnimal.Area.Width / 2);
+            this.viewPort.Y = this.followedAnimal.Area.Y - (this.viewPort.Size.Height / 2)
+                               + (this.followedAnimal.Area.Height / 2);
 
-            if (this._viewPort.Left < 0)
+            if (this.viewPort.Left < 0)
             {
-                this._viewPort.X = 0;
+                this.viewPort.X = 0;
             }
 
-            if (this._viewPort.Top < 0)
+            if (this.viewPort.Top < 0)
             {
-                this._viewPort.Y = 0;
+                this.viewPort.Y = 0;
             }
 
-            if (this._viewPort.Bottom > this._map.MapSize)
+            if (this.viewPort.Bottom > this.map.MapSize)
             {
-                this._viewPort.Y = this._map.MapSize - this._viewPort.Height;
+                this.viewPort.Y = this.map.MapSize - this.viewPort.Height;
             }
 
-            if (this._viewPort.Right > this._map.MapSize)
+            if (this.viewPort.Right > this.map.MapSize)
             {
-                this._viewPort.X = this._map.MapSize - this._viewPort.Width;
+                this.viewPort.X = this.map.MapSize - this.viewPort.Width;
             }
         }
 
@@ -1417,64 +1411,64 @@ namespace LiveIT2._1
         /// </param>
         private void AnimalFollowing(Graphics g)
         {
-            if (this._followAnimal && this.HasClicked)
+            if (this.followAnimal && this.HasClicked)
             {
-                foreach (Animal a in this._map.Animals)
+                foreach (Animal a in this.map.Animals)
                 {
                     if (this.mouseRect.IntersectsWith(new Rectangle(a.RelativePosition, a.RelativeSize)))
                     {
-                        if (this._followedAnimal != null)
+                        if (this.followedAnimal != null)
                         {
-                            if (this._followedAnimal == a || this._followedAnimal.IsDead)
+                            if (this.followedAnimal == a || this.followedAnimal.IsDead)
                             {
-                                this._followedAnimal = null;
+                                this.followedAnimal = null;
                             }
                         }
                         else
                         {
-                            this._followedAnimal = a;
-                            this._isFollowingAnAnimal = true;
+                            this.followedAnimal = a;
+                            this.isFollowingAnAnimal = true;
                         }
                     }
                     else
                     {
-                        if (this._followedAnimal == null)
+                        if (this.followedAnimal == null)
                         {
-                            this._isFollowingAnAnimal = false;
+                            this.isFollowingAnAnimal = false;
                         }
                     }
                 }
             }
 
-            if (this._followedAnimal != null)
+            if (this.followedAnimal != null)
             {
-                if (this._followedAnimal.IsDead)
+                if (this.followedAnimal.IsDead)
                 {
-                    this._isFollowingAnAnimal = false;
+                    this.isFollowingAnAnimal = false;
                 }
 
-                if (this._followAnimal && this._map.ShowDebug)
+                if (this.followAnimal && this.map.ShowDebug)
                 {
                     g.DrawRectangle(
                         Pens.Red, 
-                        new Rectangle(this._followedAnimal.RelativePosition, this._followedAnimal.RelativeSize));
+                        new Rectangle(this.followedAnimal.RelativePosition, this.followedAnimal.RelativeSize));
                 }
             }
         }
 
         /// <summary>
-        /// The check if player has entered a car.
+        ///     The check if player has entered a car.
         /// </summary>
         private void CheckIfPlayerHasEnteredACar()
         {
-            if (this.TryEnter && !this._map.IsInCar)
+            if (this.TryEnter && !this.map.IsInCar)
             {
                 foreach (Car car in this.carList)
                 {
-                    if (this.player.Area.IntersectsWith(car.Area) && this._map.IsInCar == false)
+                    if (this.player.Area.IntersectsWith(car.Area) && this.map.IsInCar == false)
                     {
-                        this._sounds.StartEngine();
-                        this._map.IsInCar = true;
+                        this.sounds.StartEngine();
+                        this.map.IsInCar = true;
                         this.player.Car = car;
                     }
                 }
@@ -1491,20 +1485,20 @@ namespace LiveIT2._1
         {
             for (int i = 0; i < this.boxList.Count; i++)
             {
-                for (int j = 0; j < this._map.Animals.Count(); j++)
+                for (int j = 0; j < this.map.Animals.Count(); j++)
                 {
-                    if (this._map.Animals[j].Area.IntersectsWith(this.boxList[i].Area))
+                    if (this.map.Animals[j].Area.IntersectsWith(this.boxList[i].Area))
                     {
-                        this.boxList[i].AddAnimal(this._map.Animals[j]);
+                        this.boxList[i].AddAnimal(this.map.Animals[j]);
                     }
                 }
 
-                this.boxList[i].Draw(g, this._screen, this.texture, this._viewPort);
+                this.boxList[i].Draw(g, this.screen, this.texture, this.viewPort);
             }
 
             for (int i = 0; i < this.boxListMini.Count; i++)
             {
-                this.boxListMini[i].DrawMiniMap(g, this._miniMap, this.texture, this.miniMapViewPort);
+                this.boxListMini[i].DrawMiniMap(g, this.miniMap, this.texture, this.miniMapViewPort);
             }
         }
 
@@ -1518,12 +1512,12 @@ namespace LiveIT2._1
         {
             foreach (Car car in this.carList)
             {
-                car.Draw(g, this._screen, this._viewPort, this._miniMap, this.miniMapViewPort, this.texture);
+                car.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
             }
 
             foreach (Tank tank in this.tankList)
             {
-                tank.Draw(g, this._screen, this._viewPort, this._miniMap, this.miniMapViewPort, this.texture);
+                tank.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
             }
         }
 
@@ -1535,15 +1529,15 @@ namespace LiveIT2._1
         /// </param>
         private void DrawFlyingAnimals(Graphics g)
         {
-            for (int i = 0; i < this._map.Animals.Count; i++)
+            for (int i = 0; i < this.map.Animals.Count; i++)
             {
-                if (this._map.Animals[i].Texture == EAnimalTexture.Eagle)
+                if (this.map.Animals[i].Texture == EAnimalTexture.Eagle)
                 {
-                    this._map.Animals[i].Draw(
+                    this.map.Animals[i].Draw(
                         g, 
-                        this._screen, 
-                        this._viewPort, 
-                        this._miniMap, 
+                        this.screen, 
+                        this.viewPort, 
+                        this.miniMap, 
                         this.miniMapViewPort, 
                         this.texture);
                 }
@@ -1558,15 +1552,15 @@ namespace LiveIT2._1
         /// </param>
         private void DrawLandAnimals(Graphics g)
         {
-            for (int i = 0; i < this._map.Animals.Count; i++)
+            for (int i = 0; i < this.map.Animals.Count; i++)
             {
-                if (this._map.Animals[i].Texture != EAnimalTexture.Eagle)
+                if (this.map.Animals[i].Texture != EAnimalTexture.Eagle)
                 {
-                    this._map.Animals[i].Draw(
+                    this.map.Animals[i].Draw(
                         g, 
-                        this._screen, 
-                        this._viewPort, 
-                        this._miniMap, 
+                        this.screen, 
+                        this.viewPort, 
+                        this.miniMap, 
                         this.miniMapViewPort, 
                         this.texture);
                 }
@@ -1581,13 +1575,13 @@ namespace LiveIT2._1
         /// </param>
         private void DrawVegetation(Graphics g)
         {
-            for (int i = 0; i < this._map.Vegetation.Count; i++)
+            for (int i = 0; i < this.map.Vegetation.Count; i++)
             {
-                this._map.Vegetation[i].Draw(
+                this.map.Vegetation[i].Draw(
                     g, 
-                    this._screen, 
-                    this._viewPort, 
-                    this._miniMap, 
+                    this.screen, 
+                    this.viewPort, 
+                    this.miniMap, 
                     this.miniMapViewPort, 
                     this.texture);
             }
@@ -1601,16 +1595,16 @@ namespace LiveIT2._1
         /// </param>
         private void MakeRain(Graphics g)
         {
-            if (this._map.IsRaining)
+            if (this.map.IsRaining)
             {
-                if (this._isRaining == false)
+                if (this.isRaining == false)
                 {
                     this.Rain();
-                    this._isRaining = true;
+                    this.isRaining = true;
                 }
 
                 // g.DrawImage(_texture.GetThunder(), _screen);
-                g.DrawImage(this.texture.GetRain(), this._screen);
+                g.DrawImage(this.texture.GetRain(), this.screen);
             }
         }
 
@@ -1622,7 +1616,7 @@ namespace LiveIT2._1
         /// </param>
         private void PlayerBehavior(Graphics g)
         {
-            if (this._map.IsPlayer)
+            if (this.map.IsPlayer)
             {
                 if (this.player.Position.X < 0)
                 {
@@ -1634,41 +1628,31 @@ namespace LiveIT2._1
                     this.player.Position = new Point(this.player.Position.X, 0);
                 }
 
-                if (this.player.Position.X > this._map.MapSize - this.player.Area.Width)
+                if (this.player.Position.X > this.map.MapSize - this.player.Area.Width)
                 {
-                    this.player.Position = new Point(
-                        this._map.MapSize - this.player.Area.Width, 
-                        this.player.Position.Y);
+                    this.player.Position = new Point(this.map.MapSize - this.player.Area.Width, this.player.Position.Y);
                 }
 
-                if (this.player.Position.Y > this._map.MapSize - this.player.Area.Width)
+                if (this.player.Position.Y > this.map.MapSize - this.player.Area.Width)
                 {
-                    this.player.Position = new Point(
-                        this.player.Position.X, 
-                        this._map.MapSize - this.player.Area.Width);
+                    this.player.Position = new Point(this.player.Position.X, this.map.MapSize - this.player.Area.Width);
                 }
 
-                this.player.BoxList = this._map.GetOverlappedBoxes(this.player.AreaBottom);
+                this.player.BoxList = this.map.GetOverlappedBoxes(this.player.AreaBottom);
 
                 if (!this.player.IsMoving)
                 {
                     this.player.EMovingDirection = EMovingDirection.Idle;
                 }
 
-                if (!this._map.IsInCar)
+                if (!this.map.IsInCar)
                 {
-                    this.player.Draw(
-                        g, 
-                        this._screen, 
-                        this._viewPort, 
-                        this._miniMap, 
-                        this.miniMapViewPort, 
-                        this.texture);
+                    this.player.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
                 }
 
                 if (this.player.IsMoving)
                 {
-                    foreach (Vegetation vegetation in this._map.Vegetation)
+                    foreach (Vegetation vegetation in this.map.Vegetation)
                     {
                         if (vegetation.Area.IntersectsWith(this.Player.Area))
                         {
@@ -1684,7 +1668,7 @@ namespace LiveIT2._1
                     }
                 }
 
-                if (this._map.IsInCar)
+                if (this.map.IsInCar)
                 {
                     if (this.player.Car.Position.X < 0)
                     {
@@ -1696,18 +1680,18 @@ namespace LiveIT2._1
                         this.player.Car.Position = new Point(this.player.Car.Position.X, 0);
                     }
 
-                    if (this.player.Car.Position.X > this._map.MapSize - this.player.Car.Area.Width)
+                    if (this.player.Car.Position.X > this.map.MapSize - this.player.Car.Area.Width)
                     {
                         this.player.Car.Position = new Point(
-                            this._map.MapSize - this.player.Car.Area.Width, 
+                            this.map.MapSize - this.player.Car.Area.Width, 
                             this.player.Car.Position.Y);
                     }
 
-                    if (this.player.Car.Position.Y > this._map.MapSize - this.player.Car.Area.Width)
+                    if (this.player.Car.Position.Y > this.map.MapSize - this.player.Car.Area.Width)
                     {
                         this.player.Car.Position = new Point(
                             this.player.Car.Position.X, 
-                            this._map.MapSize - this.player.Car.Area.Width);
+                            this.map.MapSize - this.player.Car.Area.Width);
                     }
 
                     this.player.Position = this.player.Car.Position;
@@ -1716,7 +1700,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The rain.
+        ///     The rain.
         /// </summary>
         private void Rain()
         {
@@ -1738,22 +1722,22 @@ namespace LiveIT2._1
         /// </param>
         private void T_rain_tick(object sender, EventArgs e)
         {
-            if (this._map.IsRaining)
+            if (this.map.IsRaining)
             {
                 var r = new Random();
-                var target = new Point(r.Next(0, this._map.MapSize), r.Next(0, this._map.MapSize));
+                var target = new Point(r.Next(0, this.map.MapSize), r.Next(0, this.map.MapSize));
                 var targetRect = new Rectangle(target, new Size(r.Next(0, 800), r.Next(0, 800)));
-                int top = targetRect.Top / this._map.BoxSize;
-                int left = targetRect.Left / this._map.BoxSize;
-                int bottom = (targetRect.Bottom - 1) / this._map.BoxSize;
-                int right = (targetRect.Right - 1) / this._map.BoxSize;
+                int top = targetRect.Top / this.map.BoxSize;
+                int left = targetRect.Left / this.map.BoxSize;
+                int bottom = (targetRect.Bottom - 1) / this.map.BoxSize;
+                int right = (targetRect.Right - 1) / this.map.BoxSize;
                 for (int i = top; i <= bottom; ++i)
                 {
                     for (int j = left; j <= right; ++j)
                     {
-                        if (this._map[i, j] != null)
+                        if (this.map[i, j] != null)
                         {
-                            Box b = this._map[j, i];
+                            Box b = this.map[j, i];
                             if (b.Ground == EBoxGround.Grass || b.Ground == EBoxGround.Grass2
                                 || b.Ground == EBoxGround.Dirt)
                             {

@@ -6,54 +6,55 @@
 //   The player.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Player
 {
     using System.Collections.Generic;
     using System.Drawing;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
+    using LiveIT2._1.Textures;
     using LiveIT2._1.Vehicules;
 
     /// <summary>
-    /// The player.
+    ///     The player.
     /// </summary>
     public class Player
     {
         #region Fields
 
         /// <summary>
-        /// The _direction.
+        ///     The _direction.
         /// </summary>
         private SizeF _direction;
 
         /// <summary>
-        /// The _map.
+        ///     The _map.
         /// </summary>
         private Map _map;
 
         /// <summary>
-        /// The _position.
+        ///     The _position.
         /// </summary>
         private Point _position;
 
         /// <summary>
-        /// The _relative position.
+        ///     The _relative position.
         /// </summary>
         private Point _relativePosition;
 
         /// <summary>
-        /// The _relative size.
+        ///     The _relative size.
         /// </summary>
         private Size _relativeSize;
 
         /// <summary>
-        /// The _size.
+        ///     The _size.
         /// </summary>
         private Size _size;
 
         /// <summary>
-        /// The _tank.
+        ///     The _tank.
         /// </summary>
         private Tank _tank;
 
@@ -84,7 +85,7 @@ namespace LiveIT2._1
         #region Public Properties
 
         /// <summary>
-        /// Gets the area.
+        ///     Gets the area.
         /// </summary>
         public Rectangle Area
         {
@@ -95,7 +96,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the area bottom.
+        ///     Gets the area bottom.
         /// </summary>
         public Rectangle AreaBottom
         {
@@ -108,17 +109,17 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the box list.
+        ///     Gets or sets the box list.
         /// </summary>
         public List<Box> BoxList { get; set; }
 
         /// <summary>
-        /// Gets or sets the car.
+        ///     Gets or sets the car.
         /// </summary>
         public Car Car { get; set; }
 
         /// <summary>
-        /// Gets the direction.
+        ///     Gets the direction.
         /// </summary>
         public SizeF Direction
         {
@@ -134,17 +135,17 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the e moving direction.
+        ///     Gets or sets the e moving direction.
         /// </summary>
         public EMovingDirection EMovingDirection { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is moving.
+        ///     Gets or sets a value indicating whether is moving.
         /// </summary>
         public bool IsMoving { get; set; }
 
         /// <summary>
-        /// Gets or sets the position.
+        ///     Gets or sets the position.
         /// </summary>
         public Point Position
         {
@@ -160,7 +161,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the relative position.
+        ///     Gets or sets the relative position.
         /// </summary>
         public Point RelativePosition
         {
@@ -176,7 +177,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the relative size.
+        ///     Gets or sets the relative size.
         /// </summary>
         public Size RelativeSize
         {
@@ -192,7 +193,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the size.
+        ///     Gets the size.
         /// </summary>
         public Size Size
         {
@@ -208,12 +209,12 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the speed.
+        ///     Gets or sets the speed.
         /// </summary>
         public int Speed { get; set; }
 
         /// <summary>
-        /// Gets the texture.
+        ///     Gets the texture.
         /// </summary>
         public EPlayerTexture Texture { get; internal set; }
 
@@ -295,7 +296,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The not alloud to move.
+        ///     The not alloud to move.
         /// </summary>
         public void notAlloudToMove()
         {

@@ -6,16 +6,16 @@
 //   The bush.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Vegetation
 {
     using System;
     using System.Drawing;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
 
     /// <summary>
-    /// The bush.
+    ///     The bush.
     /// </summary>
     [Serializable]
     public class Bush : Vegetation

@@ -14,12 +14,13 @@ namespace LiveIT2._1.Animals
     using System.Windows.Forms;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
 
     /// <summary>
     /// The gazelle.
     /// </summary>
     [Serializable]
-    public class Gazelle : Herbivorous
+    public sealed class Gazelle : Herbivorous
     {
         #region Fields
 

@@ -6,8 +6,7 @@
 //   The box.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Terrain
 {
     using System;
     using System.Collections.Generic;
@@ -15,9 +14,10 @@ namespace LiveIT2._1
 
     using LiveIT2._1.Animals;
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Textures;
 
     /// <summary>
-    /// The box.
+    ///     The box.
     /// </summary>
     [Serializable]
     public class Box
@@ -25,43 +25,43 @@ namespace LiveIT2._1
         #region Fields
 
         /// <summary>
-        /// The _column.
+        ///     The _column.
         /// </summary>
         private readonly int _column;
 
         /// <summary>
-        /// The _line.
+        ///     The _line.
         /// </summary>
         private readonly int _line;
 
         /// <summary>
-        /// The _animal list.
+        ///     The _animal list.
         /// </summary>
         [NonSerialized]
         private List<Animal> _animalList;
 
         /// <summary>
-        /// The _ground.
+        ///     The _ground.
         /// </summary>
         private EBoxGround _ground;
 
         /// <summary>
-        /// The _map.
+        ///     The _map.
         /// </summary>
         private Map _map;
 
         /// <summary>
-        /// The _relative position.
+        ///     The _relative position.
         /// </summary>
         private Point _relativePosition;
 
         /// <summary>
-        /// The _relative size.
+        ///     The _relative size.
         /// </summary>
         private Size _relativeSize;
 
         /// <summary>
-        /// The _source.
+        ///     The _source.
         /// </summary>
         private Rectangle _source;
 
@@ -97,7 +97,7 @@ namespace LiveIT2._1
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the animal list.
+        ///     Gets or sets the animal list.
         /// </summary>
         public List<Animal> AnimalList
         {
@@ -113,7 +113,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the area.
+        ///     Gets the area.
         /// </summary>
         public Rectangle Area
         {
@@ -124,7 +124,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the bottom.
+        ///     Gets the bottom.
         /// </summary>
         public Box Bottom
         {
@@ -135,7 +135,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the column.
+        ///     Gets the column.
         /// </summary>
         public int Column
         {
@@ -146,7 +146,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the ground.
+        ///     Gets or sets the ground.
         /// </summary>
         public EBoxGround Ground
         {
@@ -162,7 +162,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the left.
+        ///     Gets the left.
         /// </summary>
         public Box Left
         {
@@ -173,7 +173,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the line.
+        ///     Gets the line.
         /// </summary>
         public int Line
         {
@@ -184,7 +184,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the location.
+        ///     Gets the location.
         /// </summary>
         public Point Location
         {
@@ -217,7 +217,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the right.
+        ///     Gets the right.
         /// </summary>
         public Box Right
         {
@@ -228,7 +228,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets or sets the source.
+        ///     Gets or sets the source.
         /// </summary>
         public Rectangle Source
         {
@@ -244,7 +244,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// Gets the top.
+        ///     Gets the top.
         /// </summary>
         public Box Top
         {
@@ -274,7 +274,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The draw transition textures.
+        ///     The draw transition textures.
         /// </summary>
         public void DrawTransitionTextures()
         {
@@ -341,7 +341,7 @@ namespace LiveIT2._1
         /// Rectangle in pixel in the Graphics.
         /// </param>
         /// <param name="textures">
-        /// Texture object to apply the texture on the box 
+        /// Texture object to apply the texture on the box
         /// </param>
         /// <param name="viewPort">
         /// The view Port.

@@ -13,6 +13,8 @@ namespace LiveIT2._1.Vehicules
     using System.Drawing;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
+    using LiveIT2._1.Textures;
 
     /// <summary>
     /// The tank.

@@ -14,6 +14,7 @@ namespace LiveIT2._1.Animals
     using System.Linq;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
 
     /// <summary>
     /// The elephant.

@@ -6,7 +6,7 @@
 //   The main view port.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace LiveIT2._1
+namespace LiveIT2._1.Viewport
 {
     /// <summary>
     ///     The main view port.

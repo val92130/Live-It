@@ -12,6 +12,7 @@ namespace LiveIT2._1.Animals
     using System.Drawing;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
 
     /// <summary>
     ///     The wild.

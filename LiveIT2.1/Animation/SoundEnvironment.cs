@@ -6,114 +6,114 @@
 //   The sound environment.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Animation
 {
     using System.Collections.Generic;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
 
     using NAudio.Wave;
 
     /// <summary>
-    /// The sound environment.
+    ///     The sound environment.
     /// </summary>
     public class SoundEnvironment
     {
         #region Fields
 
         /// <summary>
-        /// The _box grounds.
+        ///     The _box grounds.
         /// </summary>
         private readonly List<EBoxGround> _boxGrounds;
 
         /// <summary>
-        /// The _player box grounds.
+        ///     The _player box grounds.
         /// </summary>
         private readonly List<EBoxGround> _playerBoxGrounds;
 
         /// <summary>
-        /// The wave out back ground.
+        ///     The wave out back ground.
         /// </summary>
         private readonly WaveOut waveOutBackGround;
 
         /// <summary>
-        /// The wave out car idle.
+        ///     The wave out car idle.
         /// </summary>
         private readonly WaveOut waveOutCarIdle;
 
         /// <summary>
-        /// The wave out car running.
+        ///     The wave out car running.
         /// </summary>
         private readonly WaveOut waveOutCarRunning;
 
         /// <summary>
-        /// The wave out car starting.
+        ///     The wave out car starting.
         /// </summary>
         private readonly WaveOut waveOutCarStarting;
 
         /// <summary>
-        /// The wave out radio music electro.
+        ///     The wave out radio music electro.
         /// </summary>
         private readonly WaveOut waveOutRadioMusicElectro;
 
         /// <summary>
-        /// The wave out radio music rap.
+        ///     The wave out radio music rap.
         /// </summary>
         private readonly WaveOut waveOutRadioMusicRap;
 
         /// <summary>
-        /// The wave out radio music trap.
+        ///     The wave out radio music trap.
         /// </summary>
         private readonly WaveOut waveOutRadioMusicTrap;
 
         /// <summary>
-        /// The wave out rain.
+        ///     The wave out rain.
         /// </summary>
         private readonly WaveOut waveOutRain;
 
         /// <summary>
-        /// The wave out step.
+        ///     The wave out step.
         /// </summary>
         private readonly WaveOut waveOutStep;
 
         /// <summary>
-        /// The wave out step_water.
+        ///     The wave out step_water.
         /// </summary>
         private readonly WaveOut waveOutStep_water;
 
         /// <summary>
-        /// The wave out water.
+        ///     The wave out water.
         /// </summary>
         private readonly WaveOut waveOutWater;
 
         /// <summary>
-        /// The _boxes.
+        ///     The _boxes.
         /// </summary>
         private List<Box> _boxes;
 
         /// <summary>
-        /// The _is raining.
+        ///     The _is raining.
         /// </summary>
         private bool _isRaining;
 
         /// <summary>
-        /// The _is stopped.
+        ///     The _is stopped.
         /// </summary>
         private bool _isStopped;
 
         /// <summary>
-        /// The _is water.
+        ///     The _is water.
         /// </summary>
         private bool _isWater;
 
         /// <summary>
-        /// The _map.
+        ///     The _map.
         /// </summary>
         private Map _map;
 
         /// <summary>
-        /// The wave out radio actual.
+        ///     The wave out radio actual.
         /// </summary>
         private WaveOut waveOutRadioActual;
 
@@ -122,7 +122,7 @@ namespace LiveIT2._1
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SoundEnvironment"/> class.
+        ///     Initializes a new instance of the <see cref="SoundEnvironment" /> class.
         /// </summary>
         public SoundEnvironment()
         {
@@ -203,7 +203,7 @@ namespace LiveIT2._1
         #region Public Properties
 
         /// <summary>
-        /// Gets a value indicating whether is stopped.
+        ///     Gets a value indicating whether is stopped.
         /// </summary>
         public bool IsStopped
         {
@@ -218,7 +218,7 @@ namespace LiveIT2._1
         #region Public Methods and Operators
 
         /// <summary>
-        /// The car sounds.
+        ///     The car sounds.
         /// </summary>
         public void CarSounds()
         {
@@ -335,7 +335,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The play all sounds.
+        ///     The play all sounds.
         /// </summary>
         public void PlayAllSounds()
         {
@@ -384,7 +384,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The player sounds.
+        ///     The player sounds.
         /// </summary>
         public void PlayerSounds()
         {
@@ -445,7 +445,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The start engine.
+        ///     The start engine.
         /// </summary>
         public void StartEngine()
         {
@@ -453,7 +453,7 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The toggle mute.
+        ///     The toggle mute.
         /// </summary>
         public void ToggleMute()
         {

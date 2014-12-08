@@ -13,6 +13,7 @@ namespace LiveIT2._1.Animals
     using System.Windows.Forms;
 
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Terrain;
     using LiveIT2._1.Utils;
 
     /// <summary>

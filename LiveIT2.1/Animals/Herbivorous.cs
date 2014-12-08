@@ -11,6 +11,8 @@ namespace LiveIT2._1.Animals
 {
     using System.Drawing;
 
+    using LiveIT2._1.Terrain;
+
     /// <summary>
     /// The herbivorous.
     /// </summary>

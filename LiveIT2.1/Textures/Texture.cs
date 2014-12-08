@@ -6,8 +6,7 @@
 //   The texture.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace LiveIT2._1
+namespace LiveIT2._1.Textures
 {
     using System;
     using System.Collections.Generic;
@@ -16,10 +15,13 @@ namespace LiveIT2._1
 
     using LiveIT2._1.Animals;
     using LiveIT2._1.Enums;
+    using LiveIT2._1.Player;
+    using LiveIT2._1.Terrain;
+    using LiveIT2._1.Vegetation;
     using LiveIT2._1.Vehicules;
 
     /// <summary>
-    /// The texture.
+    ///     The texture.
     /// </summary>
     [Serializable]
     public class Texture
@@ -27,702 +29,702 @@ namespace LiveIT2._1
         #region Fields
 
         /// <summary>
-        /// The _brush desert.
+        ///     The _brush desert.
         /// </summary>
         private readonly Brush _brushDesert;
 
         /// <summary>
-        /// The _brush dirt.
+        ///     The _brush dirt.
         /// </summary>
         private readonly Brush _brushDirt;
 
         /// <summary>
-        /// The _brush forest.
+        ///     The _brush forest.
         /// </summary>
         private readonly Brush _brushForest;
 
         /// <summary>
-        /// The _brush grass.
+        ///     The _brush grass.
         /// </summary>
         private readonly Brush _brushGrass;
 
         /// <summary>
-        /// The _brush snow.
+        ///     The _brush snow.
         /// </summary>
         private readonly Brush _brushSnow;
 
         /// <summary>
-        /// The _brush water.
+        ///     The _brush water.
         /// </summary>
         private readonly Brush _brushWater;
 
         /// <summary>
-        /// The _car down list.
+        ///     The _car down list.
         /// </summary>
         private readonly List<Bitmap> _carDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _car left list.
+        ///     The _car left list.
         /// </summary>
         private readonly List<Bitmap> _carLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _car right list.
+        ///     The _car right list.
         /// </summary>
         private readonly List<Bitmap> _carRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _car up list.
+        ///     The _car up list.
         /// </summary>
         private readonly List<Bitmap> _carUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cat down list.
+        ///     The _cat down list.
         /// </summary>
         private readonly List<Bitmap> _catDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cat left list.
+        ///     The _cat left list.
         /// </summary>
         private readonly List<Bitmap> _catLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cat right list.
+        ///     The _cat right list.
         /// </summary>
         private readonly List<Bitmap> _catRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cat up list.
+        ///     The _cat up list.
         /// </summary>
         private readonly List<Bitmap> _catUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cow down list.
+        ///     The _cow down list.
         /// </summary>
         private readonly List<Bitmap> _cowDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cow left list.
+        ///     The _cow left list.
         /// </summary>
         private readonly List<Bitmap> _cowLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cow right list.
+        ///     The _cow right list.
         /// </summary>
         private readonly List<Bitmap> _cowRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _cow up list.
+        ///     The _cow up list.
         /// </summary>
         private readonly List<Bitmap> _cowUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _dog down list.
+        ///     The _dog down list.
         /// </summary>
         private readonly List<Bitmap> _dogDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _dog left list.
+        ///     The _dog left list.
         /// </summary>
         private readonly List<Bitmap> _dogLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _dog right list.
+        ///     The _dog right list.
         /// </summary>
         private readonly List<Bitmap> _dogRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _dog up list.
+        ///     The _dog up list.
         /// </summary>
         private readonly List<Bitmap> _dogUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _eagle down list.
+        ///     The _eagle down list.
         /// </summary>
         private readonly List<Bitmap> _eagleDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _eagle left list.
+        ///     The _eagle left list.
         /// </summary>
         private readonly List<Bitmap> _eagleLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _eagle right list.
+        ///     The _eagle right list.
         /// </summary>
         private readonly List<Bitmap> _eagleRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _eagle up list.
+        ///     The _eagle up list.
         /// </summary>
         private readonly List<Bitmap> _eagleUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _elephant down list.
+        ///     The _elephant down list.
         /// </summary>
         private readonly List<Bitmap> _elephantDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _elephant left list.
+        ///     The _elephant left list.
         /// </summary>
         private readonly List<Bitmap> _elephantLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _elephant right list.
+        ///     The _elephant right list.
         /// </summary>
         private readonly List<Bitmap> _elephantRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _elephant up list.
+        ///     The _elephant up list.
         /// </summary>
         private readonly List<Bitmap> _elephantUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _gazelle down list.
+        ///     The _gazelle down list.
         /// </summary>
         private readonly List<Bitmap> _gazelleDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _gazelle left list.
+        ///     The _gazelle left list.
         /// </summary>
         private readonly List<Bitmap> _gazelleLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _gazelle right list.
+        ///     The _gazelle right list.
         /// </summary>
         private readonly List<Bitmap> _gazelleRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _gazelle up list.
+        ///     The _gazelle up list.
         /// </summary>
         private readonly List<Bitmap> _gazelleUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _lion down list.
+        ///     The _lion down list.
         /// </summary>
         private readonly List<Bitmap> _lionDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _lion left list.
+        ///     The _lion left list.
         /// </summary>
         private readonly List<Bitmap> _lionLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _lion right list.
+        ///     The _lion right list.
         /// </summary>
         private readonly List<Bitmap> _lionRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _lion up list.
+        ///     The _lion up list.
         /// </summary>
         private readonly List<Bitmap> _lionUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _player car texture.
+        ///     The _player car texture.
         /// </summary>
         private readonly Bitmap _playerCarTexture;
 
         /// <summary>
-        /// The _player down list.
+        ///     The _player down list.
         /// </summary>
         private readonly List<Bitmap> _playerDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _player left list.
+        ///     The _player left list.
         /// </summary>
         private readonly List<Bitmap> _playerLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _player right list.
+        ///     The _player right list.
         /// </summary>
         private readonly List<Bitmap> _playerRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _player texture.
+        ///     The _player texture.
         /// </summary>
         private readonly Bitmap _playerTexture;
 
         /// <summary>
-        /// The _player up list.
+        ///     The _player up list.
         /// </summary>
         private readonly List<Bitmap> _playerUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _rabbit down list.
+        ///     The _rabbit down list.
         /// </summary>
         private readonly List<Bitmap> _rabbitDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _rabbit left list.
+        ///     The _rabbit left list.
         /// </summary>
         private readonly List<Bitmap> _rabbitLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _rabbit right list.
+        ///     The _rabbit right list.
         /// </summary>
         private readonly List<Bitmap> _rabbitRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _rabbit up list.
+        ///     The _rabbit up list.
         /// </summary>
         private readonly List<Bitmap> _rabbitUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _rain list.
+        ///     The _rain list.
         /// </summary>
         private readonly List<Bitmap> _rainList = new List<Bitmap>();
 
         /// <summary>
-        /// The _texture blood.
+        ///     The _texture blood.
         /// </summary>
         private readonly Bitmap _textureBlood;
 
         /// <summary>
-        /// The _texture bush.
+        ///     The _texture bush.
         /// </summary>
         private readonly Bitmap _textureBush;
 
         /// <summary>
-        /// The _texture desert.
+        ///     The _texture desert.
         /// </summary>
         private readonly Bitmap _textureDesert;
 
         /// <summary>
-        /// The _texture dirt.
+        ///     The _texture dirt.
         /// </summary>
         private readonly Bitmap _textureDirt;
 
         /// <summary>
-        /// The _texture forest.
+        ///     The _texture forest.
         /// </summary>
         private readonly Bitmap _textureForest;
 
         /// <summary>
-        /// The _texture grass.
+        ///     The _texture grass.
         /// </summary>
         private readonly Bitmap _textureGrass;
 
         /// <summary>
-        /// The _texture grass 2.
+        ///     The _texture grass 2.
         /// </summary>
         private readonly Bitmap _textureGrass2;
 
         /// <summary>
-        /// The _texture mountain.
+        ///     The _texture mountain.
         /// </summary>
         private readonly Bitmap _textureMountain;
 
         /// <summary>
-        /// The _texture player idle.
+        ///     The _texture player idle.
         /// </summary>
         private readonly Bitmap _texturePlayerIdle;
 
         /// <summary>
-        /// The _texture rock.
+        ///     The _texture rock.
         /// </summary>
         private readonly Bitmap _textureRock;
 
         /// <summary>
-        /// The _texture rock 2.
+        ///     The _texture rock 2.
         /// </summary>
         private readonly Bitmap _textureRock2;
 
         /// <summary>
-        /// The _texture rock 3.
+        ///     The _texture rock 3.
         /// </summary>
         private readonly Bitmap _textureRock3;
 
         /// <summary>
-        /// The _texture snow.
+        ///     The _texture snow.
         /// </summary>
         private readonly Bitmap _textureSnow;
 
         /// <summary>
-        /// The _texture tank down.
+        ///     The _texture tank down.
         /// </summary>
         private readonly Bitmap _textureTankDown;
 
         /// <summary>
-        /// The _texture tank left.
+        ///     The _texture tank left.
         /// </summary>
         private readonly Bitmap _textureTankLeft;
 
         /// <summary>
-        /// The _texture tank right.
+        ///     The _texture tank right.
         /// </summary>
         private readonly Bitmap _textureTankRight;
 
         /// <summary>
-        /// The _texture tank up.
+        ///     The _texture tank up.
         /// </summary>
         private readonly Bitmap _textureTankUp;
 
         /// <summary>
-        /// The _texture tree.
+        ///     The _texture tree.
         /// </summary>
         private readonly Bitmap _textureTree;
 
         /// <summary>
-        /// The _texture tree 2.
+        ///     The _texture tree 2.
         /// </summary>
         private readonly Bitmap _textureTree2;
 
         /// <summary>
-        /// The _texture tree 3.
+        ///     The _texture tree 3.
         /// </summary>
         private readonly Bitmap _textureTree3;
 
         /// <summary>
-        /// The _thunder list.
+        ///     The _thunder list.
         /// </summary>
         private readonly List<Bitmap> _thunderList = new List<Bitmap>();
 
         /// <summary>
-        /// The _water list.
+        ///     The _water list.
         /// </summary>
         private readonly List<Bitmap> _waterList = new List<Bitmap>();
 
         /// <summary>
-        /// The _animate.
+        ///     The _animate.
         /// </summary>
         private Timer _animate;
 
         /// <summary>
-        /// The _animate animal.
+        ///     The _animate animal.
         /// </summary>
         private Timer _animateAnimal;
 
         /// <summary>
-        /// The _animate car.
+        ///     The _animate car.
         /// </summary>
         private Timer _animateCar;
 
         /// <summary>
-        /// The _animate player.
+        ///     The _animate player.
         /// </summary>
         private Timer _animatePlayer;
 
         /// <summary>
-        /// The _count animal.
+        ///     The _count animal.
         /// </summary>
         private int _countAnimal;
 
         /// <summary>
-        /// The _player tank texture.
+        ///     The _player tank texture.
         /// </summary>
         private Bitmap _playerTankTexture;
 
         /// <summary>
-        /// The _rain timer.
+        ///     The _rain timer.
         /// </summary>
         private Timer _rainTimer;
 
         /// <summary>
-        /// The _tank down list.
+        ///     The _tank down list.
         /// </summary>
         private List<Bitmap> _tankDownList = new List<Bitmap>();
 
         /// <summary>
-        /// The _tank left list.
+        ///     The _tank left list.
         /// </summary>
         private List<Bitmap> _tankLeftList = new List<Bitmap>();
 
         /// <summary>
-        /// The _tank right list.
+        ///     The _tank right list.
         /// </summary>
         private List<Bitmap> _tankRightList = new List<Bitmap>();
 
         /// <summary>
-        /// The _tank up list.
+        ///     The _tank up list.
         /// </summary>
         private List<Bitmap> _tankUpList = new List<Bitmap>();
 
         /// <summary>
-        /// The _texture car down.
+        ///     The _texture car down.
         /// </summary>
         private Bitmap _textureCarDown;
 
         /// <summary>
-        /// The _texture car left.
+        ///     The _texture car left.
         /// </summary>
         private Bitmap _textureCarLeft;
 
         /// <summary>
-        /// The _texture car right.
+        ///     The _texture car right.
         /// </summary>
         private Bitmap _textureCarRight;
 
         /// <summary>
-        /// The _texture car up.
+        ///     The _texture car up.
         /// </summary>
         private Bitmap _textureCarUp;
 
         /// <summary>
-        /// The _texture cat.
+        ///     The _texture cat.
         /// </summary>
         private Bitmap _textureCat;
 
         /// <summary>
-        /// The _texture cat down.
+        ///     The _texture cat down.
         /// </summary>
         private Bitmap _textureCatDown;
 
         /// <summary>
-        /// The _texture cat left.
+        ///     The _texture cat left.
         /// </summary>
         private Bitmap _textureCatLeft;
 
         /// <summary>
-        /// The _texture cat right.
+        ///     The _texture cat right.
         /// </summary>
         private Bitmap _textureCatRight;
 
         /// <summary>
-        /// The _texture cat up.
+        ///     The _texture cat up.
         /// </summary>
         private Bitmap _textureCatUp;
 
         /// <summary>
-        /// The _texture cow.
+        ///     The _texture cow.
         /// </summary>
         private Bitmap _textureCow;
 
         /// <summary>
-        /// The _texture cow down.
+        ///     The _texture cow down.
         /// </summary>
         private Bitmap _textureCowDown;
 
         /// <summary>
-        /// The _texture cow left.
+        ///     The _texture cow left.
         /// </summary>
         private Bitmap _textureCowLeft;
 
         /// <summary>
-        /// The _texture cow right.
+        ///     The _texture cow right.
         /// </summary>
         private Bitmap _textureCowRight;
 
         /// <summary>
-        /// The _texture cow up.
+        ///     The _texture cow up.
         /// </summary>
         private Bitmap _textureCowUp;
 
         /// <summary>
-        /// The _texture dog.
+        ///     The _texture dog.
         /// </summary>
         private Bitmap _textureDog;
 
         /// <summary>
-        /// The _texture dog down.
+        ///     The _texture dog down.
         /// </summary>
         private Bitmap _textureDogDown;
 
         /// <summary>
-        /// The _texture dog left.
+        ///     The _texture dog left.
         /// </summary>
         private Bitmap _textureDogLeft;
 
         /// <summary>
-        /// The _texture dog right.
+        ///     The _texture dog right.
         /// </summary>
         private Bitmap _textureDogRight;
 
         /// <summary>
-        /// The _texture dog up.
+        ///     The _texture dog up.
         /// </summary>
         private Bitmap _textureDogUp;
 
         /// <summary>
-        /// The _texture eagle.
+        ///     The _texture eagle.
         /// </summary>
         private Bitmap _textureEagle;
 
         /// <summary>
-        /// The _texture eagle down.
+        ///     The _texture eagle down.
         /// </summary>
         private Bitmap _textureEagleDown;
 
         /// <summary>
-        /// The _texture eagle left.
+        ///     The _texture eagle left.
         /// </summary>
         private Bitmap _textureEagleLeft;
 
         /// <summary>
-        /// The _texture eagle right.
+        ///     The _texture eagle right.
         /// </summary>
         private Bitmap _textureEagleRight;
 
         /// <summary>
-        /// The _texture eagle up.
+        ///     The _texture eagle up.
         /// </summary>
         private Bitmap _textureEagleUp;
 
         /// <summary>
-        /// The _texture elephant.
+        ///     The _texture elephant.
         /// </summary>
         private Bitmap _textureElephant;
 
         /// <summary>
-        /// The _texture elephant down.
+        ///     The _texture elephant down.
         /// </summary>
         private Bitmap _textureElephantDown;
 
         /// <summary>
-        /// The _texture elephant left.
+        ///     The _texture elephant left.
         /// </summary>
         private Bitmap _textureElephantLeft;
 
         /// <summary>
-        /// The _texture elephant right.
+        ///     The _texture elephant right.
         /// </summary>
         private Bitmap _textureElephantRight;
 
         /// <summary>
-        /// The _texture elephant up.
+        ///     The _texture elephant up.
         /// </summary>
         private Bitmap _textureElephantUp;
 
         /// <summary>
-        /// The _texture gazelle.
+        ///     The _texture gazelle.
         /// </summary>
         private Bitmap _textureGazelle;
 
         /// <summary>
-        /// The _texture gazelle down.
+        ///     The _texture gazelle down.
         /// </summary>
         private Bitmap _textureGazelleDown;
 
         /// <summary>
-        /// The _texture gazelle left.
+        ///     The _texture gazelle left.
         /// </summary>
         private Bitmap _textureGazelleLeft;
 
         /// <summary>
-        /// The _texture gazelle right.
+        ///     The _texture gazelle right.
         /// </summary>
         private Bitmap _textureGazelleRight;
 
         /// <summary>
-        /// The _texture gazelle up.
+        ///     The _texture gazelle up.
         /// </summary>
         private Bitmap _textureGazelleUp;
 
         /// <summary>
-        /// The _texture giraffe.
+        ///     The _texture giraffe.
         /// </summary>
         private Bitmap _textureGiraffe;
 
         /// <summary>
-        /// The _texture lion.
+        ///     The _texture lion.
         /// </summary>
         private Bitmap _textureLion;
 
         /// <summary>
-        /// The _texture lion down.
+        ///     The _texture lion down.
         /// </summary>
         private Bitmap _textureLionDown;
 
         /// <summary>
-        /// The _texture lion left.
+        ///     The _texture lion left.
         /// </summary>
         private Bitmap _textureLionLeft;
 
         /// <summary>
-        /// The _texture lion right.
+        ///     The _texture lion right.
         /// </summary>
         private Bitmap _textureLionRight;
 
         /// <summary>
-        /// The _texture lion up.
+        ///     The _texture lion up.
         /// </summary>
         private Bitmap _textureLionUp;
 
         /// <summary>
-        /// The _texture player down.
+        ///     The _texture player down.
         /// </summary>
         private Bitmap _texturePlayerDown;
 
         /// <summary>
-        /// The _texture player left.
+        ///     The _texture player left.
         /// </summary>
         private Bitmap _texturePlayerLeft;
 
         /// <summary>
-        /// The _texture player right.
+        ///     The _texture player right.
         /// </summary>
         private Bitmap _texturePlayerRight;
 
         /// <summary>
-        /// The _texture player up.
+        ///     The _texture player up.
         /// </summary>
         private Bitmap _texturePlayerUp;
 
         /// <summary>
-        /// The _texture rabbit.
+        ///     The _texture rabbit.
         /// </summary>
         private Bitmap _textureRabbit;
 
         /// <summary>
-        /// The _texture rabbit down.
+        ///     The _texture rabbit down.
         /// </summary>
         private Bitmap _textureRabbitDown;
 
         /// <summary>
-        /// The _texture rabbit left.
+        ///     The _texture rabbit left.
         /// </summary>
         private Bitmap _textureRabbitLeft;
 
         /// <summary>
-        /// The _texture rabbit right.
+        ///     The _texture rabbit right.
         /// </summary>
         private Bitmap _textureRabbitRight;
 
         /// <summary>
-        /// The _texture rabbit up.
+        ///     The _texture rabbit up.
         /// </summary>
         private Bitmap _textureRabbitUp;
 
         /// <summary>
-        /// The _texture rain.
+        ///     The _texture rain.
         /// </summary>
         private Bitmap _textureRain;
 
         /// <summary>
-        /// The _texture thunder.
+        ///     The _texture thunder.
         /// </summary>
         private Bitmap _textureThunder;
 
         /// <summary>
-        /// The _texture water animated.
+        ///     The _texture water animated.
         /// </summary>
         private Bitmap _textureWaterAnimated;
 
         /// <summary>
-        /// The _thunder timer.
+        ///     The _thunder timer.
         /// </summary>
         private Timer _thunderTimer;
 
         /// <summary>
-        /// The count.
+        ///     The count.
         /// </summary>
         private int count;
 
         /// <summary>
-        /// The count 2.
+        ///     The count 2.
         /// </summary>
         private int count2;
 
         /// <summary>
-        /// The count 3.
+        ///     The count 3.
         /// </summary>
         private int count3;
 
         /// <summary>
-        /// The count car.
+        ///     The count car.
         /// </summary>
         private int countCar;
 
         /// <summary>
-        /// The count player.
+        ///     The count player.
         /// </summary>
         private int countPlayer;
 
@@ -731,7 +733,7 @@ namespace LiveIT2._1
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Texture"/> class.
+        ///     Initializes a new instance of the <see cref="Texture" /> class.
         /// </summary>
         public Texture()
         {
@@ -967,10 +969,10 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The get blood.
+        ///     The get blood.
         /// </summary>
         /// <returns>
-        /// The <see cref="Bitmap"/>.
+        ///     The <see cref="Bitmap" />.
         /// </returns>
         public Bitmap GetBlood()
         {
@@ -1012,10 +1014,10 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The get rain.
+        ///     The get rain.
         /// </summary>
         /// <returns>
-        /// The <see cref="Bitmap"/>.
+        ///     The <see cref="Bitmap" />.
         /// </returns>
         public Bitmap GetRain()
         {
@@ -1089,10 +1091,10 @@ namespace LiveIT2._1
         }
 
         /// <summary>
-        /// The get thunder.
+        ///     The get thunder.
         /// </summary>
         /// <returns>
-        /// The <see cref="Bitmap"/>.
+        ///     The <see cref="Bitmap" />.
         /// </returns>
         public Bitmap GetThunder()
         {

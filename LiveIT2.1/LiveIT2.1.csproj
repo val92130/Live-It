@@ -55,9 +55,9 @@
     <Compile Include="Animals\Herbivorous.cs" />
     <Compile Include="Animals\Wild.cs" />
     <Compile Include="Enums\EAnimalTexture.cs" />
-    <Compile Include="Box.cs" />
+    <Compile Include="Terrain\Box.cs" />
     <Compile Include="Enums\EBoxGround.cs" />
-    <Compile Include="Bush.cs" />
+    <Compile Include="Vegetation\Bush.cs" />
     <Compile Include="Vehicules\Car.cs" />
     <Compile Include="Enums\ECarTexture.cs" />
     <Compile Include="Animals\Cat.cs" />
@@ -72,14 +72,14 @@
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
     <Compile Include="Animals\Gazelle.cs" />
-    <Compile Include="LoopStream.cs" />
-    <Compile Include="MainViewPort.Constants.cs" />
+    <Compile Include="Animation\LoopStream.cs" />
+    <Compile Include="Viewport\MainViewPort.Constants.cs" />
     <Compile Include="Vehicules\Missile.cs" />
     <Compile Include="Enums\EMovingDirection.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Enums\EPlayerTexture.cs" />
     <Compile Include="Enums\ERadioSongs.cs" />
-    <Compile Include="Rock.cs" />
+    <Compile Include="Vegetation\Rock.cs" />
     <Compile Include="Enums\ESex.cs" />
     <Compile Include="Gui\SplashScreen.cs">
       <SubType>Form</SubType>
@@ -93,19 +93,18 @@
     <Compile Include="Gui\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Giraffe.cs" />
     <Compile Include="Animals\Lion.cs" />
-    <Compile Include="MainViewPort.cs" />
-    <Compile Include="Map.cs" />
+    <Compile Include="Viewport\MainViewPort.cs" />
+    <Compile Include="Terrain\Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Animals\Rabbit.cs" />
-    <Compile Include="SoundEnvironment.cs" />
+    <Compile Include="Animation\SoundEnvironment.cs" />
     <Compile Include="Vehicules\Tank.cs" />
-    <Compile Include="Texture.cs" />
-    <Compile Include="Tree.cs" />
+    <Compile Include="Textures\Texture.cs" />
+    <Compile Include="Vegetation\Tree.cs" />
     <Compile Include="Utils\RandomGenerator.cs" />
-    <Compile Include="Vegetation.cs" />
+    <Compile Include="Vegetation\Vegetation.cs" />
     <Compile Include="Enums\EVegetationTexture.cs" />
     <Compile Include="Vehicules\Vehicule.cs" />
     <EmbeddedResource Include="Gui\Game.resx">
@@ -142,7 +141,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Animation\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
