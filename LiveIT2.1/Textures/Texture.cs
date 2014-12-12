@@ -58,6 +58,7 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private readonly Brush _brushWater;
 
+
         /// <summary>
         ///     The _car down list.
         /// </summary>
@@ -242,6 +243,11 @@ namespace LiveIT2._1.Textures
         ///     The _player texture.
         /// </summary>
         private readonly Bitmap _playerTexture;
+
+        /// <summary>
+        /// Missiles images used for the tank
+        /// </summary>
+        private readonly Bitmap _missileUp, _missileDown, _missileLeft, _missileRight;
 
         /// <summary>
         ///     The _player up list.
@@ -783,6 +789,11 @@ namespace LiveIT2._1.Textures
             this._textureRock2 = new Bitmap(@"..\..\..\assets\Vegetation\Rock2.gif");
             this._textureRock3 = new Bitmap(@"..\..\..\assets\Vegetation\Rock3.gif");
 
+            this._missileDown = new Bitmap( @"..\..\..\assets\Tank\Missile-Down\a.png" );
+            this._missileUp = new Bitmap( @"..\..\..\assets\Tank\Missile-Up\a.png" );
+            this._missileLeft = new Bitmap( @"..\..\..\assets\Tank\Missile-Left\a.png" );
+            this._missileRight = new Bitmap( @"..\..\..\assets\Tank\Missile-Right\a.png" );
+
             this._textureRabbit = new Bitmap(@"..\..\..\assets\Animal\Rabbit.png");
             this._textureElephant = new Bitmap(@"..\..\..\assets\Animal\Elephant.png");
             this._textureElephant.RotateFlip(RotateFlipType.Rotate180FlipY);
@@ -1277,6 +1288,24 @@ namespace LiveIT2._1.Textures
             }
         }
 
+        public Bitmap LoadMissileTexture( EMovingDirection d )
+        {
+            switch( d )
+            {
+                case EMovingDirection.Left:
+                    return this._missileLeft;
+                case EMovingDirection.Right:
+                    return this._missileRight;
+                case EMovingDirection.Up:
+                    return this._missileUp;
+                case EMovingDirection.Down:
+                    return this._missileDown;
+                default :
+                    return this._missileUp;
+                
+            }
+        }
+
         /// <summary>
         /// The load texture.
         /// </summary>
@@ -1325,7 +1354,11 @@ namespace LiveIT2._1.Textures
                 default:
                     return this._playerCarTexture;
             }
+
+            
         }
+
+        
 
         #endregion
 

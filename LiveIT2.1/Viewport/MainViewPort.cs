@@ -52,6 +52,11 @@ namespace LiveIT2._1.Viewport
         private readonly Rectangle screenLeft;
 
         /// <summary>
+        ///     Has player shooted.
+        /// </summary>
+        private bool _shoot;
+
+        /// <summary>
         ///     The _screen right.
         /// </summary>
         private readonly Rectangle screenRight;
@@ -221,6 +226,15 @@ namespace LiveIT2._1.Viewport
             {
                 return this.boxList;
             }
+        }
+
+        /// <summary>
+        /// Check if the player has pressed the shoot key
+        /// </summary>
+        public bool Shoot
+        {
+            get { return _shoot; }
+            set { _shoot = value; }
         }
 
         /// <summary>

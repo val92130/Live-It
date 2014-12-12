@@ -12,6 +12,7 @@ namespace LiveIT2._1.Vehicules
     using System.Drawing;
 
     using LiveIT2._1.Terrain;
+    using LiveIT2._1.Enums;
     using LiveIT2._1.Textures;
 
     /// <summary>
@@ -30,6 +31,13 @@ namespace LiveIT2._1.Vehicules
             ///     The _map.
             /// </summary>
             private readonly Map _map;
+
+            /// <summary>
+            ///     The tank that will shoot the missile
+            /// </summary>
+            private readonly Tank _tank;
+
+            private EMovingDirection _movingDirection;
 
             /// <summary>
             ///     The _area.
@@ -79,12 +87,14 @@ namespace LiveIT2._1.Vehicules
             /// <param name="map">
             /// The map.
             /// </param>
-            public Missile(Point StartPosition, Map map)
+            public Missile(Point StartPosition, Map map, Tank tank, EMovingDirection Direction)
             {
                 this._position = StartPosition;
                 this._size = new Size(80, 80);
                 this.Speed = 90000;
                 this._map = map;
+                this._tank = tank;
+                this._movingDirection = Direction;
             }
 
             #endregion
@@ -106,6 +116,8 @@ namespace LiveIT2._1.Vehicules
                     this._area = value;
                 }
             }
+
+           
 
             /// <summary>
             ///     Gets or sets the direction.
@@ -153,6 +165,12 @@ namespace LiveIT2._1.Vehicules
                 {
                     this._relativePosition = value;
                 }
+            }
+
+            public EMovingDirection MissileDirection
+            {
+                get { return _movingDirection; }
+                set { _movingDirection = value; }
             }
 
             /// <summary>
@@ -260,6 +278,8 @@ namespace LiveIT2._1.Vehicules
                 Rectangle viewPortMiniMap, 
                 Texture texture)
             {
+
+                
                 var newWidth = (int)((this.Area.Width / (double)viewPort.Width) * target.Width + 1);
                 var newHeight = (int)((this.Area.Height / (double)viewPort.Width) * target.Width + 1);
                 int newXpos =
@@ -278,8 +298,8 @@ namespace LiveIT2._1.Vehicules
                     this._position.X + (int)(this.Direction.Width * this.Speed), 
                     this._position.Y + (int)(this.Direction.Height * this.Speed));
 
-                g.FillRectangle(
-                    Brushes.Black, 
+                g.DrawImage(
+                    texture.LoadMissileTexture(this._movingDirection), 
                     new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
 
                 for (int i = 0; i < this._map.Animals.Count; i++)

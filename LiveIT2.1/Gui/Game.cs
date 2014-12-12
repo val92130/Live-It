@@ -414,6 +414,11 @@ namespace LiveIT2._1.Gui
                 }
             }
 
+            if( e.KeyCode == Keys.F )
+            {
+                this._viewPort.Shoot = true;
+            }
+
             if (e.KeyCode == Keys.ControlKey)
             {
                 this.ctrl = true;
@@ -503,6 +508,11 @@ namespace LiveIT2._1.Gui
                 {
                     this._viewPort.Player.Car.ToggleRadio();
                 }
+            }
+
+            if( e.KeyCode == Keys.F )
+            {
+                this._viewPort.Shoot = false;
             }
         }
 

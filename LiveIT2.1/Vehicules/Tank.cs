@@ -90,9 +90,13 @@ namespace LiveIT2._1.Vehicules
             Rectangle viewPortMiniMap, 
             Texture texture)
         {
-            if (this._map.ViewPort.HasClicked)
+            if (this._map.ViewPort.Shoot)
             {
-                this.Shoot();
+                if( this._map.IsInCar && this._map.ViewPort.Player.Car == this )
+                {
+                    this.Shoot();
+                }
+                
             }
 
             base.Draw(g, target, viewPort, targetMiniMap, viewPortMiniMap, texture);
@@ -120,8 +124,9 @@ namespace LiveIT2._1.Vehicules
             {
                 var m =
                     new Missile(
-                        new Point(this.Position.X + this.Area.Width, this.Position.Y + (this.Area.Width / 2)), 
-                        this._map);
+                        new Point(this.Position.X + this.Area.Width, this.Position.Y + (this.Area.Width / 2) -18), 
+                        this._map,
+                        this, this.EMovingDirection);
                 this._missiles.Add(m);
 
                 m.Shoot(new Point(this.Position.X + this.Area.Width + 800, this.Position.Y + (this.Area.Width / 2)));
@@ -129,7 +134,7 @@ namespace LiveIT2._1.Vehicules
 
             if (this.EMovingDirection == EMovingDirection.Left)
             {
-                var m = new Missile(new Point(this.Position.X, this.Position.Y + (this.Area.Height / 2)), this._map);
+                var m = new Missile(new Point(this.Position.X, this.Position.Y + (this.Area.Height / 2) - 18), this._map, this, this.EMovingDirection);
                 this._missiles.Add(m);
 
                 m.Shoot(new Point(this.Position.X - 800, this.Position.Y + (this.Area.Height / 2)));
@@ -137,7 +142,7 @@ namespace LiveIT2._1.Vehicules
 
             if (this.EMovingDirection == EMovingDirection.Up)
             {
-                var m = new Missile(new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y), this._map);
+                var m = new Missile(new Point(this.Position.X + (this.Area.Width / 2) - 15, this.Position.Y), this._map, this, this.EMovingDirection);
                 this._missiles.Add(m);
                 m.Shoot(new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y - 800));
             }
@@ -146,8 +151,9 @@ namespace LiveIT2._1.Vehicules
             {
                 var m =
                     new Missile(
-                        new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y + this.Area.Height), 
-                        this._map);
+                        new Point(this.Position.X + (this.Area.Width / 2) - 15, this.Position.Y + this.Area.Height), 
+                        this._map,
+                        this, this.EMovingDirection);
                 this._missiles.Add(m);
 
                 m.Shoot(new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y + 800 + this.Area.Height));
@@ -155,7 +161,7 @@ namespace LiveIT2._1.Vehicules
 
             if (this.EMovingDirection == EMovingDirection.Idle)
             {
-                var m = new Missile(new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y), this._map);
+                var m = new Missile(new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y), this._map, this, this.EMovingDirection);
                 this._missiles.Add(m);
                 m.Shoot(new Point(this.Position.X + (this.Area.Width / 2), this.Position.Y - 800));
             }
