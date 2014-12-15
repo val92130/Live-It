@@ -54,6 +54,7 @@
     <Compile Include="Animals\Animal.cs" />
     <Compile Include="Animals\Herbivorous.cs" />
     <Compile Include="Animals\Wild.cs" />
+    <Compile Include="Animation\AnimalSounds.cs" />
     <Compile Include="Enums\EAnimalTexture.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Gui\InGameMenu.cs">
@@ -111,6 +112,8 @@
     <Compile Include="Vegetation\Vegetation.cs" />
     <Compile Include="Enums\EVegetationTexture.cs" />
     <Compile Include="Vehicules\Vehicule.cs" />
+    <Compile Include="Viewport\MainViewPortDraw.cs" />
+    <Compile Include="Viewport\MainViewPortMovement.cs" />
     <EmbeddedResource Include="Gui\Game.resx">
       <DependentUpon>Game.cs</DependentUpon>
     </EmbeddedResource>

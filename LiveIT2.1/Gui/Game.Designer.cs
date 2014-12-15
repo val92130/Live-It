@@ -66,19 +66,19 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
             this.buttonMountain = new System.Windows.Forms.Button();
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this._playMedicButton = new System.Windows.Forms.Button();
-            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._gameMenu = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this._labelAnimalsAlive = new System.Windows.Forms.Label();
-            this._labelDeadAnimals = new System.Windows.Forms.Label();
             this._labelTimePlayed = new System.Windows.Forms.Label();
+            this._labelDeadAnimals = new System.Windows.Forms.Label();
+            this._labelAnimalsAlive = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             this.SuspendLayout();
@@ -489,6 +489,13 @@
             this.pauseToolStripMenuItem.Text = "Pause";
             this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
             // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(78, 33);
+            this.menuToolStripMenuItem.Text = "Stats";
+            this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
+            // 
             // _buttonFollowAnimal
             // 
             this._buttonFollowAnimal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(108)))), ((int)(((byte)(179)))));
@@ -557,14 +564,8 @@
             this._playMedicButton.TabIndex = 21;
             this._playMedicButton.Text = "Play Medic";
             this._playMedicButton.UseVisualStyleBackColor = false;
+            this._playMedicButton.Visible = false;
             this._playMedicButton.Click += new System.EventHandler(this._playMedicButton_Click);
-            // 
-            // menuToolStripMenuItem
-            // 
-            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(78, 33);
-            this.menuToolStripMenuItem.Text = "Stats";
-            this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
             // _gameMenu
             // 
@@ -582,41 +583,14 @@
             this._gameMenu.TabIndex = 22;
             this._gameMenu.Visible = false;
             // 
-            // label1
+            // _labelTimePlayed
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Animals alive : ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Dead Animals :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 130);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Time played :";
-            // 
-            // _labelAnimalsAlive
-            // 
-            this._labelAnimalsAlive.AutoSize = true;
-            this._labelAnimalsAlive.Location = new System.Drawing.Point(121, 34);
-            this._labelAnimalsAlive.Name = "_labelAnimalsAlive";
-            this._labelAnimalsAlive.Size = new System.Drawing.Size(19, 20);
-            this._labelAnimalsAlive.TabIndex = 3;
-            this._labelAnimalsAlive.Text = "{}";
+            this._labelTimePlayed.AutoSize = true;
+            this._labelTimePlayed.Location = new System.Drawing.Point(121, 130);
+            this._labelTimePlayed.Name = "_labelTimePlayed";
+            this._labelTimePlayed.Size = new System.Drawing.Size(19, 20);
+            this._labelTimePlayed.TabIndex = 5;
+            this._labelTimePlayed.Text = "{}";
             // 
             // _labelDeadAnimals
             // 
@@ -627,14 +601,41 @@
             this._labelDeadAnimals.TabIndex = 4;
             this._labelDeadAnimals.Text = "{}";
             // 
-            // _labelTimePlayed
+            // _labelAnimalsAlive
             // 
-            this._labelTimePlayed.AutoSize = true;
-            this._labelTimePlayed.Location = new System.Drawing.Point(121, 130);
-            this._labelTimePlayed.Name = "_labelTimePlayed";
-            this._labelTimePlayed.Size = new System.Drawing.Size(19, 20);
-            this._labelTimePlayed.TabIndex = 5;
-            this._labelTimePlayed.Text = "{}";
+            this._labelAnimalsAlive.AutoSize = true;
+            this._labelAnimalsAlive.Location = new System.Drawing.Point(121, 34);
+            this._labelAnimalsAlive.Name = "_labelAnimalsAlive";
+            this._labelAnimalsAlive.Size = new System.Drawing.Size(19, 20);
+            this._labelAnimalsAlive.TabIndex = 3;
+            this._labelAnimalsAlive.Text = "{}";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 130);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Time played :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(116, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Dead Animals :";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Animals alive : ";
             // 
             // Form1
             // 

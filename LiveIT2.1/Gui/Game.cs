@@ -1238,6 +1238,15 @@ namespace LiveIT2._1.Gui
                 ShowStatsInfo();
 
                 _map.Update();
+
+                if (!_map.IsPlayer)
+                {
+                    _playMedicButton.Hide();
+                }
+                else
+                {
+                    _playMedicButton.Show();
+                }
             }
             
         }

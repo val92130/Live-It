@@ -18,7 +18,7 @@ namespace LiveIT2._1.Animation
     /// <summary>
     ///     The sound environment.
     /// </summary>
-    public class SoundEnvironment
+    public partial class SoundEnvironment
     {
         #region Fields
 

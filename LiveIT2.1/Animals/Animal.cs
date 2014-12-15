@@ -943,6 +943,18 @@ namespace LiveIT2._1.Animals
                 - (int)
                   (viewPortMiniMap.Y
                    / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+
+            if (_map.IsMedic)
+            {
+                if (this.IsHurt)
+                {
+                    g.DrawRectangle(Pens.Blue, new Rectangle(this.RelativePosition, this.RelativeSize));
+                    g.DrawImage(texture.GetBlood(), new Rectangle(this.RelativePosition, this.RelativeSize));
+                    g.FillRectangle(Brushes.Red, new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
+                }
+            }
+
+
             if (this.Area.IntersectsWith(viewPort))
             {
                 g.DrawImage(
@@ -950,13 +962,6 @@ namespace LiveIT2._1.Animals
                     new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
             }
 
-            if( _map.IsMedic )
-            {
-                if( this.IsHurt )
-                {
-                    g.DrawRectangle( Pens.Blue, new Rectangle( this.RelativePosition, this.RelativeSize ) );
-                }
-            }
             g.DrawRectangle(
                 Pens.Black, 
                 new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));

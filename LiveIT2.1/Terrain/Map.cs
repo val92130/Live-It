@@ -18,6 +18,7 @@ namespace LiveIT2._1.Terrain
     using LiveIT2._1.Animals;
     using LiveIT2._1.Vegetation;
     using LiveIT2._1.Viewport;
+    using System.Windows.Forms;
 
     /// <summary>
     ///     The map.
@@ -52,6 +53,9 @@ namespace LiveIT2._1.Terrain
         ///     The _blood list.
         /// </summary>
         private List<Rectangle> _bloodList = new List<Rectangle>();
+
+        Timer _delayMedic;
+
 
         /// <summary>
         ///     The _boxes.
@@ -514,36 +518,60 @@ namespace LiveIT2._1.Terrain
         /// </summary>
         public void Update()
         {
-            if( this.IsMedic )
+            if (this.IsMedic)
             {
-                if( countDown == null )
+                Random rCountDown = new Random();
+
+                if (_delayMedic == null)
+                {
+                    _delayMedic = new System.Windows.Forms.Timer();
+                    _delayMedic.Interval = rCountDown.Next(10000,30000);
+                    _delayMedic.Tick += new EventHandler(T_delay_medic_tick);
+                    _delayMedic.Start();
+                }
+
+                if (countDown == null)
                 {
                     countDown = new Stopwatch();
                     countDown.Start();
-                    
                 }
-                if( _animals.Count > 0 )
+                if (_animals.Count > 0)
                 {
-                    if( _animalToSave == null )
+                    if (_animalToSave == null)
                     {
-
                         Random r = new Random();
-                        _animalToSave = _animals[r.Next( 0, _animals.Count )];
-
+                        _animalToSave = _animals[r.Next(0, _animals.Count)];
+                        _animalToSave.IsHurt = true;
                     }
 
-
-                    if( _viewPort.Player.Area.IntersectsWith( _animalToSave.Area ) )
+                    if (_viewPort.Player.Area.IntersectsWith(_animalToSave.Area))
                     {
                         _animalToSave.IsHurt = false;
-                        Random r = new Random();
-                        _animalToSave = _animals[r.Next( 0, _animals.Count )];
                     }
-                    _animalToSave.IsHurt = true;
+                    
                 }
             }
 
             
+        }
+
+        private void T_delay_medic_tick(object sender, EventArgs e)
+        {
+            if (_animals.Count > 0)
+            {
+                if (_animalToSave.IsHurt == true)
+                {
+                    _animalToSave.IsHurt = false;
+                    _animalToSave.Die();
+                }
+                 Random r = new Random();
+                  _animalToSave = _animals[r.Next(0, _animals.Count)];
+                  _animalToSave.IsHurt = true;
+            }
+            Random rCountDown = new Random();
+            _delayMedic.Stop();
+            _delayMedic.Interval = rCountDown.Next(10000, 30000);
+            _delayMedic.Start();
         }
 
         #endregion
