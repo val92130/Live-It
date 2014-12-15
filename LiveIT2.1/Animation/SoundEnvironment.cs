@@ -14,7 +14,9 @@ namespace LiveIT2._1.Animation
     using LiveIT2._1.Terrain;
 
     using NAudio.Wave;
+    using System;
 
+    [Serializable]
     /// <summary>
     ///     The sound environment.
     /// </summary>

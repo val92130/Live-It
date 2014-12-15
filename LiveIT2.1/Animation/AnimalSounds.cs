@@ -12,6 +12,8 @@ using System.IO;
 
 namespace LiveIT2._1.Animation
 {
+    
+
     public partial class SoundEnvironment
     {
         WaveOut waveOutAnimalSpawn;

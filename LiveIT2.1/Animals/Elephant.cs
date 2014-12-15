@@ -42,6 +42,16 @@ namespace LiveIT2._1.Animals
             this.ViewDistance = 800;
         }
 
+        public Elephant(Map map, Point starPosition, bool IsNewBorn)
+            : base(map, starPosition, true)
+        {
+            _finalSize = new Size(500, 500);
+            this.Texture = EAnimalTexture.Elephant;
+            this.Size = new Size(_finalSize.Width / 2, _finalSize.Height/2);
+            this.Speed = 7000;
+            this.ViewDistance = 800;
+        }
+
         #endregion
 
         #region Public Methods and Operators

@@ -94,6 +94,7 @@ namespace LiveIT2._1.Animals
         /// </summary>
         private EBoxGround _favoriteEnvironnment;
 
+        [NonSerialized]
         /// <summary>
         ///     The _graphics.
         /// </summary>
@@ -108,6 +109,8 @@ namespace LiveIT2._1.Animals
         ///     The _hunger.
         /// </summary>
         private int _hunger;
+
+        internal Size _finalSize;
 
         /// <summary>
         ///     The _position.
@@ -140,6 +143,11 @@ namespace LiveIT2._1.Animals
         private int _speed;
 
         /// <summary>
+        /// Grow speed of the newBorn animal, in millisecond
+        /// </summary>
+        private int _growSpeed;
+
+        /// <summary>
         ///     The _target location.
         /// </summary>
         private Point _targetLocation;
@@ -149,10 +157,14 @@ namespace LiveIT2._1.Animals
         /// </summary>
         private EAnimalTexture _texture;
 
+        [NonSerialized]
         /// <summary>
         ///     The _texture graphics.
         /// </summary>
         private Texture _textureGraphics;
+
+        [NonSerialized]
+        Timer _growTimer;
 
         /// <summary>
         ///     The _thirst.
@@ -195,6 +207,25 @@ namespace LiveIT2._1.Animals
             this.eSex = randomSex;
         }
 
+        protected Animal(Map map, Point position, bool IsNewBorn) 
+            :this(map,position)
+        {
+            _growSpeed = 20000;
+            _growTimer = new Timer();
+            _growTimer.Interval = _growSpeed;
+            _growTimer.Tick += new EventHandler(T_Grow_Animal);
+            _growTimer.Start();
+        }
+
+        private void T_Grow_Animal(object sender, EventArgs e)
+        {
+            if (this.Size.Height < _finalSize.Height)
+            {
+                this.Size += new Size(10, 10);
+            }
+            
+        }
+
         #endregion
 
         #region Public Properties
@@ -214,6 +245,18 @@ namespace LiveIT2._1.Animals
         {
             get { return _isHurt; }
             set { _isHurt = value; }
+        }
+
+        public int GrowSpeed
+        {
+            get { return _growSpeed; }
+            set
+            {
+                if (value >= 0)
+                {
+                    _growSpeed = value;
+                }
+            }
         }
 
         /// <summary>
@@ -653,7 +696,7 @@ namespace LiveIT2._1.Animals
                             {
                                 this.Hunger += 30;
                                 this._animalsAround[i].Hunger += 30;
-                                this._map.ViewPort.CreateAnimal(this.Texture, this.Position);
+                                this._map.ViewPort.CreateAnimal(this.Texture, this.Position, true);
                             }
                         }
                     }
@@ -836,6 +879,7 @@ namespace LiveIT2._1.Animals
         /// The texture.
         /// </param>
         public virtual void Draw(
+
             Graphics g, 
             Rectangle target, 
             Rectangle viewPort, 
@@ -843,6 +887,19 @@ namespace LiveIT2._1.Animals
             Rectangle viewPortMiniMap, 
             Texture texture)
         {
+
+            if (_growTimer == null)
+            {
+                if (_growSpeed <= 0)
+                {
+                    _growSpeed = 20000;
+                }
+                _growTimer = new Timer();
+                _growTimer.Interval = _growSpeed;
+                _growTimer.Tick += new EventHandler(T_Grow_Animal);
+                _growTimer.Start();
+            }
+
             this._graphics = g;
 
             this._textureGraphics = texture;

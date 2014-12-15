@@ -37,7 +37,6 @@ namespace LiveIT2._1.Terrain
         /// <summary>
         ///     The _animal list.
         /// </summary>
-        [NonSerialized]
         private List<Animal> _animalList;
 
         /// <summary>

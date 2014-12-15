@@ -79,6 +79,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this._labelSavedAnimals = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             this.SuspendLayout();
@@ -571,6 +573,8 @@
             // 
             this._gameMenu.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this._gameMenu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this._gameMenu.Controls.Add(this._labelSavedAnimals);
+            this._gameMenu.Controls.Add(this.label4);
             this._gameMenu.Controls.Add(this._labelTimePlayed);
             this._gameMenu.Controls.Add(this._labelDeadAnimals);
             this._gameMenu.Controls.Add(this._labelAnimalsAlive);
@@ -636,6 +640,24 @@
             this.label1.Size = new System.Drawing.Size(112, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 174);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(198, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Animal Saved as a Medic : ";
+            // 
+            // _labelSavedAnimals
+            // 
+            this._labelSavedAnimals.AutoSize = true;
+            this._labelSavedAnimals.Location = new System.Drawing.Point(207, 174);
+            this._labelSavedAnimals.Name = "_labelSavedAnimals";
+            this._labelSavedAnimals.Size = new System.Drawing.Size(19, 20);
+            this._labelSavedAnimals.TabIndex = 7;
+            this._labelSavedAnimals.Text = "{}";
             // 
             // Form1
             // 
@@ -736,6 +758,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label _labelSavedAnimals;
+        private System.Windows.Forms.Label label4;
 
     }
 }

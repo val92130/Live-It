@@ -1088,15 +1088,17 @@ namespace LiveIT2._1.Gui
             loadBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
             if (loadBox.ShowDialog() == DialogResult.OK)
             {
-                this._map.Boxes = this._map.Load(loadBox.FileName).Boxes;
-                for (int i = 0; i < this._map.Boxes.Count(); i++)
-                {
-                    this._map.Boxes[i].AnimalList = new List<Animal>();
-                }
-
-                this._map.Vegetation = this._map.Load(loadBox.FileName).Vegetation;
-                this._map.Animals = new List<Animal>();
+                LoadMap(loadBox.FileName);
             }
+        }
+
+        public void LoadMap(String mapPath)
+        {
+            this._map = this._map.Load(mapPath);
+            _viewPort = new MainViewPort(_map);
+            _viewPort.BoxList = _map.BoxList;
+            _viewPort.SoundEnvironment = this._soundEnvironment;
+            this._soundEnvironment.LoadMap(_map);
         }
 
         /// <summary>
@@ -1398,6 +1400,7 @@ namespace LiveIT2._1.Gui
             _labelAnimalsAlive.Text = _map.GetLivingAnimals.ToString() ;
             _labelDeadAnimals.Text = _map.DeadAnimals.ToString();
             _labelTimePlayed.Text = _countDown.Elapsed.ToString();
+            _labelSavedAnimals.Text = _map.SavedAnimals.ToString() ;
         }
     }
 }

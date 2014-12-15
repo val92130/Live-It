@@ -13,10 +13,12 @@ namespace LiveIT2._1.Animals
 
     using LiveIT2._1.Enums;
     using LiveIT2._1.Terrain;
+    using System;
 
     /// <summary>
     ///     The wild.
     /// </summary>
+    [Serializable]
     public class Wild : Animal
     {
         #region Constructors and Destructors
@@ -32,6 +34,11 @@ namespace LiveIT2._1.Animals
         /// </param>
         public Wild(Map map, Point position)
             : base(map, position)
+        {
+        }
+
+        public Wild(Map map, Point position, bool IsNewBorn)
+            : base(map, position, true)
         {
         }
 

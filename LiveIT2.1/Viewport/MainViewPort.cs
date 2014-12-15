@@ -226,6 +226,10 @@ namespace LiveIT2._1.Viewport
             {
                 return this.boxList;
             }
+            set
+            {
+                boxList = value;
+            }
         }
 
         /// <summary>
@@ -562,6 +566,43 @@ namespace LiveIT2._1.Viewport
             this.map.Animals.Add(a);
         }
 
+        public void CreateAnimal(EAnimalTexture eAnimalType, Point StartPosition, bool IsNewBorn)
+        {
+            Animal a;
+            switch (eAnimalType.ToString())
+            {
+                case "Dog":
+                    a = new Dog(this.map, StartPosition, true);
+                    break;
+                case "Cat":
+                    a = new Cat(this.map, StartPosition, true);
+                    break;
+                case "Lion":
+                    a = new Lion(this.map, StartPosition, true);
+                    break;
+                case "Rabbit":
+                    a = new Rabbit(this.map, StartPosition, true);
+                    break;
+                case "Elephant":
+                    a = new Elephant(this.map, StartPosition, true);
+                    break;
+                case "Cow":
+                    a = new Cow(this.map, StartPosition, true);
+                    break;
+                case "Eagle":
+                    a = new Eagle(this.map, StartPosition, true);
+                    break;
+                case "Gazelle":
+                    a = new Gazelle(this.map, StartPosition, true);
+                    break;
+                default:
+                    throw new NotSupportedException("Unknown animal type");
+            }
+
+            sounds.PlaySpawnSound(a);
+            this.map.Animals.Add(a);
+        }
+
         public Point AnimalCursor
         {
             get { return animalSelectorCursor; }
@@ -798,138 +839,6 @@ namespace LiveIT2._1.Viewport
             }
         }
 
-        /// <summary>
-        /// The draw boxes.
-        /// </summary>
-        /// <param name="g">
-        /// The g.
-        /// </param>
-        private void DrawBoxes(Graphics g)
-        {
-            for (int i = 0; i < this.boxList.Count; i++)
-            {
-                for (int j = 0; j < this.map.Animals.Count(); j++)
-                {
-                    if (this.map.Animals[j].Area.IntersectsWith(this.boxList[i].Area))
-                    {
-                        this.boxList[i].AddAnimal(this.map.Animals[j]);
-                    }
-                }
-
-                this.boxList[i].Draw(g, this.screen, this.texture, this.viewPort);
-            }
-
-            for (int i = 0; i < this.boxListMini.Count; i++)
-            {
-                this.boxListMini[i].DrawMiniMap(g, this.miniMap, this.texture, this.miniMapViewPort);
-            }
-        }
-
-        /// <summary>
-        /// The draw cars.
-        /// </summary>
-        /// <param name="g">
-        /// The g.
-        /// </param>
-        private void DrawCars(Graphics g)
-        {
-            foreach (Car car in this.carList)
-            {
-                car.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
-            }
-
-            foreach (Tank tank in this.tankList)
-            {
-                tank.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
-            }
-        }
-
-        /// <summary>
-        /// The draw flying animals.
-        /// </summary>
-        /// <param name="g">
-        /// The g.
-        /// </param>
-        private void DrawFlyingAnimals(Graphics g)
-        {
-            for (int i = 0; i < this.map.Animals.Count; i++)
-            {
-                if (this.map.Animals[i].Texture == EAnimalTexture.Eagle)
-                {
-                    this.map.Animals[i].Draw(
-                        g, 
-                        this.screen, 
-                        this.viewPort, 
-                        this.miniMap, 
-                        this.miniMapViewPort, 
-                        this.texture);
-                }
-            }
-        }
-
-        /// <summary>
-        /// The draw land animals.
-        /// </summary>
-        /// <param name="g">
-        /// The g.
-        /// </param>
-        private void DrawLandAnimals(Graphics g)
-        {
-            for (int i = 0; i < this.map.Animals.Count; i++)
-            {
-                if (this.map.Animals[i].Texture != EAnimalTexture.Eagle)
-                {
-                    this.map.Animals[i].Draw(
-                        g, 
-                        this.screen, 
-                        this.viewPort, 
-                        this.miniMap, 
-                        this.miniMapViewPort, 
-                        this.texture);
-                }
-            }
-        }
-
-        /// <summary>
-        /// The draw vegetation.
-        /// </summary>
-        /// <param name="g">
-        /// The g.
-        /// </param>
-        private void DrawVegetation(Graphics g)
-        {
-            for (int i = 0; i < this.map.Vegetation.Count; i++)
-            {
-                this.map.Vegetation[i].Draw(
-                    g, 
-                    this.screen, 
-                    this.viewPort, 
-                    this.miniMap, 
-                    this.miniMapViewPort, 
-                    this.texture);
-            }
-        }
-
-        /// <summary>
-        /// The make rain.
-        /// </summary>
-        /// <param name="g">
-        /// The g.
-        /// </param>
-        private void MakeRain(Graphics g)
-        {
-            if (this.map.IsRaining)
-            {
-                if (this.isRaining == false)
-                {
-                    this.Rain();
-                    this.isRaining = true;
-                }
-
-                // g.DrawImage(_texture.GetThunder(), _screen);
-                g.DrawImage(this.texture.GetRain(), this.screen);
-            }
-        }
 
         /// <summary>
         /// The player behavior.

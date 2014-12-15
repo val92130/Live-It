@@ -54,6 +54,29 @@ namespace LiveIT2._1.Animals
                                      };
         }
 
+        public Eagle(Map map, Point starPosition, bool IsNewBorn)
+            : base(map, starPosition, true)
+        {
+            
+            this.Position = starPosition;
+            var r = new Random();
+            int _random = r.Next(150, 350);
+            _finalSize = new Size(_random, _random);
+
+            this.Texture = EAnimalTexture.Eagle;
+            this.Size = new Size(_random / 2, _random / 2);
+            this.FavoriteEnvironnment = EBoxGround.Forest;
+            this.Speed = 150000;
+            this.DefaultSpeed = this.Speed;
+            this.ViewDistance = 400;
+            this.TargetAnimals = new List<EAnimalTexture>
+                                     {
+                                         EAnimalTexture.Rabbit, 
+                                         EAnimalTexture.Cow, 
+                                         EAnimalTexture.Gazelle
+                                     };
+        }
+
         #endregion
 
         #region Public Properties

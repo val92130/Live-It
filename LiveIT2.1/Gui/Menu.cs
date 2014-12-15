@@ -37,13 +37,8 @@
                 this.Hide();
                 game.Show(this);
 
-                game.Map.Boxes = game.Map.Load( loadBox.FileName ).Boxes;
-                for( int i = 0; i < game.Map.Boxes.Count(); i++ )
-                {
-                    game.Map.Boxes[i].AnimalList = new List<Animal>();
-                }
-                game.Map.Vegetation = game.Map.Load( loadBox.FileName ).Vegetation;
-                game.Map.Animals = new List<Animal>();
+                game.LoadMap(loadBox.FileName);
+
             }
 
         }

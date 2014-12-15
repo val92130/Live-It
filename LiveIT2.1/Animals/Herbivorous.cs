@@ -12,10 +12,12 @@ namespace LiveIT2._1.Animals
     using System.Drawing;
 
     using LiveIT2._1.Terrain;
+    using System;
 
     /// <summary>
     /// The herbivorous.
     /// </summary>
+    [Serializable]
     public class Herbivorous : Animal
     {
         #region Constructors and Destructors
@@ -31,6 +33,11 @@ namespace LiveIT2._1.Animals
         /// </param>
         public Herbivorous(Map map, Point position)
             : base(map, position)
+        {
+        }
+
+        public Herbivorous(Map map, Point position, bool IsNewBorn)
+            : base(map, position, true)
         {
         }
 

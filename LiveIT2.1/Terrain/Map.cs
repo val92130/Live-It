@@ -35,6 +35,8 @@ namespace LiveIT2._1.Terrain
 
         private Animal _animalToSave;
 
+
+        [NonSerialized]
         private Stopwatch countDown;
 
         // Box size in centimeter.
@@ -46,7 +48,6 @@ namespace LiveIT2._1.Terrain
         /// <summary>
         ///     The _animals.
         /// </summary>
-        [NonSerialized]
         private List<Animal> _animals = new List<Animal>();
 
         /// <summary>
@@ -54,6 +55,7 @@ namespace LiveIT2._1.Terrain
         /// </summary>
         private List<Rectangle> _bloodList = new List<Rectangle>();
 
+        [NonSerialized]
         Timer _delayMedic;
 
 
@@ -66,6 +68,8 @@ namespace LiveIT2._1.Terrain
         ///     The _dead animals.
         /// </summary>
         private int _deadAnimals;
+
+        private int _savedAnimals;
 
         /// <summary>
         ///     The _is in car.
@@ -152,6 +156,11 @@ namespace LiveIT2._1.Terrain
             {
                 this._animals = value;
             }
+        }
+
+        public List<Box> BoxList
+        {
+            get { return _viewPort.BoxList; }
         }
 
         public bool IsPaused
@@ -264,6 +273,12 @@ namespace LiveIT2._1.Terrain
             {
                 this._isInCar = value;
             }
+        }
+
+        public int SavedAnimals
+        {
+            get { return _savedAnimals; }
+
         }
 
         /// <summary>
@@ -494,7 +509,6 @@ namespace LiveIT2._1.Terrain
 
             // _boxes = (Box[])bFormatter.Deserialize( stream );
             var _newMap = (Map)bFormatter.Deserialize(stream);
-
             stream.Close();
             return _newMap;
         }
@@ -512,6 +526,7 @@ namespace LiveIT2._1.Terrain
             bFormatter.Serialize(stream, this);
             stream.Close();
         }
+
 
         /// <summary>
         /// Add aditional game logic here
@@ -546,7 +561,12 @@ namespace LiveIT2._1.Terrain
 
                     if (_viewPort.Player.Area.IntersectsWith(_animalToSave.Area))
                     {
+                        if (_animalToSave.IsHurt)
+                        {
+                            _savedAnimals++;
+                        }
                         _animalToSave.IsHurt = false;
+                        
                     }
                     
                 }
@@ -565,8 +585,13 @@ namespace LiveIT2._1.Terrain
                     _animalToSave.Die();
                 }
                  Random r = new Random();
-                  _animalToSave = _animals[r.Next(0, _animals.Count)];
-                  _animalToSave.IsHurt = true;
+                 int indice = r.Next(0, _animals.Count);
+                 if (_animals[indice] != null)
+                 {
+                     _animalToSave = _animals[indice];
+                     _animalToSave.IsHurt = true;
+                 }
+
             }
             Random rCountDown = new Random();
             _delayMedic.Stop();

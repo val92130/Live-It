@@ -23,7 +23,7 @@ namespace LiveIT2._1.Animals
     public sealed class Gazelle : Herbivorous
     {
         #region Fields
-
+        [NonSerialized]
         /// <summary>
         /// The timer.
         /// </summary>
@@ -48,6 +48,19 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Gazelle;
             this.Position = startPosition;
             this.Size = new Size(180, 180);
+            this.Speed = 20000;
+            this.DefaultSpeed = this.Speed;
+            this.ViewDistance = 400;
+            this.Hunger = 10;
+        }
+
+        public Gazelle(Map map, Point startPosition, bool IsNewBorn)
+            : base(map, startPosition, true)
+        {
+            _finalSize = new Size(180, 180);
+            this.Texture = EAnimalTexture.Gazelle;
+            this.Position = startPosition;
+            this.Size = new Size(_finalSize.Width / 2, _finalSize.Height/2);
             this.Speed = 20000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;

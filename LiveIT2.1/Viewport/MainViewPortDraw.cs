@@ -2,6 +2,7 @@
 using LiveIT2._1.Enums;
 using LiveIT2._1.Terrain;
 using LiveIT2._1.Textures;
+using LiveIT2._1.Vehicules;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -519,6 +520,139 @@ namespace LiveIT2._1.Viewport
                         Brushes.Aqua,
                         this.boxList[i].RelativePosition);
                 }
+            }
+        }
+
+        /// <summary>
+        /// The draw boxes.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        private void DrawBoxes(Graphics g)
+        {
+            for (int i = 0; i < this.boxList.Count; i++)
+            {
+                for (int j = 0; j < this.map.Animals.Count(); j++)
+                {
+                    if (this.map.Animals[j].Area.IntersectsWith(this.boxList[i].Area))
+                    {
+                        this.boxList[i].AddAnimal(this.map.Animals[j]);
+                    }
+                }
+
+                this.boxList[i].Draw(g, this.screen, this.texture, this.viewPort);
+            }
+
+            for (int i = 0; i < this.boxListMini.Count; i++)
+            {
+                this.boxListMini[i].DrawMiniMap(g, this.miniMap, this.texture, this.miniMapViewPort);
+            }
+        }
+
+        /// <summary>
+        /// The draw cars.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        private void DrawCars(Graphics g)
+        {
+            foreach (Car car in this.carList)
+            {
+                car.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
+            }
+
+            foreach (Tank tank in this.tankList)
+            {
+                tank.Draw(g, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort, this.texture);
+            }
+        }
+
+        /// <summary>
+        /// The draw flying animals.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        private void DrawFlyingAnimals(Graphics g)
+        {
+            for (int i = 0; i < this.map.Animals.Count; i++)
+            {
+                if (this.map.Animals[i].Texture == EAnimalTexture.Eagle)
+                {
+                    this.map.Animals[i].Draw(
+                        g,
+                        this.screen,
+                        this.viewPort,
+                        this.miniMap,
+                        this.miniMapViewPort,
+                        this.texture);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The draw land animals.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        private void DrawLandAnimals(Graphics g)
+        {
+            for (int i = 0; i < this.map.Animals.Count; i++)
+            {
+                if (this.map.Animals[i].Texture != EAnimalTexture.Eagle)
+                {
+                    this.map.Animals[i].Draw(
+                        g,
+                        this.screen,
+                        this.viewPort,
+                        this.miniMap,
+                        this.miniMapViewPort,
+                        this.texture);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The draw vegetation.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        private void DrawVegetation(Graphics g)
+        {
+            for (int i = 0; i < this.map.Vegetation.Count; i++)
+            {
+                this.map.Vegetation[i].Draw(
+                    g,
+                    this.screen,
+                    this.viewPort,
+                    this.miniMap,
+                    this.miniMapViewPort,
+                    this.texture);
+            }
+        }
+
+        /// <summary>
+        /// The make rain.
+        /// </summary>
+        /// <param name="g">
+        /// The g.
+        /// </param>
+        private void MakeRain(Graphics g)
+        {
+            if (this.map.IsRaining)
+            {
+                if (this.isRaining == false)
+                {
+                    this.Rain();
+                    this.isRaining = true;
+                }
+
+                // g.DrawImage(_texture.GetThunder(), _screen);
+                g.DrawImage(this.texture.GetRain(), this.screen);
             }
         }
     }

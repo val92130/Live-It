@@ -24,6 +24,7 @@ namespace LiveIT2._1.Animals
     {
         #region Fields
 
+        [NonSerialized]
         /// <summary>
         ///     The timer.
         /// </summary>
@@ -48,6 +49,19 @@ namespace LiveIT2._1.Animals
             this.Position = starPosition;
             this.Texture = EAnimalTexture.Cow;
             this.Size = new Size(230, 230);
+            this.Speed = 20000;
+            this.DefaultSpeed = this.Speed;
+            this.ViewDistance = 400;
+            this.FavoriteEnvironnment = EBoxGround.Grass;
+        }
+
+        public Cow(Map map, Point startPosition, bool IsNewBorn)
+            : base(map, startPosition, true)
+        {
+            _finalSize = new Size(230, 230);
+            this.Position = startPosition;
+            this.Texture = EAnimalTexture.Cow;
+            this.Size = new Size(_finalSize.Width/2, _finalSize.Width/2);
             this.Speed = 20000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;

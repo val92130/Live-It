@@ -45,6 +45,19 @@ namespace LiveIT2._1.Animals
             this.TargetAnimals = new List<EAnimalTexture> { EAnimalTexture.Rabbit, EAnimalTexture.Cow };
         }
 
+        public Dog(Map map, Point starPosition, bool IsNewBorn)
+            : base(map, starPosition, true)
+        {
+            _finalSize = new Size(150, 150);
+            this.Texture = EAnimalTexture.Dog;
+            this.Size = new Size(_finalSize.Width / 2, _finalSize.Height/2);
+            this.FavoriteEnvironnment = EBoxGround.Forest;
+            this.Speed = 15000;
+            this.DefaultSpeed = this.Speed;
+            this.ViewDistance = 400;
+            this.TargetAnimals = new List<EAnimalTexture> { EAnimalTexture.Rabbit, EAnimalTexture.Cow };
+        }
+
         #endregion
 
         #region Public Properties

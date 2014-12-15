@@ -54,6 +54,19 @@ namespace LiveIT2._1.Animals
             this.Hunger = 49;
         }
 
+        public Rabbit(Map map, Point startPosition, bool IsNewBorn)
+            : base(map, startPosition, true)
+        {
+            _finalSize = new Size(100, 100);
+            this.Texture = EAnimalTexture.Rabbit;
+            this.Position = startPosition;
+            this.Size = new Size(_finalSize.Width / 2, _finalSize.Height / 2);
+            this.Speed = 20000;
+            this.DefaultSpeed = this.Speed;
+            this.ViewDistance = 400;
+            this.Hunger = 49;
+        }
+
         #endregion
 
         #region Public Methods and Operators
