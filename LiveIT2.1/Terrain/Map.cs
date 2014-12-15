@@ -10,11 +10,11 @@ namespace LiveIT2._1.Terrain
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
-
     using LiveIT2._1.Animals;
     using LiveIT2._1.Vegetation;
     using LiveIT2._1.Viewport;
@@ -31,6 +31,10 @@ namespace LiveIT2._1.Terrain
         ///     The _box count per line.
         /// </summary>
         private readonly int _boxCountPerLine;
+
+        private Animal _animalToSave;
+
+        private Stopwatch countDown;
 
         // Box size in centimeter.
         /// <summary>
@@ -63,6 +67,8 @@ namespace LiveIT2._1.Terrain
         ///     The _is in car.
         /// </summary>
         private bool _isInCar;
+
+        private bool _isMedic;
 
         /// <summary>
         ///     The _is player spawned.
@@ -202,6 +208,15 @@ namespace LiveIT2._1.Terrain
             {
                 this._boxes = value;
             }
+        }
+
+        /// <summary>
+        /// Know if the player is playing medic mode or not
+        /// </summary>
+        public bool IsMedic
+        {
+            get { return _isMedic; }
+            set { _isMedic = value; }
         }
 
         /// <summary>
@@ -492,6 +507,43 @@ namespace LiveIT2._1.Terrain
             var bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, this);
             stream.Close();
+        }
+
+        /// <summary>
+        /// Add aditional game logic here
+        /// </summary>
+        public void Update()
+        {
+            if( this.IsMedic )
+            {
+                if( countDown == null )
+                {
+                    countDown = new Stopwatch();
+                    countDown.Start();
+                    
+                }
+                if( _animals.Count > 0 )
+                {
+                    if( _animalToSave == null )
+                    {
+
+                        Random r = new Random();
+                        _animalToSave = _animals[r.Next( 0, _animals.Count )];
+
+                    }
+
+
+                    if( _viewPort.Player.Area.IntersectsWith( _animalToSave.Area ) )
+                    {
+                        _animalToSave.IsHurt = false;
+                        Random r = new Random();
+                        _animalToSave = _animals[r.Next( 0, _animals.Count )];
+                    }
+                    _animalToSave.IsHurt = true;
+                }
+            }
+
+            
         }
 
         #endregion

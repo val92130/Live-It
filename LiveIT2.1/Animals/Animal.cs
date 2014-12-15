@@ -65,6 +65,11 @@ namespace LiveIT2._1.Animals
         protected readonly Map _map;
 
         /// <summary>
+        /// If the animal is hurt ( medic mode )
+        /// </summary>
+        private bool _isHurt;
+
+        /// <summary>
         ///     The walkable boxes of the animal.
         /// </summary>
         private readonly List<Box> WalkableBoxes = new List<Box>();
@@ -203,6 +208,12 @@ namespace LiveIT2._1.Animals
             {
                 return this._animalsAround;
             }
+        }
+
+        public bool IsHurt
+        {
+            get { return _isHurt; }
+            set { _isHurt = value; }
         }
 
         /// <summary>
@@ -847,9 +858,14 @@ namespace LiveIT2._1.Animals
             this.RelativePosition = new Point(newXpos, newYpos);
             this.RelativeSize = new Size(newWidth, newHeight);
 
-            this.Position = new Point(
-                this._position.X + (int)(this.Direction.Width * this.Speed), 
-                this._position.Y + (int)(this.Direction.Height * this.Speed));
+
+            if( !this.IsHurt )
+            {
+                this.Position = new Point(
+    this._position.X + (int)(this.Direction.Width * this.Speed),
+    this._position.Y + (int)(this.Direction.Height * this.Speed) );
+            }
+
             this.Behavior();
 
             if (this._map.ShowDebug)
@@ -934,6 +950,13 @@ namespace LiveIT2._1.Animals
                     new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
             }
 
+            if( _map.IsMedic )
+            {
+                if( this.IsHurt )
+                {
+                    g.DrawRectangle( Pens.Blue, new Rectangle( this.RelativePosition, this.RelativeSize ) );
+                }
+            }
             g.DrawRectangle(
                 Pens.Black, 
                 new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));

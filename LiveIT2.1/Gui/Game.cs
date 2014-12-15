@@ -1236,6 +1236,8 @@ namespace LiveIT2._1.Gui
                 }
 
                 ShowStatsInfo();
+
+                _map.Update();
             }
             
         }
@@ -1339,6 +1341,19 @@ namespace LiveIT2._1.Gui
 
         private void _playMedicButton_Click( object sender, EventArgs e )
         {
+            if( _map.IsPlayer )
+            {
+                if( _map.IsMedic )
+                {
+                    _map.IsMedic = false;
+                    _playMedicButton.Text = "Play Medic";
+                }
+                else
+                {
+                    _map.IsMedic = true;
+                    _playMedicButton.Text = "Quit Medic mode";
+                }
+            }
 
         }
 
