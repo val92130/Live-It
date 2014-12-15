@@ -70,6 +70,7 @@
             this.buttonMountain = new System.Windows.Forms.Button();
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this._playMedicButton = new System.Windows.Forms.Button();
+            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -230,7 +231,8 @@
             this.vehiclesToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
-            this.muteToolStripMenuItem});
+            this.muteToolStripMenuItem,
+            this.pauseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1020, 37);
@@ -537,6 +539,15 @@
             this._playMedicButton.TabIndex = 21;
             this._playMedicButton.Text = "Play Medic";
             this._playMedicButton.UseVisualStyleBackColor = false;
+            this._playMedicButton.Click += new System.EventHandler(this._playMedicButton_Click);
+            // 
+            // pauseToolStripMenuItem
+            // 
+            this.pauseToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
+            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(93, 33);
+            this.pauseToolStripMenuItem.Text = "Pause";
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -625,6 +636,7 @@
         private System.Windows.Forms.ToolStripMenuItem snowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem waterToolStripMenuItem;
         private System.Windows.Forms.Button _playMedicButton;
+        private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
 
     }
 }

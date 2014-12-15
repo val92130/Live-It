@@ -53,6 +53,11 @@ namespace LiveIT2._1.Gui
         private int _boxWidth;
 
         /// <summary>
+        /// Define if the game is playing or not
+        /// </summary>
+        private bool _isPlaying;
+
+        /// <summary>
         /// The _count.
         /// </summary>
         private long _count;
@@ -527,6 +532,7 @@ namespace LiveIT2._1.Gui
         /// </param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            _isPlaying = true;
             this.selectedEAnimal = EAnimalTexture.Rabbit;
             this._fpsCount = 0;
             this.DoubleBuffered = true;
@@ -1179,42 +1185,47 @@ namespace LiveIT2._1.Gui
         /// </param>
         private void t_Tick(object sender, EventArgs e)
         {
-            if (this.up)
-            {
-                this.MoveRectangle(Direction.Up);
-            }
-
-            if (this.left)
-            {
-                this.MoveRectangle(Direction.Left);
-            }
-
-            if (this.down)
-            {
-                this.MoveRectangle(Direction.Down);
-            }
-
-            if (this.right)
-            {
-                this.MoveRectangle(Direction.Right);
-            }
 
 
-            this.Draw();
-            this.g.DrawImage(this._background, new Point(0, 0));
-            this._soundEnvironment.LoadBoxes(this._viewPort.BoxList);
-            this._soundEnvironment.PlayAllSounds();
-            this._soundEnvironment.PlayerSounds();
-            Interlocked.Increment(ref this._fpsCount);
+            if( _isPlaying )
+            {
+                if( this.up )
+                {
+                    this.MoveRectangle( Direction.Up );
+                }
 
-            if (this._viewPort.IsFollowMode)
-            {
-                this._buttonFollowAnimal.Text = "Quit following mode";
+                if( this.left )
+                {
+                    this.MoveRectangle( Direction.Left );
+                }
+
+                if( this.down )
+                {
+                    this.MoveRectangle( Direction.Down );
+                }
+
+                if( this.right )
+                {
+                    this.MoveRectangle( Direction.Right );
+                }
+
+                this.Draw();
+                this.g.DrawImage( this._background, new Point( 0, 0 ) );
+                this._soundEnvironment.LoadBoxes( this._viewPort.BoxList );
+                this._soundEnvironment.PlayAllSounds();
+                this._soundEnvironment.PlayerSounds();
+                Interlocked.Increment( ref this._fpsCount );
+
+                if( this._viewPort.IsFollowMode )
+                {
+                    this._buttonFollowAnimal.Text = "Quit following mode";
+                }
+                else
+                {
+                    this._buttonFollowAnimal.Text = "Follow animal mode";
+                }
             }
-            else
-            {
-                this._buttonFollowAnimal.Text = "Follow animal mode";
-            }
+            
         }
 
         /// <summary>
@@ -1312,6 +1323,25 @@ namespace LiveIT2._1.Gui
         private void texturesToolStripMenuItem_Click( object sender, EventArgs e )
         {
             _viewPort.IsChangeTextureSelected = true;
+        }
+
+        private void _playMedicButton_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void pauseToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            if( _isPlaying )
+            {
+                _isPlaying = false;
+                pauseToolStripMenuItem.Text = "Play";
+            }
+            else
+            {
+                _isPlaying = true;
+                pauseToolStripMenuItem.Text = "Resume";
+            }
         }
     }
 }
