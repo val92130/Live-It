@@ -11,18 +11,17 @@ namespace LiveIT2._1.Gui
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
-
     using LiveIT2._1.Animals;
     using LiveIT2._1.Animation;
     using LiveIT2._1.Enums;
     using LiveIT2._1.Terrain;
     using LiveIT2._1.Viewport;
-
     using Timer = System.Windows.Forms.Timer;
 
     /// <summary>
@@ -101,6 +100,8 @@ namespace LiveIT2._1.Gui
         /// The _selected texture.
         /// </summary>
         private EBoxGround _selectedTexture;
+
+        private Stopwatch _countDown;
 
         /// <summary>
         /// The _selection cursor width.
@@ -565,6 +566,10 @@ namespace LiveIT2._1.Gui
             this.t.Interval = 10;
             this.t.Tick += this.t_Tick;
 
+            this._gameMenu.Width = 600 ;
+            this._gameMenu.Height = 600;
+            this._gameMenu.Location = new Point( Screen.PrimaryScreen.Bounds.Width / 2 - _gameMenu.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2 - _gameMenu.Height / 2 );
+
             var r = new Random();
             int _random = r.Next(0, this._map.MapSize);
             this._playerPosition = new Point(_random, _random);
@@ -574,6 +579,11 @@ namespace LiveIT2._1.Gui
             this._soundEnvironment = new SoundEnvironment();
             this._soundEnvironment.LoadMap(this._map);
             this._viewPort.SoundEnvironment = this._soundEnvironment;
+
+            _countDown = new Stopwatch();
+            _countDown.Start();
+
+            _gameMenu.Draggable( true );
         }
 
         /// <summary>
@@ -1187,7 +1197,7 @@ namespace LiveIT2._1.Gui
         {
 
 
-            if( _isPlaying )
+            if( !_map.IsPaused )
             {
                 if( this.up )
                 {
@@ -1224,6 +1234,8 @@ namespace LiveIT2._1.Gui
                 {
                     this._buttonFollowAnimal.Text = "Follow animal mode";
                 }
+
+                ShowStatsInfo();
             }
             
         }
@@ -1332,16 +1344,36 @@ namespace LiveIT2._1.Gui
 
         private void pauseToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            if( _isPlaying )
+            if( !_map.IsPaused )
             {
-                _isPlaying = false;
+                _map.IsPaused = true;
                 pauseToolStripMenuItem.Text = "Play";
             }
             else
             {
-                _isPlaying = true;
-                pauseToolStripMenuItem.Text = "Resume";
+                _map.IsPaused = false;
+                pauseToolStripMenuItem.Text = "Pause";
             }
+        }
+
+        private void menuToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            if( _gameMenu.Visible == true )
+            {
+                _gameMenu.Hide();
+            }
+            else
+            {
+                
+                _gameMenu.Show();
+            }
+        }
+
+        private void ShowStatsInfo()
+        {
+            _labelAnimalsAlive.Text = _map.GetLivingAnimals.ToString() ;
+            _labelDeadAnimals.Text = _map.DeadAnimals.ToString();
+            _labelTimePlayed.Text = _countDown.Elapsed.ToString();
         }
     }
 }

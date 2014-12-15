@@ -55,6 +55,10 @@
     <Compile Include="Animals\Herbivorous.cs" />
     <Compile Include="Animals\Wild.cs" />
     <Compile Include="Enums\EAnimalTexture.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Gui\InGameMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Terrain\Box.cs" />
     <Compile Include="Enums\EBoxGround.cs" />
     <Compile Include="Vegetation\Bush.cs" />

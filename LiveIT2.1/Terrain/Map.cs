@@ -75,6 +75,11 @@ namespace LiveIT2._1.Terrain
         private bool _isRaining;
 
         /// <summary>
+        /// Is the game paused or not
+        /// </summary>
+        private bool _isPaused;
+
+        /// <summary>
         ///     The _show debug.
         /// </summary>
         private bool _showDebug;
@@ -137,6 +142,12 @@ namespace LiveIT2._1.Terrain
             {
                 this._animals = value;
             }
+        }
+
+        public bool IsPaused
+        {
+            get { return _isPaused; }
+            set { _isPaused = value; }
         }
 
         /// <summary>

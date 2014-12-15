@@ -65,13 +65,22 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._buttonFollowAnimal = new System.Windows.Forms.Button();
             this._exitButton = new System.Windows.Forms.Button();
             this.buttonMountain = new System.Windows.Forms.Button();
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this._playMedicButton = new System.Windows.Forms.Button();
-            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._gameMenu = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this._labelAnimalsAlive = new System.Windows.Forms.Label();
+            this._labelDeadAnimals = new System.Windows.Forms.Label();
+            this._labelTimePlayed = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            this._gameMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // _waterButton
@@ -232,7 +241,8 @@
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.muteToolStripMenuItem,
-            this.pauseToolStripMenuItem});
+            this.pauseToolStripMenuItem,
+            this.menuToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1020, 37);
@@ -341,7 +351,7 @@
             this.desertToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Desert;
             this.desertToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.desertToolStripMenuItem.Name = "desertToolStripMenuItem";
-            this.desertToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.desertToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
             this.desertToolStripMenuItem.Text = " ";
             this.desertToolStripMenuItem.Click += new System.EventHandler(this.desertToolStripMenuItem_Click);
             // 
@@ -349,7 +359,7 @@
             // 
             this.forestToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Forest;
             this.forestToolStripMenuItem.Name = "forestToolStripMenuItem";
-            this.forestToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.forestToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
             this.forestToolStripMenuItem.Text = " ";
             this.forestToolStripMenuItem.Click += new System.EventHandler(this.forestToolStripMenuItem_Click);
             // 
@@ -357,7 +367,7 @@
             // 
             this.grassToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Grass;
             this.grassToolStripMenuItem.Name = "grassToolStripMenuItem";
-            this.grassToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.grassToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
             this.grassToolStripMenuItem.Text = " ";
             this.grassToolStripMenuItem.Click += new System.EventHandler(this.grassToolStripMenuItem_Click);
             // 
@@ -365,7 +375,7 @@
             // 
             this.mountainToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Mountain;
             this.mountainToolStripMenuItem.Name = "mountainToolStripMenuItem";
-            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
             this.mountainToolStripMenuItem.Text = " ";
             this.mountainToolStripMenuItem.Click += new System.EventHandler(this.mountainToolStripMenuItem_Click);
             // 
@@ -373,7 +383,7 @@
             // 
             this.snowToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Snow;
             this.snowToolStripMenuItem.Name = "snowToolStripMenuItem";
-            this.snowToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.snowToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
             this.snowToolStripMenuItem.Text = " ";
             this.snowToolStripMenuItem.Click += new System.EventHandler(this.snowToolStripMenuItem_Click);
             // 
@@ -381,7 +391,7 @@
             // 
             this.waterToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Water;
             this.waterToolStripMenuItem.Name = "waterToolStripMenuItem";
-            this.waterToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.waterToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
             this.waterToolStripMenuItem.Text = " ";
             this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
             // 
@@ -471,6 +481,14 @@
             this.muteToolStripMenuItem.Text = "Mute";
             this.muteToolStripMenuItem.Click += new System.EventHandler(this.muteToolStripMenuItem_Click);
             // 
+            // pauseToolStripMenuItem
+            // 
+            this.pauseToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
+            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(93, 33);
+            this.pauseToolStripMenuItem.Text = "Pause";
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
+            // 
             // _buttonFollowAnimal
             // 
             this._buttonFollowAnimal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(108)))), ((int)(((byte)(179)))));
@@ -541,13 +559,82 @@
             this._playMedicButton.UseVisualStyleBackColor = false;
             this._playMedicButton.Click += new System.EventHandler(this._playMedicButton_Click);
             // 
-            // pauseToolStripMenuItem
+            // menuToolStripMenuItem
             // 
-            this.pauseToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
-            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(93, 33);
-            this.pauseToolStripMenuItem.Text = "Pause";
-            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(78, 33);
+            this.menuToolStripMenuItem.Text = "Stats";
+            this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
+            // 
+            // _gameMenu
+            // 
+            this._gameMenu.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this._gameMenu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this._gameMenu.Controls.Add(this._labelTimePlayed);
+            this._gameMenu.Controls.Add(this._labelDeadAnimals);
+            this._gameMenu.Controls.Add(this._labelAnimalsAlive);
+            this._gameMenu.Controls.Add(this.label3);
+            this._gameMenu.Controls.Add(this.label2);
+            this._gameMenu.Controls.Add(this.label1);
+            this._gameMenu.Location = new System.Drawing.Point(206, 143);
+            this._gameMenu.Name = "_gameMenu";
+            this._gameMenu.Size = new System.Drawing.Size(656, 382);
+            this._gameMenu.TabIndex = 22;
+            this._gameMenu.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Animals alive : ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(116, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Dead Animals :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 130);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Time played :";
+            // 
+            // _labelAnimalsAlive
+            // 
+            this._labelAnimalsAlive.AutoSize = true;
+            this._labelAnimalsAlive.Location = new System.Drawing.Point(121, 34);
+            this._labelAnimalsAlive.Name = "_labelAnimalsAlive";
+            this._labelAnimalsAlive.Size = new System.Drawing.Size(19, 20);
+            this._labelAnimalsAlive.TabIndex = 3;
+            this._labelAnimalsAlive.Text = "{}";
+            // 
+            // _labelDeadAnimals
+            // 
+            this._labelDeadAnimals.AutoSize = true;
+            this._labelDeadAnimals.Location = new System.Drawing.Point(125, 84);
+            this._labelDeadAnimals.Name = "_labelDeadAnimals";
+            this._labelDeadAnimals.Size = new System.Drawing.Size(19, 20);
+            this._labelDeadAnimals.TabIndex = 4;
+            this._labelDeadAnimals.Text = "{}";
+            // 
+            // _labelTimePlayed
+            // 
+            this._labelTimePlayed.AutoSize = true;
+            this._labelTimePlayed.Location = new System.Drawing.Point(121, 130);
+            this._labelTimePlayed.Name = "_labelTimePlayed";
+            this._labelTimePlayed.Size = new System.Drawing.Size(19, 20);
+            this._labelTimePlayed.TabIndex = 5;
+            this._labelTimePlayed.Text = "{}";
             // 
             // Form1
             // 
@@ -555,6 +642,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this._gameMenu);
             this.Controls.Add(this._playMedicButton);
             this.Controls.Add(this._buttonSpawnPlayer);
             this.Controls.Add(this.buttonMountain);
@@ -587,6 +675,8 @@
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this._gameMenu.ResumeLayout(false);
+            this._gameMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -637,6 +727,14 @@
         private System.Windows.Forms.ToolStripMenuItem waterToolStripMenuItem;
         private System.Windows.Forms.Button _playMedicButton;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.Panel _gameMenu;
+        private System.Windows.Forms.Label _labelTimePlayed;
+        private System.Windows.Forms.Label _labelDeadAnimals;
+        private System.Windows.Forms.Label _labelAnimalsAlive;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
 
     }
 }
