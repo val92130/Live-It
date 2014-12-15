@@ -143,6 +143,66 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Desert.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Forest.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Grass.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mountain.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Snow.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Water.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gazelle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tree1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bush1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rock2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

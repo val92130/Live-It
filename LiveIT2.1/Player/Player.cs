@@ -53,10 +53,6 @@ namespace LiveIT2._1.Player
         /// </summary>
         private Size _size;
 
-        /// <summary>
-        ///     The _tank.
-        /// </summary>
-        private Tank _tank;
 
         #endregion
 

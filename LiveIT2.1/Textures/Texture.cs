@@ -414,10 +414,6 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private int _countAnimal;
 
-        /// <summary>
-        ///     The _player tank texture.
-        /// </summary>
-        private Bitmap _playerTankTexture;
 
         /// <summary>
         ///     The _rain timer.

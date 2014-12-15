@@ -218,7 +218,7 @@ namespace LiveIT2._1.Animation
         #region Public Methods and Operators
 
         /// <summary>
-        ///     The car sounds.
+        ///     Manage the car sounds
         /// </summary>
         public void CarSounds()
         {
@@ -335,7 +335,7 @@ namespace LiveIT2._1.Animation
         }
 
         /// <summary>
-        ///     The play all sounds.
+        ///     Play all songs of the game
         /// </summary>
         public void PlayAllSounds()
         {
@@ -384,7 +384,7 @@ namespace LiveIT2._1.Animation
         }
 
         /// <summary>
-        ///     The player sounds.
+        ///     Manage player sounds
         /// </summary>
         public void PlayerSounds()
         {

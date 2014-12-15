@@ -323,7 +323,7 @@ namespace LiveIT2._1.Viewport
         }
 
         /// <summary>
-        ///     Gets a value indicating whether is follow mode.
+        ///     Gets a value indicating if the player is following an animal.
         /// </summary>
         public bool IsFollowMode
         {
@@ -525,40 +525,45 @@ namespace LiveIT2._1.Viewport
         /// </param>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public void CreateAnimal(EAnimalTexture eAnimalType)
+        public void CreateAnimal(EAnimalTexture eAnimalType, Point StartPosition)
         {
             Animal a;
             switch (eAnimalType.ToString())
             {
                 case "Dog":
-                    a = new Dog(this.map, this.animalSelectorCursor);
+                    a = new Dog( this.map, StartPosition );
                     break;
                 case "Cat":
-                    a = new Cat(this.map, this.animalSelectorCursor);
+                    a = new Cat(this.map, StartPosition);
                     break;
                 case "Lion":
-                    a = new Lion(this.map, this.animalSelectorCursor);
+                    a = new Lion(this.map, StartPosition);
                     break;
                 case "Rabbit":
-                    a = new Rabbit(this.map, this.animalSelectorCursor);
+                    a = new Rabbit(this.map, StartPosition);
                     break;
                 case "Elephant":
-                    a = new Elephant(this.map, this.animalSelectorCursor);
+                    a = new Elephant(this.map, StartPosition);
                     break;
                 case "Cow":
-                    a = new Cow(this.map, this.animalSelectorCursor);
+                    a = new Cow(this.map, StartPosition);
                     break;
                 case "Eagle":
-                    a = new Eagle(this.map, this.animalSelectorCursor);
+                    a = new Eagle(this.map, StartPosition);
                     break;
                 case "Gazelle":
-                    a = new Gazelle(this.map, this.animalSelectorCursor);
+                    a = new Gazelle(this.map, StartPosition);
                     break;
                 default:
                     throw new NotSupportedException("Unknown animal type");
             }
 
             this.map.Animals.Add(a);
+        }
+
+        public Point AnimalCursor
+        {
+            get { return animalSelectorCursor; }
         }
 
         /// <summary>

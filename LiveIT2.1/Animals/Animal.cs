@@ -30,47 +30,47 @@ namespace LiveIT2._1.Animals
         #region Fields
 
         /// <summary>
-        ///     The box list.
+        ///     Boxes that contains the animal
         /// </summary>
         internal List<Box> BoxList = new List<Box>();
 
         /// <summary>
-        ///     The _is dead.
+        ///     If the animal is dead
         /// </summary>
         internal bool _isDead;
 
         /// <summary>
-        ///     The _is drinking.
+        ///     If the animal is currently drinking
         /// </summary>
         internal bool _isDrinking;
 
         /// <summary>
-        ///     The _is eating.
+        ///     If the animal is currently eating
         /// </summary>
         internal bool _isEating;
 
         /// <summary>
-        ///     The _is in water.
+        ///     If the animal is in water
         /// </summary>
         internal bool _isInWater;
 
         /// <summary>
-        ///     The _walking.
+        ///     If the animal is currently walking
         /// </summary>
         internal bool _walking;
 
         /// <summary>
-        ///     The _map.
+        ///     Map attached to the animal
         /// </summary>
         protected readonly Map _map;
 
         /// <summary>
-        ///     The walkable boxes.
+        ///     The walkable boxes of the animal.
         /// </summary>
         private readonly List<Box> WalkableBoxes = new List<Box>();
 
         /// <summary>
-        ///     The _animals around.
+        ///     Animals contained in the field of view of this animal
         /// </summary>
         private readonly List<Animal> _animalsAround = new List<Animal>();
 
@@ -85,7 +85,7 @@ namespace LiveIT2._1.Animals
         private SizeF _direction;
 
         /// <summary>
-        ///     The _favorite environnment.
+        ///     The _favorite environnment of the animal.
         /// </summary>
         private EBoxGround _favoriteEnvironnment;
 
@@ -601,7 +601,7 @@ namespace LiveIT2._1.Animals
         /// The add to list.
         /// </summary>
         /// <param name="b">
-        /// The b.
+        /// The box to add in the list.
         /// </param>
         public void AddToList(Box b)
         {
@@ -612,7 +612,7 @@ namespace LiveIT2._1.Animals
         }
 
         /// <summary>
-        ///     The behavior.
+        ///     The behavior of the animal, add here the interactions with other animals.
         /// </summary>
         public virtual void Behavior()
         {
@@ -642,7 +642,7 @@ namespace LiveIT2._1.Animals
                             {
                                 this.Hunger += 30;
                                 this._animalsAround[i].Hunger += 30;
-                                this._map.ViewPort.CreateAnimal(this.Texture);
+                                this._map.ViewPort.CreateAnimal(this.Texture, this.Position);
                             }
                         }
                     }
@@ -728,7 +728,7 @@ namespace LiveIT2._1.Animals
         }
 
         /// <summary>
-        ///     The change position.
+        ///     Change the position of the animal to a random position
         /// </summary>
         public void ChangePosition()
         {
@@ -744,10 +744,10 @@ namespace LiveIT2._1.Animals
         }
 
         /// <summary>
-        /// The change position.
+        /// Change position to another point defined in the argument
         /// </summary>
         /// <param name="target">
-        /// The target.
+        /// The target location.
         /// </param>
         public void ChangePosition(Point target)
         {
@@ -773,7 +773,7 @@ namespace LiveIT2._1.Animals
         }
 
         /// <summary>
-        ///     The die.
+        ///     Make the animal die
         /// </summary>
         public void Die()
         {
@@ -804,7 +804,7 @@ namespace LiveIT2._1.Animals
         }
 
         /// <summary>
-        /// The draw.
+        /// Drawing method
         /// </summary>
         /// <param name="g">
         /// The g.

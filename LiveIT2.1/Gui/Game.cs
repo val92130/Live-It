@@ -585,7 +585,7 @@ namespace LiveIT2._1.Gui
 
             if (this._viewPort.IsAnimalSelected)
             {
-                this._viewPort.CreateAnimal(this.selectedEAnimal);
+                this._viewPort.CreateAnimal(this.selectedEAnimal, _viewPort.AnimalCursor);
             }
             else if (this._viewPort.IsChangeTextureSelected)
             {
@@ -727,7 +727,7 @@ namespace LiveIT2._1.Gui
                 this._playerPosition = this._map.ViewPort.Player.Position;
                 this._map.IsPlayer = false;
                 this._map.IsInCar = false;
-                this._buttonSpawnPlayer.Text = "Play";
+                this._buttonSpawnPlayer.Text = "Free Mode";
                 this._map.ViewPort.ViewPort = new Rectangle(this._map.ViewPort.ViewPort.Location, new Size(800, 800));
             }
         }
@@ -1199,6 +1199,7 @@ namespace LiveIT2._1.Gui
                 this.MoveRectangle(Direction.Right);
             }
 
+
             this.Draw();
             this.g.DrawImage(this._background, new Point(0, 0));
             this._soundEnvironment.LoadBoxes(this._viewPort.BoxList);
@@ -1277,5 +1278,40 @@ namespace LiveIT2._1.Gui
         }
 
         #endregion
+
+        private void desertToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Desert;
+        }
+
+        private void forestToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Forest;
+        }
+
+        private void grassToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Grass;
+        }
+
+        private void mountainToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Mountain;
+        }
+
+        private void snowToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Snow;
+        }
+
+        private void waterToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Water;
+        }
+
+        private void texturesToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _viewPort.IsChangeTextureSelected = true;
+        }
     }
 }

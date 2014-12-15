@@ -48,10 +48,20 @@
             this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mountainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.snowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.waterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sportCarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,11 +69,7 @@
             this._exitButton = new System.Windows.Forms.Button();
             this.buttonMountain = new System.Windows.Forms.Button();
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
-            this.carButton = new System.Windows.Forms.Button();
-            this.tank_button = new System.Windows.Forms.Button();
-            this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sportCarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._playMedicButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,13 +78,14 @@
             this._waterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this._waterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._waterButton.ForeColor = System.Drawing.Color.Transparent;
-            this._waterButton.Location = new System.Drawing.Point(10, 289);
+            this._waterButton.Location = new System.Drawing.Point(10, 381);
             this._waterButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._waterButton.Name = "_waterButton";
             this._waterButton.Size = new System.Drawing.Size(111, 30);
             this._waterButton.TabIndex = 0;
             this._waterButton.Text = "Water";
             this._waterButton.UseVisualStyleBackColor = false;
+            this._waterButton.Visible = false;
             this._waterButton.Click += new System.EventHandler(this._waterButton_Click);
             // 
             // _dirtButton
@@ -86,13 +93,14 @@
             this._dirtButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
             this._dirtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._dirtButton.ForeColor = System.Drawing.Color.Transparent;
-            this._dirtButton.Location = new System.Drawing.Point(10, 327);
+            this._dirtButton.Location = new System.Drawing.Point(10, 419);
             this._dirtButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._dirtButton.Name = "_dirtButton";
             this._dirtButton.Size = new System.Drawing.Size(111, 30);
             this._dirtButton.TabIndex = 1;
             this._dirtButton.Text = "Forest";
             this._dirtButton.UseVisualStyleBackColor = false;
+            this._dirtButton.Visible = false;
             this._dirtButton.Click += new System.EventHandler(this._dirtButton_Click);
             // 
             // _snowButton
@@ -100,13 +108,14 @@
             this._snowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this._snowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._snowButton.ForeColor = System.Drawing.Color.Transparent;
-            this._snowButton.Location = new System.Drawing.Point(10, 365);
+            this._snowButton.Location = new System.Drawing.Point(10, 457);
             this._snowButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._snowButton.Name = "_snowButton";
             this._snowButton.Size = new System.Drawing.Size(111, 30);
             this._snowButton.TabIndex = 2;
             this._snowButton.Text = "Snow";
             this._snowButton.UseVisualStyleBackColor = false;
+            this._snowButton.Visible = false;
             this._snowButton.Click += new System.EventHandler(this._snowButton_Click);
             // 
             // _desertButton
@@ -114,13 +123,14 @@
             this._desertButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
             this._desertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._desertButton.ForeColor = System.Drawing.Color.Transparent;
-            this._desertButton.Location = new System.Drawing.Point(12, 403);
+            this._desertButton.Location = new System.Drawing.Point(12, 495);
             this._desertButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._desertButton.Name = "_desertButton";
             this._desertButton.Size = new System.Drawing.Size(111, 30);
             this._desertButton.TabIndex = 3;
             this._desertButton.Text = "Desert";
             this._desertButton.UseVisualStyleBackColor = false;
+            this._desertButton.Visible = false;
             this._desertButton.Click += new System.EventHandler(this._desertButton_Click);
             // 
             // _grassButton
@@ -128,13 +138,14 @@
             this._grassButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
             this._grassButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._grassButton.ForeColor = System.Drawing.Color.Transparent;
-            this._grassButton.Location = new System.Drawing.Point(12, 441);
+            this._grassButton.Location = new System.Drawing.Point(12, 533);
             this._grassButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._grassButton.Name = "_grassButton";
             this._grassButton.Size = new System.Drawing.Size(111, 30);
             this._grassButton.TabIndex = 4;
             this._grassButton.Text = "Grass";
             this._grassButton.UseVisualStyleBackColor = false;
+            this._grassButton.Visible = false;
             this._grassButton.Click += new System.EventHandler(this._grassButton_Click);
             // 
             // _changeTextureButton
@@ -142,13 +153,14 @@
             this._changeTextureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this._changeTextureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._changeTextureButton.ForeColor = System.Drawing.Color.Transparent;
-            this._changeTextureButton.Location = new System.Drawing.Point(10, 190);
+            this._changeTextureButton.Location = new System.Drawing.Point(10, 343);
             this._changeTextureButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._changeTextureButton.Name = "_changeTextureButton";
             this._changeTextureButton.Size = new System.Drawing.Size(205, 30);
             this._changeTextureButton.TabIndex = 7;
             this._changeTextureButton.Text = "Change Texture";
             this._changeTextureButton.UseVisualStyleBackColor = false;
+            this._changeTextureButton.Visible = false;
             this._changeTextureButton.Click += new System.EventHandler(this._changeTextureButton_Click);
             // 
             // _fillTextureButton
@@ -156,7 +168,7 @@
             this._fillTextureButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this._fillTextureButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._fillTextureButton.ForeColor = System.Drawing.Color.Transparent;
-            this._fillTextureButton.Location = new System.Drawing.Point(10, 236);
+            this._fillTextureButton.Location = new System.Drawing.Point(10, 143);
             this._fillTextureButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._fillTextureButton.Name = "_fillTextureButton";
             this._fillTextureButton.Size = new System.Drawing.Size(205, 30);
@@ -185,7 +197,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(252, 94);
+            this.button1.Location = new System.Drawing.Point(246, 94);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 29);
             this.button1.TabIndex = 10;
@@ -213,6 +225,7 @@
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.animalsToolStripMenuItem,
+            this.texturesToolStripMenuItem,
             this.vegetationToolStripMenuItem,
             this.vehiclesToolStripMenuItem,
             this.saveToolStripMenuItem,
@@ -226,6 +239,7 @@
             // 
             // animalsToolStripMenuItem
             // 
+            this.animalsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.animalsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.catToolStripMenuItem,
             this.dogToolStripMenuItem,
@@ -236,7 +250,6 @@
             this.eagleToolStripMenuItem,
             this.gazelleToolStripMenuItem});
             this.animalsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
-            this.animalsToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.animalsToolStripMenuItem.Name = "animalsToolStripMenuItem";
             this.animalsToolStripMenuItem.Size = new System.Drawing.Size(110, 33);
             this.animalsToolStripMenuItem.Text = "Animals";
@@ -244,6 +257,7 @@
             // 
             // catToolStripMenuItem
             // 
+            this.catToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Cat;
             this.catToolStripMenuItem.Name = "catToolStripMenuItem";
             this.catToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.catToolStripMenuItem.Text = "Cat";
@@ -251,6 +265,7 @@
             // 
             // dogToolStripMenuItem
             // 
+            this.dogToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Dog;
             this.dogToolStripMenuItem.Name = "dogToolStripMenuItem";
             this.dogToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.dogToolStripMenuItem.Text = "Dog";
@@ -258,6 +273,7 @@
             // 
             // rabbitToolStripMenuItem
             // 
+            this.rabbitToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a;
             this.rabbitToolStripMenuItem.Name = "rabbitToolStripMenuItem";
             this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.rabbitToolStripMenuItem.Text = "Rabbit";
@@ -265,6 +281,7 @@
             // 
             // lionToolStripMenuItem
             // 
+            this.lionToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.c;
             this.lionToolStripMenuItem.Name = "lionToolStripMenuItem";
             this.lionToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.lionToolStripMenuItem.Text = "Lion";
@@ -272,6 +289,7 @@
             // 
             // elephantToolStripMenuItem
             // 
+            this.elephantToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.b;
             this.elephantToolStripMenuItem.Name = "elephantToolStripMenuItem";
             this.elephantToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.elephantToolStripMenuItem.Text = "Elephant";
@@ -279,6 +297,7 @@
             // 
             // cowToolStripMenuItem
             // 
+            this.cowToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a1;
             this.cowToolStripMenuItem.Name = "cowToolStripMenuItem";
             this.cowToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.cowToolStripMenuItem.Text = "Cow";
@@ -286,6 +305,7 @@
             // 
             // eagleToolStripMenuItem
             // 
+            this.eagleToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.c1;
             this.eagleToolStripMenuItem.Name = "eagleToolStripMenuItem";
             this.eagleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.eagleToolStripMenuItem.Text = "Eagle";
@@ -293,10 +313,75 @@
             // 
             // gazelleToolStripMenuItem
             // 
+            this.gazelleToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a2;
             this.gazelleToolStripMenuItem.Name = "gazelleToolStripMenuItem";
             this.gazelleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
             this.gazelleToolStripMenuItem.Text = "Gazelle";
             this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
+            // 
+            // texturesToolStripMenuItem
+            // 
+            this.texturesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.desertToolStripMenuItem,
+            this.forestToolStripMenuItem,
+            this.grassToolStripMenuItem,
+            this.mountainToolStripMenuItem,
+            this.snowToolStripMenuItem,
+            this.waterToolStripMenuItem});
+            this.texturesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
+            this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
+            this.texturesToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.texturesToolStripMenuItem.Text = "Textures";
+            this.texturesToolStripMenuItem.Click += new System.EventHandler(this.texturesToolStripMenuItem_Click);
+            // 
+            // desertToolStripMenuItem
+            // 
+            this.desertToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Desert;
+            this.desertToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.desertToolStripMenuItem.Name = "desertToolStripMenuItem";
+            this.desertToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.desertToolStripMenuItem.Text = " ";
+            this.desertToolStripMenuItem.Click += new System.EventHandler(this.desertToolStripMenuItem_Click);
+            // 
+            // forestToolStripMenuItem
+            // 
+            this.forestToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Forest;
+            this.forestToolStripMenuItem.Name = "forestToolStripMenuItem";
+            this.forestToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.forestToolStripMenuItem.Text = " ";
+            this.forestToolStripMenuItem.Click += new System.EventHandler(this.forestToolStripMenuItem_Click);
+            // 
+            // grassToolStripMenuItem
+            // 
+            this.grassToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Grass;
+            this.grassToolStripMenuItem.Name = "grassToolStripMenuItem";
+            this.grassToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.grassToolStripMenuItem.Text = " ";
+            this.grassToolStripMenuItem.Click += new System.EventHandler(this.grassToolStripMenuItem_Click);
+            // 
+            // mountainToolStripMenuItem
+            // 
+            this.mountainToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Mountain;
+            this.mountainToolStripMenuItem.Name = "mountainToolStripMenuItem";
+            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.mountainToolStripMenuItem.Text = " ";
+            this.mountainToolStripMenuItem.Click += new System.EventHandler(this.mountainToolStripMenuItem_Click);
+            // 
+            // snowToolStripMenuItem
+            // 
+            this.snowToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Snow;
+            this.snowToolStripMenuItem.Name = "snowToolStripMenuItem";
+            this.snowToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.snowToolStripMenuItem.Text = " ";
+            this.snowToolStripMenuItem.Click += new System.EventHandler(this.snowToolStripMenuItem_Click);
+            // 
+            // waterToolStripMenuItem
+            // 
+            this.waterToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Water;
+            this.waterToolStripMenuItem.Name = "waterToolStripMenuItem";
+            this.waterToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.waterToolStripMenuItem.Text = " ";
+            this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
             // 
             // vegetationToolStripMenuItem
             // 
@@ -312,24 +397,53 @@
             // 
             // treeToolStripMenuItem
             // 
+            this.treeToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Tree1;
             this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
             this.treeToolStripMenuItem.Text = "Tree";
             this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
             // 
             // bushToolStripMenuItem
             // 
+            this.bushToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Bush1;
             this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
-            this.bushToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
             this.bushToolStripMenuItem.Text = "Bush";
             this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
             // 
             // rockToolStripMenuItem
             // 
+            this.rockToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Rock2;
             this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
             this.rockToolStripMenuItem.Text = "Rock";
             this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
+            // 
+            // vehiclesToolStripMenuItem
+            // 
+            this.vehiclesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sportCarToolStripMenuItem,
+            this.tankToolStripMenuItem});
+            this.vehiclesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
+            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
+            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(117, 33);
+            this.vehiclesToolStripMenuItem.Text = "Vehicles";
+            // 
+            // sportCarToolStripMenuItem
+            // 
+            this.sportCarToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a3;
+            this.sportCarToolStripMenuItem.Name = "sportCarToolStripMenuItem";
+            this.sportCarToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.sportCarToolStripMenuItem.Text = "Sport Car";
+            this.sportCarToolStripMenuItem.Click += new System.EventHandler(this.sportCarToolStripMenuItem_Click);
+            // 
+            // tankToolStripMenuItem
+            // 
+            this.tankToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a4;
+            this.tankToolStripMenuItem.Name = "tankToolStripMenuItem";
+            this.tankToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.tankToolStripMenuItem.Text = "Tank";
+            this.tankToolStripMenuItem.Click += new System.EventHandler(this.tankToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -387,13 +501,14 @@
             this.buttonMountain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonMountain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMountain.ForeColor = System.Drawing.Color.Transparent;
-            this.buttonMountain.Location = new System.Drawing.Point(12, 479);
+            this.buttonMountain.Location = new System.Drawing.Point(12, 571);
             this.buttonMountain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonMountain.Name = "buttonMountain";
             this.buttonMountain.Size = new System.Drawing.Size(111, 30);
             this.buttonMountain.TabIndex = 19;
             this.buttonMountain.Text = "Mountain";
             this.buttonMountain.UseVisualStyleBackColor = false;
+            this.buttonMountain.Visible = false;
             this.buttonMountain.Click += new System.EventHandler(this.buttonMountain_Click);
             // 
             // _buttonSpawnPlayer
@@ -401,66 +516,27 @@
             this._buttonSpawnPlayer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this._buttonSpawnPlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._buttonSpawnPlayer.ForeColor = System.Drawing.Color.Transparent;
-            this._buttonSpawnPlayer.Location = new System.Drawing.Point(10, 143);
+            this._buttonSpawnPlayer.Location = new System.Drawing.Point(10, 190);
             this._buttonSpawnPlayer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._buttonSpawnPlayer.Name = "_buttonSpawnPlayer";
             this._buttonSpawnPlayer.Size = new System.Drawing.Size(205, 30);
             this._buttonSpawnPlayer.TabIndex = 20;
-            this._buttonSpawnPlayer.Text = "Play";
+            this._buttonSpawnPlayer.Text = "Free Mode";
             this._buttonSpawnPlayer.UseVisualStyleBackColor = false;
             this._buttonSpawnPlayer.Click += new System.EventHandler(this._buttonSpawnPlayer_Click);
             // 
-            // carButton
+            // _playMedicButton
             // 
-            this.carButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.carButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.carButton.ForeColor = System.Drawing.Color.Transparent;
-            this.carButton.Location = new System.Drawing.Point(12, 57);
-            this.carButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.carButton.Name = "carButton";
-            this.carButton.Size = new System.Drawing.Size(205, 30);
-            this.carButton.TabIndex = 21;
-            this.carButton.Text = "Car";
-            this.carButton.UseVisualStyleBackColor = false;
-            this.carButton.Click += new System.EventHandler(this.carButton_Click);
-            // 
-            // tank_button
-            // 
-            this.tank_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.tank_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tank_button.ForeColor = System.Drawing.Color.Transparent;
-            this.tank_button.Location = new System.Drawing.Point(223, 57);
-            this.tank_button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tank_button.Name = "tank_button";
-            this.tank_button.Size = new System.Drawing.Size(205, 30);
-            this.tank_button.TabIndex = 22;
-            this.tank_button.Text = "Tank";
-            this.tank_button.UseVisualStyleBackColor = false;
-            this.tank_button.Click += new System.EventHandler(this.tank_button_Click);
-            // 
-            // vehiclesToolStripMenuItem
-            // 
-            this.vehiclesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sportCarToolStripMenuItem,
-            this.tankToolStripMenuItem});
-            this.vehiclesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
-            this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
-            this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(117, 33);
-            this.vehiclesToolStripMenuItem.Text = "Vehicles";
-            // 
-            // sportCarToolStripMenuItem
-            // 
-            this.sportCarToolStripMenuItem.Name = "sportCarToolStripMenuItem";
-            this.sportCarToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
-            this.sportCarToolStripMenuItem.Text = "Sport Car";
-            this.sportCarToolStripMenuItem.Click += new System.EventHandler(this.sportCarToolStripMenuItem_Click);
-            // 
-            // tankToolStripMenuItem
-            // 
-            this.tankToolStripMenuItem.Name = "tankToolStripMenuItem";
-            this.tankToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
-            this.tankToolStripMenuItem.Text = "Tank";
-            this.tankToolStripMenuItem.Click += new System.EventHandler(this.tankToolStripMenuItem_Click);
+            this._playMedicButton.BackColor = System.Drawing.Color.DarkRed;
+            this._playMedicButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._playMedicButton.ForeColor = System.Drawing.Color.Transparent;
+            this._playMedicButton.Location = new System.Drawing.Point(10, 240);
+            this._playMedicButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._playMedicButton.Name = "_playMedicButton";
+            this._playMedicButton.Size = new System.Drawing.Size(205, 30);
+            this._playMedicButton.TabIndex = 21;
+            this._playMedicButton.Text = "Play Medic";
+            this._playMedicButton.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -468,8 +544,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
-            this.Controls.Add(this.tank_button);
-            this.Controls.Add(this.carButton);
+            this.Controls.Add(this._playMedicButton);
             this.Controls.Add(this._buttonSpawnPlayer);
             this.Controls.Add(this.buttonMountain);
             this.Controls.Add(this._exitButton);
@@ -539,11 +614,17 @@
         private System.Windows.Forms.ToolStripMenuItem bushToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rockToolStripMenuItem;
         private System.Windows.Forms.Button _buttonSpawnPlayer;
-        private System.Windows.Forms.Button carButton;
-        private System.Windows.Forms.Button tank_button;
         private System.Windows.Forms.ToolStripMenuItem vehiclesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sportCarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desertToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mountainToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem snowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem waterToolStripMenuItem;
+        private System.Windows.Forms.Button _playMedicButton;
 
     }
 }
