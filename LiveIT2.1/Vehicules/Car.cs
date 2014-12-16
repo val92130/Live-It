@@ -29,6 +29,10 @@ namespace LiveIT2._1.Vehicules
         /// </summary>
         private readonly Map _map;
 
+        private int _acceleration;
+
+        private int _maxSpeed;
+
         /// <summary>
         /// The box list.
         /// </summary>
@@ -89,7 +93,9 @@ namespace LiveIT2._1.Vehicules
             var randomRadio = (ERadioSongs)values.GetValue(random.Next(values.Length));
             this.ERadioSong = randomRadio;
             this.BoxList = new List<Box>();
-            this.Speed = 200;
+            this.Speed = 20;
+            this.MaxSpeed = 150;
+            this.Acceleration = 20;
         }
 
         #endregion
@@ -120,6 +126,40 @@ namespace LiveIT2._1.Vehicules
             internal set
             {
                 this._direction = value;
+            }
+        }
+
+        public int MaxSpeed
+        {
+            get { return _maxSpeed; }
+            set
+            {
+                if( value < 0 )
+                {
+                    _maxSpeed = 0;
+                }
+                else
+                {
+                    _maxSpeed = value;
+                }
+
+                
+            }
+        }
+
+        public int Acceleration
+        {
+            get { return _acceleration; }
+            set
+            {
+                if( value < 0 )
+                {
+                    _acceleration = 0;
+                }
+                else
+                {
+                    _acceleration = value;
+                }
             }
         }
 

@@ -46,6 +46,16 @@ namespace LiveIT2._1.Viewport
             }
         }
 
+        public int MoveXLerp( int goalX, int currentX, int delta )
+        {
+            int diff = goalX - currentX;
+            if( diff > delta )
+                return currentX + delta;
+            if( diff < delta )
+                return currentX - delta;
+            return goalX;
+        }
+
         /// <summary>
         /// The move x.
         /// </summary>
@@ -65,13 +75,13 @@ namespace LiveIT2._1.Viewport
                     if (centimeters <= 0)
                     {
                         this.player.EMovingDirection = EMovingDirection.Left;
+                        this.player.Position = new Point( this.player.Position.X - player.Speed, this.player.Position.Y );
                     }
                     else
                     {
                         this.player.EMovingDirection = EMovingDirection.Right;
+                        this.player.Position = new Point( this.player.Position.X + player.Speed, this.player.Position.Y );
                     }
-
-                    this.player.Position = new Point(this.player.Position.X + (centimeters / 2), this.player.Position.Y);
                     this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
                     this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
                     this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2)
@@ -82,15 +92,18 @@ namespace LiveIT2._1.Viewport
                     if (centimeters > 0)
                     {
                         this.player.Car.EMovingDirection = EMovingDirection.Right;
+                        this.player.Car.Position = new Point(
+                        this.player.Car.Position.X + this.player.Car.Speed,
+                        this.player.Car.Position.Y );
                     }
                     else
                     {
                         this.player.Car.EMovingDirection = EMovingDirection.Left;
+                        this.player.Car.Position = new Point(
+                        this.player.Car.Position.X - this.player.Car.Speed,
+                        this.player.Car.Position.Y );
                     }
 
-                    this.player.Car.Position = new Point(
-                        this.player.Car.Position.X + (centimeters * 2),
-                        this.player.Car.Position.Y);
                     this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
                     this.viewPort.X = this.player.Car.Area.X - (this.viewPort.Size.Width / 2)
                                       + (this.player.Car.Area.Width / 2);
@@ -99,6 +112,8 @@ namespace LiveIT2._1.Viewport
                 }
             }
         }
+
+
 
         /// <summary>
         /// The move y.
@@ -117,13 +132,14 @@ namespace LiveIT2._1.Viewport
                 if (centimeters > 0)
                 {
                     this.player.EMovingDirection = EMovingDirection.Down;
+                    this.player.Position = new Point( this.player.Position.X, this.player.Position.Y + this.player.Speed );
                 }
                 else
                 {
                     this.player.EMovingDirection = EMovingDirection.Up;
+                    this.player.Position = new Point( this.player.Position.X, this.player.Position.Y - this.player.Speed );
                 }
-
-                this.player.Position = new Point(this.player.Position.X, this.player.Position.Y + (centimeters / 2));
+                
                 this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
                 this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
                 this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2) + (this.player.Area.Height / 2);
@@ -133,15 +149,18 @@ namespace LiveIT2._1.Viewport
                 if (centimeters > 0)
                 {
                     this.player.Car.EMovingDirection = EMovingDirection.Down;
+                    this.player.Car.Position = new Point(
+                    this.player.Car.Position.X,
+                    this.player.Car.Position.Y + this.Player.Car.Speed );
                 }
                 else
                 {
                     this.player.Car.EMovingDirection = EMovingDirection.Up;
+                    this.player.Car.Position = new Point(
+                    this.player.Car.Position.X,
+                    this.player.Car.Position.Y - this.Player.Car.Speed );
                 }
 
-                this.player.Car.Position = new Point(
-                    this.player.Car.Position.X,
-                    this.player.Car.Position.Y + (centimeters * 2));
                 this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
                 this.viewPort.X = this.player.Car.Area.X - (this.viewPort.Size.Width / 2)
                                    + (this.player.Car.Area.Width / 2);

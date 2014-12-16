@@ -10,19 +10,20 @@
 namespace LiveIT2._1.Gui
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
-    using System.Linq;
-    using System.Threading;
-    using System.Windows.Forms;
-    using LiveIT2._1.Animals;
-    using LiveIT2._1.Animation;
-    using LiveIT2._1.Enums;
-    using LiveIT2._1.Terrain;
-    using LiveIT2._1.Viewport;
-    using Timer = System.Windows.Forms.Timer;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using LiveIT2._1.Animals;
+using LiveIT2._1.Animation;
+using LiveIT2._1.Enums;
+using LiveIT2._1.Terrain;
+using LiveIT2._1.Utils;
+using LiveIT2._1.Viewport;
+using Timer = System.Windows.Forms.Timer;
 
     /// <summary>
     /// The form 1.
@@ -50,6 +51,8 @@ namespace LiveIT2._1.Gui
         /// The _box width.
         /// </summary>
         private int _boxWidth;
+
+        private GameTime _gameTime;
 
         /// <summary>
         /// Define if the game is playing or not
@@ -280,7 +283,7 @@ namespace LiveIT2._1.Gui
             {
                 if (d == Direction.Down)
                 {
-                    this._viewPort.MoveY(this._map.ViewPort.Player.Speed);
+                    this._viewPort.MoveY(this._map.ViewPort.Player.Speed + 1);
                 }
 
                 if (d == Direction.Up)
@@ -290,13 +293,19 @@ namespace LiveIT2._1.Gui
 
                 if (d == Direction.Right)
                 {
-                    this._viewPort.MoveX(this._map.ViewPort.Player.Speed);
+                    
+                    this._viewPort.MoveX(this._map.ViewPort.Player.Speed + 1);
                 }
 
                 if (d == Direction.Left)
                 {
                     this._viewPort.MoveX(-this._map.ViewPort.Player.Speed);
                 }
+                if( _map.IsInCar )
+                {
+                    _viewPort.Player.Car.Speed = Lerp( _viewPort.Player.Car.MaxSpeed, _viewPort.Player.Car.Speed, _viewPort.Player.Car.Acceleration );
+                }
+                _viewPort.Player.Speed = Lerp( _viewPort.Player.MaxSpeed, _viewPort.Player.Speed, _viewPort.Player.Acceleration );
             }
             else
             {
@@ -338,6 +347,21 @@ namespace LiveIT2._1.Gui
         private void AnimalButton_Click(object sender, EventArgs e)
         {
             this._viewPort.IsAnimalSelected = true;
+        }
+
+        public int Lerp( int flGoal, int flCurrent, int dt )
+        {
+            int flDifference = flGoal - flCurrent;
+
+            if( flDifference > dt )
+            {
+                return flCurrent + dt;
+            }
+            if( flDifference < -dt )
+            {
+                return flCurrent - dt;
+            }
+            return flGoal;
         }
 
         /// <summary>
@@ -520,6 +544,12 @@ namespace LiveIT2._1.Gui
             {
                 this._viewPort.Shoot = false;
             }
+
+            //if( e.KeyCode != Keys.Z && e.KeyCode != Keys.S && e.KeyCode != Keys.Q && e.KeyCode != Keys.D )
+            //{
+            //    _viewPort.Player.Speed = 0;
+            //}
+            
         }
 
         /// <summary>
@@ -533,6 +563,7 @@ namespace LiveIT2._1.Gui
         /// </param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            _gameTime = new GameTime();
             _isPlaying = true;
             this.selectedEAnimal = EAnimalTexture.Rabbit;
             this._fpsCount = 0;
@@ -1187,7 +1218,7 @@ namespace LiveIT2._1.Gui
         }
 
         /// <summary>
-        /// The t_ tick.
+        /// Update and draw method, add game logic here
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -1197,7 +1228,7 @@ namespace LiveIT2._1.Gui
         /// </param>
         private void t_Tick(object sender, EventArgs e)
         {
-
+            _gameTime.Update();
 
             if( !_map.IsPaused )
             {
@@ -1220,6 +1251,27 @@ namespace LiveIT2._1.Gui
                 {
                     this.MoveRectangle( Direction.Right );
                 }
+
+                if( _map.IsPlayer )
+                {
+                    if( _viewPort.Player != null )
+                    {
+                        if( !up && !down && !left && !right )
+                        {
+                            if( _map.IsInCar )
+                            {
+                                _viewPort.Player.Car.Speed = 0;
+                            }
+                            _viewPort.Player.Speed = 0;
+                        }
+                        else
+                        {
+                            _viewPort.Player.IsMoving = true;
+                        }
+                    }
+                   
+                }
+
 
                 this.Draw();
                 this.g.DrawImage( this._background, new Point( 0, 0 ) );

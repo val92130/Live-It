@@ -54,6 +54,7 @@ namespace LiveIT2._1.Player
         ///     The _size.
         /// </summary>
         private Size _size;
+        private  int _acceleration;
 
 
         #endregion
@@ -75,7 +76,9 @@ namespace LiveIT2._1.Player
             this._position = startPosition;
             this._size = new Size(100, 210);
             this.Texture = EPlayerTexture.MainPlayer;
-            this.Speed = 50;
+            this.Speed = 0;
+            MaxSpeed = 30;
+            this.Acceleration = 10;
         }
 
         #endregion
@@ -90,6 +93,25 @@ namespace LiveIT2._1.Player
             get
             {
                 return new Rectangle(this._position, this._size);
+            }
+        }
+
+        public int Acceleration
+        {
+            get
+            {
+                return _acceleration;
+            }
+            set
+            {
+                if( value < 1 )
+                {
+                    _acceleration = 1;
+                }
+                else
+                {
+                    _acceleration = value;
+                }
             }
         }
 
@@ -210,6 +232,9 @@ namespace LiveIT2._1.Player
         ///     Gets or sets the speed.
         /// </summary>
         public int Speed { get; set; }
+
+
+        public int MaxSpeed { get; set; }
 
         /// <summary>
         ///     Gets the texture.

@@ -1276,7 +1276,7 @@ namespace LiveIT2._1.Textures
                         case EMovingDirection.Idle:
                             return this._texturePlayerIdle;
                         default:
-                            return this._texturePlayerIdle;
+                            throw new ArgumentException( "Not handled" );
                     }
 
                 default:
