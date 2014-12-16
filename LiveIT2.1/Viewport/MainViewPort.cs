@@ -31,6 +31,8 @@ namespace LiveIT2._1.Viewport
     {
         #region Fields
 
+        private int _cameraSmoothness;
+
         /// <summary>
         ///     The _car list.
         /// </summary>
@@ -208,6 +210,7 @@ namespace LiveIT2._1.Viewport
             this.screenBottom = new Rectangle(this.screen.Width / 2 - 400, this.screen.Bottom - 100, 800, 150);
             this.screenLeft = new Rectangle(0, this.screen.Height / 2 - 400, 10, 800);
             this.screenRight = new Rectangle(this.screen.Right - 10, this.screen.Height / 2 - 400, 10, 800);
+            _cameraSmoothness = 50;
 
             // this._car = new Car(this._map, new Point(600, 600));
             // this._tank = new Tank(this._map, new Point(700, 700));
@@ -229,6 +232,22 @@ namespace LiveIT2._1.Viewport
             set
             {
                 boxList = value;
+            }
+        }
+
+        public int CameraSmoothness
+        {
+            get { return _cameraSmoothness; }
+            set
+            {
+                if (value <= 0)
+                {
+                    _cameraSmoothness = 1;
+                }
+                else
+                {
+                    _cameraSmoothness = value;
+                }
             }
         }
 
@@ -740,11 +759,11 @@ namespace LiveIT2._1.Viewport
         /// </param>
         private void AdjustViewPort(Animal a)
         {
-            this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
-            this.viewPort.X = this.followedAnimal.Area.X - (this.viewPort.Size.Width / 2)
-                               + (this.followedAnimal.Area.Width / 2);
-            this.viewPort.Y = this.followedAnimal.Area.Y - (this.viewPort.Size.Height / 2)
-                               + (this.followedAnimal.Area.Height / 2);
+            this.viewPort.Size = new Size(Lerp(this.screen.Width * 2, viewPort.Size.Width, this.CameraSmoothness), Lerp(this.screen.Height * 2, viewPort.Size.Height, this.CameraSmoothness));
+            this.viewPort.X = Lerp(this.followedAnimal.Area.X - (this.viewPort.Size.Width / 2)
+                               + (this.followedAnimal.Area.Width / 2), this.viewPort.X, this.CameraSmoothness);
+            this.viewPort.Y = Lerp(this.followedAnimal.Area.Y - (this.viewPort.Size.Height / 2)
+                               + (this.followedAnimal.Area.Height / 2), this.viewPort.Y, this.CameraSmoothness);
 
             if (this.viewPort.Left < 0)
             {
@@ -811,7 +830,7 @@ namespace LiveIT2._1.Viewport
                     this.isFollowingAnAnimal = false;
                 }
 
-                if (this.followAnimal && this.map.ShowDebug)
+                if (this.followAnimal)
                 {
                     g.DrawRectangle(
                         Pens.Red, 
@@ -984,5 +1003,23 @@ namespace LiveIT2._1.Viewport
         }
 
         #endregion
+        public int Lerp(int flGoal, int flCurrent, int dt)
+        {
+            int flDifference = flGoal - flCurrent;
+
+            if (flDifference > dt)
+            {
+                return flCurrent + dt;
+            }
+            if (flDifference < -dt)
+            {
+                return flCurrent - dt;
+            }
+            return flGoal;
+        }
+
+
     }
+
+
 }

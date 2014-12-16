@@ -179,7 +179,8 @@ namespace LiveIT2._1.Viewport
         {
             if (!this.map.IsPlayer)
             {
-                this.viewPort.Offset(delta);
+                this.viewPort.Location = new Point(Lerp(viewPort.Location.X + delta.X, viewPort.Location.X, this.CameraSmoothness), Lerp(viewPort.Location.Y + delta.Y,viewPort.Location.Y, this.CameraSmoothness) );
+                //this.viewPort.Offset(delta);
                 if (this.viewPort.X < 0)
                 {
                     this.viewPort.X = 0;
@@ -213,7 +214,7 @@ namespace LiveIT2._1.Viewport
             {
                 this.viewPort.Width += meters;
                 this.viewPort.Height += meters;
-                if (this.viewPort.Width < MinimalWidthInCentimeter && this.viewPort.Height < MinimalWidthInCentimeter)
+                if (this.viewPort.Width < MinimalWidthInCentimeter || this.viewPort.Height < MinimalWidthInCentimeter)
                 {
                     this.viewPort.Width = MinimalWidthInCentimeter;
                     this.viewPort.Height = MinimalWidthInCentimeter;

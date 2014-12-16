@@ -335,6 +335,164 @@ using Timer = System.Windows.Forms.Timer;
 
         #region Methods
 
+
+        /// <summary>
+        /// The form 1_ load.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            _gameTime = new GameTime();
+            _isPlaying = true;
+            this.selectedEAnimal = EAnimalTexture.Rabbit;
+            this._fpsCount = 0;
+            this.DoubleBuffered = true;
+            this.button1.Text = "Hide Debug";
+            this._selectedTexture = EBoxGround.Grass;
+            this._background = new Bitmap(this.Width, this.Height);
+
+            this._map = new Map(50, 2);
+
+            this._boxWidth = this._map.BoxSize;
+
+            this._viewPort = new MainViewPort(this._map);
+            this._map.ShowDebug = true;
+            this._mouseRect = new Rectangle(0, 0, 100, 100);
+
+            this.g = this.CreateGraphics();
+            this._screenGraphic = Graphics.FromImage(this._background);
+            this._screenGraphic.CompositingQuality = CompositingQuality.HighSpeed;
+            this._screenGraphic.InterpolationMode = InterpolationMode.Low;
+
+            this._selectionCursorWidth = new Size(this._boxWidth, this._boxWidth);
+            this.MouseWheel += this.T_mouseWheel;
+
+            this.t = new Timer();
+            this.fpst = new Timer();
+
+            this.fpst.Interval = 200;
+            this.fpst.Tick += this.fpst_Tick;
+
+            this.t.Interval = 10;
+            this.t.Tick += this.t_Tick;
+
+            this._gameMenu.Width = 600;
+            this._gameMenu.Height = 600;
+            this._gameMenu.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - _gameMenu.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2 - _gameMenu.Height / 2);
+
+            var r = new Random();
+            int _random = r.Next(0, this._map.MapSize);
+            this._playerPosition = new Point(_random, _random);
+
+            this.fpst.Start();
+            this.t.Start();
+            this._soundEnvironment = new SoundEnvironment();
+            this._soundEnvironment.LoadMap(this._map);
+            this._viewPort.SoundEnvironment = this._soundEnvironment;
+
+            _countDown = new Stopwatch();
+            _countDown.Start();
+
+            _gameMenu.Draggable(true);
+        }
+
+        /// <summary>
+        /// Update and draw method, add game logic here
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void t_Tick(object sender, EventArgs e)
+        {
+            _gameTime.Update();
+
+            _viewPort.CameraSmoothness = trackBar1.Value * 10;
+
+            _cameraSmoothnessLabel.Text = _viewPort.CameraSmoothness.ToString();
+            if (!_map.IsPaused)
+            {
+                if (this.up)
+                {
+                    this.MoveRectangle(Direction.Up);
+                }
+
+                if (this.left)
+                {
+                    this.MoveRectangle(Direction.Left);
+                }
+
+                if (this.down)
+                {
+                    this.MoveRectangle(Direction.Down);
+                }
+
+                if (this.right)
+                {
+                    this.MoveRectangle(Direction.Right);
+                }
+
+                if (_map.IsPlayer)
+                {
+                    if (_viewPort.Player != null)
+                    {
+                        if (!up && !down && !left && !right)
+                        {
+                            if (_map.IsInCar)
+                            {
+                                _viewPort.Player.Car.Speed = 0;
+                            }
+                            _viewPort.Player.Speed = 0;
+                        }
+                        else
+                        {
+                            _viewPort.Player.IsMoving = true;
+                        }
+                    }
+
+                }
+
+
+                this.Draw();
+                this.g.DrawImage(this._background, new Point(0, 0));
+                this._soundEnvironment.LoadBoxes(this._viewPort.BoxList);
+                this._soundEnvironment.PlayAllSounds();
+                this._soundEnvironment.PlayerSounds();
+                Interlocked.Increment(ref this._fpsCount);
+
+                if (this._viewPort.IsFollowMode)
+                {
+                    this._buttonFollowAnimal.Text = "Quit following mode";
+                }
+                else
+                {
+                    this._buttonFollowAnimal.Text = "Follow animal mode";
+                }
+
+                ShowStatsInfo();
+
+                _map.Update();
+
+                if (!_map.IsPlayer)
+                {
+                    _playMedicButton.Hide();
+                }
+                else
+                {
+                    _playMedicButton.Show();
+                }
+            }
+
+        }
+
+
         /// <summary>
         /// The animal button_ click.
         /// </summary>
@@ -552,70 +710,6 @@ using Timer = System.Windows.Forms.Timer;
             
         }
 
-        /// <summary>
-        /// The form 1_ load.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            _gameTime = new GameTime();
-            _isPlaying = true;
-            this.selectedEAnimal = EAnimalTexture.Rabbit;
-            this._fpsCount = 0;
-            this.DoubleBuffered = true;
-            this.button1.Text = "Hide Debug";
-            this._selectedTexture = EBoxGround.Grass;
-            this._background = new Bitmap(this.Width, this.Height);
-
-            this._map = new Map(50, 2);
-
-            this._boxWidth = this._map.BoxSize;
-
-            this._viewPort = new MainViewPort(this._map);
-            this._map.ShowDebug = true;
-            this._mouseRect = new Rectangle(0, 0, 100, 100);
-
-            this.g = this.CreateGraphics();
-            this._screenGraphic = Graphics.FromImage(this._background);
-            this._screenGraphic.CompositingQuality = CompositingQuality.HighSpeed;
-            this._screenGraphic.InterpolationMode = InterpolationMode.Low;
-
-            this._selectionCursorWidth = new Size(this._boxWidth, this._boxWidth);
-            this.MouseWheel += this.T_mouseWheel;
-
-            this.t = new Timer();
-            this.fpst = new Timer();
-
-            this.fpst.Interval = 200;
-            this.fpst.Tick += this.fpst_Tick;
-
-            this.t.Interval = 10;
-            this.t.Tick += this.t_Tick;
-
-            this._gameMenu.Width = 600 ;
-            this._gameMenu.Height = 600;
-            this._gameMenu.Location = new Point( Screen.PrimaryScreen.Bounds.Width / 2 - _gameMenu.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2 - _gameMenu.Height / 2 );
-
-            var r = new Random();
-            int _random = r.Next(0, this._map.MapSize);
-            this._playerPosition = new Point(_random, _random);
-
-            this.fpst.Start();
-            this.t.Start();
-            this._soundEnvironment = new SoundEnvironment();
-            this._soundEnvironment.LoadMap(this._map);
-            this._viewPort.SoundEnvironment = this._soundEnvironment;
-
-            _countDown = new Stopwatch();
-            _countDown.Start();
-
-            _gameMenu.Draggable( true );
-        }
 
         /// <summary>
         /// The form 1_ mouse click.
@@ -1217,93 +1311,6 @@ using Timer = System.Windows.Forms.Timer;
             this._viewPort.SpawnCar(new Point(_random, _random));
         }
 
-        /// <summary>
-        /// Update and draw method, add game logic here
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void t_Tick(object sender, EventArgs e)
-        {
-            _gameTime.Update();
-
-            if( !_map.IsPaused )
-            {
-                if( this.up )
-                {
-                    this.MoveRectangle( Direction.Up );
-                }
-
-                if( this.left )
-                {
-                    this.MoveRectangle( Direction.Left );
-                }
-
-                if( this.down )
-                {
-                    this.MoveRectangle( Direction.Down );
-                }
-
-                if( this.right )
-                {
-                    this.MoveRectangle( Direction.Right );
-                }
-
-                if( _map.IsPlayer )
-                {
-                    if( _viewPort.Player != null )
-                    {
-                        if( !up && !down && !left && !right )
-                        {
-                            if( _map.IsInCar )
-                            {
-                                _viewPort.Player.Car.Speed = 0;
-                            }
-                            _viewPort.Player.Speed = 0;
-                        }
-                        else
-                        {
-                            _viewPort.Player.IsMoving = true;
-                        }
-                    }
-                   
-                }
-
-
-                this.Draw();
-                this.g.DrawImage( this._background, new Point( 0, 0 ) );
-                this._soundEnvironment.LoadBoxes( this._viewPort.BoxList );
-                this._soundEnvironment.PlayAllSounds();
-                this._soundEnvironment.PlayerSounds();
-                Interlocked.Increment( ref this._fpsCount );
-
-                if( this._viewPort.IsFollowMode )
-                {
-                    this._buttonFollowAnimal.Text = "Quit following mode";
-                }
-                else
-                {
-                    this._buttonFollowAnimal.Text = "Follow animal mode";
-                }
-
-                ShowStatsInfo();
-
-                _map.Update();
-
-                if (!_map.IsPlayer)
-                {
-                    _playMedicButton.Hide();
-                }
-                else
-                {
-                    _playMedicButton.Show();
-                }
-            }
-            
-        }
 
         /// <summary>
         /// The tank tool strip menu item_ click.
@@ -1438,11 +1445,12 @@ using Timer = System.Windows.Forms.Timer;
         {
             if( _gameMenu.Visible == true )
             {
+                trackBar1.Enabled = false;
                 _gameMenu.Hide();
             }
             else
             {
-                
+                trackBar1.Enabled = true;
                 _gameMenu.Show();
             }
         }
@@ -1453,6 +1461,11 @@ using Timer = System.Windows.Forms.Timer;
             _labelDeadAnimals.Text = _map.DeadAnimals.ToString();
             _labelTimePlayed.Text = _countDown.Elapsed.ToString();
             _labelSavedAnimals.Text = _map.SavedAnimals.ToString() ;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            
         }
     }
 }

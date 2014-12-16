@@ -73,16 +73,20 @@
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this._playMedicButton = new System.Windows.Forms.Button();
             this._gameMenu = new System.Windows.Forms.Panel();
+            this._labelSavedAnimals = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this._labelTimePlayed = new System.Windows.Forms.Label();
             this._labelDeadAnimals = new System.Windows.Forms.Label();
             this._labelAnimalsAlive = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this._labelSavedAnimals = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this._cameraSmoothnessLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // _waterButton
@@ -573,6 +577,9 @@
             // 
             this._gameMenu.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this._gameMenu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this._gameMenu.Controls.Add(this._cameraSmoothnessLabel);
+            this._gameMenu.Controls.Add(this.label5);
+            this._gameMenu.Controls.Add(this.trackBar1);
             this._gameMenu.Controls.Add(this._labelSavedAnimals);
             this._gameMenu.Controls.Add(this.label4);
             this._gameMenu.Controls.Add(this._labelTimePlayed);
@@ -586,6 +593,24 @@
             this._gameMenu.Size = new System.Drawing.Size(656, 382);
             this._gameMenu.TabIndex = 22;
             this._gameMenu.Visible = false;
+            // 
+            // _labelSavedAnimals
+            // 
+            this._labelSavedAnimals.AutoSize = true;
+            this._labelSavedAnimals.Location = new System.Drawing.Point(207, 174);
+            this._labelSavedAnimals.Name = "_labelSavedAnimals";
+            this._labelSavedAnimals.Size = new System.Drawing.Size(19, 20);
+            this._labelSavedAnimals.TabIndex = 7;
+            this._labelSavedAnimals.Text = "{}";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 174);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(198, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Animal Saved as a Medic : ";
             // 
             // _labelTimePlayed
             // 
@@ -641,23 +666,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
-            // label4
+            // trackBar1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 174);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(198, 20);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Animal Saved as a Medic : ";
+            this.trackBar1.Enabled = false;
+            this.trackBar1.Location = new System.Drawing.Point(211, 274);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 8;
+            this.trackBar1.Value = 3;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
-            // _labelSavedAnimals
+            // label5
             // 
-            this._labelSavedAnimals.AutoSize = true;
-            this._labelSavedAnimals.Location = new System.Drawing.Point(207, 174);
-            this._labelSavedAnimals.Name = "_labelSavedAnimals";
-            this._labelSavedAnimals.Size = new System.Drawing.Size(19, 20);
-            this._labelSavedAnimals.TabIndex = 7;
-            this._labelSavedAnimals.Text = "{}";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 279);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(171, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Camera Smoothness : ";
+            // 
+            // _cameraSmoothnessLabel
+            // 
+            this._cameraSmoothnessLabel.AutoSize = true;
+            this._cameraSmoothnessLabel.Location = new System.Drawing.Point(182, 279);
+            this._cameraSmoothnessLabel.Name = "_cameraSmoothnessLabel";
+            this._cameraSmoothnessLabel.Size = new System.Drawing.Size(19, 20);
+            this._cameraSmoothnessLabel.TabIndex = 10;
+            this._cameraSmoothnessLabel.Text = "{}";
             // 
             // Form1
             // 
@@ -700,6 +735,7 @@
             this.menuStrip1.PerformLayout();
             this._gameMenu.ResumeLayout(false);
             this._gameMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -760,6 +796,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label _labelSavedAnimals;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label _cameraSmoothnessLabel;
 
     }
 }

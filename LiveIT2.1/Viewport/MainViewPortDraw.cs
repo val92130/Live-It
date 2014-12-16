@@ -25,7 +25,7 @@ namespace LiveIT2._1.Viewport
         {
             this.MoveWithMouse();
 
-            this.AdjustViewPort();
+            
 
             if (!this.followAnimal)
             {
@@ -42,6 +42,10 @@ namespace LiveIT2._1.Viewport
                 {
                     this.isFollowingAnAnimal = false;
                 }
+            }
+            else
+            {
+                this.AdjustViewPort();
             }
 
             // Create the rain
