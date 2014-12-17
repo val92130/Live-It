@@ -118,6 +118,7 @@ namespace LiveIT2._1.Animation
         ///     The wave out radio actual.
         /// </summary>
         private WaveOut waveOutRadioActual;
+        private  WaveOut waveOutSpi;
 
         #endregion
 
@@ -171,6 +172,14 @@ namespace LiveIT2._1.Animation
             this.waveOutCarRunning.Init(loopCarRunning);
             this.waveOutCarRunning.Volume = 0.5f;
 
+            var readerSpi = new WaveFileReader( "../../../sounds/Spi.wav" );
+            var loopSpi = new LoopStream( readerCarRunning );
+            this.waveOutSpi = new WaveOut();
+            this.waveOutSpi.Init( loopSpi );
+            this.waveOutSpi.Volume = 0.5f;
+
+
+
             var readerCarStarting = new WaveFileReader("../../../sounds/Car/StartEngine.wav");
             this.waveOutCarStarting = new WaveOut();
             this.waveOutCarStarting.Init(readerCarStarting);
@@ -219,6 +228,13 @@ namespace LiveIT2._1.Animation
 
         #region Public Methods and Operators
 
+        public void SpiVoice()
+        {
+            if( waveOutSpi.PlaybackState == PlaybackState.Stopped )
+            {
+                waveOutSpi.Play();
+            }
+        }
         /// <summary>
         ///     Manage the car sounds
         /// </summary>
