@@ -339,6 +339,8 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private readonly Bitmap _textureRock3;
 
+        private readonly Bitmap _textureHouse;
+
         /// <summary>
         ///     The _texture snow.
         /// </summary>
@@ -784,6 +786,7 @@ namespace LiveIT2._1.Textures
             this._textureRock = new Bitmap(@"..\..\..\assets\Vegetation\Rock1.gif");
             this._textureRock2 = new Bitmap(@"..\..\..\assets\Vegetation\Rock2.gif");
             this._textureRock3 = new Bitmap(@"..\..\..\assets\Vegetation\Rock3.gif");
+            this._textureHouse = new Bitmap(@"..\..\..\assets\Houses\house.png");
 
             this._missileDown = new Bitmap( @"..\..\..\assets\Tank\Missile-Down\a.png" );
             this._missileUp = new Bitmap( @"..\..\..\assets\Tank\Missile-Up\a.png" );
@@ -1092,6 +1095,8 @@ namespace LiveIT2._1.Textures
                     return this._textureRock2;
                 case EVegetationTexture.Rock3:
                     return this._textureRock3;
+                case EVegetationTexture.House:
+                    return this._textureHouse;
                 default:
                     return this._textureTree;
             }
