@@ -253,6 +253,8 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private readonly Bitmap _playerTexture;
 
+        private readonly List<Bitmap> spiList = new List<Bitmap>();
+
         /// <summary>
         /// Missiles images used for the tank
         /// </summary>
@@ -748,6 +750,12 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private int countPlayer;
 
+        private Bitmap _spiTexture;
+
+        private Timer animateSpi;
+
+        private int countSpi;
+
         #endregion
 
         #region Constructors and Destructors
@@ -771,12 +779,17 @@ namespace LiveIT2._1.Textures
             this._animatePlayer = new Timer();
             this._animatePlayer.Interval = 10;
             this._animatePlayer.Start();
-            this._animatePlayer.Tick += this.T_Player_Anim;
+            this._animatePlayer.Tick += this.PlayerAnim;
 
             this._animateCar = new Timer();
             this._animateCar.Interval = 10;
             this._animateCar.Start();
             this._animateCar.Tick += this.T_Car_Anim;
+
+            this.animateSpi = new Timer();
+            this.animateSpi.Interval = 10;
+            this.animateSpi.Start();
+            this.animateSpi.Tick += this.T_Spi_Anim;
 
             this._rainTimer.Start();
             this._rainTimer.Interval = 10;
@@ -979,6 +992,23 @@ namespace LiveIT2._1.Textures
             this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Right\", this._carRightList);
             this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Down\", this._carDownList);
             this.AddTexturesFromFolderToList(@"..\..\..\assets\Car\Car-Up\", this._carUpList);
+
+
+            this._spiTexture = new Bitmap(@"..\..\..\assets\Spi\a.png");
+            this.AddTexturesFromFolderToList(@"..\..\..\assets\Spi\", this.spiList);
+        }
+
+        private void T_Spi_Anim(object sender, EventArgs e)
+        {
+            if (this.countSpi + 1 <= this.spiList.Count)
+            {
+                this._spiTexture = this.spiList[this.countSpi];
+                this.countSpi++;
+            }
+            else
+            {
+                this.countSpi = 0;
+            }
         }
 
         #endregion
@@ -1150,6 +1180,9 @@ namespace LiveIT2._1.Textures
                     return this._flowerPot;
                 case EmapElements.Table:
                     return this._table;
+                case EmapElements.Spi:
+                    return this._spiTexture;
+                    
                 default:
                     return this._textureTree;
             }
@@ -1549,7 +1582,7 @@ namespace LiveIT2._1.Textures
         /// <param name="e">
         /// The e.
         /// </param>
-        private void T_Player_Anim(object sender, EventArgs e)
+        private void PlayerAnim(object sender, EventArgs e)
         {
             if (this.countPlayer + 1 <= this._playerLeftList.Count)
             {
@@ -1571,6 +1604,8 @@ namespace LiveIT2._1.Textures
             {
                 this.countPlayer = 0;
             }
+
+           
         }
 
         /// <summary>

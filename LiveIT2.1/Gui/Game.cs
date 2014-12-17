@@ -1582,5 +1582,10 @@ using Timer = System.Windows.Forms.Timer;
             this.selectedEVegetation = EmapElements.Shelf;
         }
 
+        private void tHEBOSSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.Spi;
+        }
+
     }
 }
