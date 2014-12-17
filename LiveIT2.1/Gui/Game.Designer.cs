@@ -59,6 +59,7 @@
             this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,7 +90,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.exitTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.furnituresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowerPotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shelfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -440,13 +446,21 @@
             this.tileFloorToolStripMenuItem.Text = "Tile Floor";
             this.tileFloorToolStripMenuItem.Click += new System.EventHandler(this.tileFloorToolStripMenuItem_Click);
             // 
+            // exitTextureToolStripMenuItem
+            // 
+            this.exitTextureToolStripMenuItem.Name = "exitTextureToolStripMenuItem";
+            this.exitTextureToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.exitTextureToolStripMenuItem.Text = "Exit Texture";
+            this.exitTextureToolStripMenuItem.Click += new System.EventHandler(this.exitTextureToolStripMenuItem_Click);
+            // 
             // vegetationToolStripMenuItem
             // 
             this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.treeToolStripMenuItem,
             this.bushToolStripMenuItem,
             this.rockToolStripMenuItem,
-            this.houseToolStripMenuItem});
+            this.houseToolStripMenuItem,
+            this.furnituresToolStripMenuItem});
             this.vegetationToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
             this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(126, 33);
@@ -457,7 +471,7 @@
             // 
             this.treeToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Tree1;
             this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(194, 34);
             this.treeToolStripMenuItem.Text = "Tree";
             this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
             // 
@@ -465,7 +479,7 @@
             // 
             this.bushToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Bush1;
             this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
-            this.bushToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(194, 34);
             this.bushToolStripMenuItem.Text = "Bush";
             this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
             // 
@@ -473,14 +487,14 @@
             // 
             this.rockToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Rock2;
             this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(194, 34);
             this.rockToolStripMenuItem.Text = "Rock";
             this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
             // 
             // houseToolStripMenuItem
             // 
             this.houseToolStripMenuItem.Name = "houseToolStripMenuItem";
-            this.houseToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.houseToolStripMenuItem.Size = new System.Drawing.Size(194, 34);
             this.houseToolStripMenuItem.Text = "House";
             this.houseToolStripMenuItem.Click += new System.EventHandler(this.houseToolStripMenuItem_Click);
             // 
@@ -741,12 +755,52 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
-            // exitTextureToolStripMenuItem
+            // furnituresToolStripMenuItem
             // 
-            this.exitTextureToolStripMenuItem.Name = "exitTextureToolStripMenuItem";
-            this.exitTextureToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
-            this.exitTextureToolStripMenuItem.Text = "Exit Texture";
-            this.exitTextureToolStripMenuItem.Click += new System.EventHandler(this.exitTextureToolStripMenuItem_Click);
+            this.furnituresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chairToolStripMenuItem,
+            this.tableToolStripMenuItem,
+            this.bToolStripMenuItem,
+            this.flowerPotToolStripMenuItem,
+            this.shelfToolStripMenuItem});
+            this.furnituresToolStripMenuItem.Name = "furnituresToolStripMenuItem";
+            this.furnituresToolStripMenuItem.Size = new System.Drawing.Size(194, 34);
+            this.furnituresToolStripMenuItem.Text = "Furnitures";
+            // 
+            // chairToolStripMenuItem
+            // 
+            this.chairToolStripMenuItem.Name = "chairToolStripMenuItem";
+            this.chairToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.chairToolStripMenuItem.Text = "Chair";
+            this.chairToolStripMenuItem.Click += new System.EventHandler(this.chairToolStripMenuItem_Click);
+            // 
+            // tableToolStripMenuItem
+            // 
+            this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.tableToolStripMenuItem.Text = "Table";
+            this.tableToolStripMenuItem.Click += new System.EventHandler(this.tableToolStripMenuItem_Click);
+            // 
+            // bToolStripMenuItem
+            // 
+            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.bToolStripMenuItem.Text = "Barrel";
+            this.bToolStripMenuItem.Click += new System.EventHandler(this.bToolStripMenuItem_Click);
+            // 
+            // flowerPotToolStripMenuItem
+            // 
+            this.flowerPotToolStripMenuItem.Name = "flowerPotToolStripMenuItem";
+            this.flowerPotToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.flowerPotToolStripMenuItem.Text = "Flower Pot";
+            this.flowerPotToolStripMenuItem.Click += new System.EventHandler(this.flowerPotToolStripMenuItem_Click);
+            // 
+            // shelfToolStripMenuItem
+            // 
+            this.shelfToolStripMenuItem.Name = "shelfToolStripMenuItem";
+            this.shelfToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.shelfToolStripMenuItem.Text = "Shelf";
+            this.shelfToolStripMenuItem.Click += new System.EventHandler(this.shelfToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -859,6 +913,12 @@
         private System.Windows.Forms.ToolStripMenuItem wallToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileFloorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitTextureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem furnituresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chairToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem flowerPotToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shelfToolStripMenuItem;
 
     }
 }
