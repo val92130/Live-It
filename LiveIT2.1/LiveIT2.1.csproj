@@ -60,8 +60,8 @@
     <Compile Include="Terrain\Box.cs" />
     <Compile Include="Enums\EBoxGround.cs" />
     <Compile Include="Utils\GameTime.cs" />
-    <Compile Include="Vegetation\Bush.cs" />
-    <Compile Include="Vegetation\House.cs" />
+    <Compile Include="MapElemennts\Bush.cs" />
+    <Compile Include="MapElemennts\House.cs" />
     <Compile Include="Vehicules\Car.cs" />
     <Compile Include="Enums\ECarTexture.cs" />
     <Compile Include="Animals\Cat.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Player\Player.cs" />
     <Compile Include="Enums\EPlayerTexture.cs" />
     <Compile Include="Enums\ERadioSongs.cs" />
-    <Compile Include="Vegetation\Rock.cs" />
+    <Compile Include="MapElemennts\Rock.cs" />
     <Compile Include="Enums\ESex.cs" />
     <Compile Include="Gui\SplashScreen.cs">
       <SubType>Form</SubType>
@@ -106,9 +106,9 @@
     <Compile Include="Animation\SoundEnvironment.cs" />
     <Compile Include="Vehicules\Tank.cs" />
     <Compile Include="Textures\Texture.cs" />
-    <Compile Include="Vegetation\Tree.cs" />
+    <Compile Include="MapElemennts\Tree.cs" />
     <Compile Include="Utils\RandomGenerator.cs" />
-    <Compile Include="Vegetation\MapElement.cs" />
+    <Compile Include="MapElemennts\MapElement.cs" />
     <Compile Include="Enums\EmapElements.cs" />
     <Compile Include="Vehicules\Vehicule.cs" />
     <Compile Include="Viewport\MainViewPortDraw.cs" />
