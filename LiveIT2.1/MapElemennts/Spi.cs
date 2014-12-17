@@ -35,7 +35,7 @@ namespace LiveIT2._1.Vegetation
             : base( map, StartPosition )
         {
 
-            this.Texture = EmapElements.House;
+            this.Texture = EmapElements.Spi;
             this.Size = new Size( 100, 210 );
         }
 

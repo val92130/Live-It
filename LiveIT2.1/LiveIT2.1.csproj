@@ -57,6 +57,7 @@
     <Compile Include="Animation\AnimalSounds.cs" />
     <Compile Include="Enums\EAnimalTexture.cs" />
     <Compile Include="MapElemennts\Furnitures.cs" />
+    <Compile Include="MapElemennts\Spi.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Terrain\Box.cs" />
     <Compile Include="Enums\EBoxGround.cs" />
