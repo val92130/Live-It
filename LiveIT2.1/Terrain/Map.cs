@@ -18,6 +18,7 @@ namespace LiveIT2._1.Terrain
     using LiveIT2._1.Animals;
     using LiveIT2._1.Vegetation;
     using LiveIT2._1.Viewport;
+    using LiveIT2._1.Player;
     using System.Windows.Forms;
 
     /// <summary>
@@ -438,6 +439,11 @@ namespace LiveIT2._1.Terrain
             return animalList;
         }
 
+        public Player Player
+        {
+            get { return _viewPort.Player; }
+        }
+
         /// <summary>
         /// The get overlapped boxes.
         /// </summary>
@@ -469,6 +475,8 @@ namespace LiveIT2._1.Terrain
 
             return boxList;
         }
+
+        
 
         /// <summary>
         /// The get overlapped vegetation.

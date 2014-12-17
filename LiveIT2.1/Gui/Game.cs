@@ -42,6 +42,10 @@ using Timer = System.Windows.Forms.Timer;
         /// </summary>
         private long _averageFps;
 
+        string _currentMap;
+
+        string _previousMap;
+
         /// <summary>
         /// The _background.
         /// </summary>
@@ -413,6 +417,20 @@ using Timer = System.Windows.Forms.Timer;
         private void t_Tick(object sender, EventArgs e)
         {
             _gameTime.Update();
+            if( this._map.IsPlayer )
+            {
+                if( _viewPort.Player != null )
+                {
+                    if( _viewPort.Player.IsInHouse )
+                    {
+                        LoadMap( "../../../maps/House.lim", true );
+                    }
+                }
+
+            }
+
+            g.DrawString( _currentMap + " : current Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 500, 500 ) );
+            g.DrawString( _previousMap + " : previous Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 700, 700 ) );
 
             _viewPort.CameraSmoothness = trackBar1.Value * 10;
 
@@ -1219,11 +1237,27 @@ using Timer = System.Windows.Forms.Timer;
 
         public void LoadMap(String mapPath)
         {
+            _previousMap = _currentMap;
+            _currentMap = mapPath;
             this._map = this._map.Load(mapPath);
             _viewPort = new MainViewPort(_map);
             _viewPort.BoxList = _map.BoxList;
             _viewPort.SoundEnvironment = this._soundEnvironment;
             this._soundEnvironment.LoadMap(_map);
+
+        }
+
+        public void LoadMap( String mapPath, bool SaveMap )
+        {
+            _map.Save( _currentMap );
+            _previousMap = _currentMap;
+            _currentMap = mapPath;
+            this._map = this._map.Load( mapPath );
+            _viewPort = new MainViewPort( _map );
+            _viewPort.BoxList = _map.BoxList;
+            _viewPort.SoundEnvironment = this._soundEnvironment;
+            this._soundEnvironment.LoadMap( _map );
+
         }
 
         /// <summary>

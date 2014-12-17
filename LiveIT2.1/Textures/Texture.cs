@@ -1029,6 +1029,12 @@ namespace LiveIT2._1.Textures
                     return this._brushDesert;
                 case EBoxGround.Mountain:
                     return this._brushDirt;
+                case EBoxGround.Floor:
+                    return this._brushDirt;
+                case EBoxGround.Floor2:
+                    return this._brushDirt;
+                case EBoxGround.Wall:
+                    return this._brushSnow;
                 default:
                     return this._brushGrass;
             }

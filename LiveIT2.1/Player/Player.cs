@@ -50,6 +50,8 @@ namespace LiveIT2._1.Player
         /// </summary>
         private Size _relativeSize;
 
+        private bool _isInHouse;
+
         /// <summary>
         ///     The _size.
         /// </summary>
@@ -94,6 +96,12 @@ namespace LiveIT2._1.Player
             {
                 return new Rectangle(this._position, this._size);
             }
+        }
+
+        public bool IsInHouse
+        {
+            get { return _isInHouse; }
+            set { _isInHouse = value; }
         }
 
         public int Acceleration

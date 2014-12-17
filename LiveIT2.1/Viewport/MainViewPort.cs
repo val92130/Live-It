@@ -211,6 +211,7 @@ namespace LiveIT2._1.Viewport
             this.screenLeft = new Rectangle(0, this.screen.Height / 2 - 400, 10, 800);
             this.screenRight = new Rectangle(this.screen.Right - 10, this.screen.Height / 2 - 400, 10, 800);
             _cameraSmoothness = 50;
+            player = new Player( this.map, new Point(0, 0) );
 
             // this._car = new Car(this._map, new Point(600, 600));
             // this._tank = new Tank(this._map, new Point(700, 700));
@@ -872,10 +873,20 @@ namespace LiveIT2._1.Viewport
         {
             if (this.map.IsPlayer)
             {
-                if (this.player.Position.X < 0)
+                for( int i = 0; i < this.map.Vegetation.Count; i++ )
                 {
-                    this.player.Position = new Point(0, this.player.Position.Y);
+                    if( this.player.Area.IntersectsWith( map.Vegetation[i].Area ) )
+                    {
+                        if( map.Vegetation[i].Texture == EmapElements.House )
+                        {
+                            this.player.IsInHouse = true;
+                        }
+                    }
                 }
+                    if( this.player.Position.X < 0 )
+                    {
+                        this.player.Position = new Point( 0, this.player.Position.Y );
+                    }
 
                 if (this.player.Position.Y < 0)
                 {
