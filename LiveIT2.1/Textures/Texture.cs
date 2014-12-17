@@ -1081,21 +1081,21 @@ namespace LiveIT2._1.Textures
         {
             switch (vegetation.Texture)
             {
-                case EVegetationTexture.Tree:
+                case EmapElements.Tree:
                     return this._textureTree;
-                case EVegetationTexture.Tree2:
+                case EmapElements.Tree2:
                     return this._textureTree2;
-                case EVegetationTexture.Tree3:
+                case EmapElements.Tree3:
                     return this._textureTree3;
-                case EVegetationTexture.Bush:
+                case EmapElements.Bush:
                     return this._textureBush;
-                case EVegetationTexture.Rock:
+                case EmapElements.Rock:
                     return this._textureRock;
-                case EVegetationTexture.Rock2:
+                case EmapElements.Rock2:
                     return this._textureRock2;
-                case EVegetationTexture.Rock3:
+                case EmapElements.Rock3:
                     return this._textureRock3;
-                case EVegetationTexture.House:
+                case EmapElements.House:
                     return this._textureHouse;
                 default:
                     return this._textureTree;

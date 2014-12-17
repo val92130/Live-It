@@ -712,9 +712,9 @@ namespace LiveIT2._1.Animals
                         if (vegetation.Area.IntersectsWith(this.Area))
                         {
                             {
-                                if (vegetation.Texture == EVegetationTexture.Rock
-                                    || vegetation.Texture == EVegetationTexture.Rock2
-                                    || vegetation.Texture == EVegetationTexture.Rock3)
+                                if (vegetation.Texture == EmapElements.Rock
+                                    || vegetation.Texture == EmapElements.Rock2
+                                    || vegetation.Texture == EmapElements.Rock3)
                                 {
                                     this.ChangePosition();
                                 }

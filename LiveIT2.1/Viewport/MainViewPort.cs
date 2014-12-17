@@ -635,19 +635,22 @@ namespace LiveIT2._1.Viewport
         /// </param>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public void CreateVegetation(EVegetationTexture texture)
+        public void CreateVegetation(EmapElements texture)
         {
             Vegetation v;
             switch (texture)
             {
-                case EVegetationTexture.Tree:
+                case EmapElements.Tree:
                     v = new Tree(this.map, this.vegetationSelectorCursor);
                     break;
-                case EVegetationTexture.Bush:
+                case EmapElements.Bush:
                     v = new Bush(this.map, this.vegetationSelectorCursor);
                     break;
-                case EVegetationTexture.Rock:
+                case EmapElements.Rock:
                     v = new Rock(this.map, this.vegetationSelectorCursor);
+                    break;
+                case EmapElements.House:
+                    v = new House(this.map, this.vegetationSelectorCursor);
                     break;
                 default:
                     throw new NotSupportedException("Unknown vegetation type");
@@ -908,9 +911,9 @@ namespace LiveIT2._1.Viewport
                         if (vegetation.Area.IntersectsWith(this.Player.Area))
                         {
                             {
-                                if (vegetation.Texture == EVegetationTexture.Rock
-                                    || vegetation.Texture == EVegetationTexture.Rock2
-                                    || vegetation.Texture == EVegetationTexture.Rock3)
+                                if (vegetation.Texture == EmapElements.Rock
+                                    || vegetation.Texture == EmapElements.Rock2
+                                    || vegetation.Texture == EmapElements.Rock3)
                                 {
                                     this.Player.notAlloudToMove();
                                 }

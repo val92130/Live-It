@@ -37,11 +37,11 @@ namespace LiveIT2._1.Vegetation
         {
             var r = new Random();
             int _random = r.Next(50, 300);
-            var RandomVegList = new List<EVegetationTexture>
+            var RandomVegList = new List<EmapElements>
                                     {
-                                        EVegetationTexture.Rock, 
-                                        EVegetationTexture.Rock2, 
-                                        EVegetationTexture.Rock3
+                                        EmapElements.Rock, 
+                                        EmapElements.Rock2, 
+                                        EmapElements.Rock3
                                     };
             var r2 = new Random();
             this.Texture = RandomVegList[r2.Next(0, RandomVegList.Count)];

@@ -18,7 +18,7 @@ namespace LiveIT2._1.Vegetation
     ///     The bush.
     /// </summary>
     [Serializable]
-    public class Bush : Vegetation
+    public class House : Vegetation
     {
         #region Constructors and Destructors
 
@@ -31,13 +31,12 @@ namespace LiveIT2._1.Vegetation
         /// <param name="StartPosition">
         /// The start position.
         /// </param>
-        public Bush(Map map, Point StartPosition)
+        public House(Map map, Point StartPosition)
             : base(map, StartPosition)
         {
-            var r = new Random();
-            int _random = r.Next(100, 250);
-            this.Texture = EmapElements.Bush;
-            this.Size = new Size(_random, _random);
+           
+            this.Texture = EmapElements.House;
+            this.Size = new Size(1200, 1200);
         }
 
         #endregion

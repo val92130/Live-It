@@ -51,7 +51,7 @@ namespace LiveIT2._1.Vegetation
         /// <summary>
         ///     The _texture.
         /// </summary>
-        private EVegetationTexture _texture;
+        private EmapElements _texture;
 
         #endregion
 
@@ -70,7 +70,7 @@ namespace LiveIT2._1.Vegetation
         {
             this._map = map;
             this._position = StartPosition;
-            this._texture = EVegetationTexture.Tree;
+            this._texture = EmapElements.Tree;
             this._size = new Size(400, 400);
         }
 
@@ -156,7 +156,7 @@ namespace LiveIT2._1.Vegetation
         /// <summary>
         ///     Gets or sets the texture.
         /// </summary>
-        public EVegetationTexture Texture
+        public EmapElements Texture
         {
             get
             {

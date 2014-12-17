@@ -164,7 +164,7 @@ using Timer = System.Windows.Forms.Timer;
         /// <summary>
         /// The selected e vegetation.
         /// </summary>
-        private EVegetationTexture selectedEVegetation;
+        private EmapElements selectedEVegetation;
 
         /// <summary>
         /// The t.
@@ -1020,7 +1020,7 @@ using Timer = System.Windows.Forms.Timer;
         /// </param>
         private void bushToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.selectedEVegetation = EVegetationTexture.Bush;
+            this.selectedEVegetation = EmapElements.Bush;
         }
 
         /// <summary>
@@ -1273,7 +1273,7 @@ using Timer = System.Windows.Forms.Timer;
         /// </param>
         private void rockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.selectedEVegetation = EVegetationTexture.Rock;
+            this.selectedEVegetation = EmapElements.Rock;
         }
 
         /// <summary>
@@ -1355,7 +1355,7 @@ using Timer = System.Windows.Forms.Timer;
         /// </param>
         private void treeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.selectedEVegetation = EVegetationTexture.Tree;
+            this.selectedEVegetation = EmapElements.Tree;
         }
 
         /// <summary>
@@ -1466,6 +1466,11 @@ using Timer = System.Windows.Forms.Timer;
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             
+        }
+
+        private void houseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.House;
         }
 
     }

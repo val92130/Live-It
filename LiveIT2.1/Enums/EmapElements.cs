@@ -12,7 +12,7 @@ namespace LiveIT2._1.Enums
     /// <summary>
     /// The e vegetation texture.
     /// </summary>
-    public enum EVegetationTexture
+    public enum EmapElements
     {
         /// <summary>
         /// The tree.
@@ -47,6 +47,9 @@ namespace LiveIT2._1.Enums
         /// <summary>
         /// The rock 3.
         /// </summary>
-        Rock3
+        Rock3,
+
+        House
+
     }
 }

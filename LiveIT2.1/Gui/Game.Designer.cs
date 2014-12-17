@@ -73,6 +73,9 @@
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this._playMedicButton = new System.Windows.Forms.Button();
             this._gameMenu = new System.Windows.Forms.Panel();
+            this._cameraSmoothnessLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this._labelSavedAnimals = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this._labelTimePlayed = new System.Windows.Forms.Label();
@@ -81,9 +84,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this._cameraSmoothnessLabel = new System.Windows.Forms.Label();
+            this.houseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -406,7 +407,8 @@
             this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.treeToolStripMenuItem,
             this.bushToolStripMenuItem,
-            this.rockToolStripMenuItem});
+            this.rockToolStripMenuItem,
+            this.houseToolStripMenuItem});
             this.vegetationToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
             this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(140, 33);
@@ -417,7 +419,7 @@
             // 
             this.treeToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Tree1;
             this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
             this.treeToolStripMenuItem.Text = "Tree";
             this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
             // 
@@ -425,7 +427,7 @@
             // 
             this.bushToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Bush1;
             this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
-            this.bushToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
             this.bushToolStripMenuItem.Text = "Bush";
             this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
             // 
@@ -433,7 +435,7 @@
             // 
             this.rockToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Rock2;
             this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
             this.rockToolStripMenuItem.Text = "Rock";
             this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
             // 
@@ -594,6 +596,34 @@
             this._gameMenu.TabIndex = 22;
             this._gameMenu.Visible = false;
             // 
+            // _cameraSmoothnessLabel
+            // 
+            this._cameraSmoothnessLabel.AutoSize = true;
+            this._cameraSmoothnessLabel.Location = new System.Drawing.Point(182, 279);
+            this._cameraSmoothnessLabel.Name = "_cameraSmoothnessLabel";
+            this._cameraSmoothnessLabel.Size = new System.Drawing.Size(19, 20);
+            this._cameraSmoothnessLabel.TabIndex = 10;
+            this._cameraSmoothnessLabel.Text = "{}";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 279);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(171, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Camera Smoothness : ";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Enabled = false;
+            this.trackBar1.Location = new System.Drawing.Point(211, 274);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 8;
+            this.trackBar1.Value = 3;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
             // _labelSavedAnimals
             // 
             this._labelSavedAnimals.AutoSize = true;
@@ -666,33 +696,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
-            // trackBar1
+            // houseToolStripMenuItem
             // 
-            this.trackBar1.Enabled = false;
-            this.trackBar1.Location = new System.Drawing.Point(211, 274);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 8;
-            this.trackBar1.Value = 3;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 279);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(171, 20);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Camera Smoothness : ";
-            // 
-            // _cameraSmoothnessLabel
-            // 
-            this._cameraSmoothnessLabel.AutoSize = true;
-            this._cameraSmoothnessLabel.Location = new System.Drawing.Point(182, 279);
-            this._cameraSmoothnessLabel.Name = "_cameraSmoothnessLabel";
-            this._cameraSmoothnessLabel.Size = new System.Drawing.Size(19, 20);
-            this._cameraSmoothnessLabel.TabIndex = 10;
-            this._cameraSmoothnessLabel.Text = "{}";
+            this.houseToolStripMenuItem.Name = "houseToolStripMenuItem";
+            this.houseToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.houseToolStripMenuItem.Text = "House";
+            this.houseToolStripMenuItem.Click += new System.EventHandler(this.houseToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -799,6 +808,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label _cameraSmoothnessLabel;
+        private System.Windows.Forms.ToolStripMenuItem houseToolStripMenuItem;
 
     }
 }

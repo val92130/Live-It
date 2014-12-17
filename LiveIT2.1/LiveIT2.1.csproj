@@ -61,6 +61,7 @@
     <Compile Include="Enums\EBoxGround.cs" />
     <Compile Include="Utils\GameTime.cs" />
     <Compile Include="Vegetation\Bush.cs" />
+    <Compile Include="Vegetation\House.cs" />
     <Compile Include="Vehicules\Car.cs" />
     <Compile Include="Enums\ECarTexture.cs" />
     <Compile Include="Animals\Cat.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="Vegetation\Tree.cs" />
     <Compile Include="Utils\RandomGenerator.cs" />
     <Compile Include="Vegetation\Vegetation.cs" />
-    <Compile Include="Enums\EVegetationTexture.cs" />
+    <Compile Include="Enums\EmapElements.cs" />
     <Compile Include="Vehicules\Vehicule.cs" />
     <Compile Include="Viewport\MainViewPortDraw.cs" />
     <Compile Include="Viewport\MainViewPortMovement.cs" />
