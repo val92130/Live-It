@@ -58,6 +58,8 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private readonly Brush _brushWater;
 
+       
+
 
         /// <summary>
         ///     The _car down list.
@@ -224,6 +226,7 @@ namespace LiveIT2._1.Textures
         /// </summary>
         private readonly Bitmap _playerCarTexture;
 
+        private readonly Bitmap _floorTexture;
         /// <summary>
         ///     The _player down list.
         /// </summary>
@@ -821,6 +824,8 @@ namespace LiveIT2._1.Textures
             this._textureTankLeft = new Bitmap(@"..\..\..\assets\Tank\Tank-Left\b.png");
             this._textureTankRight = new Bitmap(@"..\..\..\assets\Tank\Tank-Right\b.png");
 
+            this._floorTexture = new Bitmap(@"..\..\..\assets\Houses\Textures\Floor.jpg");
+
             this._textureDogDown = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Down\a.png");
             this._textureDogUp = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Up\a.png");
             this._textureDogLeft = new Bitmap(@"..\..\..\assets\Animal\Dog\Dog-Left\a.png");
@@ -1063,6 +1068,8 @@ namespace LiveIT2._1.Textures
                     return this._textureDesert;
                 case EBoxGround.Mountain:
                     return this._textureMountain;
+                case EBoxGround.Floor:
+                    return this._floorTexture;
                 default:
                     return this._textureGrass;
             }
