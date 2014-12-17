@@ -212,6 +212,45 @@
   <ItemGroup>
     <None Include="Resources\a4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TileFloor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExitFloor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlowerPot2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chair.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barrel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlowerPot.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shelf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spi-head.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

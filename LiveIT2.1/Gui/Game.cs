@@ -179,6 +179,7 @@ using Timer = System.Windows.Forms.Timer;
         /// The up.
         /// </summary>
         private bool up;
+        private bool _hasPressedE;
 
         #endregion
 
@@ -417,49 +418,13 @@ using Timer = System.Windows.Forms.Timer;
         private void t_Tick(object sender, EventArgs e)
         {
             _gameTime.Update();
-            if( this._map.IsPlayer )
-            {
-                if( _viewPort.Player != null )
-                {
-                    if( _viewPort.Player.IsInHouse )
-                    {
-                        if( _currentMap == "" || _currentMap == null )
-                        {
-                            t.Stop();
-                            var saveBox = new SaveFileDialog();
-                            saveBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
-                            if( saveBox.ShowDialog() == DialogResult.OK )
-                            {
-                                
-                                this._map.Save( saveBox.FileName );
-                                _currentMap = saveBox.FileName;
-                                LoadMap( "../../../maps/House.lim", true );
-                                t.Start();
-                            }
-                        }
-                        else
-                        {
-                            LoadMap( "../../../maps/House.lim", true );
-                        }
-                        
-                    }
 
-                    if( _viewPort.IsExitingHouse )
-                    {
-                        if( _previousMap != null || _previousMap != "" )
-                        {
-                            _viewPort.IsExitingHouse = false;
-                            LoadMap( _previousMap, true );
-                        }
+            TryEnterHouse();
 
-                    }
-                }
-
-            }
             if( _map.ShowDebug )
             {
                 g.DrawString( _currentMap + " : current Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 500, 500 ) );
-                g.DrawString( _previousMap + " : previous Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 700, 700 ) );
+                g.DrawString( _previousMap + " : previous Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 900, 500 ) );
             }
             
             _viewPort.CameraSmoothness = trackBar1.Value * 10;
@@ -538,6 +503,65 @@ using Timer = System.Windows.Forms.Timer;
                 }
             }
 
+        }
+
+        private void TryEnterHouse()
+        {
+            if (this._map.IsPlayer)
+            {
+                if (_viewPort.Player != null)
+                {
+                    if (_viewPort.Player.IsInHouse)
+                    {
+                        g.DrawString("Press E to enter", new Font("Colibri", 20f), Brushes.Black, new Point(_viewPort.Player.RelativePosition.X, _viewPort.Player.RelativePosition.Y + 10));
+                        if (_hasPressedE)
+                        {
+                            if (_currentMap == "" || _currentMap == null && _exitLoad == false)
+                            {
+                                t.Stop();
+                                var saveBox = new SaveFileDialog();
+                                saveBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
+                                if (saveBox.ShowDialog() == DialogResult.OK)
+                                {
+
+                                    this._map.Save(saveBox.FileName);
+                                    _currentMap = saveBox.FileName;
+                                    LoadMap("../../../maps/House.lim", true);
+                                    t.Start();
+                                }
+                                else
+                                {
+                                    _exitLoad = true;
+                                }
+                            }
+                            else
+                            {
+                                LoadMap("../../../maps/House.lim", true);
+                            }
+
+                        }
+                        else
+                        {
+                            _exitLoad = false;
+                        }
+
+                        _viewPort.Player.IsInHouse = false;
+                        t.Start();
+
+                    }
+
+                    if (_viewPort.IsExitingHouse)
+                    {
+                        if (_previousMap != null || _previousMap != "")
+                        {
+                            _viewPort.IsExitingHouse = false;
+                            LoadMap(_previousMap, true);
+                        }
+
+                    }
+                }
+
+            }
         }
 
 
@@ -639,6 +663,7 @@ using Timer = System.Windows.Forms.Timer;
 
             if (e.KeyCode == Keys.E)
             {
+                _hasPressedE = true;
                 if (this._map.IsInCar)
                 {
                     this._viewPort.TryEnter = false;
@@ -730,6 +755,7 @@ using Timer = System.Windows.Forms.Timer;
 
             if (e.KeyCode == Keys.E)
             {
+                _hasPressedE = false;
                 this._viewPort.TryEnter = false;
             }
 
@@ -1587,5 +1613,7 @@ using Timer = System.Windows.Forms.Timer;
             this.selectedEVegetation = EmapElements.Spi;
         }
 
+
+        public bool _exitLoad { get; set; }
     }
 }
