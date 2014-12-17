@@ -1473,5 +1473,20 @@ using Timer = System.Windows.Forms.Timer;
             this.selectedEVegetation = EmapElements.House;
         }
 
+        private void floorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _selectedTexture = EBoxGround.Floor;
+        }
+
+        private void wallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _selectedTexture = EBoxGround.Wall;
+        }
+
+        private void tileFloorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _selectedTexture = EBoxGround.Floor2;
+        }
+
     }
 }

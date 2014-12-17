@@ -65,6 +65,12 @@ namespace LiveIT2._1.Enums
         /// <summary>
         /// The water transition left.
         /// </summary>
-        WaterTransitionLeft
+        WaterTransitionLeft,
+
+        Floor,
+
+        Floor2,
+
+        Wall
     }
 }

@@ -59,6 +59,7 @@
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.houseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sportCarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +85,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.houseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.houseElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -346,7 +350,8 @@
             this.grassToolStripMenuItem,
             this.mountainToolStripMenuItem,
             this.snowToolStripMenuItem,
-            this.waterToolStripMenuItem});
+            this.waterToolStripMenuItem,
+            this.houseElementsToolStripMenuItem});
             this.texturesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
             this.texturesToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
@@ -358,7 +363,7 @@
             this.desertToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Desert;
             this.desertToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.desertToolStripMenuItem.Name = "desertToolStripMenuItem";
-            this.desertToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.desertToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.desertToolStripMenuItem.Text = " ";
             this.desertToolStripMenuItem.Click += new System.EventHandler(this.desertToolStripMenuItem_Click);
             // 
@@ -366,7 +371,7 @@
             // 
             this.forestToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Forest;
             this.forestToolStripMenuItem.Name = "forestToolStripMenuItem";
-            this.forestToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.forestToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.forestToolStripMenuItem.Text = " ";
             this.forestToolStripMenuItem.Click += new System.EventHandler(this.forestToolStripMenuItem_Click);
             // 
@@ -374,7 +379,7 @@
             // 
             this.grassToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Grass;
             this.grassToolStripMenuItem.Name = "grassToolStripMenuItem";
-            this.grassToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.grassToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.grassToolStripMenuItem.Text = " ";
             this.grassToolStripMenuItem.Click += new System.EventHandler(this.grassToolStripMenuItem_Click);
             // 
@@ -382,7 +387,7 @@
             // 
             this.mountainToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Mountain;
             this.mountainToolStripMenuItem.Name = "mountainToolStripMenuItem";
-            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.mountainToolStripMenuItem.Text = " ";
             this.mountainToolStripMenuItem.Click += new System.EventHandler(this.mountainToolStripMenuItem_Click);
             // 
@@ -390,7 +395,7 @@
             // 
             this.snowToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Snow;
             this.snowToolStripMenuItem.Name = "snowToolStripMenuItem";
-            this.snowToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.snowToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.snowToolStripMenuItem.Text = " ";
             this.snowToolStripMenuItem.Click += new System.EventHandler(this.snowToolStripMenuItem_Click);
             // 
@@ -398,7 +403,7 @@
             // 
             this.waterToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Water;
             this.waterToolStripMenuItem.Name = "waterToolStripMenuItem";
-            this.waterToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.waterToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.waterToolStripMenuItem.Text = " ";
             this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
             // 
@@ -411,8 +416,8 @@
             this.houseToolStripMenuItem});
             this.vegetationToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.vegetationToolStripMenuItem.Name = "vegetationToolStripMenuItem";
-            this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(140, 33);
-            this.vegetationToolStripMenuItem.Text = "Vegetation";
+            this.vegetationToolStripMenuItem.Size = new System.Drawing.Size(126, 33);
+            this.vegetationToolStripMenuItem.Text = "Elements";
             this.vegetationToolStripMenuItem.Click += new System.EventHandler(this.vegetationToolStripMenuItem_Click);
             // 
             // treeToolStripMenuItem
@@ -438,6 +443,13 @@
             this.rockToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
             this.rockToolStripMenuItem.Text = "Rock";
             this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
+            // 
+            // houseToolStripMenuItem
+            // 
+            this.houseToolStripMenuItem.Name = "houseToolStripMenuItem";
+            this.houseToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.houseToolStripMenuItem.Text = "House";
+            this.houseToolStripMenuItem.Click += new System.EventHandler(this.houseToolStripMenuItem_Click);
             // 
             // vehiclesToolStripMenuItem
             // 
@@ -696,12 +708,36 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
-            // houseToolStripMenuItem
+            // houseElementsToolStripMenuItem
             // 
-            this.houseToolStripMenuItem.Name = "houseToolStripMenuItem";
-            this.houseToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
-            this.houseToolStripMenuItem.Text = "House";
-            this.houseToolStripMenuItem.Click += new System.EventHandler(this.houseToolStripMenuItem_Click);
+            this.houseElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.floorToolStripMenuItem,
+            this.wallToolStripMenuItem,
+            this.tileFloorToolStripMenuItem});
+            this.houseElementsToolStripMenuItem.Name = "houseElementsToolStripMenuItem";
+            this.houseElementsToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.houseElementsToolStripMenuItem.Text = "House Elements";
+            // 
+            // floorToolStripMenuItem
+            // 
+            this.floorToolStripMenuItem.Name = "floorToolStripMenuItem";
+            this.floorToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.floorToolStripMenuItem.Text = "Floor";
+            this.floorToolStripMenuItem.Click += new System.EventHandler(this.floorToolStripMenuItem_Click);
+            // 
+            // wallToolStripMenuItem
+            // 
+            this.wallToolStripMenuItem.Name = "wallToolStripMenuItem";
+            this.wallToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
+            this.wallToolStripMenuItem.Text = "Wall";
+            this.wallToolStripMenuItem.Click += new System.EventHandler(this.wallToolStripMenuItem_Click);
+            // 
+            // tileFloorToolStripMenuItem
+            // 
+            this.tileFloorToolStripMenuItem.Name = "tileFloorToolStripMenuItem";
+            this.tileFloorToolStripMenuItem.Size = new System.Drawing.Size(191, 34);
+            this.tileFloorToolStripMenuItem.Text = "Tile Floor";
+            this.tileFloorToolStripMenuItem.Click += new System.EventHandler(this.tileFloorToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -809,6 +845,10 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label _cameraSmoothnessLabel;
         private System.Windows.Forms.ToolStripMenuItem houseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem houseElementsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem floorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wallToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tileFloorToolStripMenuItem;
 
     }
 }
