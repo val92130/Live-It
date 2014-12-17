@@ -357,7 +357,6 @@ using Timer = System.Windows.Forms.Timer;
             this.selectedEAnimal = EAnimalTexture.Rabbit;
             this._fpsCount = 0;
             this.DoubleBuffered = true;
-            this.button1.Text = "Hide Debug";
             this._selectedTexture = EBoxGround.Grass;
             this._background = new Bitmap(this.Width, this.Height);
 
@@ -400,6 +399,8 @@ using Timer = System.Windows.Forms.Timer;
             this._soundEnvironment.LoadMap(this._map);
             this._viewPort.SoundEnvironment = this._soundEnvironment;
 
+            _map.ShowDebug = false;
+
             _countDown = new Stopwatch();
             _countDown.Start();
 
@@ -418,6 +419,12 @@ using Timer = System.Windows.Forms.Timer;
         private void t_Tick(object sender, EventArgs e)
         {
             _gameTime.Update();
+
+            if (_map.ShowDebug == false)
+            {
+                
+                _fpsTextBox.Hide();
+            }
 
             TryEnterHouse();
 
@@ -1108,7 +1115,7 @@ using Timer = System.Windows.Forms.Timer;
         /// </param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.ShowDebugInfo)
+            if (!_map.ShowDebug)
             {
                 this._fpsTextBox.Show();
                 this.button1.Text = "Hide Debug";
