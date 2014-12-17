@@ -658,6 +658,9 @@ namespace LiveIT2._1.Viewport
                 case EmapElements.FlowerPot:
                     v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.FlowerPot );
                     break;
+                case EmapElements.Table:
+                    v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Table );
+                    break;
                 case EmapElements.Barrel:
                     v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Barrel );
                     break;

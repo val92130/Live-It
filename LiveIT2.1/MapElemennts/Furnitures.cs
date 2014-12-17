@@ -36,7 +36,7 @@ namespace LiveIT2._1.Vegetation
         {
 
             this.Texture = e;
-            this.Size = new Size( 300, 300 );
+            this.Size = new Size( 150, 150 );
         }
 
         #endregion
