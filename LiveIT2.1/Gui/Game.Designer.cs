@@ -55,6 +55,10 @@
             this.mountainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.houseElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,10 +89,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.houseElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -407,6 +408,38 @@
             this.waterToolStripMenuItem.Text = " ";
             this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
             // 
+            // houseElementsToolStripMenuItem
+            // 
+            this.houseElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.floorToolStripMenuItem,
+            this.wallToolStripMenuItem,
+            this.tileFloorToolStripMenuItem,
+            this.exitTextureToolStripMenuItem});
+            this.houseElementsToolStripMenuItem.Name = "houseElementsToolStripMenuItem";
+            this.houseElementsToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.houseElementsToolStripMenuItem.Text = "House Elements";
+            // 
+            // floorToolStripMenuItem
+            // 
+            this.floorToolStripMenuItem.Name = "floorToolStripMenuItem";
+            this.floorToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.floorToolStripMenuItem.Text = "Floor";
+            this.floorToolStripMenuItem.Click += new System.EventHandler(this.floorToolStripMenuItem_Click);
+            // 
+            // wallToolStripMenuItem
+            // 
+            this.wallToolStripMenuItem.Name = "wallToolStripMenuItem";
+            this.wallToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.wallToolStripMenuItem.Text = "Wall";
+            this.wallToolStripMenuItem.Click += new System.EventHandler(this.wallToolStripMenuItem_Click);
+            // 
+            // tileFloorToolStripMenuItem
+            // 
+            this.tileFloorToolStripMenuItem.Name = "tileFloorToolStripMenuItem";
+            this.tileFloorToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.tileFloorToolStripMenuItem.Text = "Tile Floor";
+            this.tileFloorToolStripMenuItem.Click += new System.EventHandler(this.tileFloorToolStripMenuItem_Click);
+            // 
             // vegetationToolStripMenuItem
             // 
             this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -708,36 +741,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
-            // houseElementsToolStripMenuItem
+            // exitTextureToolStripMenuItem
             // 
-            this.houseElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.floorToolStripMenuItem,
-            this.wallToolStripMenuItem,
-            this.tileFloorToolStripMenuItem});
-            this.houseElementsToolStripMenuItem.Name = "houseElementsToolStripMenuItem";
-            this.houseElementsToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.houseElementsToolStripMenuItem.Text = "House Elements";
-            // 
-            // floorToolStripMenuItem
-            // 
-            this.floorToolStripMenuItem.Name = "floorToolStripMenuItem";
-            this.floorToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
-            this.floorToolStripMenuItem.Text = "Floor";
-            this.floorToolStripMenuItem.Click += new System.EventHandler(this.floorToolStripMenuItem_Click);
-            // 
-            // wallToolStripMenuItem
-            // 
-            this.wallToolStripMenuItem.Name = "wallToolStripMenuItem";
-            this.wallToolStripMenuItem.Size = new System.Drawing.Size(152, 34);
-            this.wallToolStripMenuItem.Text = "Wall";
-            this.wallToolStripMenuItem.Click += new System.EventHandler(this.wallToolStripMenuItem_Click);
-            // 
-            // tileFloorToolStripMenuItem
-            // 
-            this.tileFloorToolStripMenuItem.Name = "tileFloorToolStripMenuItem";
-            this.tileFloorToolStripMenuItem.Size = new System.Drawing.Size(191, 34);
-            this.tileFloorToolStripMenuItem.Text = "Tile Floor";
-            this.tileFloorToolStripMenuItem.Click += new System.EventHandler(this.tileFloorToolStripMenuItem_Click);
+            this.exitTextureToolStripMenuItem.Name = "exitTextureToolStripMenuItem";
+            this.exitTextureToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.exitTextureToolStripMenuItem.Text = "Exit Texture";
+            this.exitTextureToolStripMenuItem.Click += new System.EventHandler(this.exitTextureToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -849,6 +858,7 @@
         private System.Windows.Forms.ToolStripMenuItem floorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wallToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileFloorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitTextureToolStripMenuItem;
 
     }
 }

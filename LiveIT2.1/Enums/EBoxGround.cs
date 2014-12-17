@@ -71,6 +71,8 @@ namespace LiveIT2._1.Enums
 
         Floor2,
 
-        Wall
+        Wall,
+
+        Exit
     }
 }

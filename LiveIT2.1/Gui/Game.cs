@@ -443,6 +443,16 @@ using Timer = System.Windows.Forms.Timer;
                         }
                         
                     }
+
+                    if( _viewPort.IsExitingHouse )
+                    {
+                        if( _previousMap != null || _previousMap != "" )
+                        {
+                            _viewPort.IsExitingHouse = false;
+                            LoadMap( _previousMap, true );
+                        }
+
+                    }
                 }
 
             }
@@ -1540,6 +1550,11 @@ using Timer = System.Windows.Forms.Timer;
         private void tileFloorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _selectedTexture = EBoxGround.Floor2;
+        }
+
+        private void exitTextureToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            _selectedTexture = EBoxGround.Exit;
         }
 
     }

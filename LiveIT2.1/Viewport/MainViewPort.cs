@@ -103,6 +103,8 @@ namespace LiveIT2._1.Viewport
         /// </summary>
         private bool isRaining;
 
+        private bool _exitHouse;
+
         /// <summary>
         ///     The _map.
         /// </summary>
@@ -862,6 +864,12 @@ namespace LiveIT2._1.Viewport
             }
         }
 
+        public bool IsExitingHouse
+        {
+            get { return _exitHouse; }
+            set { _exitHouse = value; }
+        }
+
 
         /// <summary>
         /// The player behavior.
@@ -871,7 +879,7 @@ namespace LiveIT2._1.Viewport
         /// </param>
         private void PlayerBehavior(Graphics g)
         {
-            if (this.map.IsPlayer)
+            if( this.map.IsPlayer )
             {
                 for( int i = 0; i < this.map.Vegetation.Count; i++ )
                 {
@@ -883,10 +891,23 @@ namespace LiveIT2._1.Viewport
                         }
                     }
                 }
-                    if( this.player.Position.X < 0 )
+
+                if( player.BoxList != null )
+                {
+                    for( int j = 0; j < player.BoxList.Count; j++ )
                     {
-                        this.player.Position = new Point( 0, this.player.Position.Y );
+                        if( player.BoxList[j].Ground == EBoxGround.Exit )
+                        {
+                            _exitHouse = true;
+                        }
                     }
+                }
+
+
+                if( this.player.Position.X < 0 )
+                {
+                    this.player.Position = new Point( 0, this.player.Position.Y );
+                }
 
                 if (this.player.Position.Y < 0)
                 {
