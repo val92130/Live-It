@@ -19,7 +19,7 @@ namespace LiveIT2._1.Vegetation
     ///     The vegetation.
     /// </summary>
     [Serializable]
-    public class Vegetation
+    public class MapElement
     {
         #region Fields
 
@@ -58,7 +58,7 @@ namespace LiveIT2._1.Vegetation
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Vegetation"/> class.
+        /// Initializes a new instance of the <see cref="MapElement"/> class.
         /// </summary>
         /// <param name="map">
         /// The map.
@@ -66,7 +66,7 @@ namespace LiveIT2._1.Vegetation
         /// <param name="StartPosition">
         /// The start position.
         /// </param>
-        public Vegetation(Map map, Point StartPosition)
+        public MapElement(Map map, Point StartPosition)
         {
             this._map = map;
             this._position = StartPosition;

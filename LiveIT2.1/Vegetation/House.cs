@@ -18,7 +18,7 @@ namespace LiveIT2._1.Vegetation
     ///     The bush.
     /// </summary>
     [Serializable]
-    public class House : Vegetation
+    public class House : MapElement
     {
         #region Constructors and Destructors
 

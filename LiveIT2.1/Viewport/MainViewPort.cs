@@ -121,7 +121,7 @@ namespace LiveIT2._1.Viewport
         /// <summary>
         ///     The _put vegetation.
         /// </summary>
-        private bool putVegetation;
+        private bool putMapElement;
 
         /// <summary>
         ///     The _screen.
@@ -139,9 +139,9 @@ namespace LiveIT2._1.Viewport
         private bool tryEnter;
 
         /// <summary>
-        ///     The _vegetation selector cursor.
+        ///     The element selector cursor.
         /// </summary>
-        private Point vegetationSelectorCursor;
+        private Point elementSelectorCursor;
 
         /// <summary>
         ///     The _view port.
@@ -281,7 +281,7 @@ namespace LiveIT2._1.Viewport
                 this.fillTexture = false;
                 this.changeTexture = false;
                 this.followAnimal = false;
-                this.putVegetation = false;
+                this.putMapElement = false;
             }
         }
 
@@ -301,7 +301,7 @@ namespace LiveIT2._1.Viewport
                 this.fillTexture = false;
                 this.putAnimal = false;
                 this.followAnimal = false;
-                this.putVegetation = false;
+                this.putMapElement = false;
             }
         }
 
@@ -321,7 +321,7 @@ namespace LiveIT2._1.Viewport
                 this.changeTexture = false;
                 this.putAnimal = false;
                 this.followAnimal = false;
-                this.putVegetation = false;
+                this.putMapElement = false;
             }
         }
 
@@ -341,7 +341,7 @@ namespace LiveIT2._1.Viewport
                 this.changeTexture = false;
                 this.putAnimal = false;
                 this.fillTexture = false;
-                this.putVegetation = false;
+                this.putMapElement = false;
             }
         }
 
@@ -375,16 +375,16 @@ namespace LiveIT2._1.Viewport
         /// <summary>
         ///     Gets or sets a value indicating whether is vegetation selected.
         /// </summary>
-        public bool IsVegetationSelected
+        public bool IsMapElementSelected
         {
             get
             {
-                return this.putVegetation;
+                return this.putMapElement;
             }
 
             set
             {
-                this.putVegetation = value;
+                this.putMapElement = value;
                 this.fillTexture = false;
                 this.changeTexture = false;
                 this.followAnimal = false;
@@ -635,22 +635,22 @@ namespace LiveIT2._1.Viewport
         /// </param>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public void CreateVegetation(EmapElements texture)
+        public void CreateMapElement(EmapElements texture)
         {
-            Vegetation v;
+            MapElement v;
             switch (texture)
             {
                 case EmapElements.Tree:
-                    v = new Tree(this.map, this.vegetationSelectorCursor);
+                    v = new Tree(this.map, this.elementSelectorCursor);
                     break;
                 case EmapElements.Bush:
-                    v = new Bush(this.map, this.vegetationSelectorCursor);
+                    v = new Bush(this.map, this.elementSelectorCursor);
                     break;
                 case EmapElements.Rock:
-                    v = new Rock(this.map, this.vegetationSelectorCursor);
+                    v = new Rock(this.map, this.elementSelectorCursor);
                     break;
                 case EmapElements.House:
-                    v = new House(this.map, this.vegetationSelectorCursor);
+                    v = new House(this.map, this.elementSelectorCursor);
                     break;
                 default:
                     throw new NotSupportedException("Unknown vegetation type");
@@ -906,7 +906,7 @@ namespace LiveIT2._1.Viewport
 
                 if (this.player.IsMoving)
                 {
-                    foreach (Vegetation vegetation in this.map.Vegetation)
+                    foreach (MapElement vegetation in this.map.Vegetation)
                     {
                         if (vegetation.Area.IntersectsWith(this.Player.Area))
                         {

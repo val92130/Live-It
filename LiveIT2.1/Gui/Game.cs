@@ -732,9 +732,9 @@ using Timer = System.Windows.Forms.Timer;
             {
                 this._viewPort.ChangeTexture(this._selectedTexture);
             }
-            else if (this._viewPort.IsVegetationSelected)
+            else if (this._viewPort.IsMapElementSelected)
             {
-                this._viewPort.CreateVegetation(this.selectedEVegetation);
+                this._viewPort.CreateMapElement(this.selectedEVegetation);
             }
             else if (this._viewPort.IsFillTextureSelected)
             {
@@ -1369,7 +1369,7 @@ using Timer = System.Windows.Forms.Timer;
         /// </param>
         private void vegetationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this._viewPort.IsVegetationSelected = true;
+            this._viewPort.IsMapElementSelected = true;
         }
 
         #endregion

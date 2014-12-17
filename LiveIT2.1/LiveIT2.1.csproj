@@ -108,7 +108,7 @@
     <Compile Include="Textures\Texture.cs" />
     <Compile Include="Vegetation\Tree.cs" />
     <Compile Include="Utils\RandomGenerator.cs" />
-    <Compile Include="Vegetation\Vegetation.cs" />
+    <Compile Include="Vegetation\MapElement.cs" />
     <Compile Include="Enums\EmapElements.cs" />
     <Compile Include="Vehicules\Vehicule.cs" />
     <Compile Include="Viewport\MainViewPortDraw.cs" />

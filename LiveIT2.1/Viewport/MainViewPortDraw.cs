@@ -101,7 +101,7 @@ namespace LiveIT2._1.Viewport
                 this.PutAnimalSelector(g);
             }
 
-            if (this.putVegetation)
+            if (this.putMapElement)
             {
                 this.PutVegetationSelector(g);
             }
@@ -512,8 +512,8 @@ namespace LiveIT2._1.Viewport
                 {
                     count++;
                     this.selectedBoxes.Add(this.map[this.boxList[i].Line, this.boxList[i].Column]);
-                    this.vegetationSelectorCursor.X = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.X;
-                    this.vegetationSelectorCursor.Y = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.Y;
+                    this.elementSelectorCursor.X = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.X;
+                    this.elementSelectorCursor.Y = this.map[this.boxList[i].Line, this.boxList[i].Column].Area.Y;
                     g.FillEllipse(
                         new SolidBrush(Color.Brown),
                         new Rectangle(this.mouseRect.X, this.mouseRect.Y, this.mouseRect.Width, this.mouseRect.Height));

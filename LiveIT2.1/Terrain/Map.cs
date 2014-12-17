@@ -101,7 +101,7 @@ namespace LiveIT2._1.Terrain
         /// <summary>
         ///     The _vegetation.
         /// </summary>
-        private List<Vegetation> _vegetation = new List<Vegetation>();
+        private List<MapElement> _vegetation = new List<MapElement>();
 
         /// <summary>
         ///     The _view port.
@@ -343,7 +343,7 @@ namespace LiveIT2._1.Terrain
         /// <summary>
         ///     Gets or sets the vegetation.
         /// </summary>
-        public List<Vegetation> Vegetation
+        public List<MapElement> Vegetation
         {
             get
             {
@@ -479,9 +479,9 @@ namespace LiveIT2._1.Terrain
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        public List<Vegetation> GetOverlappedVegetation(Rectangle r)
+        public List<MapElement> GetOverlappedVegetation(Rectangle r)
         {
-            var vegetationList = new List<Vegetation>();
+            var vegetationList = new List<MapElement>();
             for (int i = 0; i < this.Vegetation.Count; i++)
             {
                 if (this.Vegetation[i].Area.IntersectsWith(r))

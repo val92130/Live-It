@@ -707,7 +707,7 @@ namespace LiveIT2._1.Animals
             {
                 foreach (Box b in this.BoxList)
                 {
-                    foreach (Vegetation vegetation in this._map.Vegetation)
+                    foreach (MapElement vegetation in this._map.Vegetation)
                     {
                         if (vegetation.Area.IntersectsWith(this.Area))
                         {

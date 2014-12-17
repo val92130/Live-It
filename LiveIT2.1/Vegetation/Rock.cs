@@ -19,7 +19,7 @@ namespace LiveIT2._1.Vegetation
     ///     The rock.
     /// </summary>
     [Serializable]
-    public class Rock : Vegetation
+    public class Rock : MapElement
     {
         #region Constructors and Destructors
 

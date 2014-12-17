@@ -1077,7 +1077,7 @@ namespace LiveIT2._1.Textures
         /// <returns>
         /// The <see cref="Bitmap"/>.
         /// </returns>
-        public Bitmap GetTexture(Vegetation vegetation)
+        public Bitmap GetTexture(MapElement vegetation)
         {
             switch (vegetation.Texture)
             {
