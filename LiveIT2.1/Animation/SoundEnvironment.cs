@@ -173,7 +173,7 @@ namespace LiveIT2._1.Animation
             this.waveOutCarRunning.Volume = 0.5f;
 
             var readerSpi = new WaveFileReader( "../../../sounds/Spi.wav" );
-            var loopSpi = new LoopStream( readerCarRunning );
+            var loopSpi = new LoopStream( readerSpi );
             this.waveOutSpi = new WaveOut();
             this.waveOutSpi.Init( loopSpi );
             this.waveOutSpi.Volume = 0.5f;
@@ -233,6 +233,14 @@ namespace LiveIT2._1.Animation
             if( waveOutSpi.PlaybackState == PlaybackState.Stopped )
             {
                 waveOutSpi.Play();
+            }
+        }
+
+        public void SpiStop()
+        {
+            if( waveOutSpi.PlaybackState == PlaybackState.Playing )
+            {
+                waveOutSpi.Stop();
             }
         }
         /// <summary>

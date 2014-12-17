@@ -974,6 +974,10 @@ namespace LiveIT2._1.Viewport
                                 {
                                     this.sounds.SpiVoice();
                                 }
+                                else
+                                {
+                                    this.sounds.SpiStop();
+                                }
                             }
                         }
                     }
