@@ -655,8 +655,23 @@ namespace LiveIT2._1.Viewport
                 case EmapElements.House:
                     v = new House(this.map, this.elementSelectorCursor);
                     break;
+                case EmapElements.FlowerPot:
+                    v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.FlowerPot );
+                    break;
+                case EmapElements.Barrel:
+                    v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Barrel );
+                    break;
+                case EmapElements.Chair:
+                    v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Chair );
+                    break;
+                case EmapElements.Shelf:
+                    v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Shelf );
+                    break;
+                case EmapElements.Panier:
+                    v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Panier );
+                    break;
                 default:
-                    throw new NotSupportedException("Unknown vegetation type");
+                    throw new NotSupportedException("Unknown element type");
             }
 
             this.map.Vegetation.Add(v);

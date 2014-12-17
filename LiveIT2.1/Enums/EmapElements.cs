@@ -49,7 +49,13 @@ namespace LiveIT2._1.Enums
         /// </summary>
         Rock3,
 
-        House
+        House,
+        Chair,
+        Shelf,
+        Table,
+        FlowerPot,
+        Barrel,
+        Panier
 
     }
 }

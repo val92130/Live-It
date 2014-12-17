@@ -31,12 +31,12 @@ namespace LiveIT2._1.Vegetation
         /// <param name="StartPosition">
         /// The start position.
         /// </param>
-        public Furniture( Map map, Point StartPosition )
+        public Furniture( Map map, Point StartPosition, EmapElements e )
             : base( map, StartPosition )
         {
 
-            this.Texture = EmapElements.House;
-            this.Size = new Size( 1200, 1200 );
+            this.Texture = e;
+            this.Size = new Size( 300, 300 );
         }
 
         #endregion
