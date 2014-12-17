@@ -423,7 +423,25 @@ using Timer = System.Windows.Forms.Timer;
                 {
                     if( _viewPort.Player.IsInHouse )
                     {
-                        LoadMap( "../../../maps/House.lim", true );
+                        if( _currentMap == "" || _currentMap == null )
+                        {
+                            t.Stop();
+                            var saveBox = new SaveFileDialog();
+                            saveBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
+                            if( saveBox.ShowDialog() == DialogResult.OK )
+                            {
+                                
+                                this._map.Save( saveBox.FileName );
+                                _currentMap = saveBox.FileName;
+                                LoadMap( "../../../maps/House.lim", true );
+                                t.Start();
+                            }
+                        }
+                        else
+                        {
+                            LoadMap( "../../../maps/House.lim", true );
+                        }
+                        
                     }
                 }
 
