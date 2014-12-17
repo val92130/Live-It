@@ -446,10 +446,12 @@ using Timer = System.Windows.Forms.Timer;
                 }
 
             }
-
-            g.DrawString( _currentMap + " : current Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 500, 500 ) );
-            g.DrawString( _previousMap + " : previous Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 700, 700 ) );
-
+            if( _map.ShowDebug )
+            {
+                g.DrawString( _currentMap + " : current Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 500, 500 ) );
+                g.DrawString( _previousMap + " : previous Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 700, 700 ) );
+            }
+            
             _viewPort.CameraSmoothness = trackBar1.Value * 10;
 
             _cameraSmoothnessLabel.Text = _viewPort.CameraSmoothness.ToString();
