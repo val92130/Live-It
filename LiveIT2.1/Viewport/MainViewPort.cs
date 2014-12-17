@@ -972,7 +972,7 @@ namespace LiveIT2._1.Viewport
                                 }
                                 if (vegetation.Texture == EmapElements.Spi)
                                 {
-                                    this.Player.SpiVoice();
+                                    this.sounds.SpiVoice();
                                 }
                             }
                         }
