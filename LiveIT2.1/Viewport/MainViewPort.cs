@@ -673,6 +673,9 @@ namespace LiveIT2._1.Viewport
                 case EmapElements.Panier:
                     v = new Furniture( this.map, this.elementSelectorCursor, EmapElements.Panier );
                     break;
+                case EmapElements.Spi:
+                    v = new Spi(this.map, this.elementSelectorCursor);
+                    break;
                 default:
                     throw new NotSupportedException("Unknown element type");
             }
