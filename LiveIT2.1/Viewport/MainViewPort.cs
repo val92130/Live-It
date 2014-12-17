@@ -970,6 +970,10 @@ namespace LiveIT2._1.Viewport
                                 {
                                     this.Player.notAlloudToMove();
                                 }
+                                if (vegetation.Texture == EmapElements.Spi)
+                                {
+                                    this.Player.SpiVoice();
+                                }
                             }
                         }
                     }
