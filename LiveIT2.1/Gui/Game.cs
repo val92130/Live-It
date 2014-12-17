@@ -1557,5 +1557,30 @@ using Timer = System.Windows.Forms.Timer;
             _selectedTexture = EBoxGround.Exit;
         }
 
+        private void chairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.Chair;
+        }
+
+        private void tableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.Table;
+        }
+
+        private void bToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.Barrel;
+        }
+
+        private void flowerPotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.FlowerPot;
+        }
+
+        private void shelfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedEVegetation = EmapElements.Shelf;
+        }
+
     }
 }

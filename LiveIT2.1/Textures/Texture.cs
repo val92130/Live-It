@@ -61,7 +61,7 @@ namespace LiveIT2._1.Textures
        
 
 
-        /// <summary>
+        /// <summary> 
         ///     The _car down list.
         /// </summary>
         private readonly List<Bitmap> _carDownList = new List<Bitmap>();
@@ -349,6 +349,13 @@ namespace LiveIT2._1.Textures
         private readonly Bitmap _textureRock3;
 
         private readonly Bitmap _textureHouse;
+        private readonly Bitmap _chair;
+        private readonly Bitmap _barrel;
+        private readonly Bitmap _flowerPot;
+        private readonly Bitmap _flowerPot2;
+        private readonly Bitmap _shelf;
+        private readonly Bitmap _table;
+        private readonly Bitmap _table2;
 
         /// <summary>
         ///     The _texture snow.
@@ -796,7 +803,13 @@ namespace LiveIT2._1.Textures
             this._textureRock2 = new Bitmap(@"..\..\..\assets\Vegetation\Rock2.gif");
             this._textureRock3 = new Bitmap(@"..\..\..\assets\Vegetation\Rock3.gif");
             this._textureHouse = new Bitmap(@"..\..\..\assets\Houses\house.png");
-
+            this._chair = new Bitmap(@"..\..\..\assets\Houses\Furnitures\Chair.png");
+            this._table = new Bitmap(@"..\..\..\assets\Houses\Furnitures\Table.png");
+            this._table2 = new Bitmap(@"..\..\..\assets\Houses\Furnitures\Table2.png");
+            this._shelf = new Bitmap(@"..\..\..\assets\Houses\Furnitures\Shelf.png");
+            this._flowerPot = new Bitmap(@"..\..\..\assets\Houses\Furnitures\FlowerPot.png");
+            this._flowerPot2 = new Bitmap(@"..\..\..\assets\Houses\Furnitures\FlowerPot2.png");
+            this._barrel = new Bitmap(@"..\..\..\assets\Houses\Furnitures\Barrel.png");
             this._missileDown = new Bitmap( @"..\..\..\assets\Tank\Missile-Down\a.png" );
             this._missileUp = new Bitmap( @"..\..\..\assets\Tank\Missile-Up\a.png" );
             this._missileLeft = new Bitmap( @"..\..\..\assets\Tank\Missile-Left\a.png" );
@@ -1127,6 +1140,16 @@ namespace LiveIT2._1.Textures
                     return this._textureRock3;
                 case EmapElements.House:
                     return this._textureHouse;
+                case EmapElements.Chair:
+                    return this._chair;
+                case EmapElements.Barrel:
+                    return this._barrel;
+                case EmapElements.Shelf:
+                    return this._shelf;
+                case EmapElements.FlowerPot:
+                    return this._flowerPot;
+                case EmapElements.Table:
+                    return this._table;
                 default:
                     return this._textureTree;
             }
