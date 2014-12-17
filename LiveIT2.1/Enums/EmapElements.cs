@@ -55,7 +55,8 @@ namespace LiveIT2._1.Enums
         Table,
         FlowerPot,
         Barrel,
-        Panier
+        Panier,
 
+        Spi
     }
 }
