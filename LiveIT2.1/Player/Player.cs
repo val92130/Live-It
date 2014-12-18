@@ -85,7 +85,7 @@ namespace LiveIT2._1.Player
             this.Speed = 0;
             MaxSpeed = 30;
             this.Acceleration = 10;
-            _collisionTextures = new List<EBoxGround>() { EBoxGround.Wall };
+            _collisionTextures = new List<EBoxGround>() { EBoxGround.Wall, EBoxGround.Water };
         }
 
         #endregion

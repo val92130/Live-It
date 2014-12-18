@@ -39,7 +39,7 @@ namespace LiveIT2._1.Terrain
         ///     The _animal list.
         /// </summary>
         private List<Animal> _animalList;
-        private List<MapElement> _elements;
+        private List<EmapElements> _elements;
 
         /// <summary>
         ///     The _ground.
@@ -92,6 +92,7 @@ namespace LiveIT2._1.Terrain
             this._relativePosition = new Point(line, column);
             this._relativeSize = new Size(this._map.BoxSize, this._map.BoxSize);
             this._animalList = new List<Animal>();
+            this._elements = new List<EmapElements>();
         }
 
         #endregion
@@ -274,7 +275,7 @@ namespace LiveIT2._1.Terrain
                 this._animalList.Add(a);
             }
         }
-        public void AddElement(MapElement e)
+        public void AddElement(EmapElements e)
         {
             if (!this._elements.Contains(e))
             {
