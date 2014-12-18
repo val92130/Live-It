@@ -53,7 +53,7 @@ namespace LiveIT2._1.Vehicules
             this._map = map;
             this.Texture = ECarTexture.Tank;
             this.Size = new Size(1000, 1000);
-            this.Speed = 20000;
+            this.Speed = 9000;
             this._missiles = new List<Missile>();
         }
 

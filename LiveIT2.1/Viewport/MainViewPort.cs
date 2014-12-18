@@ -588,7 +588,7 @@ namespace LiveIT2._1.Viewport
             this.map.Animals.Add(a);
         }
 
-        public void CreateAnimal(EAnimalTexture eAnimalType, Point StartPosition, bool IsNewBorn)
+        public void CreateAnimal(EAnimalTexture eAnimalType, Point StartPosition, bool IsNewBorn, Animal mother)
         {
             Animal a;
             switch (eAnimalType.ToString())
@@ -620,7 +620,7 @@ namespace LiveIT2._1.Viewport
                 default:
                     throw new NotSupportedException("Unknown animal type");
             }
-
+            a.Mother = mother;
             sounds.PlaySpawnSound(a);
             this.map.Animals.Add(a);
         }

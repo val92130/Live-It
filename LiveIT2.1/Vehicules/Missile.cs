@@ -91,7 +91,7 @@ namespace LiveIT2._1.Vehicules
             {
                 this._position = StartPosition;
                 this._size = new Size(80, 80);
-                this.Speed = 90000;
+                this.Speed = 125000;
                 this._map = map;
                 this._tank = tank;
                 this._movingDirection = Direction;

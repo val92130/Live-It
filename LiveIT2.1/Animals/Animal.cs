@@ -152,6 +152,8 @@ namespace LiveIT2._1.Animals
         /// </summary>
         private Point _targetLocation;
 
+        private Animal _mother;
+
         /// <summary>
         ///     The _texture.
         /// </summary>
@@ -239,6 +241,12 @@ namespace LiveIT2._1.Animals
             {
                 return this._animalsAround;
             }
+        }
+
+        internal Animal Mother
+        {
+            get { return _mother; }
+            set { _mother = value; }
         }
 
         public bool IsHurt
@@ -696,7 +704,15 @@ namespace LiveIT2._1.Animals
                             {
                                 this.Hunger += 30;
                                 this._animalsAround[i].Hunger += 30;
-                                this._map.ViewPort.CreateAnimal(this.Texture, this.Position, true);
+                                if( this.ESex == Enums.ESex.Female )
+                                {
+                                    this._map.ViewPort.CreateAnimal( this.Texture, this.Position, true, this );
+                                }
+                                else
+                                {
+                                    this._map.ViewPort.CreateAnimal( this.Texture, this.Position, true, _animalsAround[i] );
+                                }
+                                
                             }
                         }
                     }
@@ -917,6 +933,13 @@ namespace LiveIT2._1.Animals
             this.RelativePosition = new Point(newXpos, newYpos);
             this.RelativeSize = new Size(newWidth, newHeight);
 
+            if( this.Size.Width < this._finalSize.Width )
+            {
+                if( this.Mother != null )
+                {
+                    this.Direction = this.Mother.Direction;
+                }
+            }
 
             if( !this.IsHurt )
             {
