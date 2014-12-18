@@ -689,7 +689,7 @@ namespace LiveIT2._1.Animals
                     if (this.ESex != this._animalsAround[i].ESex)
                     {
                         if (this.Hunger < 20 && this._animalsAround[i].Hunger < 20 && this.Health > 70
-                            && this._animalsAround[i].Health > 70)
+                            && this._animalsAround[i].Health > 70 && this.Size.Width >= this._finalSize.Width)
                         {
                             this.ChangePosition(this._animalsAround[i].Position);
                             if (this.Area.IntersectsWith(this._animalsAround[i].Area))
@@ -736,6 +736,8 @@ namespace LiveIT2._1.Animals
                                     if (!this.WalkableBoxes.Contains(this._map.Boxes[i]))
                                     {
                                         this.WalkableBoxes.Add(this._map.Boxes[i]);
+                                        this.Speed = 5000;
+                                        this.ChangePosition();
                                     }
                                 }
 
