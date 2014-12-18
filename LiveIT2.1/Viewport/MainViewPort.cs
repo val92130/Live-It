@@ -683,7 +683,7 @@ namespace LiveIT2._1.Viewport
             {
                 if( v.Area.IntersectsWith( b.Area ) )
                 {
-                    b.AddElement( v );
+                    b.AddElement( v.Texture );
                 }
             }
             this.map.Vegetation.Add(v);
