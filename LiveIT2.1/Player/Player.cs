@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace LiveIT2._1.Player
 {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
 
@@ -15,7 +16,6 @@ namespace LiveIT2._1.Player
     using LiveIT2._1.Terrain;
     using LiveIT2._1.Textures;
     using LiveIT2._1.Vehicules;
-    using System;
 
     /// <summary>
     ///     The player.
