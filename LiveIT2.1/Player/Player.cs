@@ -9,13 +9,13 @@
 namespace LiveIT2._1.Player
 {
     using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-
-    using LiveIT2._1.Enums;
-    using LiveIT2._1.Terrain;
-    using LiveIT2._1.Textures;
-    using LiveIT2._1.Vehicules;
+using System.Collections.Generic;
+using System.Drawing;
+using LiveIT2._1.Enums;
+using LiveIT2._1.Terrain;
+using LiveIT2._1.Textures;
+using LiveIT2._1.Vegetation;
+using LiveIT2._1.Vehicules;
 
     /// <summary>
     ///     The player.
@@ -61,6 +61,7 @@ namespace LiveIT2._1.Player
         private  int _acceleration;
 
         List<EBoxGround> _collisionTextures;
+        List<EmapElements> _collisionElements;
 
 
         #endregion
@@ -86,6 +87,7 @@ namespace LiveIT2._1.Player
             MaxSpeed = 30;
             this.Acceleration = 10;
             _collisionTextures = new List<EBoxGround>() { EBoxGround.Wall };
+            _collisionElements = new List<EmapElements>();
         }
 
         #endregion
