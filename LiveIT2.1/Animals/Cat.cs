@@ -107,7 +107,9 @@ namespace LiveIT2._1.Animals
                 this.AnimalsAround[i].Speed = (int)(this.Speed * 2.5);
                 if (this.Area.IntersectsWith(this.AnimalsAround[i].Area))
                 {
+                    Random r = new Random();
                     this.AnimalsAround[i].Die();
+                    this.Hunger -= r.Next(30, 40);
                 }
             }
         }
