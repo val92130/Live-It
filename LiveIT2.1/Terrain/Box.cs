@@ -15,6 +15,7 @@ namespace LiveIT2._1.Terrain
     using LiveIT2._1.Animals;
     using LiveIT2._1.Enums;
     using LiveIT2._1.Textures;
+    using LiveIT2._1.Vegetation;
 
     /// <summary>
     ///     The box.
@@ -38,7 +39,7 @@ namespace LiveIT2._1.Terrain
         ///     The _animal list.
         /// </summary>
         private List<Animal> _animalList;
-        private List<EmapElements> _elements;
+        private List<MapElement> _elements;
 
         /// <summary>
         ///     The _ground.
@@ -273,7 +274,7 @@ namespace LiveIT2._1.Terrain
                 this._animalList.Add(a);
             }
         }
-        public void AddElement(EmapElements e)
+        public void AddElement(MapElement e)
         {
             if (!this._elements.Contains(e))
             {
