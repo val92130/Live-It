@@ -38,12 +38,14 @@ namespace LiveIT2._1.Terrain
         ///     The _animal list.
         /// </summary>
         private List<Animal> _animalList;
+        private List<EmapElements> _elements;
 
         /// <summary>
         ///     The _ground.
         /// </summary>
         private EBoxGround _ground;
 
+        
         /// <summary>
         ///     The _map.
         /// </summary>
@@ -269,6 +271,14 @@ namespace LiveIT2._1.Terrain
             {
                 a.AddToList(this);
                 this._animalList.Add(a);
+            }
+        }
+        public void AddElement(EmapElements e)
+        {
+            if (!this._elements.Contains(e))
+            {
+               
+                this._elements.Add(e);
             }
         }
 
