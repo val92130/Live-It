@@ -679,7 +679,13 @@ namespace LiveIT2._1.Viewport
                 default:
                     throw new NotSupportedException("Unknown element type");
             }
-
+            foreach( Box b in BoxList )
+            {
+                if( v.Area.IntersectsWith( b.Area ) )
+                {
+                    b.AddElement( v );
+                }
+            }
             this.map.Vegetation.Add(v);
         }
 
