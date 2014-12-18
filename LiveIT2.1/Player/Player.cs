@@ -87,7 +87,7 @@ using LiveIT2._1.Vehicules;
             MaxSpeed = 30;
             this.Acceleration = 10;
             _collisionTextures = new List<EBoxGround>() { EBoxGround.Wall, EBoxGround.Water };
-            _collisionElements = new List<EmapElements>() {EmapElements.Table, EmapElements.Barrel, EmapElements.Chair, EmapElements.Shelf, EmapElements.Chair };
+            _collisionElements = new List<EmapElements>() {EmapElements.Table, EmapElements.Barrel, EmapElements.Chair, EmapElements.Shelf, EmapElements.FlowerPot };
         }
 
         #endregion
@@ -353,9 +353,17 @@ using LiveIT2._1.Vehicules;
             {
                 if( b.Left != null )
                 {
-                    if( _collisionTextures.Contains(b.Left.Ground) )
+                    if( _collisionTextures.Contains(b.Left.Ground))
                     {
                         leftCollide = true;
+                    }
+
+                    foreach( EmapElements e in b.Left.Elements )
+                    {
+                        if( _collisionElements.Contains( e ) )
+                        {
+                            leftCollide = true;
+                        }
                     }
                 }
                 if( b.Right != null )
@@ -364,12 +372,26 @@ using LiveIT2._1.Vehicules;
                     {
                         rightCollide = true;
                     }
+                    foreach( EmapElements e in b.Right.Elements )
+                    {
+                        if( _collisionElements.Contains( e ) )
+                        {
+                            rightCollide = true;
+                        }
+                    }
                 }
                 if( b.Top != null )
                 {
                     if(_collisionTextures.Contains( b.Top.Ground) )
                     {
                         upCollide = true;
+                    }
+                    foreach( EmapElements e in b.Top.Elements )
+                    {
+                        if( _collisionElements.Contains( e ) )
+                        {
+                            upCollide = true;
+                        }
                     }
                 }
                 if( b.Bottom != null )
@@ -378,12 +400,23 @@ using LiveIT2._1.Vehicules;
                     {
                         downCollide = true;
                     }
+                    foreach( EmapElements e in b.Bottom.Elements )
+                    {
+                        if( _collisionElements.Contains( e ) )
+                        {
+                            downCollide = true;
+                        }
+                    }
                 }
                 if( _map.ShowDebug )
                 {
                     _map.ViewPort.DrawRectangleInViewPort( g, b.Area, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMapViewPort, _map.ViewPort.MiniMap );
                 }
+
             }
+    
+
+           
             g.DrawRectangle(
                 Pens.Black, 
                 new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
