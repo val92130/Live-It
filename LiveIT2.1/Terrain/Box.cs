@@ -45,7 +45,6 @@ namespace LiveIT2._1.Terrain
         ///     The _ground.
         /// </summary>
         private EBoxGround _ground;
-
         
         /// <summary>
         ///     The _map.
@@ -163,7 +162,13 @@ namespace LiveIT2._1.Terrain
                 this._ground = value;
             }
         }
-
+        public  List<EmapElements> Elements  
+        {
+            get
+            {
+                return this._elements;
+            }
+        }
         /// <summary>
         ///     Gets the left.
         /// </summary>
