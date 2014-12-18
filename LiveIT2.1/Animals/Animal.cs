@@ -152,6 +152,8 @@ namespace LiveIT2._1.Animals
         /// </summary>
         private Point _targetLocation;
 
+        private Animal _mother;
+
         /// <summary>
         ///     The _texture.
         /// </summary>
@@ -239,6 +241,12 @@ namespace LiveIT2._1.Animals
             {
                 return this._animalsAround;
             }
+        }
+
+        internal Animal Mother
+        {
+            get { return _mother; }
+            set { _mother = value; }
         }
 
         public bool IsHurt
@@ -689,14 +697,22 @@ namespace LiveIT2._1.Animals
                     if (this.ESex != this._animalsAround[i].ESex)
                     {
                         if (this.Hunger < 20 && this._animalsAround[i].Hunger < 20 && this.Health > 70
-                            && this._animalsAround[i].Health > 70)
+                            && this._animalsAround[i].Health > 70 && this.Size.Width >= this._finalSize.Width)
                         {
                             this.ChangePosition(this._animalsAround[i].Position);
                             if (this.Area.IntersectsWith(this._animalsAround[i].Area))
                             {
                                 this.Hunger += 30;
                                 this._animalsAround[i].Hunger += 30;
-                                this._map.ViewPort.CreateAnimal(this.Texture, this.Position, true);
+                                if( this.ESex == Enums.ESex.Female )
+                                {
+                                    this._map.ViewPort.CreateAnimal( this.Texture, this.Position, true, this );
+                                }
+                                else
+                                {
+                                    this._map.ViewPort.CreateAnimal( this.Texture, this.Position, true, _animalsAround[i] );
+                                }
+                                
                             }
                         }
                     }
@@ -736,6 +752,8 @@ namespace LiveIT2._1.Animals
                                     if (!this.WalkableBoxes.Contains(this._map.Boxes[i]))
                                     {
                                         this.WalkableBoxes.Add(this._map.Boxes[i]);
+                                        this.Speed = 5000;
+                                        this.ChangePosition();
                                     }
                                 }
 
@@ -915,6 +933,13 @@ namespace LiveIT2._1.Animals
             this.RelativePosition = new Point(newXpos, newYpos);
             this.RelativeSize = new Size(newWidth, newHeight);
 
+            if( this.Size.Width < this._finalSize.Width )
+            {
+                if( this.Mother != null )
+                {
+                    this.Direction = this.Mother.Direction;
+                }
+            }
 
             if( !this.IsHurt )
             {

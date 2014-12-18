@@ -15,6 +15,7 @@ namespace LiveIT2._1.Terrain
     using LiveIT2._1.Animals;
     using LiveIT2._1.Enums;
     using LiveIT2._1.Textures;
+    using LiveIT2._1.Vegetation;
 
     /// <summary>
     ///     The box.
@@ -38,12 +39,13 @@ namespace LiveIT2._1.Terrain
         ///     The _animal list.
         /// </summary>
         private List<Animal> _animalList;
+        private List<EmapElements> _elements;
 
         /// <summary>
         ///     The _ground.
         /// </summary>
         private EBoxGround _ground;
-
+        
         /// <summary>
         ///     The _map.
         /// </summary>
@@ -89,6 +91,7 @@ namespace LiveIT2._1.Terrain
             this._relativePosition = new Point(line, column);
             this._relativeSize = new Size(this._map.BoxSize, this._map.BoxSize);
             this._animalList = new List<Animal>();
+            this._elements = new List<EmapElements>();
         }
 
         #endregion
@@ -159,7 +162,13 @@ namespace LiveIT2._1.Terrain
                 this._ground = value;
             }
         }
-
+        public  List<EmapElements> Elements  
+        {
+            get
+            {
+                return this._elements;
+            }
+        }
         /// <summary>
         ///     Gets the left.
         /// </summary>
@@ -269,6 +278,14 @@ namespace LiveIT2._1.Terrain
             {
                 a.AddToList(this);
                 this._animalList.Add(a);
+            }
+        }
+        public void AddElement(EmapElements e)
+        {
+            if (!this._elements.Contains(e))
+            {
+               
+                this._elements.Add(e);
             }
         }
 
@@ -414,5 +431,6 @@ namespace LiveIT2._1.Terrain
         }
 
         #endregion
+
     }
 }
