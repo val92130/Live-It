@@ -36,8 +36,7 @@ namespace LiveIT2._1.Viewport
             {
                 if (this.followedAnimal != null)
                 {
-                    this.AdjustViewPort(this.followedAnimal);
-                }
+                    this.AdjustViewPort(this.followedAnimal);                }
                 else
                 {
                     this.isFollowingAnAnimal = false;
@@ -115,6 +114,17 @@ namespace LiveIT2._1.Viewport
             this.CheckIfPlayerHasEnteredACar();
 
             this.HasClicked = false;
+
+            if( this.IsFollowingAnAnimal )
+            {
+                if( followedAnimal != null )
+                {
+                    g.DrawString( "Health : " + followedAnimal.Health.ToString(), new Font( "Arial", 10f ), Brushes.Black, new Point( followedAnimal.RelativePosition.X, followedAnimal.RelativePosition.Y - 60 ) );
+                    g.DrawString( "Sex : " + followedAnimal.ESex.ToString(), new Font( "Arial", 10f ), Brushes.Black, new Point( followedAnimal.RelativePosition.X, followedAnimal.RelativePosition.Y - 40 ) );
+                    g.DrawString( "Hunger : " + followedAnimal.Hunger.ToString(), new Font( "Arial", 10f ), Brushes.Black, new Point( followedAnimal.RelativePosition.X, followedAnimal.RelativePosition.Y - 20 ) );
+
+                }
+            }
         }
 
         /// <summary>

@@ -75,12 +75,20 @@ namespace LiveIT2._1.Viewport
                     if (centimeters <= 0)
                     {
                         this.player.EMovingDirection = EMovingDirection.Left;
-                        this.player.Position = new Point( this.player.Position.X - player.Speed, this.player.Position.Y );
+                        if( player.LeftCollide == false )
+                        {
+                            this.player.Position = new Point( this.player.Position.X - player.Speed, this.player.Position.Y );
+                        }
+                        
                     }
                     else
                     {
                         this.player.EMovingDirection = EMovingDirection.Right;
-                        this.player.Position = new Point( this.player.Position.X + player.Speed, this.player.Position.Y );
+                        if( player.RightCollide == false )
+                        {
+                            this.player.Position = new Point( this.player.Position.X + player.Speed, this.player.Position.Y );
+                        }
+                        
                     }
                     this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
                     this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
@@ -132,12 +140,20 @@ namespace LiveIT2._1.Viewport
                 if (centimeters > 0)
                 {
                     this.player.EMovingDirection = EMovingDirection.Down;
-                    this.player.Position = new Point( this.player.Position.X, this.player.Position.Y + this.player.Speed );
+                    if( player.DownCollide == false )
+                    {
+                        this.player.Position = new Point( this.player.Position.X, this.player.Position.Y + this.player.Speed );
+                    }
+                    
                 }
                 else
                 {
                     this.player.EMovingDirection = EMovingDirection.Up;
-                    this.player.Position = new Point( this.player.Position.X, this.player.Position.Y - this.player.Speed );
+                    if( player.UpCollide == false )
+                    {
+                        this.player.Position = new Point( this.player.Position.X, this.player.Position.Y - this.player.Speed );
+                    }
+                    
                 }
                 
                 this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);

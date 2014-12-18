@@ -30,6 +30,8 @@ namespace LiveIT2._1.Player
         /// </summary>
         private SizeF _direction;
 
+        bool leftCollide, rightCollide, upCollide, downCollide;
+
         /// <summary>
         ///     The _map.
         /// </summary>
@@ -58,6 +60,8 @@ namespace LiveIT2._1.Player
         private Size _size;
         private  int _acceleration;
 
+        List<EBoxGround> _collisionTextures;
+
 
         #endregion
 
@@ -81,6 +85,7 @@ namespace LiveIT2._1.Player
             this.Speed = 0;
             MaxSpeed = 30;
             this.Acceleration = 10;
+            _collisionTextures = new List<EBoxGround>() { EBoxGround.Wall };
         }
 
         #endregion
@@ -131,8 +136,8 @@ namespace LiveIT2._1.Player
             get
             {
                 return new Rectangle(
-                    new Point(this._position.X, this._position.Y + (this._size.Height / 2)), 
-                    new Size(this._size.Width, this._size.Height / 2));
+                    new Point(this._position.X, this._position.Y + (this._size.Height / 3)), 
+                    new Size(this._size.Width, this._size.Height / 3));
             }
         }
 
@@ -236,6 +241,23 @@ namespace LiveIT2._1.Player
             }
         }
 
+        public bool LeftCollide
+        {
+            get { return leftCollide; }
+        }
+        public bool RightCollide
+        {
+            get { return rightCollide; }
+        }
+        public bool UpCollide
+        {
+            get { return upCollide; }
+        }
+        public bool DownCollide
+        {
+            get { return downCollide; }
+        }
+
         /// <summary>
         ///     Gets or sets the speed.
         /// </summary>
@@ -320,7 +342,46 @@ namespace LiveIT2._1.Player
                     texture.LoadTexture(this), 
                     new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
             }
+            rightCollide = false;
+            upCollide = false;
+            downCollide = false;
+            leftCollide = false;
 
+            foreach( Box b in BoxList )
+            {
+                if( b.Left != null )
+                {
+                    if( _collisionTextures.Contains(b.Left.Ground) )
+                    {
+                        leftCollide = true;
+                    }
+                }
+                if( b.Right != null )
+                {
+                    if( _collisionTextures.Contains(b.Right.Ground) )
+                    {
+                        rightCollide = true;
+                    }
+                }
+                if( b.Top != null )
+                {
+                    if(_collisionTextures.Contains( b.Top.Ground) )
+                    {
+                        upCollide = true;
+                    }
+                }
+                if( b.Bottom != null )
+                {
+                    if( _collisionTextures.Contains(b.Bottom.Ground) )
+                    {
+                        downCollide = true;
+                    }
+                }
+                if( _map.ShowDebug )
+                {
+                    _map.ViewPort.DrawRectangleInViewPort( g, b.Area, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMapViewPort, _map.ViewPort.MiniMap );
+                }
+            }
             g.DrawRectangle(
                 Pens.Black, 
                 new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
