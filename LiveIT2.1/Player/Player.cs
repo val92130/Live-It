@@ -87,7 +87,7 @@ using LiveIT2._1.Vehicules;
             MaxSpeed = 30;
             this.Acceleration = 10;
             _collisionTextures = new List<EBoxGround>() { EBoxGround.Wall, EBoxGround.Water };
-            _collisionElements = new List<EmapElements>();
+            _collisionElements = new List<EmapElements>() {EmapElements.Table, EmapElements.Barrel, EmapElements.Chair, EmapElements.Shelf, EmapElements.Chair };
         }
 
         #endregion
