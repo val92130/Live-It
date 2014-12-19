@@ -738,6 +738,11 @@ namespace LiveIT2._1.Animals
                         }
                     }
 
+                    if( b.Area.IntersectsWith( this.FieldOfView ) && this.Thirst >= 60 && b.Ground == EBoxGround.Water )
+                    {
+                        this.ChangePosition( b.Area.Location );
+                    }
+
                     if (b != null)
                     {
                         if (b.Ground == EBoxGround.Water && this.Texture != EAnimalTexture.Eagle)
