@@ -221,7 +221,11 @@ namespace LiveIT2._1.Viewport
             {
                 player = new Player(this.map, new Point(0, 0));
             }
-            
+
+            if (map.IsPlayer)
+            {
+                AdjustViewPortToPlayer();
+            }
 
             // this._car = new Car(this._map, new Point(600, 600));
             // this._tank = new Tank(this._map, new Point(700, 700));
