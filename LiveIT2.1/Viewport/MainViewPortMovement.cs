@@ -90,10 +90,7 @@ namespace LiveIT2._1.Viewport
                         }
                         
                     }
-                    this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
-                    this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
-                    this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2)
-                                      + (this.player.Area.Height / 2);
+                    AdjustViewPortToPlayer();
                 }
                 else if (this.map.IsPlayer && this.map.IsInCar)
                 {
@@ -112,13 +109,17 @@ namespace LiveIT2._1.Viewport
                         this.player.Car.Position.Y );
                     }
 
-                    this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
-                    this.viewPort.X = this.player.Car.Area.X - (this.viewPort.Size.Width / 2)
-                                      + (this.player.Car.Area.Width / 2);
-                    this.viewPort.Y = this.player.Car.Area.Y - (this.viewPort.Size.Height / 2)
-                                      + (this.player.Car.Area.Height / 2);
+                    AdjustViewPortToPlayer();
                 }
             }
+        }
+
+        private void AdjustViewPortToPlayer()
+        {
+            this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
+            this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
+            this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2)
+                              + (this.player.Area.Height / 2);
         }
 
 
@@ -155,10 +156,8 @@ namespace LiveIT2._1.Viewport
                     }
                     
                 }
-                
-                this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
-                this.viewPort.X = this.player.Area.X - (this.viewPort.Size.Width / 2) + (this.player.Area.Width / 2);
-                this.viewPort.Y = this.player.Area.Y - (this.viewPort.Size.Height / 2) + (this.player.Area.Height / 2);
+
+                AdjustViewPortToPlayer();
             }
             else if (this.map.IsPlayer && this.map.IsInCar)
             {
@@ -177,11 +176,7 @@ namespace LiveIT2._1.Viewport
                     this.player.Car.Position.Y - this.Player.Car.Speed );
                 }
 
-                this.viewPort.Size = new Size(this.screen.Width * 2, this.screen.Height * 2);
-                this.viewPort.X = this.player.Car.Area.X - (this.viewPort.Size.Width / 2)
-                                   + (this.player.Car.Area.Width / 2);
-                this.viewPort.Y = this.player.Car.Area.Y - (this.viewPort.Size.Height / 2)
-                                   + (this.player.Car.Area.Height / 2);
+                AdjustViewPortToPlayer();
             }
         }
 

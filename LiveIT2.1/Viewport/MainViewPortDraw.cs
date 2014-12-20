@@ -47,6 +47,11 @@ namespace LiveIT2._1.Viewport
                 this.AdjustViewPort();
             }
 
+            if (map.IsPlayer)
+            {
+                AdjustViewPortToPlayer();
+            }
+
             // Create the rain
             var t = new Random();
             if (t.Next(MinStartRain, MaxStartRain) == 30)
@@ -125,6 +130,7 @@ namespace LiveIT2._1.Viewport
 
                 }
             }
+
         }
 
         /// <summary>

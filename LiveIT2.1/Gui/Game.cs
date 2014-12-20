@@ -180,6 +180,7 @@ using Timer = System.Windows.Forms.Timer;
         /// </summary>
         private bool up;
         private bool _hasPressedE;
+        private Point _savedPlayerPos;
 
         #endregion
 
@@ -508,6 +509,11 @@ using Timer = System.Windows.Forms.Timer;
                 {
                     _playMedicButton.Show();
                 }
+
+                if (_map.SavedPlayerPosition != null && _map.ShowDebug)
+                {
+                    g.DrawString(_map.SavedPlayerPosition.ToString(), new Font("Arial", 15f), Brushes.Black, new Point(300, 300));
+                }
             }
 
         }
@@ -530,7 +536,6 @@ using Timer = System.Windows.Forms.Timer;
                                 saveBox.Filter = "Fichier Live It Map File(*.lim)|*.lim";
                                 if (saveBox.ShowDialog() == DialogResult.OK)
                                 {
-
                                     this._map.Save(saveBox.FileName);
                                     _currentMap = saveBox.FileName;
                                     LoadMap("../../../maps/House.lim", true);
@@ -559,13 +564,18 @@ using Timer = System.Windows.Forms.Timer;
 
                     if (_viewPort.IsExitingHouse)
                     {
-                        if (_previousMap != null || _previousMap != "")
+                        g.DrawString("Press E to exit", new Font("Colibri", 20f), Brushes.Black, new Point(_viewPort.Player.RelativePosition.X, _viewPort.Player.RelativePosition.Y + 10));
+                        if (_hasPressedE)
                         {
-                            _viewPort.IsExitingHouse = false;
-                            LoadMap(_previousMap, true);
+                            if (_previousMap != null && _previousMap != "")
+                            {
+                                _viewPort.IsExitingHouse = false;
+                                LoadMap(_previousMap, true);
+                            }
                         }
-
                     }
+
+                    _viewPort.IsExitingHouse = false;
                 }
 
             }
@@ -939,6 +949,10 @@ using Timer = System.Windows.Forms.Timer;
         {
             if (!this._map.IsPlayer)
             {
+                if (_map.SavedPlayerPosition != null && _map.SavedPlayerPosition != new Point(0, 0))
+                {
+                    this._viewPort.SpawnPlayer(_map.SavedPlayerPosition);
+                }
                 this._viewPort.SpawnPlayer(this._playerPosition);
                 this._map.IsPlayer = true;
                 this._buttonSpawnPlayer.Text = "Quit";
@@ -946,7 +960,15 @@ using Timer = System.Windows.Forms.Timer;
             }
             else
             {
-                this._playerPosition = this._map.ViewPort.Player.Position;
+                if (_map.SavedPlayerPosition != null && _map.SavedPlayerPosition != new Point(0, 0))
+                {
+                    this._playerPosition = _map.SavedPlayerPosition;
+                }
+                else
+                {
+                    this._playerPosition = this._map.ViewPort.Player.Position;
+                }
+                
                 this._map.IsPlayer = false;
                 this._map.IsInCar = false;
                 this._buttonSpawnPlayer.Text = "Free Mode";
@@ -1312,6 +1334,7 @@ using Timer = System.Windows.Forms.Timer;
 
         public void LoadMap( String mapPath, bool SaveMap )
         {
+            
             _map.Save( _currentMap );
             _previousMap = _currentMap;
             _currentMap = mapPath;

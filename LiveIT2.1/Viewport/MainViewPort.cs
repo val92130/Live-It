@@ -213,7 +213,15 @@ namespace LiveIT2._1.Viewport
             this.screenLeft = new Rectangle(0, this.screen.Height / 2 - 400, 10, 800);
             this.screenRight = new Rectangle(this.screen.Right - 10, this.screen.Height / 2 - 400, 10, 800);
             _cameraSmoothness = 50;
-            player = new Player( this.map, new Point(0, 0) );
+            if (map.SavedPlayerPosition != null && map.SavedPlayerPosition != new Point(0, 0))
+            {
+                player = new Player(this.map, map.SavedPlayerPosition);
+            }
+            else
+            {
+                player = new Player(this.map, new Point(0, 0));
+            }
+            
 
             // this._car = new Car(this._map, new Point(600, 600));
             // this._tank = new Tank(this._map, new Point(700, 700));
@@ -238,6 +246,10 @@ namespace LiveIT2._1.Viewport
             }
         }
 
+        public Texture Textures
+        {
+            get { return texture; }
+        }
         public int CameraSmoothness
         {
             get { return _cameraSmoothness; }

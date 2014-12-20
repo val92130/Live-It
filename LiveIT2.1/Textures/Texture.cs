@@ -1442,7 +1442,15 @@ namespace LiveIT2._1.Textures
                     return this._playerCarTexture;
             }
 
+
+
             
+        }
+        public void DisposeAll()
+        {
+            _textureGrass.Dispose();
+            _textureGrass2.Dispose();
+            _textureWaterAnimated.Dispose();
         }
 
         

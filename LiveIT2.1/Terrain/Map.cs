@@ -60,6 +60,8 @@ namespace LiveIT2._1.Terrain
         Timer _delayMedic;
 
 
+        private Point _savedPlayerPosition;
+
         /// <summary>
         ///     The _boxes.
         /// </summary>
@@ -529,12 +531,18 @@ namespace LiveIT2._1.Terrain
         /// </param>
         public void Save(string filename)
         {
+            this.SavedPlayerPosition = this.ViewPort.Player.Position;
             Stream stream = File.Open(filename, FileMode.Create);
             var bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, this);
             stream.Close();
         }
 
+        public Point SavedPlayerPosition
+        {
+            get { return _savedPlayerPosition; }
+            set { _savedPlayerPosition = value; }
+        }
 
         /// <summary>
         /// Add aditional game logic here
