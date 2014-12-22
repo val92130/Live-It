@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._waterButton = new System.Windows.Forms.Button();
             this._dirtButton = new System.Windows.Forms.Button();
             this._snowButton = new System.Windows.Forms.Button();
@@ -40,9 +41,41 @@
             this._buttonExit = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.animalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rabbitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.elephantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mountainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.snowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.waterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.houseElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vegetationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.houseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.furnituresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowerPotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shelfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tHEBOSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehiclesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sportCarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.muteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,38 +98,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.catToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rabbitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.elephantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eagleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gazelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.desertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.forestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.grassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mountainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.snowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.waterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.houseElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileFloorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.houseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.furnituresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowerPotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shelfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tHEBOSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sportCarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -286,6 +287,70 @@
             this.animalsToolStripMenuItem.Text = "Animals";
             this.animalsToolStripMenuItem.Click += new System.EventHandler(this.animalsToolStripMenuItem_Click);
             // 
+            // catToolStripMenuItem
+            // 
+            this.catToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Cat;
+            this.catToolStripMenuItem.Name = "catToolStripMenuItem";
+            this.catToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.catToolStripMenuItem.Text = "Cat";
+            this.catToolStripMenuItem.Click += new System.EventHandler(this.catToolStripMenuItem_Click);
+            // 
+            // dogToolStripMenuItem
+            // 
+            this.dogToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Dog;
+            this.dogToolStripMenuItem.Name = "dogToolStripMenuItem";
+            this.dogToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.dogToolStripMenuItem.Text = "Dog";
+            this.dogToolStripMenuItem.Click += new System.EventHandler(this.dogToolStripMenuItem_Click);
+            // 
+            // rabbitToolStripMenuItem
+            // 
+            this.rabbitToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a;
+            this.rabbitToolStripMenuItem.Name = "rabbitToolStripMenuItem";
+            this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.rabbitToolStripMenuItem.Text = "Rabbit";
+            this.rabbitToolStripMenuItem.Click += new System.EventHandler(this.rabbitToolStripMenuItem_Click);
+            // 
+            // lionToolStripMenuItem
+            // 
+            this.lionToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.c;
+            this.lionToolStripMenuItem.Name = "lionToolStripMenuItem";
+            this.lionToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.lionToolStripMenuItem.Text = "Lion";
+            this.lionToolStripMenuItem.Click += new System.EventHandler(this.lionToolStripMenuItem_Click);
+            // 
+            // elephantToolStripMenuItem
+            // 
+            this.elephantToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.b;
+            this.elephantToolStripMenuItem.Name = "elephantToolStripMenuItem";
+            this.elephantToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.elephantToolStripMenuItem.Text = "Elephant";
+            this.elephantToolStripMenuItem.Click += new System.EventHandler(this.elephantToolStripMenuItem_Click);
+            // 
+            // cowToolStripMenuItem
+            // 
+            this.cowToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a1;
+            this.cowToolStripMenuItem.Name = "cowToolStripMenuItem";
+            this.cowToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.cowToolStripMenuItem.Text = "Cow";
+            this.cowToolStripMenuItem.Click += new System.EventHandler(this.cowToolStripMenuItem_Click);
+            // 
+            // eagleToolStripMenuItem
+            // 
+            this.eagleToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.c1;
+            this.eagleToolStripMenuItem.Name = "eagleToolStripMenuItem";
+            this.eagleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.eagleToolStripMenuItem.Text = "Eagle";
+            this.eagleToolStripMenuItem.Click += new System.EventHandler(this.eagleToolStripMenuItem_Click);
+            // 
+            // gazelleToolStripMenuItem
+            // 
+            this.gazelleToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a2;
+            this.gazelleToolStripMenuItem.Name = "gazelleToolStripMenuItem";
+            this.gazelleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
+            this.gazelleToolStripMenuItem.Text = "Gazelle";
+            this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
+            // 
             // texturesToolStripMenuItem
             // 
             this.texturesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -302,6 +367,99 @@
             this.texturesToolStripMenuItem.Text = "Textures";
             this.texturesToolStripMenuItem.Click += new System.EventHandler(this.texturesToolStripMenuItem_Click);
             // 
+            // desertToolStripMenuItem
+            // 
+            this.desertToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Desert;
+            this.desertToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.desertToolStripMenuItem.Name = "desertToolStripMenuItem";
+            this.desertToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.desertToolStripMenuItem.Text = " ";
+            this.desertToolStripMenuItem.Click += new System.EventHandler(this.desertToolStripMenuItem_Click);
+            // 
+            // forestToolStripMenuItem
+            // 
+            this.forestToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Forest;
+            this.forestToolStripMenuItem.Name = "forestToolStripMenuItem";
+            this.forestToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.forestToolStripMenuItem.Text = " ";
+            this.forestToolStripMenuItem.Click += new System.EventHandler(this.forestToolStripMenuItem_Click);
+            // 
+            // grassToolStripMenuItem
+            // 
+            this.grassToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Grass;
+            this.grassToolStripMenuItem.Name = "grassToolStripMenuItem";
+            this.grassToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.grassToolStripMenuItem.Text = " ";
+            this.grassToolStripMenuItem.Click += new System.EventHandler(this.grassToolStripMenuItem_Click);
+            // 
+            // mountainToolStripMenuItem
+            // 
+            this.mountainToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Mountain;
+            this.mountainToolStripMenuItem.Name = "mountainToolStripMenuItem";
+            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.mountainToolStripMenuItem.Text = " ";
+            this.mountainToolStripMenuItem.Click += new System.EventHandler(this.mountainToolStripMenuItem_Click);
+            // 
+            // snowToolStripMenuItem
+            // 
+            this.snowToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Snow;
+            this.snowToolStripMenuItem.Name = "snowToolStripMenuItem";
+            this.snowToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.snowToolStripMenuItem.Text = " ";
+            this.snowToolStripMenuItem.Click += new System.EventHandler(this.snowToolStripMenuItem_Click);
+            // 
+            // waterToolStripMenuItem
+            // 
+            this.waterToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Water;
+            this.waterToolStripMenuItem.Name = "waterToolStripMenuItem";
+            this.waterToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.waterToolStripMenuItem.Text = " ";
+            this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
+            // 
+            // houseElementsToolStripMenuItem
+            // 
+            this.houseElementsToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.ExitFloor;
+            this.houseElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.floorToolStripMenuItem,
+            this.wallToolStripMenuItem,
+            this.tileFloorToolStripMenuItem,
+            this.exitTextureToolStripMenuItem});
+            this.houseElementsToolStripMenuItem.Name = "houseElementsToolStripMenuItem";
+            this.houseElementsToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
+            this.houseElementsToolStripMenuItem.Text = "House Elements";
+            // 
+            // floorToolStripMenuItem
+            // 
+            this.floorToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Floor;
+            this.floorToolStripMenuItem.Name = "floorToolStripMenuItem";
+            this.floorToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.floorToolStripMenuItem.Text = "Floor";
+            this.floorToolStripMenuItem.Click += new System.EventHandler(this.floorToolStripMenuItem_Click);
+            // 
+            // wallToolStripMenuItem
+            // 
+            this.wallToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Wall;
+            this.wallToolStripMenuItem.Name = "wallToolStripMenuItem";
+            this.wallToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.wallToolStripMenuItem.Text = "Wall";
+            this.wallToolStripMenuItem.Click += new System.EventHandler(this.wallToolStripMenuItem_Click);
+            // 
+            // tileFloorToolStripMenuItem
+            // 
+            this.tileFloorToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.TileFloor;
+            this.tileFloorToolStripMenuItem.Name = "tileFloorToolStripMenuItem";
+            this.tileFloorToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.tileFloorToolStripMenuItem.Text = "Tile Floor";
+            this.tileFloorToolStripMenuItem.Click += new System.EventHandler(this.tileFloorToolStripMenuItem_Click);
+            // 
+            // exitTextureToolStripMenuItem
+            // 
+            this.exitTextureToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Exit;
+            this.exitTextureToolStripMenuItem.Name = "exitTextureToolStripMenuItem";
+            this.exitTextureToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
+            this.exitTextureToolStripMenuItem.Text = "Exit Texture";
+            this.exitTextureToolStripMenuItem.Click += new System.EventHandler(this.exitTextureToolStripMenuItem_Click);
+            // 
             // vegetationToolStripMenuItem
             // 
             this.vegetationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -317,6 +475,99 @@
             this.vegetationToolStripMenuItem.Text = "Elements";
             this.vegetationToolStripMenuItem.Click += new System.EventHandler(this.vegetationToolStripMenuItem_Click);
             // 
+            // treeToolStripMenuItem
+            // 
+            this.treeToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Tree1;
+            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.treeToolStripMenuItem.Text = "Tree";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
+            // 
+            // bushToolStripMenuItem
+            // 
+            this.bushToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Bush1;
+            this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
+            this.bushToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.bushToolStripMenuItem.Text = "Bush";
+            this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
+            // 
+            // rockToolStripMenuItem
+            // 
+            this.rockToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Rock2;
+            this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.rockToolStripMenuItem.Text = "Rock";
+            this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
+            // 
+            // houseToolStripMenuItem
+            // 
+            this.houseToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.house;
+            this.houseToolStripMenuItem.Name = "houseToolStripMenuItem";
+            this.houseToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.houseToolStripMenuItem.Text = "House";
+            this.houseToolStripMenuItem.Click += new System.EventHandler(this.houseToolStripMenuItem_Click);
+            // 
+            // furnituresToolStripMenuItem
+            // 
+            this.furnituresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chairToolStripMenuItem,
+            this.tableToolStripMenuItem,
+            this.bToolStripMenuItem,
+            this.flowerPotToolStripMenuItem,
+            this.shelfToolStripMenuItem});
+            this.furnituresToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.FlowerPot2;
+            this.furnituresToolStripMenuItem.Name = "furnituresToolStripMenuItem";
+            this.furnituresToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.furnituresToolStripMenuItem.Text = "Furnitures";
+            // 
+            // chairToolStripMenuItem
+            // 
+            this.chairToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Chair;
+            this.chairToolStripMenuItem.Name = "chairToolStripMenuItem";
+            this.chairToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.chairToolStripMenuItem.Text = "Chair";
+            this.chairToolStripMenuItem.Click += new System.EventHandler(this.chairToolStripMenuItem_Click);
+            // 
+            // tableToolStripMenuItem
+            // 
+            this.tableToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Table;
+            this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.tableToolStripMenuItem.Text = "Table";
+            this.tableToolStripMenuItem.Click += new System.EventHandler(this.tableToolStripMenuItem_Click);
+            // 
+            // bToolStripMenuItem
+            // 
+            this.bToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Barrel;
+            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.bToolStripMenuItem.Text = "Barrel";
+            this.bToolStripMenuItem.Click += new System.EventHandler(this.bToolStripMenuItem_Click);
+            // 
+            // flowerPotToolStripMenuItem
+            // 
+            this.flowerPotToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.FlowerPot;
+            this.flowerPotToolStripMenuItem.Name = "flowerPotToolStripMenuItem";
+            this.flowerPotToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.flowerPotToolStripMenuItem.Text = "Flower Pot";
+            this.flowerPotToolStripMenuItem.Click += new System.EventHandler(this.flowerPotToolStripMenuItem_Click);
+            // 
+            // shelfToolStripMenuItem
+            // 
+            this.shelfToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Shelf;
+            this.shelfToolStripMenuItem.Name = "shelfToolStripMenuItem";
+            this.shelfToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
+            this.shelfToolStripMenuItem.Text = "Shelf";
+            this.shelfToolStripMenuItem.Click += new System.EventHandler(this.shelfToolStripMenuItem_Click);
+            // 
+            // tHEBOSSToolStripMenuItem
+            // 
+            this.tHEBOSSToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.spi_head;
+            this.tHEBOSSToolStripMenuItem.Name = "tHEBOSSToolStripMenuItem";
+            this.tHEBOSSToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.tHEBOSSToolStripMenuItem.Text = "THE BOSS";
+            this.tHEBOSSToolStripMenuItem.Click += new System.EventHandler(this.tHEBOSSToolStripMenuItem_Click);
+            // 
             // vehiclesToolStripMenuItem
             // 
             this.vehiclesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -326,6 +577,22 @@
             this.vehiclesToolStripMenuItem.Name = "vehiclesToolStripMenuItem";
             this.vehiclesToolStripMenuItem.Size = new System.Drawing.Size(117, 33);
             this.vehiclesToolStripMenuItem.Text = "Vehicles";
+            // 
+            // sportCarToolStripMenuItem
+            // 
+            this.sportCarToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a3;
+            this.sportCarToolStripMenuItem.Name = "sportCarToolStripMenuItem";
+            this.sportCarToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.sportCarToolStripMenuItem.Text = "Sport Car";
+            this.sportCarToolStripMenuItem.Click += new System.EventHandler(this.sportCarToolStripMenuItem_Click);
+            // 
+            // tankToolStripMenuItem
+            // 
+            this.tankToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a4;
+            this.tankToolStripMenuItem.Name = "tankToolStripMenuItem";
+            this.tankToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.tankToolStripMenuItem.Text = "Tank";
+            this.tankToolStripMenuItem.Click += new System.EventHandler(this.tankToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -558,272 +825,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
-            // catToolStripMenuItem
-            // 
-            this.catToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Cat;
-            this.catToolStripMenuItem.Name = "catToolStripMenuItem";
-            this.catToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.catToolStripMenuItem.Text = "Cat";
-            this.catToolStripMenuItem.Click += new System.EventHandler(this.catToolStripMenuItem_Click);
-            // 
-            // dogToolStripMenuItem
-            // 
-            this.dogToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Dog;
-            this.dogToolStripMenuItem.Name = "dogToolStripMenuItem";
-            this.dogToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.dogToolStripMenuItem.Text = "Dog";
-            this.dogToolStripMenuItem.Click += new System.EventHandler(this.dogToolStripMenuItem_Click);
-            // 
-            // rabbitToolStripMenuItem
-            // 
-            this.rabbitToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a;
-            this.rabbitToolStripMenuItem.Name = "rabbitToolStripMenuItem";
-            this.rabbitToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.rabbitToolStripMenuItem.Text = "Rabbit";
-            this.rabbitToolStripMenuItem.Click += new System.EventHandler(this.rabbitToolStripMenuItem_Click);
-            // 
-            // lionToolStripMenuItem
-            // 
-            this.lionToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.c;
-            this.lionToolStripMenuItem.Name = "lionToolStripMenuItem";
-            this.lionToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.lionToolStripMenuItem.Text = "Lion";
-            this.lionToolStripMenuItem.Click += new System.EventHandler(this.lionToolStripMenuItem_Click);
-            // 
-            // elephantToolStripMenuItem
-            // 
-            this.elephantToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.b;
-            this.elephantToolStripMenuItem.Name = "elephantToolStripMenuItem";
-            this.elephantToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.elephantToolStripMenuItem.Text = "Elephant";
-            this.elephantToolStripMenuItem.Click += new System.EventHandler(this.elephantToolStripMenuItem_Click);
-            // 
-            // cowToolStripMenuItem
-            // 
-            this.cowToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a1;
-            this.cowToolStripMenuItem.Name = "cowToolStripMenuItem";
-            this.cowToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.cowToolStripMenuItem.Text = "Cow";
-            this.cowToolStripMenuItem.Click += new System.EventHandler(this.cowToolStripMenuItem_Click);
-            // 
-            // eagleToolStripMenuItem
-            // 
-            this.eagleToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.c1;
-            this.eagleToolStripMenuItem.Name = "eagleToolStripMenuItem";
-            this.eagleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.eagleToolStripMenuItem.Text = "Eagle";
-            this.eagleToolStripMenuItem.Click += new System.EventHandler(this.eagleToolStripMenuItem_Click);
-            // 
-            // gazelleToolStripMenuItem
-            // 
-            this.gazelleToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a2;
-            this.gazelleToolStripMenuItem.Name = "gazelleToolStripMenuItem";
-            this.gazelleToolStripMenuItem.Size = new System.Drawing.Size(181, 34);
-            this.gazelleToolStripMenuItem.Text = "Gazelle";
-            this.gazelleToolStripMenuItem.Click += new System.EventHandler(this.gazelleToolStripMenuItem_Click);
-            // 
-            // desertToolStripMenuItem
-            // 
-            this.desertToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Desert;
-            this.desertToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
-            this.desertToolStripMenuItem.Name = "desertToolStripMenuItem";
-            this.desertToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.desertToolStripMenuItem.Text = " ";
-            this.desertToolStripMenuItem.Click += new System.EventHandler(this.desertToolStripMenuItem_Click);
-            // 
-            // forestToolStripMenuItem
-            // 
-            this.forestToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Forest;
-            this.forestToolStripMenuItem.Name = "forestToolStripMenuItem";
-            this.forestToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.forestToolStripMenuItem.Text = " ";
-            this.forestToolStripMenuItem.Click += new System.EventHandler(this.forestToolStripMenuItem_Click);
-            // 
-            // grassToolStripMenuItem
-            // 
-            this.grassToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Grass;
-            this.grassToolStripMenuItem.Name = "grassToolStripMenuItem";
-            this.grassToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.grassToolStripMenuItem.Text = " ";
-            this.grassToolStripMenuItem.Click += new System.EventHandler(this.grassToolStripMenuItem_Click);
-            // 
-            // mountainToolStripMenuItem
-            // 
-            this.mountainToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Mountain;
-            this.mountainToolStripMenuItem.Name = "mountainToolStripMenuItem";
-            this.mountainToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.mountainToolStripMenuItem.Text = " ";
-            this.mountainToolStripMenuItem.Click += new System.EventHandler(this.mountainToolStripMenuItem_Click);
-            // 
-            // snowToolStripMenuItem
-            // 
-            this.snowToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Snow;
-            this.snowToolStripMenuItem.Name = "snowToolStripMenuItem";
-            this.snowToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.snowToolStripMenuItem.Text = " ";
-            this.snowToolStripMenuItem.Click += new System.EventHandler(this.snowToolStripMenuItem_Click);
-            // 
-            // waterToolStripMenuItem
-            // 
-            this.waterToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Water;
-            this.waterToolStripMenuItem.Name = "waterToolStripMenuItem";
-            this.waterToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.waterToolStripMenuItem.Text = " ";
-            this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
-            // 
-            // houseElementsToolStripMenuItem
-            // 
-            this.houseElementsToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.ExitFloor;
-            this.houseElementsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.floorToolStripMenuItem,
-            this.wallToolStripMenuItem,
-            this.tileFloorToolStripMenuItem,
-            this.exitTextureToolStripMenuItem});
-            this.houseElementsToolStripMenuItem.Name = "houseElementsToolStripMenuItem";
-            this.houseElementsToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
-            this.houseElementsToolStripMenuItem.Text = "House Elements";
-            // 
-            // floorToolStripMenuItem
-            // 
-            this.floorToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Floor;
-            this.floorToolStripMenuItem.Name = "floorToolStripMenuItem";
-            this.floorToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
-            this.floorToolStripMenuItem.Text = "Floor";
-            this.floorToolStripMenuItem.Click += new System.EventHandler(this.floorToolStripMenuItem_Click);
-            // 
-            // wallToolStripMenuItem
-            // 
-            this.wallToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Wall;
-            this.wallToolStripMenuItem.Name = "wallToolStripMenuItem";
-            this.wallToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
-            this.wallToolStripMenuItem.Text = "Wall";
-            this.wallToolStripMenuItem.Click += new System.EventHandler(this.wallToolStripMenuItem_Click);
-            // 
-            // tileFloorToolStripMenuItem
-            // 
-            this.tileFloorToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.TileFloor;
-            this.tileFloorToolStripMenuItem.Name = "tileFloorToolStripMenuItem";
-            this.tileFloorToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
-            this.tileFloorToolStripMenuItem.Text = "Tile Floor";
-            this.tileFloorToolStripMenuItem.Click += new System.EventHandler(this.tileFloorToolStripMenuItem_Click);
-            // 
-            // exitTextureToolStripMenuItem
-            // 
-            this.exitTextureToolStripMenuItem.BackgroundImage = global::LiveIT2._1.Properties.Resources.Exit;
-            this.exitTextureToolStripMenuItem.Name = "exitTextureToolStripMenuItem";
-            this.exitTextureToolStripMenuItem.Size = new System.Drawing.Size(213, 34);
-            this.exitTextureToolStripMenuItem.Text = "Exit Texture";
-            this.exitTextureToolStripMenuItem.Click += new System.EventHandler(this.exitTextureToolStripMenuItem_Click);
-            // 
-            // treeToolStripMenuItem
-            // 
-            this.treeToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Tree1;
-            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
-            this.treeToolStripMenuItem.Text = "Tree";
-            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
-            // 
-            // bushToolStripMenuItem
-            // 
-            this.bushToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Bush1;
-            this.bushToolStripMenuItem.Name = "bushToolStripMenuItem";
-            this.bushToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
-            this.bushToolStripMenuItem.Text = "Bush";
-            this.bushToolStripMenuItem.Click += new System.EventHandler(this.bushToolStripMenuItem_Click);
-            // 
-            // rockToolStripMenuItem
-            // 
-            this.rockToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Rock2;
-            this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
-            this.rockToolStripMenuItem.Text = "Rock";
-            this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
-            // 
-            // houseToolStripMenuItem
-            // 
-            this.houseToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.house;
-            this.houseToolStripMenuItem.Name = "houseToolStripMenuItem";
-            this.houseToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
-            this.houseToolStripMenuItem.Text = "House";
-            this.houseToolStripMenuItem.Click += new System.EventHandler(this.houseToolStripMenuItem_Click);
-            // 
-            // furnituresToolStripMenuItem
-            // 
-            this.furnituresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chairToolStripMenuItem,
-            this.tableToolStripMenuItem,
-            this.bToolStripMenuItem,
-            this.flowerPotToolStripMenuItem,
-            this.shelfToolStripMenuItem});
-            this.furnituresToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.FlowerPot2;
-            this.furnituresToolStripMenuItem.Name = "furnituresToolStripMenuItem";
-            this.furnituresToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
-            this.furnituresToolStripMenuItem.Text = "Furnitures";
-            // 
-            // chairToolStripMenuItem
-            // 
-            this.chairToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Chair;
-            this.chairToolStripMenuItem.Name = "chairToolStripMenuItem";
-            this.chairToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
-            this.chairToolStripMenuItem.Text = "Chair";
-            this.chairToolStripMenuItem.Click += new System.EventHandler(this.chairToolStripMenuItem_Click);
-            // 
-            // tableToolStripMenuItem
-            // 
-            this.tableToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Table;
-            this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            this.tableToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
-            this.tableToolStripMenuItem.Text = "Table";
-            this.tableToolStripMenuItem.Click += new System.EventHandler(this.tableToolStripMenuItem_Click);
-            // 
-            // bToolStripMenuItem
-            // 
-            this.bToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Barrel;
-            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
-            this.bToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
-            this.bToolStripMenuItem.Text = "Barrel";
-            this.bToolStripMenuItem.Click += new System.EventHandler(this.bToolStripMenuItem_Click);
-            // 
-            // flowerPotToolStripMenuItem
-            // 
-            this.flowerPotToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.FlowerPot;
-            this.flowerPotToolStripMenuItem.Name = "flowerPotToolStripMenuItem";
-            this.flowerPotToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
-            this.flowerPotToolStripMenuItem.Text = "Flower Pot";
-            this.flowerPotToolStripMenuItem.Click += new System.EventHandler(this.flowerPotToolStripMenuItem_Click);
-            // 
-            // shelfToolStripMenuItem
-            // 
-            this.shelfToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.Shelf;
-            this.shelfToolStripMenuItem.Name = "shelfToolStripMenuItem";
-            this.shelfToolStripMenuItem.Size = new System.Drawing.Size(203, 34);
-            this.shelfToolStripMenuItem.Text = "Shelf";
-            this.shelfToolStripMenuItem.Click += new System.EventHandler(this.shelfToolStripMenuItem_Click);
-            // 
-            // tHEBOSSToolStripMenuItem
-            // 
-            this.tHEBOSSToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.spi_head;
-            this.tHEBOSSToolStripMenuItem.Name = "tHEBOSSToolStripMenuItem";
-            this.tHEBOSSToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
-            this.tHEBOSSToolStripMenuItem.Text = "THE BOSS";
-            this.tHEBOSSToolStripMenuItem.Click += new System.EventHandler(this.tHEBOSSToolStripMenuItem_Click);
-            // 
-            // sportCarToolStripMenuItem
-            // 
-            this.sportCarToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a3;
-            this.sportCarToolStripMenuItem.Name = "sportCarToolStripMenuItem";
-            this.sportCarToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
-            this.sportCarToolStripMenuItem.Text = "Sport Car";
-            this.sportCarToolStripMenuItem.Click += new System.EventHandler(this.sportCarToolStripMenuItem_Click);
-            // 
-            // tankToolStripMenuItem
-            // 
-            this.tankToolStripMenuItem.Image = global::LiveIT2._1.Properties.Resources.a4;
-            this.tankToolStripMenuItem.Name = "tankToolStripMenuItem";
-            this.tankToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
-            this.tankToolStripMenuItem.Text = "Tank";
-            this.tankToolStripMenuItem.Click += new System.EventHandler(this.tankToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -850,12 +851,13 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
-            this.Text = "Form1";
+            this.Text = "Live It";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);

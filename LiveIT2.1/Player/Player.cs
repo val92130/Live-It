@@ -414,8 +414,6 @@ using LiveIT2._1.Vehicules;
                 }
 
             }
-    
-
            
             g.DrawRectangle(
                 Pens.Black, 
