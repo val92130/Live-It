@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7BF3D2
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Live It Setup", "Live It Setup\Live It Setup.vdproj", "{6B981321-3FE6-4A70-A9B4-620D8C2BE394}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Live It Installer", "Live It Installer\Live It Installer.vdproj", "{E9F03984-8B30-4FF9-91E5-93D39455EC54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,8 +28,8 @@ Global
 		{26E3D27A-0C05-4322-A56E-A6DED935CE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26E3D27A-0C05-4322-A56E-A6DED935CE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26E3D27A-0C05-4322-A56E-A6DED935CE65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B981321-3FE6-4A70-A9B4-620D8C2BE394}.Debug|Any CPU.ActiveCfg = Debug
-		{6B981321-3FE6-4A70-A9B4-620D8C2BE394}.Release|Any CPU.ActiveCfg = Release
+		{E9F03984-8B30-4FF9-91E5-93D39455EC54}.Debug|Any CPU.ActiveCfg = Debug
+		{E9F03984-8B30-4FF9-91E5-93D39455EC54}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
