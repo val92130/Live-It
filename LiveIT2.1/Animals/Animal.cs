@@ -911,18 +911,6 @@ namespace LiveIT2._1.Animals
             Texture texture)
         {
 
-            if (_growTimer == null)
-            {
-                if (_growSpeed <= 0)
-                {
-                    _growSpeed = 20000;
-                }
-                _growTimer = new Timer();
-                _growTimer.Interval = _growSpeed;
-                _growTimer.Tick += new EventHandler(T_Grow_Animal);
-                _growTimer.Start();
-            }
-
             this._graphics = g;
 
             this._textureGraphics = texture;
@@ -938,22 +926,7 @@ namespace LiveIT2._1.Animals
             this.RelativePosition = new Point(newXpos, newYpos);
             this.RelativeSize = new Size(newWidth, newHeight);
 
-            if( this.Size.Width < this._finalSize.Width )
-            {
-                if( this.Mother != null )
-                {
-                    this.Direction = this.Mother.Direction;
-                }
-            }
 
-            if( !this.IsHurt )
-            {
-                this.Position = new Point(
-    this._position.X + (int)(this.Direction.Width * this.Speed),
-    this._position.Y + (int)(this.Direction.Height * this.Speed) );
-            }
-
-            this.Behavior();
 
             if (this._map.ShowDebug)
             {
@@ -1013,7 +986,36 @@ namespace LiveIT2._1.Animals
                     this._map.ViewPort.MiniMapViewPort);
             }
 
-            this.GetAnimalsAround();
+            
+
+
+            if (_map.IsMedic)
+            {
+                if (this.IsHurt)
+                {
+                    g.DrawRectangle(Pens.Blue, new Rectangle(this.RelativePosition, this.RelativeSize));
+                    g.DrawImage(texture.GetBlood(), new Rectangle(this.RelativePosition, this.RelativeSize));
+                }
+            }
+
+
+            if (this.Area.IntersectsWith(viewPort))
+            {
+                g.DrawImage(
+                    texture.LoadTexture(this), 
+                    new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
+            }
+
+
+        }
+
+        public void DrawMiniMap(Graphics g, 
+            Rectangle target, 
+            Rectangle viewPort, 
+            Rectangle targetMiniMap, 
+            Rectangle viewPortMiniMap, 
+            Texture texture)
+        {
             var newSizeMini = (int)((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             var newHeightMini = (int)((this.Area.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             int newXposMini =
@@ -1030,28 +1032,52 @@ namespace LiveIT2._1.Animals
                 - (int)
                   (viewPortMiniMap.Y
                    / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
-
             if (_map.IsMedic)
             {
                 if (this.IsHurt)
                 {
-                    g.DrawRectangle(Pens.Blue, new Rectangle(this.RelativePosition, this.RelativeSize));
-                    g.DrawImage(texture.GetBlood(), new Rectangle(this.RelativePosition, this.RelativeSize));
                     g.FillRectangle(Brushes.Red, new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
                 }
             }
 
+            g.DrawRectangle(
+    Pens.Black,
+    new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
 
-            if (this.Area.IntersectsWith(viewPort))
+        }
+
+        public void Update()
+        {
+            if (_growTimer == null)
             {
-                g.DrawImage(
-                    texture.LoadTexture(this), 
-                    new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
+                if (_growSpeed <= 0)
+                {
+                    _growSpeed = 20000;
+                }
+                _growTimer = new Timer();
+                _growTimer.Interval = _growSpeed;
+                _growTimer.Tick += new EventHandler(T_Grow_Animal);
+                _growTimer.Start();
             }
 
-            g.DrawRectangle(
-                Pens.Black, 
-                new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
+            if (this.Size.Width < this._finalSize.Width)
+            {
+                if (this.Mother != null)
+                {
+                    this.Direction = this.Mother.Direction;
+                }
+            }
+
+            if (!this.IsHurt)
+            {
+                this.Position = new Point(
+    this._position.X + (int)(this.Direction.Width * this.Speed),
+    this._position.Y + (int)(this.Direction.Height * this.Speed));
+            }
+
+            this.Behavior();
+
+            this.GetAnimalsAround();
         }
 
         /// <summary>

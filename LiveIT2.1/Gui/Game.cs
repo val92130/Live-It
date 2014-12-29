@@ -265,6 +265,34 @@ using Timer = System.Windows.Forms.Timer;
             this._viewPort.Draw(this._screenGraphic);
         }
 
+        public void Update()
+        {
+            switch (trackBar2.Value)
+            {
+                case 1 :
+                    this._viewPort.Update();
+                    break;
+                case 2 :
+                    this._viewPort.Update();
+                    this._viewPort.Update();
+                    break;
+                case 3 :
+                    this._viewPort.Update();
+                    this._viewPort.Update();
+                    this._viewPort.Update();
+                    break;
+                case 4 :
+                    this._viewPort.Update();
+                    this._viewPort.Update();
+                    this._viewPort.Update();
+                    this._viewPort.Update();
+                    break;
+                default :
+                    this._viewPort.Update();
+                    break;
+            }
+        }
+
         /// <summary>
         /// The load map.
         /// </summary>
@@ -482,6 +510,8 @@ using Timer = System.Windows.Forms.Timer;
 
 
                 this.Draw();
+                this.Update();
+
                 this.g.DrawImage(this._background, new Point(0, 0));
                 this._soundEnvironment.LoadBoxes(this._viewPort.BoxList);
                 this._soundEnvironment.PlayAllSounds();
@@ -1566,11 +1596,13 @@ using Timer = System.Windows.Forms.Timer;
             if( _gameMenu.Visible == true )
             {
                 trackBar1.Enabled = false;
+                trackBar2.Enabled = false;
                 _gameMenu.Hide();
             }
             else
             {
                 trackBar1.Enabled = true;
+                trackBar2.Enabled = true;
                 _gameMenu.Show();
             }
         }

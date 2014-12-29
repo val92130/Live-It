@@ -25,8 +25,6 @@ namespace LiveIT2._1.Viewport
         {
             this.MoveWithMouse();
 
-            
-
             if (!this.followAnimal)
             {
                 this.followedAnimal = null;
@@ -72,10 +70,6 @@ namespace LiveIT2._1.Viewport
                 this.DrawBloodInViewPort(g, r, this.screen, this.viewPort, this.miniMap, this.miniMapViewPort);
             }
 
-            g.DrawRectangle(
-                Pens.White,
-                new Rectangle(this.miniMap.X, this.miniMap.Y, this.miniMap.Width, this.miniMap.Height + 20));
-
             this.DrawLandAnimals(g);
 
             this.PlayerBehavior(g);
@@ -110,7 +104,6 @@ namespace LiveIT2._1.Viewport
 
             this.MakeRain(g);
 
-            this.DrawViewPortMiniMap(g, this.viewPort, this.miniMap, this.miniMapViewPort);
 
             this.CheckIfPlayerHasEnteredACar();
 
@@ -126,9 +119,47 @@ namespace LiveIT2._1.Viewport
 
                 }
             }
+            
+            this.DrawMiniMapBoxes(g);
+            DrawAnimalsInMiniMap(g);
+            DrawVegetationInMiniMap(g);
 
+            this.DrawViewPortMiniMap(g, this.viewPort, this.miniMap, this.miniMapViewPort);
+            g.DrawRectangle(
+    Pens.White,
+    new Rectangle(this.miniMap.X, this.miniMap.Y, this.miniMap.Width, this.miniMap.Height + 20));
 
+        }
 
+        public void Update()
+        {
+            this.UpdateAnimals();
+        }
+
+        public void DrawVegetationInMiniMap(Graphics g)
+        {
+            for (int i = 0; i < this.map.Vegetation.Count; i++)
+            {
+                this.map.Vegetation[i].DrawInMiniMap(g,
+                        this.screen,
+                        this.viewPort,
+                        this.miniMap,
+                        this.miniMapViewPort,
+                        this.texture);
+            }
+        }
+
+        public void DrawAnimalsInMiniMap(Graphics g)
+        {
+            for (int i = 0; i < this.map.Animals.Count; i++)
+            {
+                map.Animals[i].DrawMiniMap(g,
+                        this.screen,
+                        this.viewPort,
+                        this.miniMap,
+                        this.miniMapViewPort,
+                        this.texture);
+            }
         }
 
         /// <summary>
@@ -562,6 +593,11 @@ namespace LiveIT2._1.Viewport
                 this.boxList[i].Draw(g, this.screen, this.texture, this.viewPort);
             }
 
+
+        }
+
+        private void DrawMiniMapBoxes(Graphics g)
+        {
             for (int i = 0; i < this.boxListMini.Count; i++)
             {
                 this.boxListMini[i].DrawMiniMap(g, this.miniMap, this.texture, this.miniMapViewPort);
@@ -630,6 +666,14 @@ namespace LiveIT2._1.Viewport
                         this.miniMapViewPort,
                         this.texture);
                 }
+            }
+        }
+
+        private void UpdateAnimals()
+        {
+            for (int i = 0; i < this.map.Animals.Count; i++)
+            {
+                this.map.Animals[i].Update();
             }
         }
 

@@ -87,6 +87,8 @@
             this._buttonSpawnPlayer = new System.Windows.Forms.Button();
             this._playMedicButton = new System.Windows.Forms.Button();
             this._gameMenu = new System.Windows.Forms.Panel();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.label6 = new System.Windows.Forms.Label();
             this._cameraSmoothnessLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -100,6 +102,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -596,7 +599,7 @@
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(110)))), ((int)(((byte)(123)))));
+            this.saveToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(198)))), ((int)(((byte)(187)))));
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(79, 33);
             this.saveToolStripMenuItem.Text = "Save";
@@ -604,7 +607,7 @@
             // 
             // loadToolStripMenuItem
             // 
-            this.loadToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(110)))), ((int)(((byte)(123)))));
+            this.loadToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(198)))), ((int)(((byte)(187)))));
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(79, 33);
             this.loadToolStripMenuItem.Text = "Load";
@@ -612,7 +615,7 @@
             // 
             // muteToolStripMenuItem
             // 
-            this.muteToolStripMenuItem.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.muteToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(166)))), ((int)(((byte)(91)))));
             this.muteToolStripMenuItem.Name = "muteToolStripMenuItem";
             this.muteToolStripMenuItem.Size = new System.Drawing.Size(78, 33);
             this.muteToolStripMenuItem.Text = "Mute";
@@ -628,9 +631,10 @@
             // 
             // menuToolStripMenuItem
             // 
+            this.menuToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(167)))), ((int)(((byte)(240)))));
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(78, 33);
-            this.menuToolStripMenuItem.Text = "Stats";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 33);
+            this.menuToolStripMenuItem.Text = "Menu";
             this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
             // _buttonFollowAnimal
@@ -708,6 +712,8 @@
             // 
             this._gameMenu.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this._gameMenu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this._gameMenu.Controls.Add(this.trackBar2);
+            this._gameMenu.Controls.Add(this.label6);
             this._gameMenu.Controls.Add(this._cameraSmoothnessLabel);
             this._gameMenu.Controls.Add(this.label5);
             this._gameMenu.Controls.Add(this.trackBar1);
@@ -724,6 +730,26 @@
             this._gameMenu.Size = new System.Drawing.Size(656, 382);
             this._gameMenu.TabIndex = 22;
             this._gameMenu.Visible = false;
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Enabled = false;
+            this.trackBar2.Location = new System.Drawing.Point(211, 217);
+            this.trackBar2.Maximum = 4;
+            this.trackBar2.Minimum = 1;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(104, 45);
+            this.trackBar2.TabIndex = 12;
+            this.trackBar2.Value = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 217);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(68, 20);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Speed : ";
             // 
             // _cameraSmoothnessLabel
             // 
@@ -867,6 +893,7 @@
             this.menuStrip1.PerformLayout();
             this._gameMenu.ResumeLayout(false);
             this._gameMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -944,6 +971,8 @@
         private System.Windows.Forms.ToolStripMenuItem flowerPotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shelfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tHEBOSSToolStripMenuItem;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label6;
 
     }
 }
