@@ -21,7 +21,7 @@ namespace LiveIT2._1.Terrain
     ///     The box.
     /// </summary>
     [Serializable]
-    public class Box
+    public partial class Box
     {
         #region Fields
 

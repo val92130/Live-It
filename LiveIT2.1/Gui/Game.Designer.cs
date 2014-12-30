@@ -100,6 +100,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.pathFindButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this._gameMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -851,12 +852,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Animals alive : ";
             // 
+            // pathFindButton
+            // 
+            this.pathFindButton.Location = new System.Drawing.Point(379, 94);
+            this.pathFindButton.Name = "pathFindButton";
+            this.pathFindButton.Size = new System.Drawing.Size(88, 32);
+            this.pathFindButton.TabIndex = 13;
+            this.pathFindButton.Text = "Find Path";
+            this.pathFindButton.UseVisualStyleBackColor = true;
+            this.pathFindButton.Click += new System.EventHandler(this.pathFindButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1020, 719);
+            this.Controls.Add(this.pathFindButton);
             this.Controls.Add(this._gameMenu);
             this.Controls.Add(this._playMedicButton);
             this.Controls.Add(this._buttonSpawnPlayer);
@@ -973,6 +985,7 @@
         private System.Windows.Forms.ToolStripMenuItem tHEBOSSToolStripMenuItem;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button pathFindButton;
 
     }
 }

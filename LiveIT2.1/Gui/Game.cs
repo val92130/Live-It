@@ -37,6 +37,8 @@ using Timer = System.Windows.Forms.Timer;
         /// </summary>
         private bool ShowDebugInfo;
 
+        private PathFinder pathFinder;
+
         /// <summary>
         /// The _average fps.
         /// </summary>
@@ -181,6 +183,7 @@ using Timer = System.Windows.Forms.Timer;
         private bool up;
         private bool _hasPressedE;
         private Point _savedPlayerPos;
+        private bool _pathFind;
 
         #endregion
 
@@ -267,6 +270,14 @@ using Timer = System.Windows.Forms.Timer;
 
         public void Update()
         {
+            if (_pathFind)
+            {
+                pathFinder.Update();
+            }
+            
+            pathFinder.TargetBox.Ground = EBoxGround.Snow;
+            pathFinder.StartBox.Ground = EBoxGround.Snow;
+
             switch (trackBar2.Value)
             {
                 case 1 :
@@ -434,6 +445,8 @@ using Timer = System.Windows.Forms.Timer;
             _countDown.Start();
 
             _gameMenu.Draggable(true);
+
+            pathFinder = new PathFinder(_map[0, 5], _map[45, 20], _map);
         }
 
         /// <summary>
@@ -1677,5 +1690,10 @@ using Timer = System.Windows.Forms.Timer;
 
 
         public bool _exitLoad { get; set; }
+
+        private void pathFindButton_Click(object sender, EventArgs e)
+        {
+            _pathFind = true;
+        }
     }
 }
