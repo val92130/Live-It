@@ -8,15 +8,16 @@ namespace LiveIT2._1.Terrain
 {
     public class PathFinder
     {
-        private List<Box> openList = new List<Box>();
-        private List<Box> closedList = new List<Box>();
-        private Box checkingNode = null;
+        public List<Box> openList = new List<Box>();
+        public List<Box> closedList = new List<Box>();
+        public Box checkingNode = null;
         public Box firstNodeInGrid = null;
         public Box startNode = null;
         public Box targetNode = null;
         public bool foundTarget = false;
         public int baseMovementCost = 10;
         private Map map;
+        public List<Box> finalPath = new List<Box>();
 
         public PathFinder(Box startBox, Box targetBox, Map map)
         {
@@ -40,15 +41,6 @@ namespace LiveIT2._1.Terrain
             }
         }
 
-        public Box StartBox
-        {
-            get { return startNode; }
-        }
-
-        public Box TargetBox
-        {
-            get { return targetNode; }
-        }
 
         public void FindPath()
         {
@@ -90,7 +82,7 @@ namespace LiveIT2._1.Terrain
                 return;
             }
 
-            if (testing.Ground == Enums.EBoxGround.Water)
+            if (testing.Ground == Enums.EBoxGround.Mountain || testing.Ground == Enums.EBoxGround.Water)
                 return;
 
             if (!closedList.Contains(testing))
@@ -146,20 +138,31 @@ namespace LiveIT2._1.Terrain
 
         private void TraceBackPath()
         {
+            finalPath.Clear();
             Box node = targetNode;
-            do
+            while (node != null)
             {
-                node.Ground = Enums.EBoxGround.Snow;
-                node = node.ParentBox;
-
-            } while (node != null);
+                if (node != null)
+                {
+                    finalPath.Add(node);
+                    node = node.ParentBox;
+                }
+            }
         }
 
+        public List<Box> FinalPath
+        {
+            get
+            {
+                finalPath.Reverse();
+                return finalPath;
+            }
+        }
         public void CalculateDistance()
         {
-            foreach (Box b in map.Boxes)
+            for (int i = 0; i < map.Boxes.Length; i++ )
             {
-                b.HValue = (int)(Math.Pow(b.Area.X - targetNode.Area.X, 2) + Math.Pow(b.Area.Y - targetNode.Area.Y, 2));
+                map.Boxes[i].HValue = (int)(Math.Pow(map.Boxes[i].Area.X - targetNode.Area.X, 2) + Math.Pow(map.Boxes[i].Area.Y - targetNode.Area.Y, 2));
             }
         }
     }

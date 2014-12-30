@@ -270,13 +270,7 @@ using Timer = System.Windows.Forms.Timer;
 
         public void Update()
         {
-            if (_pathFind)
-            {
-                pathFinder.Update();
-            }
-            
-            pathFinder.TargetBox.Ground = EBoxGround.Snow;
-            pathFinder.StartBox.Ground = EBoxGround.Snow;
+
 
             switch (trackBar2.Value)
             {
@@ -302,6 +296,28 @@ using Timer = System.Windows.Forms.Timer;
                     this._viewPort.Update();
                     break;
             }
+
+            if (_pathFind)
+            {
+                pathFinder.Update();
+            }
+
+            foreach (Box b in pathFinder.closedList)
+            {
+                b.Ground = EBoxGround.Snow;
+            }
+
+            if (pathFinder.foundTarget)
+            {
+                _pathFind = false;
+                foreach (Box b in pathFinder.FinalPath)
+                {
+                    b.Ground = EBoxGround.Snow;
+                }
+            }
+            pathFinder.startNode.Ground = EBoxGround.Snow;
+            pathFinder.targetNode.Ground = EBoxGround.Snow;
+
         }
 
         /// <summary>
@@ -523,9 +539,8 @@ using Timer = System.Windows.Forms.Timer;
 
 
                 this.Draw();
-                this.Update();
-
                 this.g.DrawImage(this._background, new Point(0, 0));
+                this.Update();
                 this._soundEnvironment.LoadBoxes(this._viewPort.BoxList);
                 this._soundEnvironment.PlayAllSounds();
                 this._soundEnvironment.PlayerSounds();
@@ -1694,6 +1709,18 @@ using Timer = System.Windows.Forms.Timer;
         private void pathFindButton_Click(object sender, EventArgs e)
         {
             _pathFind = true;
+        }
+
+        private void randomPathButton_Click(object sender, EventArgs e)
+        {
+            foreach (Box b in pathFinder.closedList)
+            {
+                b.Ground = EBoxGround.Grass;
+            }
+            pathFinder.startNode.Ground = EBoxGround.Grass;
+            pathFinder.targetNode.Ground = EBoxGround.Grass;
+            Random r = new Random();
+            pathFinder = new PathFinder(_map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
         }
     }
 }

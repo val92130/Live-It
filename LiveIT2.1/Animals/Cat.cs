@@ -39,7 +39,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Cat;
             this.Size = new Size(120, 120);
             this.FavoriteEnvironnment = EBoxGround.Grass;
-            this.Speed = 20000;
+            this.Speed = 2000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 300;
             this.TargetAnimals = new List<EAnimalTexture> { EAnimalTexture.Rabbit };

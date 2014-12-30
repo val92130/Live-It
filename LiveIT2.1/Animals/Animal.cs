@@ -29,6 +29,10 @@ namespace LiveIT2._1.Animals
     {
         #region Fields
 
+        PathFinder _pathFinder;
+
+        List<Box> _pathBoxList;
+
         /// <summary>
         ///     Boxes that contains the animal
         /// </summary>
@@ -672,22 +676,58 @@ namespace LiveIT2._1.Animals
                 this.BoxList.Add(b);
             }
         }
-
+        int _pathCount = 1;
         /// <summary>
         ///     The behavior of the animal, add here the interactions with other animals.
         /// </summary>
         public virtual void Behavior()
-        {
+        {          
             this._isDrinking = false;
-            if (this.FieldOfView.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
-            {
-                this.IsInMovement = false;
-            }
 
             if (!this.IsInMovement)
             {
-                this.ChangePosition();
+                //this.ChangePosition();
+                this.FindNewPath();
+                IsInMovement = true;
             }
+
+            if (_pathFinder.foundTarget)
+            {
+                _pathBoxList = _pathFinder.FinalPath;
+            }
+
+            if (_pathBoxList != null)
+            {
+                if (_pathCount >= _pathBoxList.Count)
+                {
+                    ChangePosition(_pathBoxList[_pathBoxList.Count - 1].Location);
+                }
+                else
+                {
+                    ChangePosition(_pathBoxList[_pathCount].Location);
+                }
+                
+            }
+            if (this.Area.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
+            {
+                if (_pathBoxList != null)
+                {
+                    if (_pathCount != _pathBoxList.Count - 1) _pathCount++;
+                }
+
+                if (_pathCount == _pathBoxList.Count - 1)
+                {
+                    _pathCount = 1;
+                    this.IsInMovement = false;
+                }
+            }
+            foreach (Box b in _pathFinder.closedList)
+            {
+                _graphics.DrawRectangle(Pens.White, new Rectangle(b.RelativePosition, b.RelativeSize));
+                b.Ground = EBoxGround.Snow;
+            }
+            _pathFinder.Update();
+            
 
             // BREEDING
             for (int i = 0; i < this._animalsAround.Count; i++)
@@ -801,6 +841,20 @@ namespace LiveIT2._1.Animals
                         }
                     }
                 }
+            }
+        }
+
+        private void FindNewPath()
+        {
+            if (this.BoxList.Count > 0)
+            {
+                Random r = new Random();
+                _pathFinder = new PathFinder(this.BoxList[0], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+            }
+            else
+            {
+                Random r = new Random();
+                _pathFinder = new PathFinder(_map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
             }
         }
 
