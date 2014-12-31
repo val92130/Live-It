@@ -66,6 +66,8 @@ namespace LiveIT2._1.Terrain
         /// </summary>
         private Rectangle _source;
 
+        
+
         #endregion
 
         #region Constructors and Destructors
@@ -265,6 +267,7 @@ namespace LiveIT2._1.Terrain
         #endregion
 
         #region Public Methods and Operators
+
 
         /// <summary>
         /// The add animal.

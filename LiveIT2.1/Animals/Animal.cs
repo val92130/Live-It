@@ -684,6 +684,7 @@ namespace LiveIT2._1.Animals
         {          
             this._isDrinking = false;
 
+            // if the animal isn't in movement, find a new path
             if (!this.IsInMovement)
             {
                 //this.ChangePosition();
@@ -691,11 +692,13 @@ namespace LiveIT2._1.Animals
                 IsInMovement = true;
             }
 
+            // if the path has reached his target, add the path to the pathboxlist
             if (_pathFinder.foundTarget)
             {
                 _pathBoxList = _pathFinder.FinalPath;
             }
 
+            // if the animal hasn't reached all the paths, change position to the next paths
             if (_pathBoxList != null)
             {
                 if (_pathCount >= _pathBoxList.Count)
@@ -708,6 +711,8 @@ namespace LiveIT2._1.Animals
                 }
                 
             }
+
+            // if animal interesect with the next path, increment the path count to go to the next path
             if (this.Area.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
             {
                 if (_pathBoxList != null)
@@ -721,6 +726,8 @@ namespace LiveIT2._1.Animals
                     this.IsInMovement = false;
                 }
             }
+
+            // draw the boxes of the closed list 
             foreach (Box b in _pathFinder.closedList)
             {
                 _graphics.DrawRectangle(Pens.White, new Rectangle(b.RelativePosition, b.RelativeSize));
@@ -730,34 +737,7 @@ namespace LiveIT2._1.Animals
             
 
             // BREEDING
-            for (int i = 0; i < this._animalsAround.Count; i++)
-            {
-                if (this._animalsAround[i].Texture == this.Texture)
-                {
-                    if (this.ESex != this._animalsAround[i].ESex)
-                    {
-                        if (this.Hunger < 20 && this._animalsAround[i].Hunger < 20 && this.Health > 70
-                            && this._animalsAround[i].Health > 70 && this.Size.Width >= this._finalSize.Width)
-                        {
-                            this.ChangePosition(this._animalsAround[i].Position);
-                            if (this.Area.IntersectsWith(this._animalsAround[i].Area))
-                            {
-                                this.Hunger += 30;
-                                this._animalsAround[i].Hunger += 30;
-                                if( this.ESex == Enums.ESex.Female )
-                                {
-                                    this._map.ViewPort.CreateAnimal( this.Texture, this.Position, true, this );
-                                }
-                                else
-                                {
-                                    this._map.ViewPort.CreateAnimal( this.Texture, this.Position, true, _animalsAround[i] );
-                                }
-                                
-                            }
-                        }
-                    }
-                }
-            }
+            Breeding();
 
             if (this.BoxList.Count() != 0)
             {
@@ -844,8 +824,44 @@ namespace LiveIT2._1.Animals
             }
         }
 
+        private void Breeding()
+        {
+            for (int i = 0; i < this._animalsAround.Count; i++)
+            {
+                if (this._animalsAround[i].Texture == this.Texture)
+                {
+                    if (this.ESex != this._animalsAround[i].ESex)
+                    {
+                        if (this.Hunger < 20 && this._animalsAround[i].Hunger < 20 && this.Health > 70
+                            && this._animalsAround[i].Health > 70 && this.Size.Width >= this._finalSize.Width)
+                        {
+                            this.ChangePosition(this._animalsAround[i].Position);
+                            if (this.Area.IntersectsWith(this._animalsAround[i].Area))
+                            {
+                                this.Hunger += 30;
+                                this._animalsAround[i].Hunger += 30;
+                                if (this.ESex == Enums.ESex.Female)
+                                {
+                                    this._map.ViewPort.CreateAnimal(this.Texture, this.Position, true, this);
+                                }
+                                else
+                                {
+                                    this._map.ViewPort.CreateAnimal(this.Texture, this.Position, true, _animalsAround[i]);
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void FindNewPath()
         {
+            foreach (Box b in _map.Boxes)
+            {
+                b.ParentBox = null;
+            }
             if (this.BoxList.Count > 0)
             {
                 Random r = new Random();

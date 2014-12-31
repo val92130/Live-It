@@ -12,6 +12,7 @@ namespace LiveIT2._1.Terrain
         public int g_movementCost = 0;
         public int f_totalCost = 0;
         Box _parentBox;
+        private Dictionary<Box, int> _heuristics = new Dictionary<Box, int>();
 
         public Box ParentBox
         {
@@ -40,6 +41,15 @@ namespace LiveIT2._1.Terrain
         public void CalculateFValue()
         {
             f_totalCost = GValue + HValue;
+        }
+
+        public void CalculateHeuristic()
+        {
+            foreach (Box b in _map.Boxes)
+            {
+                int h = (int)(Math.Pow(this.Area.X - b.Area.X, 2) + Math.Pow(this.Area.Y - b.Area.Y, 2));
+                _heuristics.Add(b, h);
+            }
         }
     }
 

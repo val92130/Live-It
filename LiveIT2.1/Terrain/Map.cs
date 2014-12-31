@@ -139,6 +139,11 @@ namespace LiveIT2._1.Terrain
                     this._boxes[count++] = new Box(i, j, this);
                 }
             }
+
+            //foreach (Box b in _boxes)
+            //{
+            //    b.CalculateHeuristic();
+            //}
         }
 
         #endregion
