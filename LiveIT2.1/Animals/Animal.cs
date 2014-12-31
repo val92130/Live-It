@@ -683,14 +683,6 @@ namespace LiveIT2._1.Animals
         public virtual void Behavior()
         {
 
-            if (!this.IsInMovement)
-            {
-                this.Speed = 0;
-            }
-            else
-            {
-                this.Speed = this.DefaultSpeed;
-            }
 
             this._isDrinking = false;
 
@@ -706,6 +698,7 @@ namespace LiveIT2._1.Animals
             // if the path has reached his target, add the path to the pathboxlist
             if (_pathFinder.foundTarget)
             {
+                this.Speed = this.DefaultSpeed;
                 _pathBoxList = _pathFinder.FinalPath;
             }
 
@@ -726,6 +719,7 @@ namespace LiveIT2._1.Animals
                 if (_pathCount == _pathBoxList.Count - 1)
                 {
                     _pathCount = 1;
+                    this.Speed = 0;
                     this.IsInMovement = false;
                 }
             }
