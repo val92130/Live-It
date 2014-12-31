@@ -48,7 +48,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Rabbit;
             this.Position = startPosition;
             this.Size = new Size(100, 100);
-            this.Speed = 20000;
+            this.Speed = 20;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.Hunger = 49;

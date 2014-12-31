@@ -681,9 +681,20 @@ namespace LiveIT2._1.Animals
         ///     The behavior of the animal, add here the interactions with other animals.
         /// </summary>
         public virtual void Behavior()
-        {          
+        {
+
+            if (!this.IsInMovement)
+            {
+                this.Speed = 0;
+            }
+            else
+            {
+                this.Speed = this.DefaultSpeed;
+            }
+
             this._isDrinking = false;
 
+            
             // if the animal isn't in movement, find a new path
             if (!this.IsInMovement)
             {
@@ -701,19 +712,11 @@ namespace LiveIT2._1.Animals
             // if the animal hasn't reached all the paths, change position to the next paths
             if (_pathBoxList != null)
             {
-                if (_pathCount >= _pathBoxList.Count)
-                {
-                    ChangePosition(_pathBoxList[_pathBoxList.Count - 1].Location);
-                }
-                else
-                {
-                    ChangePosition(_pathBoxList[_pathCount].Location);
-                }
-                
+                ChangePosition(_pathBoxList[_pathCount].Location);        
             }
 
             // if animal interesect with the next path, increment the path count to go to the next path
-            if (this.Area.IntersectsWith(new Rectangle(this.TargetLocation, this.FieldOfView.Size)))
+            if (this.Area.IntersectsWith(new Rectangle(this.TargetLocation, this.Area.Size)))
             {
                 if (_pathBoxList != null)
                 {
@@ -1140,9 +1143,11 @@ namespace LiveIT2._1.Animals
 
             if (!this.IsHurt)
             {
+                int newSpeedX = (int)(this.Speed / this.Direction.Width);
+                int newSpeedY = (int)(this.Speed / this.Direction.Height);
                 this.Position = new Point(
-    this._position.X + (int)(this.Direction.Width * this.Speed),
-    this._position.Y + (int)(this.Direction.Height * this.Speed));
+    this._position.X + (int)(this.Direction.Width * newSpeedX),
+    this._position.Y + (int)(this.Direction.Height * newSpeedY));
             }
 
             this.Behavior();

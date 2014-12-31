@@ -37,7 +37,7 @@ namespace LiveIT2._1.Terrain
 
             if (foundTarget == true)
             {
-                TraceBackPath();
+                //TraceBackPath();
             }
         }
 
@@ -77,7 +77,11 @@ namespace LiveIT2._1.Terrain
 
             if (testing == targetNode)
             {
-                targetNode.ParentBox = currentNode;
+                if (!finalPath.Contains(currentNode))
+                {
+                    finalPath.Add(currentNode);
+                }
+                //targetNode.ParentBox = currentNode;
                 foundTarget = true;
                 return;
             }
@@ -93,14 +97,23 @@ namespace LiveIT2._1.Terrain
 
                     if (newGCost < testing.GValue)
                     {
-                        testing.ParentBox = currentNode;
+                        if (!finalPath.Contains(currentNode))
+                        {
+                            finalPath.Add(currentNode);
+                        }
+                        
+                        //testing.ParentBox = currentNode;
                         testing.GValue = newGCost;
                         testing.CalculateFValue();
                     }
                 }
                 else
                 {
-                    testing.ParentBox = currentNode;
+                    //testing.ParentBox = currentNode;
+                    if (!finalPath.Contains(currentNode))
+                    {
+                        finalPath.Add(currentNode);
+                    }
                     testing.GValue = currentNode.GValue + baseMovementCost;
                     testing.CalculateFValue();
                     AddToOpenList(testing);
@@ -154,7 +167,7 @@ namespace LiveIT2._1.Terrain
         {
             get
             {
-                finalPath.Reverse();
+                //finalPath.Reverse();
                 return finalPath;
             }
         }

@@ -38,7 +38,7 @@ namespace LiveIT2._1.Animals
         {
             this.Texture = EAnimalTexture.Elephant;
             this.Size = new Size(500, 500);
-            this.Speed = 7000;
+            this.Speed = 7;
             this.ViewDistance = 800;
         }
 
