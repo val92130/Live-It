@@ -49,7 +49,7 @@ namespace LiveIT2._1.Animals
             this.Position = starPosition;
             this.Texture = EAnimalTexture.Cow;
             this.Size = new Size(230, 230);
-            this.Speed = 10;
+            this.Speed = 2000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.FavoriteEnvironnment = EBoxGround.Grass;
@@ -62,7 +62,7 @@ namespace LiveIT2._1.Animals
             this.Position = startPosition;
             this.Texture = EAnimalTexture.Cow;
             this.Size = new Size(_finalSize.Width/2, _finalSize.Width/2);
-            this.Speed = 20000;
+            this.Speed = 2000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.FavoriteEnvironnment = EBoxGround.Grass;

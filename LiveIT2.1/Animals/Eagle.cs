@@ -43,7 +43,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Eagle;
             this.Size = new Size(_random, _random);
             this.FavoriteEnvironnment = EBoxGround.Forest;
-            this.Speed = 25;
+            this.Speed = 8000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.TargetAnimals = new List<EAnimalTexture>
@@ -66,7 +66,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Eagle;
             this.Size = new Size(_random / 2, _random / 2);
             this.FavoriteEnvironnment = EBoxGround.Forest;
-            this.Speed = 150000;
+            this.Speed = 8000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.TargetAnimals = new List<EAnimalTexture>

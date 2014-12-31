@@ -40,7 +40,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Lion;
             this.Size = new Size(250, 250);
             this.FavoriteEnvironnment = EBoxGround.Forest;
-            this.Speed = 15;
+            this.Speed = 4000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.Hunger = 10;
@@ -61,7 +61,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Lion;
             this.Size = new Size(_finalSize.Width / 2, _finalSize.Height / 2);
             this.FavoriteEnvironnment = EBoxGround.Forest;
-            this.Speed = 15000;
+            this.Speed = 4000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.Hunger = 49;

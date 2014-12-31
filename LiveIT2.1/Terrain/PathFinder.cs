@@ -103,7 +103,7 @@ namespace LiveIT2._1.Terrain
                         }
                         
                         //testing.ParentBox = currentNode;
-                        testing.GValue = newGCost;
+                        //testing.GValue = newGCost;
                         testing.CalculateFValue();
                     }
                 }
@@ -114,7 +114,7 @@ namespace LiveIT2._1.Terrain
                     {
                         finalPath.Add(currentNode);
                     }
-                    testing.GValue = currentNode.GValue + baseMovementCost;
+                    //testing.GValue = currentNode.GValue + baseMovementCost;
                     testing.CalculateFValue();
                     AddToOpenList(testing);
                 }

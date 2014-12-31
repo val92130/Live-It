@@ -48,7 +48,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Gazelle;
             this.Position = startPosition;
             this.Size = new Size(180, 180);
-            this.Speed = 20;
+            this.Speed = 4500;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
             this.Hunger = 10;
@@ -61,7 +61,7 @@ namespace LiveIT2._1.Animals
             this.Texture = EAnimalTexture.Gazelle;
             this.Position = startPosition;
             this.Size = new Size(_finalSize.Width / 2, _finalSize.Height/2);
-            this.Speed = 20000;
+            this.Speed = 4500;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
         }

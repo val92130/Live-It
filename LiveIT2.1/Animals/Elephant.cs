@@ -38,7 +38,7 @@ namespace LiveIT2._1.Animals
         {
             this.Texture = EAnimalTexture.Elephant;
             this.Size = new Size(500, 500);
-            this.Speed = 7;
+            this.Speed = 1500;
             this.ViewDistance = 800;
         }
 
@@ -48,7 +48,7 @@ namespace LiveIT2._1.Animals
             _finalSize = new Size(500, 500);
             this.Texture = EAnimalTexture.Elephant;
             this.Size = new Size(_finalSize.Width / 2, _finalSize.Height/2);
-            this.Speed = 7000;
+            this.Speed = 1500;
             this.ViewDistance = 800;
         }
 

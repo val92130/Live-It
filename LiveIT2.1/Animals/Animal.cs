@@ -31,6 +31,7 @@ namespace LiveIT2._1.Animals
 
         PathFinder _pathFinder;
 
+        EMovingDirection _animalDirection;
         List<Box> _pathBoxList;
 
         /// <summary>
@@ -451,27 +452,9 @@ namespace LiveIT2._1.Animals
         {
             get
             {
-                if (this.Direction.Width > 0 && this.Direction.Width > this.Direction.Height)
-                {
-                    return EMovingDirection.Right;
-                }
+                return _animalDirection;
 
-                if (this.Direction.Width < 0 && this.Direction.Width > this.Direction.Height)
-                {
-                    return EMovingDirection.Left;
-                }
 
-                if (this.Direction.Height > 0 && this.Direction.Height > this.Direction.Width)
-                {
-                    return EMovingDirection.Down;
-                }
-
-                if (this.Direction.Height < 0 && this.Direction.Height > this.Direction.Width)
-                {
-                    return EMovingDirection.Up;
-                }
-
-                return EMovingDirection.Up;
             }
         }
 
@@ -705,7 +688,15 @@ namespace LiveIT2._1.Animals
             // if the animal hasn't reached all the paths, change position to the next paths
             if (_pathBoxList != null)
             {
-                ChangePosition(_pathBoxList[_pathCount].Location);        
+                ChangePosition(_pathBoxList[_pathCount].Location);
+                if (_pathBoxList.Count == 1)
+                {
+                    ChangePosition(_pathBoxList[0].Location);
+                }
+                else
+                {
+                    ChangePosition(_pathBoxList[_pathCount].Location);
+                }
             }
 
             // if animal interesect with the next path, increment the path count to go to the next path
@@ -724,13 +715,11 @@ namespace LiveIT2._1.Animals
                 }
             }
 
-            // draw the boxes of the closed list 
-            foreach (Box b in _pathFinder.closedList)
+            while (!_pathFinder.foundTarget)
             {
-                _graphics.DrawRectangle(Pens.White, new Rectangle(b.RelativePosition, b.RelativeSize));
-                b.Ground = EBoxGround.Snow;
+                _pathFinder.Update();
             }
-            _pathFinder.Update();
+            
             
 
             // BREEDING
@@ -867,7 +856,14 @@ namespace LiveIT2._1.Animals
             else
             {
                 Random r = new Random();
-                _pathFinder = new PathFinder(_map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+                if (this.Mother != null)
+                {
+                    _pathFinder = new PathFinder(this.Mother.BoxList[0], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+                }
+                else
+                {   
+                    _pathFinder = new PathFinder(_map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+                }
             }
         }
 
@@ -1053,7 +1049,6 @@ namespace LiveIT2._1.Animals
                     this._map.ViewPort.MiniMapViewPort);
             }
 
-            
 
 
             if (_map.IsMedic)
@@ -1115,6 +1110,26 @@ namespace LiveIT2._1.Animals
 
         public void Update()
         {
+            if (this.Direction.Width > 0 && this.Direction.Width > this.Direction.Height)
+            {
+                _animalDirection =  EMovingDirection.Right;
+            }
+
+            if (this.Direction.Width < 0 && this.Direction.Width > this.Direction.Height)
+            {
+                _animalDirection = EMovingDirection.Left;
+            }
+
+            if (this.Direction.Height > 0 && this.Direction.Height > this.Direction.Width)
+            {
+                _animalDirection = EMovingDirection.Down;
+            }
+
+            if (this.Direction.Height < 0 && this.Direction.Height > this.Direction.Width)
+            {
+                _animalDirection = EMovingDirection.Up;
+            }
+
             if (_growTimer == null)
             {
                 if (_growSpeed <= 0)
@@ -1137,11 +1152,9 @@ namespace LiveIT2._1.Animals
 
             if (!this.IsHurt)
             {
-                int newSpeedX = (int)(this.Speed / this.Direction.Width);
-                int newSpeedY = (int)(this.Speed / this.Direction.Height);
                 this.Position = new Point(
-    this._position.X + (int)(this.Direction.Width * newSpeedX),
-    this._position.Y + (int)(this.Direction.Height * newSpeedY));
+    this._position.X + (int)(this.Direction.Width * Speed),
+    this._position.Y + (int)(this.Direction.Height * Speed));
             }
 
             this.Behavior();
