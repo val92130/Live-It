@@ -263,15 +263,11 @@ using Timer = System.Windows.Forms.Timer;
         public void Draw()
         {
             var _rMouse = new Rectangle(new Point(Cursor.Position.X, Cursor.Position.Y), this._selectionCursorWidth);
-
-            // _screenGraphic.Clear( Color.FromArgb( 255, Color.Black ) );
             this._viewPort.Draw(this._screenGraphic);
         }
 
         public void Update()
         {
-
-
             switch (trackBar2.Value)
             {
                 case 1 :
@@ -296,27 +292,6 @@ using Timer = System.Windows.Forms.Timer;
                     this._viewPort.Update();
                     break;
             }
-
-            if (_pathFind)
-            {
-                pathFinder.Update();
-            }
-
-            foreach (Box b in pathFinder.closedList)
-            {
-                b.Ground = EBoxGround.Snow;
-            }
-
-            if (pathFinder.foundTarget)
-            {
-                _pathFind = false;
-                foreach (Box b in pathFinder.FinalPath)
-                {
-                    b.Ground = EBoxGround.Snow;
-                }
-            }
-            pathFinder.startNode.Ground = EBoxGround.Snow;
-            pathFinder.targetNode.Ground = EBoxGround.Snow;
 
         }
 
@@ -1713,14 +1688,7 @@ using Timer = System.Windows.Forms.Timer;
 
         private void randomPathButton_Click(object sender, EventArgs e)
         {
-            foreach (Box b in pathFinder.closedList)
-            {
-                b.Ground = EBoxGround.Grass;
-            }
-            pathFinder.startNode.Ground = EBoxGround.Grass;
-            pathFinder.targetNode.Ground = EBoxGround.Grass;
-            Random r = new Random();
-            pathFinder = new PathFinder(_map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+          
         }
     }
 }

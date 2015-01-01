@@ -283,6 +283,19 @@ namespace LiveIT2._1.Animals
             }
         }
 
+        public Box OverlappedBox
+        {
+            get { return _map.GetOverlappedBox(this); }
+        }
+
+        public Rectangle CenteredArea
+        {
+            get
+            {
+                return new Rectangle(new Point(this.Position.X + (this.Size.Width/2), this.Position.Y + (this.Size.Height/2)), new Size(5,5));
+            }
+        }
+
         /// <summary>
         ///     Gets or sets the default speed.
         /// </summary>
@@ -679,10 +692,14 @@ namespace LiveIT2._1.Animals
             }
 
             // if the path has reached his target, add the path to the pathboxlist
-            if (_pathFinder.foundTarget)
+            if (_pathFinder.FoundTarget)
             {
                 this.Speed = this.DefaultSpeed;
                 _pathBoxList = _pathFinder.FinalPath;
+                foreach (Box b in _pathFinder.closedList)
+                {
+                    b.Ground = EBoxGround.Snow;
+                }
             }
 
             // if the animal hasn't reached all the paths, change position to the next paths
@@ -715,11 +732,10 @@ namespace LiveIT2._1.Animals
                 }
             }
 
-            while (!_pathFinder.foundTarget)
+            while (!_pathFinder.FoundTarget)
             {
                 _pathFinder.Update();
             }
-            
             
 
             // BREEDING
@@ -844,24 +860,37 @@ namespace LiveIT2._1.Animals
 
         private void FindNewPath()
         {
-            foreach (Box b in _map.Boxes)
-            {
-                b.ParentBox = null;
-            }
-            if (this.BoxList.Count > 0)
+            if (this.OverlappedBox != null)
             {
                 Random r = new Random();
-                _pathFinder = new PathFinder(this.BoxList[0], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+                Box targetBox = _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)];
+                if (targetBox != null && targetBox.Ground != EBoxGround.Water && targetBox.Ground != EBoxGround.Mountain)
+                {
+                    _pathFinder = new PathFinder(this.OverlappedBox, targetBox, _map);
+                }
+                else
+                {
+                    FindNewPath();
+                }
             }
             else
             {
                 Random r = new Random();
                 if (this.Mother != null)
                 {
-                    _pathFinder = new PathFinder(this.Mother.BoxList[0], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
+                    Box targetBox = _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)];
+                    if (targetBox != null && targetBox.Ground != EBoxGround.Water && targetBox.Ground != EBoxGround.Mountain)
+                    {
+                        _pathFinder = new PathFinder(this.Mother.OverlappedBox, targetBox, _map);
+                    }
+                    else
+                    {
+                        FindNewPath();
+                    }
+                    
                 }
                 else
-                {   
+                {
                     _pathFinder = new PathFinder(_map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map[r.Next(0, _map.BoxCountPerLine), r.Next(0, _map.BoxCountPerLine)], _map);
                 }
             }

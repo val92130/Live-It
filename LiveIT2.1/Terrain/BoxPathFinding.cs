@@ -25,12 +25,10 @@ namespace LiveIT2._1.Terrain
         public int HValue
         {
             get { return h_heuristicValue; }
-            set { h_heuristicValue = value; }
         }
         public int GValue
         {
             get { return g_movementCost; }
-            set { g_movementCost = value; }
         }
 
         public int FValue
@@ -43,6 +41,12 @@ namespace LiveIT2._1.Terrain
             f_totalCost = GValue + HValue;
         }
 
+        public int GetFValue(Box b)
+        {
+            int hvalue;
+           _heuristics.TryGetValue(b, out hvalue);
+           return hvalue;
+        }
         public void CalculateHeuristic()
         {
             foreach (Box b in _map.Boxes)

@@ -10,22 +10,25 @@ namespace LiveIT2._1.Terrain
     {
         public List<Box> openList = new List<Box>();
         public List<Box> closedList = new List<Box>();
-        public Box checkingNode = null;
-        public Box firstNodeInGrid = null;
-        public Box startNode = null;
-        public Box targetNode = null;
-        public bool foundTarget = false;
+        private Box checkingNode = null;
+        private Box firstNodeInGrid = null;
+        private Box startNode = null;
+        private Box targetNode = null;
+        private bool foundTarget = false;
         public int baseMovementCost = 10;
         private Map map;
         public List<Box> finalPath = new List<Box>();
 
+        public bool FoundTarget
+        {
+            get { return foundTarget; }
+        }
         public PathFinder(Box startBox, Box targetBox, Map map)
         {
             startNode = startBox;
             targetNode = targetBox;
             checkingNode = startNode;
             this.map = map;
-            CalculateDistance();
         }
 
         public void Update()
@@ -33,11 +36,6 @@ namespace LiveIT2._1.Terrain
             if (foundTarget == false)
             {
                 FindPath();
-            }
-
-            if (foundTarget == true)
-            {
-                //TraceBackPath();
             }
         }
 
@@ -81,7 +79,6 @@ namespace LiveIT2._1.Terrain
                 {
                     finalPath.Add(currentNode);
                 }
-                //targetNode.ParentBox = currentNode;
                 foundTarget = true;
                 return;
             }
@@ -101,21 +98,14 @@ namespace LiveIT2._1.Terrain
                         {
                             finalPath.Add(currentNode);
                         }
-                        
-                        //testing.ParentBox = currentNode;
-                        //testing.GValue = newGCost;
-                        testing.CalculateFValue();
                     }
                 }
                 else
                 {
-                    //testing.ParentBox = currentNode;
                     if (!finalPath.Contains(currentNode))
                     {
                         finalPath.Add(currentNode);
                     }
-                    //testing.GValue = currentNode.GValue + baseMovementCost;
-                    testing.CalculateFValue();
                     AddToOpenList(testing);
                 }
             }
@@ -141,7 +131,7 @@ namespace LiveIT2._1.Terrain
             Box minValueBox = openList[0];
             for (int i = 0; i < openList.Count; i++)
             {
-                if (openList[i].FValue < minValueBox.FValue)
+                if (openList[i].GetFValue(targetNode) < minValueBox.GetFValue(targetNode))
                 {
                     minValueBox = openList[i];
                 }
@@ -167,15 +157,7 @@ namespace LiveIT2._1.Terrain
         {
             get
             {
-                //finalPath.Reverse();
                 return finalPath;
-            }
-        }
-        public void CalculateDistance()
-        {
-            for (int i = 0; i < map.Boxes.Length; i++ )
-            {
-                map.Boxes[i].HValue = (int)(Math.Pow(map.Boxes[i].Area.X - targetNode.Area.X, 2) + Math.Pow(map.Boxes[i].Area.Y - targetNode.Area.Y, 2));
             }
         }
     }

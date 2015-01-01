@@ -140,10 +140,10 @@ namespace LiveIT2._1.Terrain
                 }
             }
 
-            //foreach (Box b in _boxes)
-            //{
-            //    b.CalculateHeuristic();
-            //}
+            foreach (Box b in _boxes)
+            {
+                b.CalculateHeuristic();
+            }
         }
 
         #endregion
@@ -446,6 +446,20 @@ namespace LiveIT2._1.Terrain
             return animalList;
         }
 
+        public Box GetOverlappedBox(Animal r)
+        {
+            Box b = null;
+            for (int i = 0; i < this.Boxes.Length; i++)
+            {
+                if (this.Boxes[i].Area.IntersectsWith(r.CenteredArea))
+                {
+                    b = Boxes[i];
+                }
+            }
+
+            return b;
+        }
+
         public Player Player
         {
             get { return _viewPort.Player; }
@@ -481,6 +495,26 @@ namespace LiveIT2._1.Terrain
             }
 
             return boxList;
+        }
+
+        public Box GetOverlappedBox(Rectangle r)
+        {
+            Box b = null;
+            int top = r.Top / this.BoxSize;
+            int left = r.Left / this.BoxSize;
+            int bottom = (r.Bottom - 1) / this.BoxSize;
+            int right = (r.Right - 1) / this.BoxSize;
+            for (int i = top; i <= bottom; ++i)
+            {
+                for (int j = left; j <= right; ++j)
+                {
+                    if (this[i, j] != null)
+                    {
+                        b = this[j, i];                   
+                    }
+                }
+            }
+            return b;
         }
 
         
