@@ -124,12 +124,23 @@ namespace LiveIT2._1.Viewport
             DrawAnimalsInMiniMap(g);
             DrawVegetationInMiniMap(g);
 
-
+            PlayerPathFinding(g);
 
             this.DrawViewPortMiniMap(g, this.viewPort, this.miniMap, this.miniMapViewPort);
             g.DrawRectangle(
     Pens.White,
     new Rectangle(this.miniMap.X, this.miniMap.Y, this.miniMap.Width, this.miniMap.Height + 20));
+
+            this.HasClicked = false;        
+        }
+
+        public void Update()
+        {
+            this.UpdateAnimals();
+        }
+
+        public void PlayerPathFinding(Graphics g)
+        {
 
             foreach (Box b in map.Boxes)
             {
@@ -152,7 +163,7 @@ namespace LiveIT2._1.Viewport
                             }
                         }
                     }
-                    
+
                 }
             }
 
@@ -195,12 +206,6 @@ namespace LiveIT2._1.Viewport
 
                 this.DrawRectangleInViewPort(g, player.Area, this.MiniMap, this.miniMapViewPort, Brushes.Black);
             }
-            this.HasClicked = false;        
-        }
-
-        public void Update()
-        {
-            this.UpdateAnimals();
         }
 
         public void DrawVegetationInMiniMap(Graphics g)
