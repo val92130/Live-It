@@ -41,6 +41,7 @@
             this.newGameButton = new System.Windows.Forms.Panel();
             this.newGameText = new System.Windows.Forms.PictureBox();
             this.btnNewGame = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.exitButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitLabel)).BeginInit();
             this.settingsButton.SuspendLayout();
@@ -187,6 +188,14 @@
             this.btnNewGame.Text = "New Game";
             this.btnNewGame.Visible = false;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(472, 87);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(100, 23);
+            this.progressBar1.TabIndex = 20;
+            this.progressBar1.Visible = false;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +203,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(945, 798);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.loadGameButton);
@@ -233,5 +243,6 @@
         private System.Windows.Forms.Panel newGameButton;
         private System.Windows.Forms.PictureBox newGameText;
         private System.Windows.Forms.Label btnNewGame;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

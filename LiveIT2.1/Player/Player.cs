@@ -105,6 +105,11 @@ using LiveIT2._1.Vehicules;
             }
         }
 
+        public Box OverlappedBox
+        {
+            get { return _map.GetOverlappedBox(this); }
+        }
+
         public bool IsInHouse
         {
             get { return _isInHouse; }
@@ -127,6 +132,14 @@ using LiveIT2._1.Vehicules;
                 {
                     _acceleration = value;
                 }
+            }
+        }
+
+        public Rectangle CenteredArea
+        {
+            get
+            {
+                return new Rectangle(new Point(this.Position.X + (this.Size.Width / 2), this.Position.Y + (this.Size.Height / 2)), new Size(5, 5));
             }
         }
 
@@ -349,16 +362,14 @@ using LiveIT2._1.Vehicules;
             downCollide = false;
             leftCollide = false;
 
-            foreach( Box b in BoxList )
-            {
-                if( b.Left != null )
+                if( this.OverlappedBox.Left != null )
                 {
-                    if( _collisionTextures.Contains(b.Left.Ground))
+                    if (_collisionTextures.Contains(this.OverlappedBox.Left.Ground))
                     {
                         leftCollide = true;
                     }
 
-                    foreach( EmapElements e in b.Left.Elements )
+                    foreach (EmapElements e in this.OverlappedBox.Left.Elements)
                     {
                         if( _collisionElements.Contains( e ) )
                         {
@@ -366,13 +377,13 @@ using LiveIT2._1.Vehicules;
                         }
                     }
                 }
-                if( b.Right != null )
+                if (this.OverlappedBox.Right != null)
                 {
-                    if( _collisionTextures.Contains(b.Right.Ground) )
+                    if (_collisionTextures.Contains(this.OverlappedBox.Right.Ground))
                     {
                         rightCollide = true;
                     }
-                    foreach( EmapElements e in b.Right.Elements )
+                    foreach (EmapElements e in this.OverlappedBox.Right.Elements)
                     {
                         if( _collisionElements.Contains( e ) )
                         {
@@ -380,13 +391,13 @@ using LiveIT2._1.Vehicules;
                         }
                     }
                 }
-                if( b.Top != null )
+                if (this.OverlappedBox.Top != null)
                 {
-                    if(_collisionTextures.Contains( b.Top.Ground) )
+                    if (_collisionTextures.Contains(this.OverlappedBox.Top.Ground))
                     {
                         upCollide = true;
                     }
-                    foreach( EmapElements e in b.Top.Elements )
+                    foreach (EmapElements e in this.OverlappedBox.Top.Elements)
                     {
                         if( _collisionElements.Contains( e ) )
                         {
@@ -394,13 +405,13 @@ using LiveIT2._1.Vehicules;
                         }
                     }
                 }
-                if( b.Bottom != null )
+                if (this.OverlappedBox.Bottom != null)
                 {
-                    if( _collisionTextures.Contains(b.Bottom.Ground) )
+                    if (_collisionTextures.Contains(this.OverlappedBox.Bottom.Ground))
                     {
                         downCollide = true;
                     }
-                    foreach( EmapElements e in b.Bottom.Elements )
+                    foreach (EmapElements e in this.OverlappedBox.Bottom.Elements)
                     {
                         if( _collisionElements.Contains( e ) )
                         {
@@ -410,11 +421,11 @@ using LiveIT2._1.Vehicules;
                 }
                 if( _map.ShowDebug )
                 {
-                    _map.ViewPort.DrawRectangleInViewPort( g, b.Area, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMapViewPort, _map.ViewPort.MiniMap );
+                    _map.ViewPort.DrawRectangleInViewPort(g, this.OverlappedBox.Area, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMapViewPort, _map.ViewPort.MiniMap);
                 }
 
-            }
-           
+          
+            
             g.DrawRectangle(
                 Pens.Black, 
                 new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));

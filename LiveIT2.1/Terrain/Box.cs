@@ -65,6 +65,8 @@ namespace LiveIT2._1.Terrain
         ///     The _source.
         /// </summary>
         private Rectangle _source;
+private  Rectangle _relativeMiniMapArea;
+private Rectangle _relativeMiniMapSize;
 
         
 
@@ -204,6 +206,17 @@ namespace LiveIT2._1.Terrain
             }
         }
 
+        public Rectangle RelativeMiniMapArea
+        {
+            get { return _relativeMiniMapArea; }
+            internal set { _relativeMiniMapArea = value; }
+        }
+
+        public Rectangle RelativeMiniMapSize
+        {
+            get { return _relativeMiniMapSize; }
+            internal set { _relativeMiniMapSize = value; }
+        }
         /// <summary>
         ///     Gets the position of the box in the viewport
         /// </summary>
@@ -225,6 +238,14 @@ namespace LiveIT2._1.Terrain
                 return this._relativeSize;
             }
         }
+        public Rectangle CenteredArea
+        {
+            get
+            {
+                return new Rectangle(new Point(this.Location.X + (this.Area.Size.Width / 2), this.Location.Y + (this.Area.Size.Height / 2)), new Size(5, 5));
+            }
+        }
+
 
         /// <summary>
         ///     Gets the right.
@@ -428,6 +449,7 @@ namespace LiveIT2._1.Terrain
                 - (int)
                   (viewPort.Y / (this._map.BoxSize / ((this.Source.Width / (double)viewPort.Width) * target.Width)));
 
+            this.RelativeMiniMapArea = new Rectangle(new Point(newXpos, newYpos), new Size(newSize, newSize));
             g.FillRectangle(
                 textures.GetColor(this), 
                 new Rectangle(newXpos + target.X, newYpos + target.Y, newSize, newSize));

@@ -111,6 +111,7 @@ namespace LiveIT2._1.Terrain
         /// </summary>
         [NonSerialized]
         private MainViewPort _viewPort;
+        private bool _loaded;
 
         #endregion
 
@@ -144,12 +145,17 @@ namespace LiveIT2._1.Terrain
             {
                 b.CalculateHeuristic();
             }
+            _loaded = true;
         }
 
         #endregion
 
         #region Public Properties
 
+        public bool IsLoaded
+        {
+            get { return _loaded; }
+        }
         /// <summary>
         ///     Gets or sets the animals.
         /// </summary>
@@ -452,6 +458,20 @@ namespace LiveIT2._1.Terrain
             for (int i = 0; i < this.Boxes.Length; i++)
             {
                 if (this.Boxes[i].Area.IntersectsWith(r.CenteredArea))
+                {
+                    b = Boxes[i];
+                }
+            }
+
+            return b;
+        }
+
+        public Box GetOverlappedBox(Player p)
+        {
+            Box b = null;
+            for (int i = 0; i < this.Boxes.Length; i++)
+            {
+                if (this.Boxes[i].Area.IntersectsWith(p.CenteredArea))
                 {
                     b = Boxes[i];
                 }

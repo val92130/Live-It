@@ -18,6 +18,7 @@ namespace LiveIT2._1.Terrain
         public int baseMovementCost = 10;
         private Map map;
         public List<Box> finalPath = new List<Box>();
+        bool _stuck;
 
         public bool FoundTarget
         {
@@ -42,7 +43,7 @@ namespace LiveIT2._1.Terrain
 
         public void FindPath()
         {
-            if (foundTarget == false)
+            if (foundTarget == false && _stuck == false)
             {
                 if (checkingNode.Top != null)
                 {
@@ -116,6 +117,11 @@ namespace LiveIT2._1.Terrain
             openList.Add(box);
         }
 
+        public bool IsStuck
+        {
+            get { return _stuck; }
+        }
+
         private void AddToClosedList(Box box)
         {
             closedList.Add(box);
@@ -128,15 +134,24 @@ namespace LiveIT2._1.Terrain
 
         private Box GetSmallestFValueNode()
         {
-            Box minValueBox = openList[0];
-            for (int i = 0; i < openList.Count; i++)
+            if (openList.Count <= 0)
             {
-                if (openList[i].GetFValue(targetNode) < minValueBox.GetFValue(targetNode))
-                {
-                    minValueBox = openList[i];
-                }
+                _stuck = true;
+                return null;
             }
-            return minValueBox;
+            else
+            {
+                Box minValueBox = openList[0];
+                for (int i = 0; i < openList.Count; i++)
+                {
+                    if (openList[i].GetFValue(targetNode) < minValueBox.GetFValue(targetNode))
+                    {
+                        minValueBox = openList[i];
+                    }
+                }
+                return minValueBox;
+            }
+            
         }
 
         private void TraceBackPath()

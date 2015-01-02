@@ -195,6 +195,7 @@ using Timer = System.Windows.Forms.Timer;
         public Form1()
         {
             this.InitializeComponent();
+            this._map = new Map(50, 2);
         }
 
         #endregion
@@ -391,7 +392,6 @@ using Timer = System.Windows.Forms.Timer;
             this._selectedTexture = EBoxGround.Grass;
             this._background = new Bitmap(this.Width, this.Height);
 
-            this._map = new Map(50, 2);
 
             this._boxWidth = this._map.BoxSize;
 

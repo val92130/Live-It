@@ -33,6 +33,10 @@ namespace LiveIT2._1.Viewport
 
         private int _cameraSmoothness;
 
+        private PathFinder _playerPathFinder;
+
+        private Box _pathFindTarget;
+
         /// <summary>
         ///     The _car list.
         /// </summary>

@@ -107,7 +107,7 @@ namespace LiveIT2._1.Viewport
 
             this.CheckIfPlayerHasEnteredACar();
 
-            this.HasClicked = false;
+            
 
             if( this.IsFollowingAnAnimal )
             {
@@ -124,11 +124,78 @@ namespace LiveIT2._1.Viewport
             DrawAnimalsInMiniMap(g);
             DrawVegetationInMiniMap(g);
 
+
+
             this.DrawViewPortMiniMap(g, this.viewPort, this.miniMap, this.miniMapViewPort);
             g.DrawRectangle(
     Pens.White,
     new Rectangle(this.miniMap.X, this.miniMap.Y, this.miniMap.Width, this.miniMap.Height + 20));
 
+            foreach (Box b in map.Boxes)
+            {
+                Rectangle r = new Rectangle(new Point(this.MouseSelector.X, this.MouseSelector.Y - this.ScreenSize.Height + this.MiniMap.Height), this.MouseSelector.Size);
+                if (r.IntersectsWith(b.RelativeMiniMapArea))
+                {
+                    if (this.HasClicked)
+                    {
+                        if (this.map.IsPlayer)
+                        {
+                            _pathFindTarget = b;
+                            _playerPathFinder = new PathFinder(this.Player.OverlappedBox, _pathFindTarget, map);
+                            while (!_playerPathFinder.FoundTarget)
+                            {
+                                _playerPathFinder.Update();
+                                if (_playerPathFinder.IsStuck)
+                                {
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+            if (_playerPathFinder != null && map.IsPlayer)
+            {
+                if (player.IsMoving)
+                {
+                    _playerPathFinder = new PathFinder(this.Player.OverlappedBox, _pathFindTarget, map);
+                    while (!_playerPathFinder.FoundTarget)
+                    {
+                        _playerPathFinder.Update();
+                        if (_playerPathFinder.IsStuck)
+                        {
+                            return;
+                        }
+                    }
+                }
+                if (!_playerPathFinder.IsStuck)
+                {
+                    foreach (Box b in _playerPathFinder.finalPath)
+                    {
+                        this.DrawRectangleInViewPort(g, b.CenteredArea, this.MiniMap, this.miniMapViewPort, Brushes.White);
+                    }
+                }
+                else
+                {
+                    _playerPathFinder = null;
+                }
+            }
+
+            if (map.IsPlayer)
+            {
+                if (_playerPathFinder != null)
+                {
+                    if (player.Area.IntersectsWith(_pathFindTarget.Area))
+                    {
+                        _playerPathFinder = null;
+                    }
+                }
+
+                this.DrawRectangleInViewPort(g, player.Area, this.MiniMap, this.miniMapViewPort, Brushes.Black);
+            }
+            this.HasClicked = false;        
         }
 
         public void Update()
@@ -320,6 +387,34 @@ namespace LiveIT2._1.Viewport
             g.DrawRectangle(Pens.Blue, new Rectangle(newXpos + target.X, newYpos + target.Y, newSize, newHeight));
             g.DrawRectangle(
                 Pens.Blue,
+                new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
+        }
+
+        public void DrawRectangleInViewPort(
+            Graphics g,
+            Rectangle source,
+            Rectangle targetMiniMap,
+            Rectangle viewPortMiniMap,
+            Brush b)
+        {
+
+            var newSizeMini = (int)((source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
+            var newHeightMini = (int)((source.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
+            int newXposMini =
+                (int)
+                (source.X / (source.Width / ((source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)))
+                - (int)
+                  (viewPortMiniMap.X
+                   / (source.Width / ((source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+            int newYposMini =
+                (int)
+                (source.Y / (source.Width / ((source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)))
+                - (int)
+                  (viewPortMiniMap.Y
+                   / (source.Width / ((source.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+
+            g.FillRectangle(
+                b,
                 new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
         }
 
@@ -601,6 +696,14 @@ namespace LiveIT2._1.Viewport
             for (int i = 0; i < this.boxListMini.Count; i++)
             {
                 this.boxListMini[i].DrawMiniMap(g, this.miniMap, this.texture, this.miniMapViewPort);
+            }
+        }
+
+        public void DrawMap(Graphics g)
+        {
+            for (int i = 0; i < this.boxListMini.Count; i++)
+            {
+                this.boxListMini[i].DrawMiniMap(g, this.screen, this.texture, this.miniMapViewPort);
             }
         }
 
