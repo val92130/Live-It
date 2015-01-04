@@ -362,63 +362,90 @@ using LiveIT2._1.Vehicules;
             downCollide = false;
             leftCollide = false;
 
-                if( this.OverlappedBox.Left != null )
+            foreach (Box b in this.BoxList)
+            {
+                if (b.Area.IntersectsWith(this.AreaBottom))
                 {
-                    if (_collisionTextures.Contains(this.OverlappedBox.Left.Ground))
+                    if (_collisionTextures.Contains(b.Ground))
                     {
-                        leftCollide = true;
-                    }
-
-                    foreach (EmapElements e in this.OverlappedBox.Left.Elements)
-                    {
-                        if( _collisionElements.Contains( e ) )
+                        if (b.Area.X < this.AreaBottom.X)
                         {
                             leftCollide = true;
                         }
-                    }
-                }
-                if (this.OverlappedBox.Right != null)
-                {
-                    if (_collisionTextures.Contains(this.OverlappedBox.Right.Ground))
-                    {
-                        rightCollide = true;
-                    }
-                    foreach (EmapElements e in this.OverlappedBox.Right.Elements)
-                    {
-                        if( _collisionElements.Contains( e ) )
+                        if (b.Area.X > this.AreaBottom.X)
                         {
                             rightCollide = true;
                         }
-                    }
-                }
-                if (this.OverlappedBox.Top != null)
-                {
-                    if (_collisionTextures.Contains(this.OverlappedBox.Top.Ground))
-                    {
-                        upCollide = true;
-                    }
-                    foreach (EmapElements e in this.OverlappedBox.Top.Elements)
-                    {
-                        if( _collisionElements.Contains( e ) )
+                        if (b.Area.Y < this.AreaBottom.Y)
                         {
                             upCollide = true;
                         }
-                    }
-                }
-                if (this.OverlappedBox.Bottom != null)
-                {
-                    if (_collisionTextures.Contains(this.OverlappedBox.Bottom.Ground))
-                    {
-                        downCollide = true;
-                    }
-                    foreach (EmapElements e in this.OverlappedBox.Bottom.Elements)
-                    {
-                        if( _collisionElements.Contains( e ) )
+                        if (b.Area.Y > this.AreaBottom.Y)
                         {
                             downCollide = true;
                         }
                     }
+
                 }
+            }
+
+                //if( this.OverlappedBox.Left != null )
+                //{
+                //    if (_collisionTextures.Contains(this.OverlappedBox.Left.Ground))
+                //    {
+                //        leftCollide = true;
+                //    }
+
+                //    foreach (EmapElements e in this.OverlappedBox.Left.Elements)
+                //    {
+                //        if( _collisionElements.Contains( e ) )
+                //        {
+                //            leftCollide = true;
+                //        }
+                //    }
+                //}
+                //if (this.OverlappedBox.Right != null)
+                //{
+                //    if (_collisionTextures.Contains(this.OverlappedBox.Right.Ground))
+                //    {
+                //        rightCollide = true;
+                //    }
+                //    foreach (EmapElements e in this.OverlappedBox.Right.Elements)
+                //    {
+                //        if( _collisionElements.Contains( e ) )
+                //        {
+                //            rightCollide = true;
+                //        }
+                //    }
+                //}
+                //if (this.OverlappedBox.Top != null)
+                //{
+                //    if (_collisionTextures.Contains(this.OverlappedBox.Top.Ground))
+                //    {
+                //        upCollide = true;
+                //    }
+                //    foreach (EmapElements e in this.OverlappedBox.Top.Elements)
+                //    {
+                //        if( _collisionElements.Contains( e ) )
+                //        {
+                //            upCollide = true;
+                //        }
+                //    }
+                //}
+                //if (this.OverlappedBox.Bottom != null)
+                //{
+                //    if (_collisionTextures.Contains(this.OverlappedBox.Bottom.Ground))
+                //    {
+                //        downCollide = true;
+                //    }
+                //    foreach (EmapElements e in this.OverlappedBox.Bottom.Elements)
+                //    {
+                //        if( _collisionElements.Contains( e ) )
+                //        {
+                //            downCollide = true;
+                //        }
+                //    }
+                //}
                 if( _map.ShowDebug )
                 {
                     _map.ViewPort.DrawRectangleInViewPort(g, this.OverlappedBox.Area, _map.ViewPort.ScreenSize, _map.ViewPort.ViewPort, _map.ViewPort.MiniMapViewPort, _map.ViewPort.MiniMap);
