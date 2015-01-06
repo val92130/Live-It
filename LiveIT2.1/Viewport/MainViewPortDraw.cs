@@ -58,8 +58,7 @@ namespace LiveIT2._1.Viewport
                 this.map.IsRaining = false;
             }
 
-            this.boxList = this.map.GetOverlappedBoxes(this.viewPort);
-            this.boxListMini = this.map.GetOverlappedBoxes(this.miniMapViewPort);
+            
             this.mouseRect.X = Cursor.Position.X - (this.mouseRect.Width / 2);
             this.mouseRect.Y = Cursor.Position.Y - (this.mouseRect.Height / 2);
 
@@ -131,11 +130,26 @@ namespace LiveIT2._1.Viewport
     Pens.White,
     new Rectangle(this.miniMap.X, this.miniMap.Y, this.miniMap.Width, this.miniMap.Height + 20));
 
+
             this.HasClicked = false;        
         }
 
         public void Update()
         {
+            for (int i = 0; i < this.boxList.Count; i++)
+            {
+                boxList[i].Update();
+                for (int j = 0; j < this.map.Animals.Count(); j++)
+                {
+                    if (this.map.Animals[j].Area.IntersectsWith(this.boxList[i].Area))
+                    {
+                        this.boxList[i].AddAnimal(this.map.Animals[j]);
+                    }
+                }
+            }
+            this.boxList = this.map.GetOverlappedBoxes(this.viewPort);
+            this.boxListMini = this.map.GetOverlappedBoxes(this.miniMapViewPort);
+
             this.UpdateAnimals();
         }
 
@@ -682,13 +696,7 @@ namespace LiveIT2._1.Viewport
         {
             for (int i = 0; i < this.boxList.Count; i++)
             {
-                for (int j = 0; j < this.map.Animals.Count(); j++)
-                {
-                    if (this.map.Animals[j].Area.IntersectsWith(this.boxList[i].Area))
-                    {
-                        this.boxList[i].AddAnimal(this.map.Animals[j]);
-                    }
-                }
+                
 
                 this.boxList[i].Draw(g, this.screen, this.texture, this.viewPort);
             }

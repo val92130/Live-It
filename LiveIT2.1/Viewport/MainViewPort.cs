@@ -162,12 +162,12 @@ namespace LiveIT2._1.Viewport
         /// <summary>
         ///     The _box list.
         /// </summary>
-        private List<Box> boxList;
+        private List<Box> boxList = new List<Box>();
 
         /// <summary>
         ///     The _box list mini.
         /// </summary>
-        private List<Box> boxListMini;
+        private List<Box> boxListMini = new List<Box>();
 
         /// <summary>
         ///     The _change texture.
@@ -731,7 +731,10 @@ namespace LiveIT2._1.Viewport
         {
             this.map = map;
         }
-
+        public List<Car> Cars
+        {
+            get { return carList; }
+        }
 
         /// <summary>
         /// The spawn car.

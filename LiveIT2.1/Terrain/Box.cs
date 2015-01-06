@@ -411,6 +411,15 @@ namespace LiveIT2._1.Terrain
                 g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));
             }
 
+
+
+            
+        }
+
+        public void Update()
+        {
+            this.DrawTransitionTextures();
+
             for (int i = 0; i < this._animalList.Count; i++)
             {
                 if (!this._animalList[i].Area.IntersectsWith(this.Area))
@@ -418,10 +427,7 @@ namespace LiveIT2._1.Terrain
                     this.RemoveFromList(this._animalList[i]);
                 }
             }
-
-            this.DrawTransitionTextures();
         }
-
         /// <summary>
         /// The draw mini map.
         /// </summary>
