@@ -78,5 +78,30 @@
             }
 
         }
+
+        private void newGameButton_MouseHover( object sender, EventArgs e )
+        {
+            btnNewGame.Visible = true;
+        }
+
+        private void newGameButton_MouseEnter( object sender, EventArgs e )
+        {
+            btnNewGame.Visible = true;
+        }
+
+        private void newGameButton_MouseLeave( object sender, EventArgs e )
+        {
+            btnNewGame.Visible = false;
+        }
+
+        private void loadGameButton_MouseEnter( object sender, EventArgs e )
+        {
+            btnLoadGame.Visible = true;
+        }
+
+        private void loadGameButton_MouseLeave( object sender, EventArgs e )
+        {
+            btnLoadGame.Visible = false;
+        }
     }
 }

@@ -460,12 +460,6 @@ using Timer = System.Windows.Forms.Timer;
             }
 
             TryEnterHouse();
-
-            if( _map.ShowDebug )
-            {
-                g.DrawString( _currentMap + " : current Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 500, 500 ) );
-                g.DrawString( _previousMap + " : previous Map", new Font( "Arial", 15f ), Brushes.Black, new Point( 900, 500 ) );
-            }
             
             _viewPort.CameraSmoothness = trackBar1.Value * 10;
 
@@ -543,10 +537,6 @@ using Timer = System.Windows.Forms.Timer;
                     _playMedicButton.Show();
                 }
 
-                if (_map.SavedPlayerPosition != null && _map.ShowDebug)
-                {
-                    g.DrawString(_map.SavedPlayerPosition.ToString(), new Font("Arial", 15f), Brushes.Black, new Point(300, 300));
-                }
             }
 
         }
@@ -1358,6 +1348,7 @@ using Timer = System.Windows.Forms.Timer;
             _previousMap = _currentMap;
             _currentMap = mapPath;
             this._map = this._map.Load(mapPath);
+            _map.CalculateHeuristic();
             _viewPort = new MainViewPort(_map);
             _viewPort.BoxList = _map.BoxList;
             _viewPort.SoundEnvironment = this._soundEnvironment;
@@ -1372,6 +1363,7 @@ using Timer = System.Windows.Forms.Timer;
             _previousMap = _currentMap;
             _currentMap = mapPath;
             this._map = this._map.Load( mapPath );
+            _map.CalculateHeuristic();
             _viewPort = new MainViewPort( _map );
             _viewPort.BoxList = _map.BoxList;
             _viewPort.SoundEnvironment = this._soundEnvironment;

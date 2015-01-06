@@ -129,6 +129,8 @@
             this.loadGameButton.Name = "loadGameButton";
             this.loadGameButton.Size = new System.Drawing.Size(442, 125);
             this.loadGameButton.TabIndex = 16;
+            this.loadGameButton.MouseEnter += new System.EventHandler(this.loadGameButton_MouseEnter);
+            this.loadGameButton.MouseLeave += new System.EventHandler(this.loadGameButton_MouseLeave);
             // 
             // loadGameText
             // 
@@ -163,6 +165,9 @@
             this.newGameButton.Name = "newGameButton";
             this.newGameButton.Size = new System.Drawing.Size(442, 125);
             this.newGameButton.TabIndex = 15;
+            this.newGameButton.MouseEnter += new System.EventHandler(this.newGameButton_MouseEnter);
+            this.newGameButton.MouseLeave += new System.EventHandler(this.newGameButton_MouseLeave);
+            this.newGameButton.MouseHover += new System.EventHandler(this.newGameButton_MouseHover);
             // 
             // newGameText
             // 

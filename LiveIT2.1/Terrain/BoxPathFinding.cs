@@ -31,6 +31,11 @@ namespace LiveIT2._1.Terrain
             get { return g_movementCost; }
         }
 
+        public void EmptyHeuristic()
+        {
+            _heuristics.Clear();
+        }
+
         public int FValue
         {
             get { return f_totalCost; }

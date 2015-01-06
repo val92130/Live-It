@@ -254,6 +254,11 @@ namespace LiveIT2._1.Animals
             set { _mother = value; }
         }
 
+        public PathFinder PathFinder
+        {
+            get { return _pathFinder; }
+        }
+
         public bool IsHurt
         {
             get { return _isHurt; }
@@ -465,9 +470,27 @@ namespace LiveIT2._1.Animals
         {
             get
             {
-                return _animalDirection;
+                if( this.Direction.Width > 0 && this.Direction.Width > this.Direction.Height )
+                {
+                    return EMovingDirection.Right;
+                }
 
+                if( this.Direction.Width < 0 && this.Direction.Width > this.Direction.Height )
+                {
+                    return EMovingDirection.Left;
+                }
 
+                if( this.Direction.Height > 0 && this.Direction.Height > this.Direction.Width )
+                {
+                    return EMovingDirection.Down;
+                }
+
+                if( this.Direction.Height < 0 && this.Direction.Height > this.Direction.Width )
+                {
+                    return EMovingDirection.Up;
+                }
+
+                return EMovingDirection.Up;
             }
         }
 
@@ -679,6 +702,10 @@ namespace LiveIT2._1.Animals
         public virtual void Behavior()
         {
 
+            if( _pathFinder == null )
+            {
+                this.FindNewPath();
+            }
 
             this._isDrinking = false;
 
@@ -696,16 +723,30 @@ namespace LiveIT2._1.Animals
             {
                 this.Speed = this.DefaultSpeed;
                 _pathBoxList = _pathFinder.FinalPath;
-                foreach (Box b in _pathFinder.closedList)
-                {
-                    b.Ground = EBoxGround.Snow;
-                }
             }
 
             // if the animal hasn't reached all the paths, change position to the next paths
             if (_pathBoxList != null)
             {
                 ChangePosition(_pathBoxList[_pathCount].Location);
+
+                if( _pathBoxList[_pathCount].Area.X > this.Area.X )
+                {
+                    this._animalDirection = Enums.EMovingDirection.Right;
+                }
+                if( _pathBoxList[_pathCount].Area.X < this.Area.X )
+                {
+                    this._animalDirection = Enums.EMovingDirection.Left;
+                }
+                if( _pathBoxList[_pathCount].Area.Y > this.Area.Y )
+                {
+                    this._animalDirection = Enums.EMovingDirection.Down;
+                }
+                if( _pathBoxList[_pathCount].Area.Y < this.Area.Y )
+                {
+                    this._animalDirection = Enums.EMovingDirection.Up;
+                }
+                
                 if (_pathBoxList.Count == 1)
                 {
                     ChangePosition(_pathBoxList[0].Location);
@@ -779,7 +820,6 @@ namespace LiveIT2._1.Animals
                                     if (!this.WalkableBoxes.Contains(this._map.Boxes[i]))
                                     {
                                         this.WalkableBoxes.Add(this._map.Boxes[i]);
-                                        this.Speed = 5000;
                                         this.ChangePosition();
                                     }
                                 }
@@ -1089,6 +1129,20 @@ namespace LiveIT2._1.Animals
                 }
             }
 
+            if( this._map.ShowDebug )
+            {
+                if( this.PathFinder != null )
+                {
+                    if( this.PathFinder.FoundTarget )
+                    {
+                        foreach( Box b in this.PathFinder.FinalPath )
+                        {
+                            g.DrawRectangle( Pens.Red, new Rectangle( b.RelativePosition, b.RelativeSize ) );
+                        }
+                    }
+
+                }
+            }
 
             if (this.Area.IntersectsWith(viewPort))
             {
@@ -1139,25 +1193,6 @@ namespace LiveIT2._1.Animals
 
         public void Update()
         {
-            if (this.Direction.Width > 0 && this.Direction.Width > this.Direction.Height)
-            {
-                _animalDirection =  EMovingDirection.Right;
-            }
-
-            if (this.Direction.Width < 0 && this.Direction.Width > this.Direction.Height)
-            {
-                _animalDirection = EMovingDirection.Left;
-            }
-
-            if (this.Direction.Height > 0 && this.Direction.Height > this.Direction.Width)
-            {
-                _animalDirection = EMovingDirection.Down;
-            }
-
-            if (this.Direction.Height < 0 && this.Direction.Height > this.Direction.Width)
-            {
-                _animalDirection = EMovingDirection.Up;
-            }
 
             if (_growTimer == null)
             {

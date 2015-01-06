@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiveIT2._1.Terrain
 {
+    [Serializable]
     public class PathFinder
     {
         public List<Box> openList = new List<Box>();
