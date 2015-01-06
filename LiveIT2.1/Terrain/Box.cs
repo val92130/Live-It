@@ -65,8 +65,8 @@ namespace LiveIT2._1.Terrain
         ///     The _source.
         /// </summary>
         private Rectangle _source;
-private  Rectangle _relativeMiniMapArea;
-private Rectangle _relativeMiniMapSize;
+        private  Rectangle _relativeMiniMapArea;
+        private Rectangle _relativeMiniMapSize;
 
         
 

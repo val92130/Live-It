@@ -140,18 +140,9 @@ namespace LiveIT2._1.Terrain
                     this._boxes[count++] = new Box(i, j, this);
                 }
             }
-
-            CalculateHeuristic();
             _loaded = true;
         }
 
-        public void CalculateHeuristic()
-        {
-            foreach( Box b in _boxes )
-            {
-                b.CalculateHeuristic();
-            }
-        }
 
         #endregion
 
@@ -595,10 +586,6 @@ namespace LiveIT2._1.Terrain
         /// </param>
         public void Save(string filename)
         {
-            foreach( Box b in this._boxes )
-            {
-                b.EmptyHeuristic();
-            }
             this.SavedPlayerPosition = this.ViewPort.Player.Position;
             Stream stream = File.Open(filename, FileMode.Create);
             var bFormatter = new BinaryFormatter();

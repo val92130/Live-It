@@ -12,7 +12,6 @@ namespace LiveIT2._1.Terrain
         public List<Box> openList = new List<Box>();
         public List<Box> closedList = new List<Box>();
         private Box checkingNode = null;
-        private Box firstNodeInGrid = null;
         private Box startNode = null;
         private Box targetNode = null;
         private bool foundTarget = false;
@@ -77,10 +76,7 @@ namespace LiveIT2._1.Terrain
 
             if (testing == targetNode)
             {
-                if (!finalPath.Contains(currentNode))
-                {
-                    finalPath.Add(currentNode);
-                }
+
                 foundTarget = true;
                 return;
             }
@@ -153,20 +149,6 @@ namespace LiveIT2._1.Terrain
                 return minValueBox;
             }
             
-        }
-
-        private void TraceBackPath()
-        {
-            finalPath.Clear();
-            Box node = targetNode;
-            while (node != null)
-            {
-                if (node != null)
-                {
-                    finalPath.Add(node);
-                    node = node.ParentBox;
-                }
-            }
         }
 
         public List<Box> FinalPath

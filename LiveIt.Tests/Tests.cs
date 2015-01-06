@@ -28,10 +28,11 @@ namespace LiveIT2._1
         {
             Map map = new Map( 200, 20 );
             MainViewPort v = new MainViewPort( map );
-            Assert.That( map.Animals.Count == 0 );
+            v.Update();
             v.CreateAnimal( Enums.EAnimalTexture.Cat, new Point( 1, 1 ) );
             Assert.That( map.Animals.Count == 1 );
         }
+
         [Test]
 
         public void Kill_Animal_Works_Correctly()

@@ -702,11 +702,6 @@ namespace LiveIT2._1.Animals
         public virtual void Behavior()
         {
 
-            if( _pathFinder == null )
-            {
-                this.FindNewPath();
-            }
-
             this._isDrinking = false;
 
             
@@ -715,6 +710,7 @@ namespace LiveIT2._1.Animals
             {
                 //this.ChangePosition();
                 this.FindNewPath();
+                Debug.Assert( _pathFinder != null );
                 IsInMovement = true;
             }
 
@@ -730,22 +726,6 @@ namespace LiveIT2._1.Animals
             {
                 ChangePosition(_pathBoxList[_pathCount].Location);
 
-                if( _pathBoxList[_pathCount].Area.X > this.Area.X )
-                {
-                    this._animalDirection = Enums.EMovingDirection.Right;
-                }
-                if( _pathBoxList[_pathCount].Area.X < this.Area.X )
-                {
-                    this._animalDirection = Enums.EMovingDirection.Left;
-                }
-                if( _pathBoxList[_pathCount].Area.Y > this.Area.Y )
-                {
-                    this._animalDirection = Enums.EMovingDirection.Down;
-                }
-                if( _pathBoxList[_pathCount].Area.Y < this.Area.Y )
-                {
-                    this._animalDirection = Enums.EMovingDirection.Up;
-                }
                 
                 if (_pathBoxList.Count == 1)
                 {
@@ -907,10 +887,6 @@ namespace LiveIT2._1.Animals
                 if (targetBox != null && targetBox.Ground != EBoxGround.Water && targetBox.Ground != EBoxGround.Mountain)
                 {
                     _pathFinder = new PathFinder(this.OverlappedBox, targetBox, _map);
-                }
-                else
-                {
-                    FindNewPath();
                 }
             }
             else
