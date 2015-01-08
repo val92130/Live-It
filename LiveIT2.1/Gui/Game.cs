@@ -187,6 +187,7 @@ using Timer = System.Windows.Forms.Timer;
         private  List<Box> _boxesPath;
         private  Box _boxStart;
         private  Box _boxTarget;
+        private  PathFinder _pathFinder;
 
         #endregion
 
@@ -295,6 +296,15 @@ using Timer = System.Windows.Forms.Timer;
                 default :
                     this._viewPort.Update();
                     break;
+            }
+
+            if( _pathFinder != null )
+            {
+                while( !_pathFinder.FoundTarget )
+                {
+                    _pathFinder.Update();
+                }
+                
             }
 
             //if( _boxesPath != null )
@@ -656,6 +666,10 @@ using Timer = System.Windows.Forms.Timer;
         /// </param>
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if( e.KeyCode == Keys.Space )
+            {
+                _pathFinder = new PathFinder( Map[2, 2], Map[40, 40], Map );
+            }
             if (e.KeyCode == Keys.Z)
             {
                 this.up = true;
@@ -737,7 +751,7 @@ using Timer = System.Windows.Forms.Timer;
             }
         }
 
-        private List<Box> FindPath(Box start, Box target)
+        private void FindPath(Box start, Box target)
         {
             List<Box> l = new List<Box>();
             pathFinder = new PathFinder( start , target, this.Map);
@@ -746,7 +760,7 @@ using Timer = System.Windows.Forms.Timer;
             {
                 pathFinder.Update();
             }
-            return pathFinder.FinalPath;
+            //return pathFinder.FinalPath;
         }
 
         /// <summary>

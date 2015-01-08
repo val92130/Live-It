@@ -59,6 +59,7 @@
     <Compile Include="MapElemennts\Furnitures.cs" />
     <Compile Include="MapElemennts\Spi.cs" />
     <Compile Include="Terrain\BoxPathFinding.cs" />
+    <Compile Include="Terrain\Node.cs" />
     <Compile Include="Terrain\PathFinder.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Terrain\Box.cs" />

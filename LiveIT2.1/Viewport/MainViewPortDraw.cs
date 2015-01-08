@@ -197,10 +197,10 @@ namespace LiveIT2._1.Viewport
                 }
                 if (!_playerPathFinder.IsStuck)
                 {
-                    foreach (Box b in _playerPathFinder.finalPath)
-                    {
-                        this.DrawRectangleInViewPort(g, b.CenteredArea, this.MiniMap, this.miniMapViewPort, Brushes.White);
-                    }
+                    //foreach (Box b in _playerPathFinder.finalPath)
+                    //{
+                    //    this.DrawRectangleInViewPort(g, b.CenteredArea, this.MiniMap, this.miniMapViewPort, Brushes.White);
+                    //}
                 }
                 else
                 {

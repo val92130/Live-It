@@ -37,7 +37,10 @@ namespace LiveIT2._1.Terrain
         {
             f_totalCost = GValue + HValue;
         }
-
+        public Box Box
+        {
+            get { return _box; }
+        }
         public Node TopNode
         {
             get
@@ -105,6 +108,11 @@ namespace LiveIT2._1.Terrain
         {
             get { return _parent; }
             set { _parent = value; }
+        }
+
+        public int Distance( Node n )
+        {
+            return (int)Math.Sqrt( (Math.Pow( this.Box.Area.X - n.Box.Area.X, 2 ) + Math.Pow( this.Box.Area.Y - n.Box.Area.Y, 2 )) );
         }
     }
 }

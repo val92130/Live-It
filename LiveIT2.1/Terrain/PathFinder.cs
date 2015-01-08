@@ -9,154 +9,183 @@ namespace LiveIT2._1.Terrain
     [Serializable]
     public class PathFinder
     {
-        public List<Box> openList = new List<Box>();
-        public List<Box> closedList = new List<Box>();
-        private Box checkingNode = null;
-        private Box startNode = null;
-        private Box targetNode = null;
-        private bool foundTarget = false;
+        private List<Node> openList = new List<Node>();
+        private List<Node> closedList = new List<Node>();
+        private Node checkingNode = null;
+        public Node firstNodeInGrid = null;
+        public Node startNode = null;
+        public Node targetNode = null;
+        public bool foundTarget = false;
         public int baseMovementCost = 10;
         private Map map;
-        public List<Box> finalPath = new List<Box>();
-        bool _stuck;
+        private  bool _stuck;
+        private  List<Box> _finalPath;
 
-        public bool FoundTarget
+        public PathFinder( Box startBox, Box targetBox, Map map )
         {
-            get { return foundTarget; }
-        }
-        public PathFinder(Box startBox, Box targetBox, Map map)
-        {
-            startNode = startBox;
-            targetNode = targetBox;
+            _finalPath = new List<Box>();
+            startNode = new Node(startBox);
+            targetNode = new Node(targetBox);
             checkingNode = startNode;
             this.map = map;
         }
 
         public void Update()
         {
-            if (foundTarget == false)
+            if( foundTarget == false )
             {
                 FindPath();
             }
-        }
 
-
-        public void FindPath()
-        {
-            if (foundTarget == false && _stuck == false)
+            if( foundTarget == true )
             {
-                if (checkingNode.Top != null)
-                {
-                    DetermineNodeValues(checkingNode, checkingNode.Top);
-                }
-                if (checkingNode.Right != null)
-                {
-                    DetermineNodeValues(checkingNode, checkingNode.Right);
-                }
-                if (checkingNode.Bottom != null)
-                {
-                    DetermineNodeValues(checkingNode, checkingNode.Bottom);
-                }
-                if (checkingNode.Left != null)
-                {
-                    DetermineNodeValues(checkingNode, checkingNode.Left);
-                }
-
-                AddToClosedList(checkingNode);
-                RemoveFromOpenList(checkingNode);
-
-                checkingNode = GetSmallestFValueNode();
+                TraceBackPath();
             }
         }
 
-        private void DetermineNodeValues(Box currentNode, Box testing)
+        public Node StartBox
         {
-            if (testing == null)
-                return;
-
-            if (testing == targetNode)
-            {
-
-                foundTarget = true;
-                return;
-            }
-
-            if (testing.Ground == Enums.EBoxGround.Mountain || testing.Ground == Enums.EBoxGround.Water)
-                return;
-
-            if (!closedList.Contains(testing))
-            {
-                if (openList.Contains(testing))
-                {
-                    int newGCost = currentNode.GValue + baseMovementCost;
-
-                    if (newGCost < testing.GValue)
-                    {
-                        if (!finalPath.Contains(currentNode))
-                        {
-                            finalPath.Add(currentNode);
-                        }
-                    }
-                }
-                else
-                {
-                    if (!finalPath.Contains(currentNode))
-                    {
-                        finalPath.Add(currentNode);
-                    }
-                    AddToOpenList(testing);
-                }
-            }
+            get { return startNode; }
         }
 
-        private void AddToOpenList(Box box)
+        public Node TargetBox
         {
-            openList.Add(box);
+            get { return targetNode; }
         }
 
         public bool IsStuck
         {
             get { return _stuck; }
         }
-
-        private void AddToClosedList(Box box)
+        public bool FoundTarget
         {
-            closedList.Add(box);
+            get { return foundTarget; }
+        }
+        public void FindPath()
+        {
+            if( foundTarget == false )
+            {
+                if( checkingNode.TopNode != null )
+                {
+                    DetermineNodeValues( checkingNode, checkingNode.TopNode );
+                }
+                if( checkingNode.RightNode != null )
+                {
+                    DetermineNodeValues( checkingNode, checkingNode.RightNode );
+                }
+                if( checkingNode.BottomNode != null )
+                {
+                    DetermineNodeValues( checkingNode, checkingNode.BottomNode );
+                }
+                if( checkingNode.LeftNode != null )
+                {
+                    DetermineNodeValues( checkingNode, checkingNode.LeftNode );
+                }
+
+                AddToClosedList( checkingNode );
+                RemoveFromOpenList( checkingNode );
+
+                checkingNode = GetSmallestFValueNode();
+            }
         }
 
-        private void RemoveFromOpenList(Box currentNode)
+        private void DetermineNodeValues( Node currentNode, Node testing )
         {
-            openList.Remove(currentNode);
+            currentNode.HValue = currentNode.Distance( targetNode );
+            testing.HValue = testing.Distance( targetNode );
+
+            if( testing == null )
+                return;
+
+            if( testing.Box == targetNode.Box )
+            {
+                targetNode.ParentNode = currentNode;
+                foundTarget = true;
+                return;
+            }
+
+            if( testing.Box.Ground == Enums.EBoxGround.Water || testing.Box.Ground == Enums.EBoxGround.Mountain )
+                return;
+
+            if( !closedList.Contains( testing ) )
+            {
+                if( openList.Contains( testing ) )
+                {
+                    int newGCost = currentNode.GValue + baseMovementCost;
+
+                    if( newGCost < testing.GValue )
+                    {
+                        testing.ParentNode = currentNode;
+                        testing.GValue = newGCost;
+                        testing.CalculateFValue();
+                    }
+                }
+                else
+                {
+                    testing.ParentNode = currentNode;
+                    testing.GValue = currentNode.GValue + baseMovementCost;
+                    testing.CalculateFValue();
+                    AddToOpenList( testing );
+                }
+            }
         }
 
-        private Box GetSmallestFValueNode()
+        private void AddToOpenList( Node node )
         {
-            if (openList.Count <= 0)
+            openList.Add( node );
+        }
+
+        private void AddToClosedList( Node node )
+        {
+            closedList.Add( node );
+        }
+
+        private void RemoveFromOpenList( Node currentNode )
+        {
+            openList.Remove( currentNode );
+        }
+
+        private Node GetSmallestFValueNode()
+        {
+            if( openList.Count <= 0 )
             {
                 _stuck = true;
                 return null;
             }
-            else
             {
-                Box minValueBox = openList[0];
-                for (int i = 0; i < openList.Count; i++)
+                Node minValueBox = openList[0];
+                for( int i = 0; i < openList.Count; i++ )
                 {
-                    if (openList[i].GetFValue(targetNode) < minValueBox.GetFValue(targetNode))
+                    if( openList[i].FValue < minValueBox.FValue )
                     {
                         minValueBox = openList[i];
                     }
                 }
                 return minValueBox;
             }
-            
+
+        }
+
+        private void TraceBackPath()
+        {
+            Node node = targetNode;
+            do
+            {
+                //node.Box.Ground = Enums.EBoxGround.Snow;
+                _finalPath.Add( node.Box );
+                node = node.ParentNode;
+
+            } while( node != null );
         }
 
         public List<Box> FinalPath
         {
             get
             {
-                return finalPath;
+                _finalPath.Reverse();
+                return _finalPath;
             }
         }
+
     }
 }
