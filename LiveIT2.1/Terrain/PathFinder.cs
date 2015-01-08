@@ -42,7 +42,10 @@ namespace LiveIT2._1.Terrain
                 TraceBackPath();
             }
         }
-
+        public Node CheckingNode
+        {
+            get { return checkingNode; }
+        }
         public Node StartBox
         {
             get { return startNode; }
@@ -91,7 +94,6 @@ namespace LiveIT2._1.Terrain
 
         private void DetermineNodeValues( Node currentNode, Node testing )
         {
-            currentNode.HValue = currentNode.Distance( targetNode );
             testing.HValue = testing.Distance( targetNode );
 
             if( testing == null )
@@ -143,6 +145,16 @@ namespace LiveIT2._1.Terrain
         private void RemoveFromOpenList( Node currentNode )
         {
             openList.Remove( currentNode );
+        }
+
+        public List<Node> ClosedList
+        {
+            get { return closedList; }
+        }
+
+        public List<Node> OpenList
+        {
+            get { return openList;}
         }
 
         private Node GetSmallestFValueNode()

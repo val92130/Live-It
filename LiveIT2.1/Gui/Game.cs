@@ -300,12 +300,13 @@ using Timer = System.Windows.Forms.Timer;
 
             if( _pathFinder != null )
             {
-                while( !_pathFinder.FoundTarget )
-                {
                     _pathFinder.Update();
-                }
-                
+                    foreach( Node n in _pathFinder.OpenList )
+                    {
+                        n.Box.Ground = EBoxGround.Forest;
+                    }
             }
+
 
             //if( _boxesPath != null )
             //{
@@ -457,8 +458,6 @@ using Timer = System.Windows.Forms.Timer;
             _countDown.Start();
 
             _gameMenu.Draggable(true);
-
-            pathFinder = new PathFinder(_map[0, 5], _map[45, 20], _map);
         }
 
         /// <summary>
@@ -668,7 +667,7 @@ using Timer = System.Windows.Forms.Timer;
         {
             if( e.KeyCode == Keys.Space )
             {
-                _pathFinder = new PathFinder( Map[2, 2], Map[40, 40], Map );
+                _pathFinder = new PathFinder( Map[2, 2], Map[20, 45], Map );
             }
             if (e.KeyCode == Keys.Z)
             {
