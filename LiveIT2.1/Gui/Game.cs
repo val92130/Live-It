@@ -184,6 +184,9 @@ using Timer = System.Windows.Forms.Timer;
         private bool _hasPressedE;
         private Point _savedPlayerPos;
         private bool _pathFind;
+        private  List<Box> _boxesPath;
+        private  Box _boxStart;
+        private  Box _boxTarget;
 
         #endregion
 
@@ -293,6 +296,14 @@ using Timer = System.Windows.Forms.Timer;
                     this._viewPort.Update();
                     break;
             }
+
+            //if( _boxesPath != null )
+            //{
+            //    foreach( Box b in _boxesPath )
+            //    {
+            //        b.Ground = EBoxGround.Snow;
+            //    }
+            //}
 
         }
 
@@ -726,6 +737,18 @@ using Timer = System.Windows.Forms.Timer;
             }
         }
 
+        private List<Box> FindPath(Box start, Box target)
+        {
+            List<Box> l = new List<Box>();
+            pathFinder = new PathFinder( start , target, this.Map);
+
+            while( pathFinder.FoundTarget != true )
+            {
+                pathFinder.Update();
+            }
+            return pathFinder.FinalPath;
+        }
+
         /// <summary>
         /// The form 1_ key up.
         /// </summary>
@@ -837,6 +860,7 @@ using Timer = System.Windows.Forms.Timer;
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             this._viewPort.HasClicked = true;
+            //_boxesPath = FindPath( Map[2, 1], Map[2, 40] );
 
             if (this._viewPort.IsAnimalSelected)
             {

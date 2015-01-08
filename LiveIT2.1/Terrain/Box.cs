@@ -410,9 +410,6 @@ namespace LiveIT2._1.Terrain
             {
                 g.FillRectangle(textures.GetColor(this), new Rectangle(newXpos, newYpos, newSize, newSize));
             }
-
-
-
             
         }
 

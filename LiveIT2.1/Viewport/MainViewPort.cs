@@ -898,7 +898,7 @@ namespace LiveIT2._1.Viewport
         /// <summary>
         ///     The check if player has entered a car.
         /// </summary>
-        private void CheckIfPlayerHasEnteredACar()
+        public void CheckIfPlayerHasEnteredACar()
         {
             if (this.TryEnter && !this.map.IsInCar)
             {

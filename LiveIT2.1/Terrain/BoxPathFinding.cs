@@ -19,6 +19,7 @@ namespace LiveIT2._1.Terrain
         public int GValue
         {
             get { return g_movementCost; }
+            set { g_movementCost = value; }
         }
 
         public int FValue

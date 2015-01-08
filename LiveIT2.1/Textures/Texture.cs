@@ -795,10 +795,6 @@ namespace LiveIT2._1.Textures
             this._rainTimer.Interval = 10;
             this._rainTimer.Tick += this.T_rain_tick;
 
-            this._thunderTimer.Start();
-            this._thunderTimer.Interval = 10;
-            this._thunderTimer.Tick += this.T_Thunder_tick;
-
             this._animate.Tick += this.T_animateTick;
             this._textureGrass = new Bitmap(@"..\..\..\assets\Grass.jpg");
             this._textureGrass2 = new Bitmap(@"..\..\..\assets\Grass2.jpg");
@@ -1336,7 +1332,7 @@ namespace LiveIT2._1.Textures
                     }
 
                 default:
-                    return this._textureGrass;
+                    throw new NotSupportedException( "No texture found for this animal" );
             }
         }
 

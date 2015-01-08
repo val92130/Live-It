@@ -127,5 +127,60 @@ namespace LiveIT2._1
 
         }
 
+        [Test]
+
+        public void Player_Enter_Car_Correctly()
+        {
+            Map map = new Map( 200, 20 );
+            MainViewPort v = new MainViewPort( map );
+            SoundEnvironment s;
+            s = new SoundEnvironment();
+            s.LoadMap( map );
+            v.SoundEnvironment = s;
+            v.Update();
+            v.SpawnPlayer( new Point( 490, 500 ) );
+            v.Update();
+            v.TryEnter = true;
+            v.CheckIfPlayerHasEnteredACar();
+            Assert.That( map.IsInCar == false );
+            v.SpawnCar( new Point( 500, 500 ) );
+            v.Update();
+            v.TryEnter = true;
+            v.CheckIfPlayerHasEnteredACar();
+            v.Update();
+            Assert.That( map.IsInCar == true );
+            v.Update();
+            Assert.That( v.Player.Car != null );
+        }
+
+        [Test]
+        public void Player_Exit_Car_Correclty()
+        {
+            Map map = new Map( 200, 20 );
+            MainViewPort v = new MainViewPort( map );
+            SoundEnvironment s;
+            s = new SoundEnvironment();
+            s.LoadMap( map );
+            v.SoundEnvironment = s;
+            v.Update();
+            v.SpawnPlayer( new Point( 490, 500 ) );
+            v.Update();
+            v.TryEnter = true;
+            v.CheckIfPlayerHasEnteredACar();
+            Assert.That( map.IsInCar == false );
+            v.SpawnCar( new Point( 500, 500 ) );
+            v.Update();
+            v.TryEnter = true;
+            v.CheckIfPlayerHasEnteredACar();
+            v.Update();
+            Assert.That( map.IsInCar == true );
+            v.Update();
+            Assert.That( v.Player.Car != null );
+            v.TryEnter = false;
+            map.ExitCar();            
+            v.Update();
+            Assert.That( map.IsInCar == false );
+        }
+
     }
 }
