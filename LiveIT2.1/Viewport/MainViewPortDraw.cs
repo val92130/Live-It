@@ -122,6 +122,29 @@ namespace LiveIT2._1.Viewport
             
             this.DrawMiniMapBoxes(g);
             DrawAnimalsInMiniMap(g);
+
+            if (map.IsPlayer)
+            {
+                this.Player.DrawInMiniMap(g,
+                        this.screen,
+                        this.viewPort,
+                        this.miniMap,
+                        this.miniMapViewPort,
+                        this.texture);
+            }
+
+            if (this.carList.Count != 0)
+            {
+                foreach (Car c in carList)
+                {
+                    c.DrawInMiniMap(g,
+                        this.screen,
+                        this.viewPort,
+                        this.miniMap,
+                        this.miniMapViewPort,
+                        this.texture);
+                }
+            }
             DrawVegetationInMiniMap(g);
 
             this.DrawViewPortMiniMap(g, this.viewPort, this.miniMap, this.miniMapViewPort);

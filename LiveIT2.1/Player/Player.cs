@@ -322,22 +322,7 @@ using LiveIT2._1.Vehicules;
                 this._position.X + (int)(this.Direction.Width * this.Speed), 
                 this._position.Y + (int)(this.Direction.Height * this.Speed));
 
-            var newSizeMini = (int)((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
-            var newHeightMini = (int)((this.Area.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
-            int newXposMini =
-                (int)
-                (this.Area.X
-                 / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)))
-                - (int)
-                  (viewPortMiniMap.X
-                   / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
-            int newYposMini =
-                (int)
-                (this.Area.Y
-                 / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)))
-                - (int)
-                  (viewPortMiniMap.Y
-                   / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+
             if (this.Area.IntersectsWith(viewPort))
             {
                 g.DrawImage(
@@ -415,9 +400,36 @@ using LiveIT2._1.Vehicules;
 
             }
            
+
+        }
+
+        public void DrawInMiniMap(Graphics g,
+            Rectangle target,
+            Rectangle viewPort,
+            Rectangle targetMiniMap,
+            Rectangle viewPortMiniMap,
+            Texture texture)
+        {
+            var newSizeMini = (int)((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
+            var newHeightMini = (int)((this.Area.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
+            int newXposMini =
+                (int)
+                (this.Area.X
+                 / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)))
+                - (int)
+                  (viewPortMiniMap.X
+                   / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+            int newYposMini =
+                (int)
+                (this.Area.Y
+                 / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)))
+                - (int)
+                  (viewPortMiniMap.Y
+                   / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
+
             g.DrawRectangle(
-                Pens.Black, 
-                new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
+    Pens.Black,
+    new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
         }
 
         /// <summary>

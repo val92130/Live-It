@@ -337,6 +337,22 @@ namespace LiveIT2._1.Vehicules
                 this._position.X + (int)(this.Direction.Width * this.Speed), 
                 this._position.Y + (int)(this.Direction.Height * this.Speed));
 
+           
+            if (this.Area.IntersectsWith(viewPort))
+            {
+                g.DrawImage(
+                    texture.LoadTexture(this), 
+                    new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
+            }
+        }
+
+        public void DrawInMiniMap(Graphics g,
+            Rectangle target,
+            Rectangle viewPort,
+            Rectangle targetMiniMap,
+            Rectangle viewPortMiniMap,
+            Texture texture)
+        {
             var newSizeMini = (int)((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             var newHeightMini = (int)((this.Area.Height / (double)viewPortMiniMap.Width) * targetMiniMap.Width + 1);
             int newXposMini =
@@ -353,16 +369,10 @@ namespace LiveIT2._1.Vehicules
                 - (int)
                   (viewPortMiniMap.Y
                    / (this.Area.Width / ((this.Area.Width / (double)viewPortMiniMap.Width) * targetMiniMap.Width)));
-            if (this.Area.IntersectsWith(viewPort))
-            {
-                g.DrawImage(
-                    texture.LoadTexture(this), 
-                    new Rectangle(newXpos + target.X, newYpos + target.Y, newWidth, newHeight));
-            }
 
             g.DrawRectangle(
-                Pens.Black, 
-                new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
+    Pens.Black,
+    new Rectangle(newXposMini + targetMiniMap.X, newYposMini + targetMiniMap.Y, newSizeMini, newHeightMini));
         }
 
         /// <summary>
