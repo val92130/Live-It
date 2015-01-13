@@ -10,9 +10,10 @@ namespace LiveIT2._1.Terrain
     {
         Box _box;
         Node _parent;
-        public int h_heuristicValue = 0;
-        public int g_movementCost = 0;
-        public int f_totalCost = 0;
+        private int h_heuristicValue = 0;
+        private int g_movementCost = 0;
+        private int f_totalCost = 0;
+        private Node _topNode, _bottomNode, _leftNode, _rightNode;
         public Node( Box box )
         {
             _box = box;
@@ -45,9 +46,14 @@ namespace LiveIT2._1.Terrain
         {
             get
             {
+                if( _topNode != null )
+                {
+                    return _topNode;
+                }
                 if( _box.Top != null )
                 {
-                    return new Node( _box.Top );
+                    _topNode = new Node( _box.Top );
+                    return _topNode;
                 }
                 else
                 {
@@ -61,9 +67,14 @@ namespace LiveIT2._1.Terrain
         {
             get
             {
+                if( _bottomNode != null )
+                {
+                    return _bottomNode;
+                }
                 if( _box.Bottom != null )
                 {
-                    return new Node( _box.Bottom );
+                    _bottomNode = new Node( _box.Bottom );
+                    return _bottomNode;
                 }
                 else
                 {
@@ -77,9 +88,14 @@ namespace LiveIT2._1.Terrain
         {
             get
             {
+                if( _leftNode != null )
+                {
+                    return _leftNode;
+                }
                 if( _box.Left != null )
                 {
-                    return new Node( _box.Left );
+                    _leftNode = new Node( _box.Left );
+                    return _leftNode;
                 }
                 else
                 {
@@ -92,9 +108,14 @@ namespace LiveIT2._1.Terrain
         {
             get
             {
+                if( _rightNode != null )
+                {
+                    return _rightNode;
+                }
                 if( _box.Right != null )
                 {
-                    return new Node( _box.Right );
+                    _rightNode = new Node( _box.Right );
+                    return _rightNode;
                 }
                 else
                 {

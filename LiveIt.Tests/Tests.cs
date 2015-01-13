@@ -182,5 +182,22 @@ namespace LiveIT2._1
             Assert.That( map.IsInCar == false );
         }
 
+        [Test]
+
+        public void Animal_path_finding_works_correctly()
+        {
+            Map map = new Map( 200, 20 );
+            MainViewPort v = new MainViewPort( map );
+            SoundEnvironment s;
+            s = new SoundEnvironment();
+            s.LoadMap( map );
+            v.SoundEnvironment = s;
+
+            v.Update();
+            v.CreateAnimal( Enums.EAnimalTexture.Cat, new Point( 1, 1 ) );
+            Assert.That( map.Animals.Count == 1 );
+            v.Update();
+        }
+
     }
 }

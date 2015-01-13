@@ -301,21 +301,25 @@ using Timer = System.Windows.Forms.Timer;
             if( _pathFinder != null )
             {
                     _pathFinder.Update();
+
                     foreach( Node n in _pathFinder.OpenList )
                     {
-                        n.Box.Ground = EBoxGround.Forest;
+                        g.DrawRectangle( Pens.White, new Rectangle( n.Box.RelativePosition, n.Box.RelativeSize ) );
                     }
+
+                    DrawString( g, _pathFinder.count.ToString(), new Point( 500, 500 ) );
+                //g.DrawRectangle(Pens.White, new Rectangle(_pathFinder._testingNode.Box.RelativePosition, _pathFinder._testingNode.Box.RelativeSize));
+                //g.DrawRectangle( Pens.Blue, new Rectangle( _pathFinder._testingNode.RightNode.Box.RelativePosition, _pathFinder._testingNode.RightNode.Box.RelativeSize ) );
+                //g.DrawRectangle( Pens.Yellow, new Rectangle( _pathFinder.minBox.Box.RelativePosition, _pathFinder.minBox.Box.RelativeSize ) );
+
             }
 
 
-            //if( _boxesPath != null )
-            //{
-            //    foreach( Box b in _boxesPath )
-            //    {
-            //        b.Ground = EBoxGround.Snow;
-            //    }
-            //}
+        }
 
+        public void DrawString( Graphics g,String s, Point position )
+        {
+            g.DrawString( s, new Font( "Arial", 15f ), Brushes.Black, position );
         }
 
         /// <summary>
