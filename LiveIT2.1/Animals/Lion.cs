@@ -43,7 +43,7 @@ namespace LiveIT2._1.Animals
             this.Speed = 15000;
             this.DefaultSpeed = this.Speed;
             this.ViewDistance = 400;
-            this.Hunger = 10;
+            this.Hunger = 60;
             this.TargetAnimals = new List<EAnimalTexture>
                                      {
                                          EAnimalTexture.Rabbit, 
